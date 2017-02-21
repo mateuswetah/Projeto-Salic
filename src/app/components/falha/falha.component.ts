@@ -1,15 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-falha',
   templateUrl: './falha.component.html',
   styleUrls: ['./falha.component.scss']
 })
-export class FalhaComponent implements OnInit {
+export class FalhaComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  statusFalha: Number;
+  detalhesFalha = '';
+  inscricao: Subscription; // Usada para observar mudanças na URL
+
+  constructor( private route: ActivatedRoute,
+               private router: Router) { }
 
   ngOnInit() {
+     // Obtêm o parâmetro através da rota da URL
+   this.inscricao = this.route.params.subscribe(
+      (params: any) => {
+        this.statusFalha = Number(params['statusFalha']);
+        switch (this.statusFalha) {
+          case 404:
+            this.detalhesFalha = 'Projeto com PRONAC fornecido não encontrado.';
+          break;
+          case 405:
+            this.detalhesFalha = 'PRONAC inválido.';
+          break;
+          case 503:
+            this.detalhesFalha = 'Erro interno.';
+          break;
+          default:
+            this.detalhesFalha = 'Erro desconhecido.';
+        }
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.inscricao.unsubscribe();
   }
 
 }

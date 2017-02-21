@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 @Component({
@@ -13,13 +13,16 @@ export class HomeComponent implements OnInit,OnDestroy {
   queryUF: String = 'GO';
   inscricao: Subscription; // Usada para observar mudanças na URL
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
 
     this.inscricao = this.route.queryParams.subscribe (
       (queryParams: any) => {
-        this.queryUF = queryParams['UF'];
+        if (queryParams['UF']) {
+          this.queryUF = queryParams['UF'];
+        }
       }
     );
 
@@ -27,6 +30,11 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  onUpdateQuery() {
+    this.queryUF = 'SP';
+    this.router.navigate([''], { queryParams: {'UF': this.queryUF}});
   }
 
 }

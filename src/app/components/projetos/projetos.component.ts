@@ -1,7 +1,9 @@
-import { ProjetosService } from './../../services/projetos.service';
+import { Projeto } from './../../models/projeto.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+
+import { ApiService } from './../../services/api.service';
 
 @Component({
   selector: 'app-projetos',
@@ -12,10 +14,12 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   PRONAC: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
+  carregandoDados: Boolean = false;
+  projeto: String = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private projetosService: ProjetosService) {
+              private apiService: ApiService) {
     //this.PRONAC = this.route.snapshot.params['PRONAC'];
   }
 
@@ -33,6 +37,21 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  onLoadProject(PRONAC: Number) {
+    this.carregandoDados = true;
+
+    this.apiService.getProjeto(String(PRONAC)).subscribe(
+      projeto => {
+        console.log(projeto);
+        this.projeto = JSON.stringify(projeto);
+      },
+      err => {
+        this.carregandoDados = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDados = false);
   }
 
 }

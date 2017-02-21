@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './modules/app.rounting.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -12,7 +13,8 @@ import { IncentivadoresComponent } from './components/incentivadores/incentivado
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { FalhaComponent } from './components/falha/falha.component';
 
-import { routing } from './app.routing';
+import { ApiService } from './services/api.service';
+import { ConfigurationService } from './services/configuration.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,9 @@ import { routing } from './app.routing';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [ApiService, ConfigurationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

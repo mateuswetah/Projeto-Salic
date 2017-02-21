@@ -3,7 +3,8 @@
 </p>
 <div>
   <ul>
-    <li><a routerLink="home" [queryParams]="{ UF:'GO' }" >Página Inicial com Pesquisa por Projeto e Queries</a></li>
+    <!--<li><a routerLink="home" [queryParams]="{ UF:'GO' }" >Página Inicial com Pesquisa por Projeto e Query {{ queryUF }}</a></li>-->
+    <li><a (click)="onUpdateQuery()" >Página Inicial com Pesquisa por Projeto e Query {{ queryUF }}</a></li>
     <li><a [routerLink]="['projetos', PRONAC]">Página de Projeto</a></li>
     <li><a routerLink="propostas">Página de Proposta</a></li>
     <li><a routerLink="proponentes">Página de Proponente</a></li>
