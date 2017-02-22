@@ -9,12 +9,18 @@ import { ApiService } from './../../services/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit,OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  queryUF: String = 'GO';
   inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
   pesquisaPor = 'projeto';
+
+  // Queries para a busca
+  queries: { [query: string]: String; } = {};
+  possibleQueries = [ 'limit', 'offset', 'PRONAC', 'proponente', 'cgccpf',
+                      'nome', 'area', 'segmento', 'UF', 'ano_projeto', 'sort',
+                      'data_inicio', 'data_inicio_min', 'data_inicio_max',
+                      'data_termino', 'data_termino_min', 'data_termino_max' ];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -22,11 +28,9 @@ export class HomeComponent implements OnInit,OnDestroy {
               }
 
   ngOnInit() {
-
     this.inscricaoPesquisaPor = this.route.params.subscribe (
       (params: any) => {
         this.pesquisaPor = params['pesquisaPor'];
-        console.log("PARAM: " + this.pesquisaPor);
         switch (this.pesquisaPor) {
           case 'projetos':
           break;
@@ -46,9 +50,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
     this.inscricaoQueries = this.route.queryParams.subscribe (
       (queryParams: any) => {
-        if (queryParams['UF']) {
-          this.queryUF = queryParams['UF'];
-        }
+        this.atualizaStringDeQueries(queryParams);
       }
     );
 
@@ -60,8 +62,18 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   onUpdateQuery() {
-    this.queryUF = 'SP';
-    this.router.navigate([''], { queryParams: {'UF': this.queryUF}});
+    this.queries['UF'] = 'SP';
+    this.router.navigate([''], { queryParams: {'UF': this.queries['UF']}});
+  }
+
+  atualizaStringDeQueries(queryParams: any) {
+
+    for (const query of this.possibleQueries) {
+      if (queryParams[query]) {
+        this.queries[query] = queryParams[query];
+      }
+    }
+
   }
 
 }

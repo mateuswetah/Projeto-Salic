@@ -28,7 +28,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.PRONAC = params['PRONAC'];
-        
+
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
