@@ -1,7 +1,7 @@
 <p>
   Página do Projeto de PRONAC {{ PRONAC }}
 </p>
-<a routerLink="">Página Inicial</a>
+<a [routerLink]="['/', 'projetos']">Página Inicial</a>
 
 <button (click)="onLoadProject(PRONAC)">Carregar Projeto</button>
 <p *ngIf="carregandoDados">Carregando projetos...</p>

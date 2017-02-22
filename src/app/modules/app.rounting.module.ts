@@ -11,12 +11,13 @@ import { FalhaComponent } from '../components/falha/falha.component';
 
 const appRoutes: Routes = [
   { path: 'projetos/:PRONAC', component: ProjetosComponent},
-  { path: 'propostas', component: PropostasComponent},
-  { path: 'proponentes', component: ProponentesComponent},
-  { path: 'incentivadores', component: IncentivadoresComponent},
-  { path: 'fornecedores', component: FornecedoresComponent},
+  { path: 'propostas/:idProposta', component: PropostasComponent},
+  { path: 'proponentes/:cgccpfProponente', component: ProponentesComponent},
+  { path: 'incentivadores/:cgccpfIncentivador', component: IncentivadoresComponent},
+  { path: 'fornecedores/:cgccpfFornecedor', component: FornecedoresComponent},
   { path: 'falha/:statusFalha', component: FalhaComponent},
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/projetos', pathMatch: 'full' },
+  { path: ':pesquisaPor', component: HomeComponent },
 ];
 
 @NgModule({

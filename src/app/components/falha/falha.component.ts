@@ -23,10 +23,10 @@ export class FalhaComponent implements OnInit, OnDestroy {
         this.statusFalha = Number(params['statusFalha']);
         switch (this.statusFalha) {
           case 404:
-            this.detalhesFalha = 'Projeto com PRONAC fornecido não encontrado.';
+            this.detalhesFalha = 'Nenhum dado encontrado com os parâmetros fornecidos.';
           break;
           case 405:
-            this.detalhesFalha = 'PRONAC inválido.';
+            this.detalhesFalha = 'Parâmetro de pesquisa inválido.';
           break;
           case 503:
             this.detalhesFalha = 'Erro interno.';

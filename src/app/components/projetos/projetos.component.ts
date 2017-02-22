@@ -1,9 +1,10 @@
-import { Projeto } from './../../models/projeto.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
+
+import { Projeto } from './../../models/projeto.model';
 
 @Component({
   selector: 'app-projetos',
@@ -20,7 +21,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService) {
-    //this.PRONAC = this.route.snapshot.params['PRONAC'];
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.PRONAC = params['PRONAC'];
-
+        
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
