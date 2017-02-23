@@ -3,7 +3,7 @@
 </p>
 <a [routerLink]="['/', 'projetos']">Página Inicial</a>
 
-<button (click)="onLoadProject(PRONAC)">Carregar Projeto</button>
-<p *ngIf="carregandoDados">Carregando projetos...</p>
+<button (click)="onLoadProjeto(PRONAC)">Carregar Projeto</button>
+<p *ngIf="carregandoDados">Carregando projeto...</p>
 <p>{{ projeto }}</p>
 

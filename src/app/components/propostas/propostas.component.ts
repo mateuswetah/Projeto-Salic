@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
 
+import { Proposta } from './../../models/proposta.model';
+
 @Component({
   selector: 'app-propostas',
   templateUrl: './propostas.component.html',
@@ -14,6 +16,7 @@ export class PropostasComponent implements OnInit, OnDestroy {
   idProposta: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
+  proposta: String = ''; // Usar objeto depois
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -32,6 +35,21 @@ export class PropostasComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  onLoadProposta(idProposta: Number) {
+    this.carregandoDados = true;
+
+    this.apiService.getProposta(String(idProposta)).subscribe(
+      proposta => {
+        console.log(proposta);
+        this.proposta = JSON.stringify(proposta);
+      },
+      err => {
+        this.carregandoDados = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDados = false);
   }
 
 }

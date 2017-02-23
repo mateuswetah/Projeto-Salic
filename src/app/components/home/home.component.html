@@ -1,5 +1,5 @@
 <p>
-  home works!
+  Página Inicial
 </p>
 <div>
   <ul>
@@ -10,4 +10,9 @@
     <li><a [routerLink]="['/incentivadores','123456789']">Página de Incentivador</a></li>
     <li><a [routerLink]="['/fornecedores', '123456789']">Página de Fornecedor</a></li>
   </ul>
+</div>
+<div>
+  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onTestarBusca()">Testar Busca</button></p>
+  <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
+  <p>{{ resposta }}</p>
 </div>

@@ -2,3 +2,7 @@
   Página da Proposta de ID: {{ idProposta }}
 </p>
 <a [routerLink]="['/', 'propostas']">Página Inicial</a>
+
+<button (click)="onLoadProposta(idProposta)">Carregar Proposta</button>
+<p *ngIf="carregandoDados">Carregando proposta...</p>
+<p>{{ proposta }}</p>

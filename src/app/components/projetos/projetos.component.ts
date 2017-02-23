@@ -16,7 +16,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   PRONAC: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
-  projeto: String = '';
+  projeto: String = ''; // Usar objeto depois.
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,7 +39,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  onLoadProject(PRONAC: Number) {
+  onLoadProjeto(PRONAC: Number) {
     this.carregandoDados = true;
 
     this.apiService.getProjeto(String(PRONAC)).subscribe(
