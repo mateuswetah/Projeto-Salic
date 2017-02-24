@@ -3,6 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
+
+import { Projeto } from './../../models/projeto.model';
+import { Proposta } from './../../models/proposta.model';
+import { Proponente } from './../../models/proponente.model';
+import { Incentivador } from './../../models/incentivador.model';
+import { Fornecedor } from './../../models/fornecedor.model';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +22,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   inscricaoPesquisaPor: Subscription;
   pesquisaPor = 'projeto';
   carregandoDados: Boolean = false;
-  resposta: String = '';
   JSON: any = JSON;
+
+  // Respostas da API:
+  resposta: String = '';
+  listaProjetos:        [Projeto];
+  listaPropostas:       [Proposta];
+  listaProponentes:     [Proponente];
+  listaIncentivadores:  [Incentivador];
+  listaFornecedores:    [Fornecedor];
 
   // Queries para a busca
   queries: { [query: string]: String; } = {};
@@ -35,7 +49,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private dataFormatterService: DataFormatterService) {
               }
 
   ngOnInit() {
@@ -98,7 +113,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'projetos':
         this.apiService.getListaProjetos(this.queries).subscribe(
           projetos => {
-            this.resposta = JSON.stringify(projetos);
+            this.listaProjetos = projetos;
+            //this.resposta = JSON.stringify(projetos);
           },
           err => {
             this.carregandoDados = false;
@@ -111,7 +127,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'propostas':
         this.apiService.getListaPropostas(this.queries).subscribe(
           propostas => {
-            this.resposta = JSON.stringify(propostas);
+            this.listaPropostas = propostas;
+            //this.resposta = JSON.stringify(propostas);
           },
           err => {
             this.carregandoDados = false;
@@ -123,7 +140,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'proponentes':
         this.apiService.getListaProponentes(this.queries).subscribe(
           proponentes => {
-            this.resposta = JSON.stringify(proponentes);
+            //this.resposta = JSON.stringify(proponentes);
+            this.listaProponentes = proponentes;
           },
           err => {
             this.carregandoDados = false;
@@ -135,7 +153,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'incentivadores':
         this.apiService.getListaIncentivadores(this.queries).subscribe(
           incentivadores => {
-            this.resposta = JSON.stringify(incentivadores);
+            //this.resposta = JSON.stringify(incentivadores);
+            this.listaIncentivadores = incentivadores;
           },
           err => {
             this.carregandoDados = false;
@@ -147,7 +166,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'fornecedores':
         this.apiService.getListaFornecedores(this.queries).subscribe(
           fornecedores=> {
-            this.resposta = JSON.stringify(fornecedores);
+            //this.resposta = JSON.stringify(fornecedores);
+            this.listaFornecedores = fornecedores;
           },
           err => {
             this.carregandoDados = false;

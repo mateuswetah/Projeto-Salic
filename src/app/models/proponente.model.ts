@@ -11,4 +11,5 @@ export class Proponente {
                 public UF:            String,
                 public total_captado: String,
                 public municipio:     String) {}
+
 }

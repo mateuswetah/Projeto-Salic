@@ -1,7 +1,7 @@
 <p>
   Página Inicial
 </p>
-<div>
+<!--<div>
   <ul>
     <li><a [routerLink]="['', pesquisaPor]" [queryParams]="queries">Página Inicial com Pesquisa por {{ pesquisaPor }} + Queries</a></li>
     <li><a [routerLink]="['/projetos', 1]">Página de Projeto</a></li>
@@ -10,9 +10,35 @@
     <li><a [routerLink]="['/incentivadores','123456789']">Página de Incentivador</a></li>
     <li><a [routerLink]="['/fornecedores', '123456789']">Página de Fornecedor</a></li>
   </ul>
+</div>-->
+<div>
+  <p>Pesquisar por:
+  <select [(ngModel)]="pesquisaPor">
+    <option value="projetos">projetos</option>
+    <option value="propostas">propostas</option>
+    <option value="proponentes">proponentes</option>
+    <option value="incentivadores">incentivadores</option>
+    <option value="fornecedores">fornecedores</option>
+  </select>
+  </p>
 </div>
 <div>
   <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onTestarBusca()">Testar Busca</button></p>
   <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
   <p>{{ resposta }}</p>
+</div>
+<div *ngFor="let projeto of listaProjetos">
+  <p>{{ projeto.nome }} <button [routerLink]="['/projetos', projeto.PRONAC]">VER PROJETO</button></p>
+</div>
+<div *ngFor="let proposta of listaPropostas">
+  <p>{{ proposta.nome }} <button [routerLink]="['/propostas', proposta.id]">VER PROPOSTA</button></p>
+</div>
+<div *ngFor="let proponente of listaProponentes">
+  <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extractIdFromUrl(proponente._links.self)]">VER PROPONENTE</button></p>
+</div>
+<div *ngFor="let incentivador of listaIncentivadores">
+  <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extractIdFromUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
+</div>
+<div *ngFor="let fornecedor of listaFornecedores">
+  <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extractIdFromUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
 </div>

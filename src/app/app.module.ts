@@ -15,6 +15,7 @@ import { FalhaComponent } from './components/falha/falha.component';
 
 import { ApiService } from './services/api.service';
 import { ConfigurationService } from './services/configuration.service';
+import { DataFormatterService } from './services/data-formatter.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ConfigurationService } from './services/configuration.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ApiService, ConfigurationService],
+  providers: [ApiService, ConfigurationService, DataFormatterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
