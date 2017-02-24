@@ -10,6 +10,8 @@ import { Proposta } from './../models/proposta.model';
 import { Proponente } from './../models/proponente.model';
 import { Incentivador } from './../models/incentivador.model';
 import { Fornecedor } from './../models/fornecedor.model';
+import { Produto } from './../models/produto.model';
+import { Doacoes } from './../models/doacoes.model';
 
 @Injectable()
 export class ApiService {
@@ -41,7 +43,7 @@ export class ApiService {
   }
 
   // Propostas
-  getListaPropostas( queries: { [query: string]: String; } ): Observable<[Proposta]> {
+  getListaPropostas(queries: { [query: string]: String; } ): Observable<[Proposta]> {
     const searchParams = this.serializeQueries(queries);
     return this.http.get(this.configuration.ApiUrl + 'propostas/', { search: searchParams })
       .map((res: Response) => res.json()._embedded.propostas)
@@ -49,7 +51,11 @@ export class ApiService {
   }
 
   // Proponente
-  getProponente() {  }
+  getProponente(proponente_id: String): Observable<Proponente> {
+    return this.http.get(this.configuration.ApiUrl + 'proponentes/' + proponente_id + '/')
+      .map((res: Response) => res.json())
+      .catch((error: any) => this.handleError(error));
+  }
 
   // Proponentes
   getListaProponentes(queries: { [query: string]: String; } ): Observable<[Proponente]> {
@@ -60,7 +66,11 @@ export class ApiService {
   }
 
   // Incentivador
-  getIncentivador() {  }
+  getIncentivador(incentivador_id: String): Observable<Incentivador> {
+    return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/')
+      .map((res: Response) => res.json())
+      .catch((error: any) => this.handleError(error));
+  }
 
   // Incentivadores
   getListaIncentivadores(queries: { [query: string]: String; } ): Observable<[Incentivador]> {
@@ -70,14 +80,32 @@ export class ApiService {
       .catch((error: any) => this.handleError(error));
   }
 
-  // Fornecedor
-  getFornecedor() {  }
+  // Doações do Incentivador
+  getListaDoacoesDoIncentivador(incentivador_id: String): Observable<[Doacoes]> {
+    return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/doacoes/')
+      .map((res: Response) => res.json()._embedded.doacoes)
+      .catch((error: any) => this.handleError(error));
+  }
 
-  // Incentivadores
+  // Fornecedor
+  getFornecedor(fornecedor_id: String): Observable<Fornecedor> {
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/' + fornecedor_id)
+      .map((res: Response) => res.json())
+      .catch((error: any) => this.handleError(error));
+  }
+
+  // Fornecedores
   getListaFornecedores(queries: { [query: string]: String; } ): Observable<[Fornecedor]> {
     const searchParams = this.serializeQueries(queries);
     return this.http.get(this.configuration.ApiUrl + 'fornecedores/', { search: searchParams })
       .map((res: Response) => res.json()._embedded.fornecedores)
+      .catch((error: any) => this.handleError(error));
+  }
+
+  // Produtos do Fornecedor
+  getListaProdutosDoFornecedor(fornecedor_id: String): Observable<[Produto]> {
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/' + fornecedor_id + '/produtos/')
+      .map((res: Response) => res.json()._embedded.produtos)
       .catch((error: any) => this.handleError(error));
   }
 

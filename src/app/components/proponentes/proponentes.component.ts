@@ -11,9 +11,10 @@ import { ApiService } from './../../services/api.service';
 })
 export class ProponentesComponent implements OnInit, OnDestroy {
 
-  cgccpfProponente: String;
+  idProponente: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
+  proponente: String = ''; // Usar objeto depois
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -23,7 +24,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
    // Obtêm o parâmetro através da rota da URL
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
-        this.cgccpfProponente = params['cgccpfProponente'];
+        this.idProponente = params['idProponente'];
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
@@ -32,5 +33,20 @@ export class ProponentesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  onLoadProponente(idProponente: Number) {
+    this.carregandoDados = true;
+
+    this.apiService.getProponente(String(idProponente)).subscribe(
+      proponente => {
+        console.log(proponente);
+        this.proponente = JSON.stringify(proponente);
+      },
+      err => {
+        this.carregandoDados = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDados = false);
   }
 }

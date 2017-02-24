@@ -1,4 +1,12 @@
 <p>
-  Página do Incentivador de CGCCPF: {{ cgccpfIncentivador }} 
+  Página do Incentivador de id: {{ idIncentivador }} 
 </p>
 <a [routerLink]="['/', 'incentivadores']">Página Inicial</a>
+
+<button (click)="onLoadIncentivador(idIncentivador)">Carregar Incentivador</button>
+<p *ngIf="carregandoDados">Carregando incentivador...</p>
+<p>{{ incentivador }}</p>
+
+<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>
+<p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
+<p>{{ doacoes }}</p>

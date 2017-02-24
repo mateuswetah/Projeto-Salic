@@ -1,4 +1,12 @@
 <p>
-  Página do Fornecedor de CGCCPF: {{ cgccpfFornecedor }} 
+  Página do Fornecedor de id: {{ idFornecedor }} 
 </p>
 <a [routerLink]="['/', 'fornecedores']">Página Inicial</a>
+
+<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>
+<p *ngIf="carregandoDados">Carregando fornecedor...</p>
+<p>{{ fornecedor }}</p>
+
+<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>
+<p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
+<p>{{ produtos }}</p>

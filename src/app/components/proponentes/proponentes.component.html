@@ -1,4 +1,8 @@
 <p>
-  Página do Proponente de CGCCPF: {{ cgccpfProponente}} 
+  Página do Proponente de id: {{ idProponente}} 
 </p>
 <a [routerLink]="['/', 'proponentes']">Página Inicial</a>
+
+<button (click)="onLoadProponente(idProponente)">Carregar Proponente</button>
+<p *ngIf="carregandoDados">Carregando proponente...</p>
+<p>{{ proponente }}</p>

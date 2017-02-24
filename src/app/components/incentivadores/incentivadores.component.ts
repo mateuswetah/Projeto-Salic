@@ -12,9 +12,12 @@ import { ApiService } from './../../services/api.service';
 })
 export class IncentivadoresComponent implements OnInit, OnDestroy {
 
-  cgccpfIncentivador: String;
+  idIncentivador: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
+  carregandoDadosDoacoes: Boolean = false;
+  incentivador: String = ''; // Usar objeto depois
+  doacoes: String = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -24,7 +27,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
    // Obtêm o parâmetro através da rota da URL
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
-        this.cgccpfIncentivador = params['cgccpfIncentivador'];
+        this.idIncentivador = params['idIncentivador'];
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
@@ -33,5 +36,35 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  onLoadIncentivador(idIncentivador: Number) {
+    this.carregandoDados = true;
+
+    this.apiService.getIncentivador(String(idIncentivador)).subscribe(
+      incentivador => {
+        console.log(incentivador);
+        this.incentivador = JSON.stringify(incentivador);
+      },
+      err => {
+        this.carregandoDados = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDados = false);
+  }
+
+  onLoadDoacoes(idIncentivador: Number) {
+    this.carregandoDadosDoacoes = true;
+
+    this.apiService.getListaDoacoesDoIncentivador(String(idIncentivador)).subscribe(
+      doacoes => {
+        console.log(doacoes);
+        this.doacoes = JSON.stringify(doacoes);
+      },
+      err => {
+        this.carregandoDadosDoacoes = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDadosDoacoes = false);
   }
 }

@@ -11,9 +11,12 @@ import { ApiService } from './../../services/api.service';
 })
 export class FornecedoresComponent implements OnInit, OnDestroy {
 
-  cgccpfFornecedor: String;
+  idFornecedor: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
+  carregandoDadosProdutos: Boolean = false;
+  fornecedor: String = ''; // Usar objeto depois
+  produtos: String = ''; // Usar objeto depois
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -23,7 +26,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
    // Obtêm o parâmetro através da rota da URL
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
-        this.cgccpfFornecedor = params['cgccpfFornecedor'];
+        this.idFornecedor = params['idFornecedor'];
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
@@ -34,4 +37,33 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
+  onLoadFornecedor(idFornecedor: Number) {
+    this.carregandoDados = true;
+
+    this.apiService.getFornecedor(String(idFornecedor)).subscribe(
+      fornecedor => {
+        console.log(fornecedor);
+        this.fornecedor = JSON.stringify(fornecedor);
+      },
+      err => {
+        this.carregandoDados = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDados = false);
+  }
+
+    onLoadProdutos(idFornecedor: Number) {
+    this.carregandoDadosProdutos = true;
+
+    this.apiService.getListaProdutosDoFornecedor(String(idFornecedor)).subscribe(
+      produtos => {
+        console.log(produtos);
+        this.produtos = JSON.stringify(produtos);
+      },
+      err => {
+        this.carregandoDadosProdutos = false;
+        this.router.navigate(['falha', err]);
+      },
+      () => this.carregandoDadosProdutos = false);
+  }
 }
