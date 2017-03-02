@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
+
+import { Proponente } from './../../models/proponente.model';
 
 @Component({
   selector: 'app-proponentes',
@@ -14,11 +17,13 @@ export class ProponentesComponent implements OnInit, OnDestroy {
   idProponente: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
-  proponente: String = ''; // Usar objeto depois
+  proponente: Proponente;
+  JSON: any = JSON;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private apiService: ApiService) { }
+              private apiService: ApiService,
+              private dataFormatterService: DataFormatterService) { }
 
   ngOnInit() {
    // Obtêm o parâmetro através da rota da URL
@@ -41,7 +46,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
     this.apiService.getProponente(String(idProponente)).subscribe(
       proponente => {
         console.log(proponente);
-        this.proponente = JSON.stringify(proponente);
+        this.proponente = proponente;
       },
       err => {
         this.carregandoDados = false;

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
 
 import { Projeto } from './../../models/projeto.model';
 
@@ -16,11 +17,13 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   PRONAC: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
-  projeto: String = ''; // Usar objeto depois.
+  projeto: Projeto;
+  JSON: any = JSON;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private dataFormatterService: DataFormatterService) {
   }
 
   ngOnInit() {
@@ -45,7 +48,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     this.apiService.getProjeto(String(PRONAC)).subscribe(
       projeto => {
         console.log(projeto);
-        this.projeto = JSON.stringify(projeto);
+        this.projeto = projeto;
       },
       err => {
         this.carregandoDados = false;

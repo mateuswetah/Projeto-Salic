@@ -5,5 +5,10 @@
 
 <button (click)="onLoadProjeto(PRONAC)">Carregar Projeto</button>
 <p *ngIf="carregandoDados">Carregando projeto...</p>
-<p>{{ projeto }}</p>
+<p *ngIf="projeto != undefined">
+  <button [routerLink]="['/proponentes', dataFormatterService.extractIdFromUrl(projeto._links.proponente)]">VER PROPONENTE</button>
+  <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR INCENTIVADORES</button>
+  <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR FORNECEDORES</button>
+</p>
+<p>{{ JSON.stringify(projeto) }}</p>
 

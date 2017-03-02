@@ -1,4 +1,4 @@
-export class Doacoes {
+export class Doacao {
 
   constructor ( public PRONAC:        String,
                 public valor:         String,

@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
-
+import { Incentivador } from './../../models/incentivador.model';
+import { Doacao } from './../../models/doacao.model';
 
 @Component({
   selector: 'app-incentivadores',
@@ -16,8 +17,9 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
   carregandoDadosDoacoes: Boolean = false;
-  incentivador: String = ''; // Usar objeto depois
-  doacoes: String = '';
+  incentivador: Incentivador; // Usar objeto depois
+  listaDoacoes: [Doacao];
+  JSON: any = JSON;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -44,7 +46,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     this.apiService.getIncentivador(String(idIncentivador)).subscribe(
       incentivador => {
         console.log(incentivador);
-        this.incentivador = JSON.stringify(incentivador);
+        this.incentivador = incentivador;
       },
       err => {
         this.carregandoDados = false;
@@ -59,7 +61,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     this.apiService.getListaDoacoesDoIncentivador(String(idIncentivador)).subscribe(
       doacoes => {
         console.log(doacoes);
-        this.doacoes = JSON.stringify(doacoes);
+        this.listaDoacoes = doacoes;
       },
       err => {
         this.carregandoDadosDoacoes = false;

@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
 
+import { Produto } from './../../models/produto.model';
+import { Fornecedor } from './../../models/fornecedor.model';
+
 @Component({
   selector: 'app-fornecedores',
   templateUrl: './fornecedores.component.html',
@@ -15,8 +18,10 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
   inscricao: Subscription; // Usada para observar mudanças na URL
   carregandoDados: Boolean = false;
   carregandoDadosProdutos: Boolean = false;
-  fornecedor: String = ''; // Usar objeto depois
-  produtos: String = ''; // Usar objeto depois
+  JSON: any = JSON;
+
+  fornecedor: Fornecedor;
+  listaProdutos: [Produto];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -43,7 +48,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
     this.apiService.getFornecedor(String(idFornecedor)).subscribe(
       fornecedor => {
         console.log(fornecedor);
-        this.fornecedor = JSON.stringify(fornecedor);
+        this.fornecedor = fornecedor;
       },
       err => {
         this.carregandoDados = false;
@@ -58,7 +63,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
     this.apiService.getListaProdutosDoFornecedor(String(idFornecedor)).subscribe(
       produtos => {
         console.log(produtos);
-        this.produtos = JSON.stringify(produtos);
+        this.listaProdutos = produtos;
       },
       err => {
         this.carregandoDadosProdutos = false;

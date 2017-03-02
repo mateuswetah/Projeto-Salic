@@ -114,7 +114,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.apiService.getListaProjetos(this.queries).subscribe(
           projetos => {
             this.listaProjetos = projetos;
-            //this.resposta = JSON.stringify(projetos);
           },
           err => {
             this.carregandoDados = false;
@@ -128,7 +127,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.apiService.getListaPropostas(this.queries).subscribe(
           propostas => {
             this.listaPropostas = propostas;
-            //this.resposta = JSON.stringify(propostas);
           },
           err => {
             this.carregandoDados = false;
@@ -140,7 +138,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'proponentes':
         this.apiService.getListaProponentes(this.queries).subscribe(
           proponentes => {
-            //this.resposta = JSON.stringify(proponentes);
             this.listaProponentes = proponentes;
           },
           err => {
@@ -153,7 +150,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'incentivadores':
         this.apiService.getListaIncentivadores(this.queries).subscribe(
           incentivadores => {
-            //this.resposta = JSON.stringify(incentivadores);
             this.listaIncentivadores = incentivadores;
           },
           err => {
@@ -165,15 +161,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       case 'fornecedores':
         this.apiService.getListaFornecedores(this.queries).subscribe(
-          fornecedores=> {
-            //this.resposta = JSON.stringify(fornecedores);
+          fornecedores => {
             this.listaFornecedores = fornecedores;
           },
           err => {
             this.carregandoDados = false;
             this.router.navigate(['falha', err]);
           },
-          () => this.carregandoDados = false);  
+          () => this.carregandoDados = false);
       break;
       default:
         this.router.navigate(['falha', 405]);

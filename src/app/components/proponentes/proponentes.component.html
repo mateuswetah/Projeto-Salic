@@ -5,4 +5,8 @@
 
 <button (click)="onLoadProponente(idProponente)">Carregar Proponente</button>
 <p *ngIf="carregandoDados">Carregando proponente...</p>
-<p>{{ proponente }}</p>
+<p *ngIf="proponente != undefined">
+  API AINDA NÃO ESTÁ FORNECENDO PROJETOS DO PROPONENTE
+  <!--<button [routerLink]="['/projeto', dataFormatterService.extractIdFromUrl(proponente._links.projetos)]">VER PROJETOS</button>-->
+</p> 
+<p>{{ JSON.stringify(proponente) }}</p>
