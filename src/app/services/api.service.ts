@@ -11,7 +11,7 @@ import { Proponente } from './../models/proponente.model';
 import { Incentivador } from './../models/incentivador.model';
 import { Fornecedor } from './../models/fornecedor.model';
 import { Produto } from './../models/produto.model';
-import { Doacoes } from './../models/doacoes.model';
+import { Doacao } from './../models/doacao.model';
 
 @Injectable()
 export class ApiService {
@@ -81,7 +81,7 @@ export class ApiService {
   }
 
   // Doações do Incentivador
-  getListaDoacoesDoIncentivador(incentivador_id: String): Observable<[Doacoes]> {
+  getListaDoacoesDoIncentivador(incentivador_id: String): Observable<[Doacao]> {
     return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/doacoes/')
       .map((res: Response) => res.json()._embedded.doacoes)
       .catch((error: any) => this.handleError(error));

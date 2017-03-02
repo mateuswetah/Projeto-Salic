@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ApiService } from './../../services/api.service';
+import { ConfigurationService } from './../../services/configuration.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
 
 import { Projeto } from './../../models/projeto.model';
@@ -23,6 +24,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   pesquisaPor = 'projeto';
   carregandoDados: Boolean = false;
   JSON: any = JSON;
+
+  // Parâmetros do InifiniteScroll
+  scrollDistance = 1;
+  offsetAtual = 0;
 
   // Respostas da API:
   resposta: String = '';
@@ -50,6 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
+              private configurationService: ConfigurationService,
               private dataFormatterService: DataFormatterService) {
               }
 
@@ -105,15 +111,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  onTestarBusca() {
+  onRealizarBusca() {
+    this.offsetAtual = 0;
+    this.listaProjetos = undefined;
+    this.listaPropostas = undefined;
+    this.listaProponentes = undefined;
+    this.listaIncentivadores = undefined;
+    this.listaFornecedores = undefined;
+
+    this.carregarDados();
+  }
+
+  carregarDados() {
     this.carregandoDados = true;
+
+    // Adiciona queries extras
+    this.queries['limit'] = '' + this.configurationService.limitResultados;
+    this.queries['offset'] = '' + this.offsetAtual;
 
     switch (this.pesquisaPor) {
 
       case 'projetos':
         this.apiService.getListaProjetos(this.queries).subscribe(
           projetos => {
-            this.listaProjetos = projetos;
+            if (this.listaProjetos !== undefined) {
+              for (const projeto of projetos) {
+                this.listaProjetos.push(projeto);
+              }
+            } else {
+              this.listaProjetos = projetos;
+            }
           },
           err => {
             this.carregandoDados = false;
@@ -126,7 +153,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'propostas':
         this.apiService.getListaPropostas(this.queries).subscribe(
           propostas => {
-            this.listaPropostas = propostas;
+            if (this.listaPropostas !== undefined) {
+              for (const proposta of propostas) {
+                this.listaPropostas.push(proposta);
+              }
+            } else {
+              this.listaPropostas = propostas;
+            }
           },
           err => {
             this.carregandoDados = false;
@@ -138,7 +171,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'proponentes':
         this.apiService.getListaProponentes(this.queries).subscribe(
           proponentes => {
-            this.listaProponentes = proponentes;
+            if (this.listaProponentes !== undefined) {
+              for (const proponente of proponentes) {
+                this.listaProponentes.push(proponente);
+              }
+            } else {
+              this.listaProponentes = proponentes;
+            }
           },
           err => {
             this.carregandoDados = false;
@@ -150,7 +189,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'incentivadores':
         this.apiService.getListaIncentivadores(this.queries).subscribe(
           incentivadores => {
-            this.listaIncentivadores = incentivadores;
+            if (this.listaIncentivadores !== undefined) {
+              for (const incentivador of incentivadores) {
+                this.listaIncentivadores.push(incentivador);
+              }
+            } else {
+              this.listaIncentivadores = incentivadores;
+            }
           },
           err => {
             this.carregandoDados = false;
@@ -162,7 +207,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'fornecedores':
         this.apiService.getListaFornecedores(this.queries).subscribe(
           fornecedores => {
-            this.listaFornecedores = fornecedores;
+            if (this.listaFornecedores !== undefined) {
+              for (const fornecedor of fornecedores) {
+                this.listaFornecedores.push(fornecedor);
+              }
+            } else {
+              this.listaFornecedores = fornecedores;
+            }
           },
           err => {
             this.carregandoDados = false;
@@ -172,6 +223,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       break;
       default:
         this.router.navigate(['falha', 405]);
+    }
+  }
+
+  onScrollDown () {
+    if (!this.carregandoDados) {
+      this.offsetAtual += this.configurationService.limitResultados;
+      this.carregarDados();
     }
   }
 }

@@ -23,37 +23,51 @@
   </p>
 </div>
 <div>
-  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onTestarBusca()">Testar Busca</button></p>
-  <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
+  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onRealizarBusca()">Testar Busca</button></p>
   <p>{{ resposta }}</p>
 </div>
 <div [ngSwitch]="pesquisaPor">
-
-
-<div *ngSwitchCase="'projetos'">
-  <div *ngFor="let projeto of listaProjetos">
-    <p>{{ projeto.nome }} <button [routerLink]="['/projetos', projeto.PRONAC]">VER PROJETO</button></p>
-  </div>
-</div>
-<div *ngSwitchCase="'propostas'">
-  <div *ngFor="let proposta of listaPropostas">
-    <p>{{ proposta.nome }} <button [routerLink]="['/propostas', proposta.id]">VER PROPOSTA</button></p>
-  </div>
-</div>
-<div *ngSwitchCase="'proponentes'">
-  <div *ngFor="let proponente of listaProponentes">
-    <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]">VER PROPONENTE</button></p>
-  </div>
-</div>
-<div *ngSwitchCase="'incentivadores'">
-  <div *ngFor="let incentivador of listaIncentivadores">
-    <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
-  </div>
-</div>
-<div *ngSwitchCase="'fornecedores'">
-  <div *ngFor="let fornecedor of listaFornecedores">
-    <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
+      
+  <div *ngSwitchCase="'projetos'" 
+       infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()">
+    <div *ngFor="let projeto of listaProjetos">
+      <p>{{ projeto.nome }} <button [routerLink]="['/projetos', projeto.PRONAC]">VER PROJETO</button></p>
     </div>
-</div>
+  </div>
+  <div *ngSwitchCase="'propostas'"
+         infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()">
+    <div *ngFor="let proposta of listaPropostas">
+      <p>{{ proposta.nome }} <button [routerLink]="['/propostas', proposta.id]">VER PROPOSTA</button></p>
+    </div>
+  </div>
+  <div *ngSwitchCase="'proponentes'"
+         infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()">
+    <div *ngFor="let proponente of listaProponentes">
+      <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]">VER PROPONENTE</button></p>
+    </div>
+  </div>
+  <div *ngSwitchCase="'incentivadores'"
+         infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()">
+    <div *ngFor="let incentivador of listaIncentivadores">
+      <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
+    </div>
+  </div>
+  <div *ngSwitchCase="'fornecedores'"
+         infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()">
+    <div *ngFor="let fornecedor of listaFornecedores">
+      <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
+      </div>
+  </div>
 
+<p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
 </div>
