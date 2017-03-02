@@ -42,17 +42,17 @@
 </div>
 <div *ngSwitchCase="'proponentes'">
   <div *ngFor="let proponente of listaProponentes">
-    <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extractIdFromUrl(proponente._links.self)]">VER PROPONENTE</button></p>
+    <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]">VER PROPONENTE</button></p>
   </div>
 </div>
 <div *ngSwitchCase="'incentivadores'">
   <div *ngFor="let incentivador of listaIncentivadores">
-    <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extractIdFromUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
+    <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
   </div>
 </div>
 <div *ngSwitchCase="'fornecedores'">
   <div *ngFor="let fornecedor of listaFornecedores">
-    <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extractIdFromUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
+    <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
     </div>
 </div>
 

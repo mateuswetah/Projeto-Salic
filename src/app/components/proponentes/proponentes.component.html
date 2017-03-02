@@ -7,6 +7,6 @@
 <p *ngIf="carregandoDados">Carregando proponente...</p>
 <p *ngIf="proponente != undefined">
   API AINDA NÃO ESTÁ FORNECENDO PROJETOS DO PROPONENTE
-  <!--<button [routerLink]="['/projeto', dataFormatterService.extractIdFromUrl(proponente._links.projetos)]">VER PROJETOS</button>-->
+  <!--<button [routerLink]="['/projeto', dataFormatterService.extraiIdDaUrl(proponente._links.projetos)]">VER PROJETOS</button>-->
 </p> 
 <p>{{ JSON.stringify(proponente) }}</p>

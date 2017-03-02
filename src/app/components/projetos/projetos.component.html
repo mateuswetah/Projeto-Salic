@@ -6,7 +6,9 @@
 <button (click)="onLoadProjeto(PRONAC)">Carregar Projeto</button>
 <p *ngIf="carregandoDados">Carregando projeto...</p>
 <p *ngIf="projeto != undefined">
-  <button [routerLink]="['/proponentes', dataFormatterService.extractIdFromUrl(projeto._links.proponente)]">VER PROPONENTE</button>
+  Exemplo de Data Formatada: {{ projeto.data_inicio }} --> {{ dataFormatterService.formataData(projeto.data_inicio)}} --> {{ dataFormatterService.formataDataExtenso(projeto.data_inicio)}}<br>
+  Exemplo de Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br> 
+  <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]">VER PROPONENTE</button>
   <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR INCENTIVADORES</button>
   <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR FORNECEDORES</button>
 </p>
