@@ -1,6 +1,12 @@
 <p>
   Página do Projeto de PRONAC {{ PRONAC }}
 </p>
+<p>Exemplos de ShareButtons: </p>
+<share-buttons class="withCount" 
+              [url]="'https://projetosalic.herokuapp.com'" 
+              [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+              [showCount]="true" ></share-buttons>
+
 <a [routerLink]="['/', 'projetos']">Página Inicial</a>
 
 <button (click)="onLoadProjeto(PRONAC)">Carregar Projeto</button>

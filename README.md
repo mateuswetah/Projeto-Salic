@@ -2,8 +2,8 @@
 
 Este projeto demonstra o uso da [API SALIC](http://hmg.api.salic.cultura.gov.br/doc/#) para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura ([SALIC](http://novosalic.cultura.gov.br/cidadao/consultar)).
 
-## Instalação
-##### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para sua execução.
+## Configuração do ambiente
+##### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para a execução do projeto.
 #
 A última versão do **Node** pode ser encontrada [aqui].(https://nodejs.org/en/). A versão usada para o desenvolvimento é **7.4.0**. 
 Usuários _Ubuntu/Debian_ podem instalar via apt:
@@ -42,7 +42,8 @@ $ ng --version
 ## Instalação
 Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:
 ```
-$ cd caminho/para/a/pasta/Projeto-Salic/
+$ git clone https://github.com/mateuswetah/Projeto-Salic.git
+$ cd Projeto-Salic/
 $ ng install
 ```
 Os módulos necessários são informados no `package.json`. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via `npm install`.

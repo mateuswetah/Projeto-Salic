@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { RouteReuseStrategy } from '@angular/router';
+import { ShareButtonsModule } from 'ng2-sharebuttons';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -37,7 +38,8 @@ import { CustomReuseStrategy } from './services/route-reuse.strategy';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ShareButtonsModule.forRoot()
   ],
   providers: [
     ApiService,
