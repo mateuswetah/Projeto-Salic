@@ -96,9 +96,18 @@ export class ApiService {
 
   // Fornecedores
   getListaFornecedores(queries: { [query: string]: String; } ): Observable<[Fornecedor]> {
+
     const searchParams = this.serializeQueries(queries);
-    return this.http.get(this.configuration.ApiUrl + 'fornecedores/', { search: searchParams })
-      .map((res: Response) => res.json()._embedded.fornecedores)
+    const headers = new Headers();
+    // headers.append('Access-Control-Allow-Headers', 'x-total-count');
+    headers.append('Access-Control-Expose-Headers', 'x-total-count');
+    const options  = new RequestOptions({ headers: headers, search: searchParams});
+
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/', options)
+      .map((res: Response) => {
+            console.log(res);
+            return res.json()._embedded.fornecedores;
+          })
       .catch((error: any) => this.handleError(error));
   }
 
