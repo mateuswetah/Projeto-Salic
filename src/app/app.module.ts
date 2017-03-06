@@ -55,7 +55,7 @@ const metaConfig: MetaConfig = {
     HttpModule,
     AppRoutingModule,
     //InfiniteScrollModule,
-    ShareButtonsModule.forRoot(),
+    ShareButtonsModule,
     MetaModule.forRoot(metaConfig)
   ],
   providers: [
