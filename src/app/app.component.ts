@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MetaService } from 'ng2-meta';
+import { MetaService } from '@nglibs/meta';
 
 @Component({
   selector: 'app-root',

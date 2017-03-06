@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
+    "@nglibs/meta": "^0.2.0-rc.3",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "core-js": "^2.4.1",

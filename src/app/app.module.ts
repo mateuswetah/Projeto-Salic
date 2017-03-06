@@ -8,7 +8,7 @@ import { RouteReuseStrategy } from '@angular/router';
 // Modules de terceiros
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ShareButtonsModule } from 'ng2-sharebuttons';
-import { MetaModule, MetaService, MetaConfig } from 'ng2-meta';
+import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 
 // Components do App
 import { AppComponent } from './app.component';
@@ -38,6 +38,22 @@ import { CustomReuseStrategy } from './services/route-reuse.strategy';
 //   }
 // };
 
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' | ',
+    applicationName: 'Visualização SALIC',
+    defaults: {
+      title: 'Visualização e Consulta SALIC',
+      description: `Visualização e Consulta de Projetos 
+                    submetidos aos Sistema de Apoio às 
+                    Leis de Incentivo à Cultura.`,
+      'og:type': 'website',
+      'og:locale': 'pt-BR'
+    }
+  });
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,14 +72,17 @@ import { CustomReuseStrategy } from './services/route-reuse.strategy';
     AppRoutingModule,
     //InfiniteScrollModule,
     ShareButtonsModule.forRoot(),
-    MetaModule.forRoot()
+    MetaModule.forRoot({
+      provide: MetaLoader,
+      useFactory: (metaFactory)
+    })
   ],
   providers: [
     ApiService,
     ConfigurationService,
     DataFormatterService,
-    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy},
-    MetaService
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+    //MetaService
   ],
   bootstrap: [AppComponent]
 })

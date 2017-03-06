@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { MetaService } from 'ng2-meta';
+import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 
 import { Fornecedor } from './../../models/fornecedor.model';
