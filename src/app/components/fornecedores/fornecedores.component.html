@@ -7,13 +7,17 @@
               [showCount]="true" ></share-buttons>
 <a [routerLink]="['/', 'fornecedores']">Página Inicial</a>
 
-<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>
+<!--<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>-->
 <p *ngIf="carregandoDados">Carregando fornecedor...</p>
-<p>{{ JSON.stringify(fornecedor) }}</p>
 
-<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>
-<p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
-<div *ngFor="let produto of listaProdutos">
-  <p>{{ produto.nome_projeto}} <button [routerLink]="['/projetos', produto.PRONAC]">VER PROJETO</button></p>
-  <p>{{ JSON.stringify(produto) }}</p>
+<div *ngIf="!carregandoDados">
+  <p>{{ JSON.stringify(fornecedor) }}</p>
+  <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
+  <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
+  <div *ngIf="!carregandoDadosProdutos">
+    <div *ngFor="let produto of listaProdutos">
+      <p>{{ produto.nome_projeto}} <button [routerLink]="['/projetos', produto.PRONAC]">VER PROJETO</button></p>
+      <p>{{ JSON.stringify(produto) }}</p>
+    </div>
+  </div>
 </div>

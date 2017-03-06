@@ -33,8 +33,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.PRONAC = params['PRONAC'];
-        // Acessar API, passar dados para objeto.
-        // Caso falha, this.router.navigate('falha/:idFalha')
+        this.onLoadProjeto(this.PRONAC);
       }
     );
   }
@@ -77,6 +76,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     // Meta tags do Open Graph
     this.metaService.setTag('og:title', 'Projeto: ' +  this.projeto.nome);
     this.metaService.setTag('og:typle', 'article');
+    this.metaService.setTag('og:locale', 'pt-BR');
     this.metaService.setTag('og:url', this.router.url);
     this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
                                                 submetidos aos Sistema de Apoio às 

@@ -33,8 +33,8 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idIncentivador = params['idIncentivador'];
-        // Acessar API, passar dados para objeto.
-        // Caso falha, this.router.navigate('falha/:idFalha')
+        this.onLoadIncentivador(this.idIncentivador);
+        this.onLoadDoacoes(this.idIncentivador);
       }
     );
   }
@@ -43,10 +43,10 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  onLoadIncentivador(idIncentivador: Number) {
+  onLoadIncentivador(idIncentivador: String) {
     this.carregandoDados = true;
 
-    this.apiService.getIncentivador(String(idIncentivador)).subscribe(
+    this.apiService.getIncentivador(idIncentivador).subscribe(
       incentivador => {
         console.log(incentivador);
         this.incentivador = incentivador;
@@ -59,10 +59,10 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
       () => this.carregandoDados = false);
   }
 
-  onLoadDoacoes(idIncentivador: Number) {
+  onLoadDoacoes(idIncentivador: String) {
     this.carregandoDadosDoacoes = true;
 
-    this.apiService.getListaDoacoesDoIncentivador(String(idIncentivador)).subscribe(
+    this.apiService.getListaDoacoesDoIncentivador(idIncentivador).subscribe(
       doacoes => {
         console.log(doacoes);
         this.listaDoacoes = doacoes;
@@ -92,6 +92,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     // Meta tags do Open Graph
     this.metaService.setTag('og:title', 'Incentivador: ' +  this.incentivador.nome);
     this.metaService.setTag('og:typle', 'article');
+    this.metaService.setTag('og:locale', 'pt-BR');
     this.metaService.setTag('og:url', this.router.url);
     this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
                                                 submetidos aos Sistema de Apoio às 

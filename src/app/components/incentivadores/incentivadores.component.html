@@ -9,13 +9,17 @@
 
 <a [routerLink]="['/', 'incentivadores']">Página Inicial</a>
 
-<button (click)="onLoadIncentivador(idIncentivador)">Carregar Incentivador</button>
+<!--<button (click)="onLoadIncentivador(idIncentivador)">Carregar Incentivador</button>-->
 <p *ngIf="carregandoDados">Carregando incentivador...</p>
-<p>{{ JSON.stringify(incentivador) }}</p>
 
-<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>
-<p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
-<div *ngFor="let doacao of listaDoacoes">
-  <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]">VER PROJETO</button></p>
-  <p>{{ JSON.stringify(doacao) }}</p>
+<div *ngIf="!carregandoDados">
+  <p>{{ JSON.stringify(incentivador) }}</p>
+  <!--<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>-->
+  <p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
+  <div *ngIf="!carregandoDadosDoacoes">
+    <div *ngFor="let doacao of listaDoacoes">
+      <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]">VER PROJETO</button></p>
+      <p>{{ JSON.stringify(doacao) }}</p>
+    </div>
+  </div>
 </div>

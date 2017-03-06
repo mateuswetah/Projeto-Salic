@@ -30,8 +30,7 @@ export class PropostasComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idProposta = params['idProposta'];
-        // Acessar API, passar dados para objeto.
-        // Caso falha, this.router.navigate('falha/:idFalha')
+        this.onLoadProposta(this.idProposta);
       }
     );
   }
@@ -74,6 +73,7 @@ export class PropostasComponent implements OnInit, OnDestroy {
     // Meta tags do Open Graph
     this.metaService.setTag('og:title', 'Proposta: ' +  this.proposta.nome);
     this.metaService.setTag('og:typle', 'article');
+    this.metaService.setTag('og:locale', 'pt-BR');
     this.metaService.setTag('og:url', this.router.url);
     this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
                                                 submetidos aos Sistema de Apoio às 

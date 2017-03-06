@@ -9,13 +9,17 @@
 
 <a [routerLink]="['/', 'proponentes']">Página Inicial</a>
 
-<button (click)="onLoadProponente(idProponente)">Carregar Proponente</button>
+<!--<button (click)="onLoadProponente(idProponente)">Carregar Proponente</button>-->
 <p *ngIf="carregandoDados">Carregando proponente...</p>
-<p *ngIf="proponente != undefined">{{ JSON.stringify(proponente) }}</p>
 
-<button (click)="onLoadProjetos(idProponente)">Carregar Projetos deste Proponente</button>
-<p *ngIf="carregandoDadosProjetos">Carregando doações deste incentivador...</p>
-<div *ngFor="let projeto of listaProjetos">
-  <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]">VER PROJETO</button></p>
-  <p>{{ JSON.stringify(projeto.resumo) }}</p>
+<div *ngIf="!carregandoDados">
+  <p>{{ JSON.stringify(proponente) }}</p>
+  <!--<button (click)="onLoadProjetos(idProponente)">Carregar Projetos deste Proponente</button>-->
+  <p *ngIf="carregandoDadosProjetos">Carregando doações deste incentivador...</p>
+  <div *ngIf="!carregandoDadosProjetos">
+    <div *ngFor="let projeto of listaProjetos">
+      <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]">VER PROJETO</button></p>
+      <p>{{ JSON.stringify(projeto.resumo) }}</p>
+    </div>
+  </div>
 </div>

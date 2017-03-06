@@ -34,8 +34,8 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idFornecedor = params['idFornecedor'];
-        // Acessar API, passar dados para objeto.
-        // Caso falha, this.router.navigate('falha/:idFalha')
+        this.onLoadFornecedor(this.idFornecedor);
+        this.onLoadProdutos(this.idFornecedor);
       }
     );
   }
@@ -44,10 +44,10 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  onLoadFornecedor(idFornecedor: Number) {
+  onLoadFornecedor(idFornecedor: String) {
     this.carregandoDados = true;
 
-    this.apiService.getFornecedor(String(idFornecedor)).subscribe(
+    this.apiService.getFornecedor(idFornecedor).subscribe(
       fornecedor => {
         console.log(fornecedor);
         this.fornecedor = fornecedor;
@@ -60,10 +60,10 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
       () => this.carregandoDados = false);
   }
 
-  onLoadProdutos(idFornecedor: Number) {
+  onLoadProdutos(idFornecedor: String) {
     this.carregandoDadosProdutos = true;
 
-    this.apiService.getListaProdutosDoFornecedor(String(idFornecedor)).subscribe(
+    this.apiService.getListaProdutosDoFornecedor(idFornecedor).subscribe(
       produtos => {
         console.log(produtos);
         this.listaProdutos = produtos;
@@ -93,6 +93,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
     // Meta tags do Open Graph
     this.metaService.setTag('og:title', 'Fornecedor: ' +  this.fornecedor.nome);
     this.metaService.setTag('og:typle', 'article');
+    this.metaService.setTag('og:locale', 'pt-BR');
     this.metaService.setTag('og:url', this.router.url);
     this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
                                                 submetidos aos Sistema de Apoio às 

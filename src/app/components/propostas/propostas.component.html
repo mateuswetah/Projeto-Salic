@@ -11,4 +11,6 @@
 
 <button (click)="onLoadProposta(idProposta)">Carregar Proposta</button>
 <p *ngIf="carregandoDados">Carregando proposta...</p>
-<p>{{ JSON.stringify(proposta) }}</p>
+<div *ngIf="!carregandoDados">
+  <p>{{ JSON.stringify(proposta) }}</p>
+</div>

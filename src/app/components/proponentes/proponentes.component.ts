@@ -32,15 +32,12 @@ export class ProponentesComponent implements OnInit, OnDestroy {
               private metaService: MetaService) { }
 
   ngOnInit() {
-    this.proponente = null;
-    this.listaProjetos = null;
-
    // Obtêm o parâmetro através da rota da URL
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idProponente = params['idProponente'];
-        // Acessar API, passar dados para objeto.
-        // Caso falha, this.router.navigate('falha/:idFalha')
+        this.onLoadProponente(this.idProponente);
+        this.onLoadProjetos(this.idProponente);
       }
     );
   }
@@ -49,10 +46,10 @@ export class ProponentesComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  onLoadProponente(idProponente: Number) {
+  onLoadProponente(idProponente: String) {
     this.carregandoDados = true;
 
-    this.apiService.getProponente(String(idProponente)).subscribe(
+    this.apiService.getProponente(idProponente).subscribe(
       proponente => {
         console.log(proponente);
         this.proponente = proponente;
@@ -65,10 +62,10 @@ export class ProponentesComponent implements OnInit, OnDestroy {
       () => this.carregandoDados = false);
   }
 
-  onLoadProjetos(idProponente: Number) {
+  onLoadProjetos(idProponente: String) {
     this.carregandoDadosProjetos = true;
 
-    this.apiService.getListaProjetosDoProponente(String(idProponente)).subscribe(
+    this.apiService.getListaProjetosDoProponente(idProponente).subscribe(
       projetos => {
         console.log(projetos);
         this.listaProjetos = projetos;
