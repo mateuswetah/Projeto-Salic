@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
-import { AppMetaTaggingModule } from './modules/app.metatagging.module';
+//git import { AppMetaTaggingModule } from './modules/app.metatagging.module';
 
 // Modules de terceiros
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ShareButtonsModule } from 'ng2-sharebuttons';
-import { MetaModule } from 'ng2-meta';
+import { MetaModule, MetaConfig, MetaService } from 'ng2-meta';
 
 // Components do App
 import { AppComponent } from './app.component';
@@ -27,6 +27,17 @@ import { ConfigurationService } from './services/configuration.service';
 import { DataFormatterService } from './services/data-formatter.service';
 
 import { CustomReuseStrategy } from './services/route-reuse.strategy';
+
+// Padrão de Meta-tag para as páginas que não possuírem estes dados especificados.
+const metaConfig: MetaConfig = {
+  useTitleSuffix: true, // Faz com que todas as páginas do site tenham este sufixo.
+  defaults: {
+    title: 'Projeto de Visualização do SALIC',
+    titleSuffix: ' | Projeto Visualização SALIC'
+    //,
+    //'og:image': 'http://example.com/default-image.png',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -46,7 +57,7 @@ import { CustomReuseStrategy } from './services/route-reuse.strategy';
     AppRoutingModule,
     InfiniteScrollModule,
     ShareButtonsModule.forRoot(),
-    AppMetaTaggingModule
+    MetaModule.forRoot(metaConfig)
   ],
   providers: [
     ApiService,
