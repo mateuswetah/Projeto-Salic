@@ -27,6 +27,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
 
     shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
         //console.debug('CustomReuseStrategy:shouldReuseRoute', future, curr);
+        //console.debug('should:' + (future.routeConfig === curr.routeConfig).valueOf());
         return future.routeConfig === curr.routeConfig;
     }
 

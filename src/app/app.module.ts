@@ -3,10 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { RouteReuseStrategy } from '@angular/router';
-import { ShareButtonsModule } from 'ng2-sharebuttons';
+import { AppMetaTaggingModule } from './modules/app.metatagging.module';
 
+// Modules de terceiros
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { ShareButtonsModule } from 'ng2-sharebuttons';
+import { MetaModule } from 'ng2-meta';
+
+// Components do App
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjetosComponent } from './components/projetos/projetos.component';
@@ -16,6 +21,7 @@ import { IncentivadoresComponent } from './components/incentivadores/incentivado
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { FalhaComponent } from './components/falha/falha.component';
 
+// Services do App
 import { ApiService } from './services/api.service';
 import { ConfigurationService } from './services/configuration.service';
 import { DataFormatterService } from './services/data-formatter.service';
@@ -39,7 +45,8 @@ import { CustomReuseStrategy } from './services/route-reuse.strategy';
     HttpModule,
     AppRoutingModule,
     InfiniteScrollModule,
-    ShareButtonsModule.forRoot()
+    ShareButtonsModule.forRoot(),
+    AppMetaTaggingModule
   ],
   providers: [
     ApiService,

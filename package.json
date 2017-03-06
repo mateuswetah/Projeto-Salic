@@ -29,6 +29,7 @@
     "core-js": "^2.4.1",
     "express": "^4.14.1",
     "font-awesome": "^4.7.0",
+    "ng2-meta": "^2.0.3",
     "ng2-sharebuttons": "^2.0.1",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",

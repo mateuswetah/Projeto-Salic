@@ -1,6 +1,12 @@
 <p>
   Página do Incentivador de id: {{ idIncentivador }} 
 </p>
+<p>Exemplos de ShareButtons: </p>
+<share-buttons class="withCount" 
+              [url]="this.router.url" 
+              [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+              [showCount]="true" ></share-buttons>
+
 <a [routerLink]="['/', 'incentivadores']">Página Inicial</a>
 
 <button (click)="onLoadIncentivador(idIncentivador)">Carregar Incentivador</button>

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { MetaService } from 'ng2-meta';
 import { ApiService } from './../../services/api.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
 
@@ -23,7 +24,8 @@ export class ProjetosComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
-              private dataFormatterService: DataFormatterService) {
+              private dataFormatterService: DataFormatterService,
+              private metaService: MetaService) {
   }
 
   ngOnInit() {
@@ -31,7 +33,6 @@ export class ProjetosComponent implements OnInit, OnDestroy {
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.PRONAC = params['PRONAC'];
-
         // Acessar API, passar dados para objeto.
         // Caso falha, this.router.navigate('falha/:idFalha')
       }
@@ -49,12 +50,39 @@ export class ProjetosComponent implements OnInit, OnDestroy {
       projeto => {
         console.log(projeto);
         this.projeto = projeto;
+        this.atualizarMetaTags();
       },
       err => {
         this.carregandoDados = false;
         this.router.navigate(['falha', err]);
       },
       () => this.carregandoDados = false);
+  }
+
+  atualizarMetaTags() {
+    // Meta tags genéricas
+    this.metaService.setTitle('Projeto: ' +  this.projeto.nome);
+    this.metaService.setTag('description', `Visualização e Consulta de Projetos 
+                                            submetidos aos Sistema de Apoio às 
+                                            Leis de Incentivo à Cultura.`);
+    // Meta tags do Twitter
+    this.metaService.setTag('twitter:card', 'summary');
+    this.metaService.setTag('twitter:site', '@publisher_handle');
+    this.metaService.setTag('twitter:title', 'Projeto: ' +  this.projeto.nome);
+    this.metaService.setTag('twitter:description', `Visualização e Consulta de Projetos 
+                                                    submetidos aos Sistema de Apoio às 
+                                                    Leis de Incentivo à Cultura.`);
+    this.metaService.setTag('twitter:creator', '@author_handle');
+
+    // Meta tags do Open Graph
+    this.metaService.setTag('og:title', 'Projeto: ' +  this.projeto.nome);
+    this.metaService.setTag('og:typle', 'article');
+    this.metaService.setTag('og:url', this.router.url);
+    this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
+                                                submetidos aos Sistema de Apoio às 
+                                                Leis de Incentivo à Cultura.`);
+    this.metaService.setTag('site_name', 'Sistema de Visualização do SALIC');
+    //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 
 }

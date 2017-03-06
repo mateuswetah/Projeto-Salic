@@ -10,7 +10,16 @@ import { FornecedoresComponent } from '../components/fornecedores/fornecedores.c
 import { FalhaComponent } from '../components/falha/falha.component';
 
 const appRoutes: Routes = [
-  { path: 'projetos/:PRONAC', component: ProjetosComponent},
+  {
+    path: 'projetos/:PRONAC',
+    component: ProjetosComponent,
+    data: {
+      meta: {
+        title: 'Página de Projeto',
+        description: 'Página de Projeto - Visualização SALIC'
+      }
+    }
+  },
   { path: 'propostas/:idProposta', component: PropostasComponent},
   { path: 'proponentes/:idProponente', component: ProponentesComponent},
   { path: 'incentivadores/:idIncentivador', component: IncentivadoresComponent},

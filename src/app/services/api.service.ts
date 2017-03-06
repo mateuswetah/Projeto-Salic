@@ -65,6 +65,15 @@ export class ApiService {
       .catch((error: any) => this.handleError(error));
   }
 
+  // Projetos do Proponente
+  getListaProjetosDoProponente(proponente_id: String): Observable<[Projeto]> {
+    const searchParams = this.serializeQueries({'proponente_id': proponente_id});
+    console.log(searchParams);
+    return this.http.get(this.configuration.ApiUrl + 'projetos/', { search: searchParams})
+      .map((res: Response) => res.json()._embedded.projetos)
+      .catch((error: any) => this.handleError(error));
+  }
+
   // Incentivador
   getIncentivador(incentivador_id: String): Observable<Incentivador> {
     return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/')
