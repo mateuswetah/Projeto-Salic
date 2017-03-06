@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
-//git import { AppMetaTaggingModule } from './modules/app.metatagging.module';
 
 // Modules de terceiros
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
@@ -55,7 +54,7 @@ const metaConfig: MetaConfig = {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    InfiniteScrollModule,
+    //InfiniteScrollModule,
     ShareButtonsModule.forRoot(),
     MetaModule.forRoot(metaConfig)
   ],

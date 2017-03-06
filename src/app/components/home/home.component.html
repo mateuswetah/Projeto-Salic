@@ -28,42 +28,27 @@
 </div>
 <div [ngSwitch]="pesquisaPor">
       
-  <div *ngSwitchCase="'projetos'" 
-       infinite-scroll
-       [infiniteScrollDistance]="scrollDistance"
-       (scrolled)="onScrollDown()">
+  <div *ngSwitchCase="'projetos'">
     <div *ngFor="let projeto of listaProjetos">
       <p>{{ projeto.nome }} <button [routerLink]="['/projetos', projeto.PRONAC]">VER PROJETO</button></p>
     </div>
   </div>
-  <div *ngSwitchCase="'propostas'"
-         infinite-scroll
-       [infiniteScrollDistance]="scrollDistance"
-       (scrolled)="onScrollDown()">
+  <div *ngSwitchCase="'propostas'">
     <div *ngFor="let proposta of listaPropostas">
       <p>{{ proposta.nome }} <button [routerLink]="['/propostas', proposta.id]">VER PROPOSTA</button></p>
     </div>
   </div>
-  <div *ngSwitchCase="'proponentes'"
-         infinite-scroll
-       [infiniteScrollDistance]="scrollDistance"
-       (scrolled)="onScrollDown()">
+  <div *ngSwitchCase="'proponentes'">
     <div *ngFor="let proponente of listaProponentes">
       <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]">VER PROPONENTE</button></p>
     </div>
   </div>
-  <div *ngSwitchCase="'incentivadores'"
-         infinite-scroll
-       [infiniteScrollDistance]="scrollDistance"
-       (scrolled)="onScrollDown()">
+  <div *ngSwitchCase="'incentivadores'">
     <div *ngFor="let incentivador of listaIncentivadores">
       <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
     </div>
   </div>
-  <div *ngSwitchCase="'fornecedores'"
-         infinite-scroll
-       [infiniteScrollDistance]="scrollDistance"
-       (scrolled)="onScrollDown()">
+  <div *ngSwitchCase="'fornecedores'">
     <div *ngFor="let fornecedor of listaFornecedores">
       <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
       </div>
@@ -75,3 +60,8 @@
   <p>Não encontramos {{ pesquisaPor }} com estes parâmetros de pesquisa :(</p>
   <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
 </div>
+  <!--<div *ngSwitchCase="'fornecedores'"
+         infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       (scrolled)="onScrollDown()"> -->
+       

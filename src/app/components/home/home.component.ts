@@ -253,10 +253,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  onScrollDown () {
-    if (!this.carregandoDados) {
-      this.offsetAtual += this.configurationService.limitResultados;
-      this.carregarDados();
-    }
-  }
+  // onScrollDown () {
+  //   if (!this.carregandoDados) {
+  //     this.offsetAtual += this.configurationService.limitResultados;
+  //     this.carregarDados();
+  //   }
+  // }
 }
