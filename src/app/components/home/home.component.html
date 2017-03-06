@@ -1,7 +1,6 @@
 <p>
   Página Inicial
 </p>
-
 <!--<div>
   <ul>
     <li><a [routerLink]="['', pesquisaPor]" [queryParams]="queries">Página Inicial com Pesquisa por {{ pesquisaPor }} + Queries</a></li>
@@ -69,6 +68,10 @@
       <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
       </div>
   </div>
+</div>
 
 <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
+<div *ngIf="buscaSemResultados">
+  <p>Não encontramos {{ pesquisaPor }} com estes parâmetros de pesquisa :(</p>
+  <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
 </div>

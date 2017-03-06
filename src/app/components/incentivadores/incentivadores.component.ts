@@ -15,13 +15,16 @@ import { Doacao } from './../../models/doacao.model';
 })
 export class IncentivadoresComponent implements OnInit, OnDestroy {
 
-  idIncentivador: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
+  JSON: any = JSON;
+
   carregandoDados: Boolean = false;
   carregandoDadosDoacoes: Boolean = false;
-  incentivador: Incentivador; // Usar objeto depois
+  buscaPorDoacoesSemResultados: Boolean = false;
+
+  idIncentivador: String;
+  incentivador: Incentivador;
   listaDoacoes: [Doacao];
-  JSON: any = JSON;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -61,6 +64,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
 
   onLoadDoacoes(idIncentivador: String) {
     this.carregandoDadosDoacoes = true;
+    this.buscaPorDoacoesSemResultados = false;
 
     this.apiService.getListaDoacoesDoIncentivador(idIncentivador).subscribe(
       doacoes => {
@@ -69,7 +73,12 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
       },
       err => {
         this.carregandoDadosDoacoes = false;
-        this.router.navigate(['falha', err]);
+
+        if (err === 404) {
+          this.buscaPorDoacoesSemResultados = true;
+        } else {
+          this.router.navigate(['falha', err]);
+        }
       },
       () => this.carregandoDadosDoacoes = false);
   }

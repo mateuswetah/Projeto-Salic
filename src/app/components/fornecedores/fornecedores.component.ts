@@ -15,12 +15,14 @@ import { Produto } from './../../models/produto.model';
 })
 export class FornecedoresComponent implements OnInit, OnDestroy {
 
-  idFornecedor: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
-  carregandoDados: Boolean = false;
-  carregandoDadosProdutos: Boolean = false;
   JSON: any = JSON;
 
+  carregandoDados: Boolean = false;
+  carregandoDadosProdutos: Boolean = false;
+  buscaPorProdutosSemResultados: Boolean = false;
+
+  idFornecedor: String;
   fornecedor: Fornecedor;
   listaProdutos: [Produto];
 
@@ -62,6 +64,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
 
   onLoadProdutos(idFornecedor: String) {
     this.carregandoDadosProdutos = true;
+    this.buscaPorProdutosSemResultados = false;
 
     this.apiService.getListaProdutosDoFornecedor(idFornecedor).subscribe(
       produtos => {
@@ -70,7 +73,12 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
       },
       err => {
         this.carregandoDadosProdutos = false;
-        this.router.navigate(['falha', err]);
+
+        if (err === 404) {
+          this.buscaPorProdutosSemResultados = true;
+        } else {
+          this.router.navigate(['falha', err]);
+        }
       },
       () => this.carregandoDadosProdutos = false);
   }

@@ -21,5 +21,10 @@
       <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]">VER PROJETO</button></p>
       <p>{{ JSON.stringify(doacao) }}</p>
     </div>
+
+    <div *ngIf="buscaPorDoacoesSemResultados">
+      <p>Não encontramos Doações feitas por este Incentivador.</p>
+    </div>
+
   </div>
 </div>

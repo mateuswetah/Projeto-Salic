@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   pesquisaPor = 'projeto';
   carregandoDados: Boolean = false;
   JSON: any = JSON;
+  buscaSemResultados = false;
 
   // Parâmetros do InifiniteScroll
   scrollDistance = 1;
@@ -124,6 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   carregarDados() {
     this.carregandoDados = true;
+    this.buscaSemResultados = false;
 
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
@@ -144,7 +146,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           },
           err => {
             this.carregandoDados = false;
-            this.router.navigate(['falha', err]);
+
+            if (err === 404) {
+              this.buscaSemResultados = true;
+            } else {
+              this.router.navigate(['falha', err]);
+            }
           },
           () => this.carregandoDados = false);
 
@@ -163,7 +170,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           },
           err => {
             this.carregandoDados = false;
-            this.router.navigate(['falha', err]);
+
+            if (err === 404) {
+              this.buscaSemResultados = true;
+            } else {
+              this.router.navigate(['falha', err]);
+            }
           },
           () => this.carregandoDados = false);
       break;
@@ -181,7 +193,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           },
           err => {
             this.carregandoDados = false;
-            this.router.navigate(['falha', err]);
+
+            if (err === 404) {
+              this.buscaSemResultados = true;
+            } else {
+              this.router.navigate(['falha', err]);
+            }
           },
           () => this.carregandoDados = false);
       break;
@@ -199,7 +216,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           },
           err => {
             this.carregandoDados = false;
-            this.router.navigate(['falha', err]);
+
+            if (err === 404) {
+              this.buscaSemResultados = true;
+            } else {
+              this.router.navigate(['falha', err]);
+            }
           },
           () => this.carregandoDados = false);
       break;
@@ -217,7 +239,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           },
           err => {
             this.carregandoDados = false;
-            this.router.navigate(['falha', err]);
+
+            if (err === 404) {
+              this.buscaSemResultados = true;
+            } else {
+              this.router.navigate(['falha', err]);
+            }
           },
           () => this.carregandoDados = false);
       break;

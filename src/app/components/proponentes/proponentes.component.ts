@@ -16,12 +16,14 @@ import { Projeto } from './../../models/projeto.model';
 })
 export class ProponentesComponent implements OnInit, OnDestroy {
 
-  idProponente: String;
   inscricao: Subscription; // Usada para observar mudanças na URL
-  carregandoDados: Boolean = false;
-  carregandoDadosProjetos = false;
   JSON: any = JSON;
 
+  carregandoDados: Boolean = false;
+  carregandoDadosProjetos = false;
+  buscaPorProjetosSemResultados: Boolean = false;
+
+  idProponente: String;
   proponente: Proponente;
   listaProjetos: [Projeto];
 
@@ -64,6 +66,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
 
   onLoadProjetos(idProponente: String) {
     this.carregandoDadosProjetos = true;
+    this.buscaPorProjetosSemResultados = false;
 
     this.apiService.getListaProjetosDoProponente(idProponente).subscribe(
       projetos => {
@@ -72,7 +75,12 @@ export class ProponentesComponent implements OnInit, OnDestroy {
       },
       err => {
         this.carregandoDadosProjetos = false;
-        this.router.navigate(['falha', err]);
+
+        if (err === 404) {
+          this.buscaPorProjetosSemResultados = true;
+        } else {
+          this.router.navigate(['falha', err]);
+        }
       },
       () => this.carregandoDadosProjetos = false);
   }

@@ -19,5 +19,10 @@
       <p>{{ produto.nome_projeto}} <button [routerLink]="['/projetos', produto.PRONAC]">VER PROJETO</button></p>
       <p>{{ JSON.stringify(produto) }}</p>
     </div>
+
+    <div *ngIf="buscaPorProdutosSemResultados">
+      <p>Não encontramos Produtos pertencentes a este Fornecedor.</p>
+    </div>
+
   </div>
 </div>

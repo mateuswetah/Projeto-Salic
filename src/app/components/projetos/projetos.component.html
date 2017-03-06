@@ -13,7 +13,6 @@
 <p *ngIf="carregandoDados">Carregando projeto...</p>
 
 <div *ngIf="!carregandoDados">
-  <p >{{ JSON.stringify(projeto) }}</p>
   <p *ngIf="projeto != undefined">
     Exemplo de Data Formatada: {{ projeto.data_inicio }} --> {{ dataFormatterService.formataData(projeto.data_inicio)}} --> {{ dataFormatterService.formataDataExtenso(projeto.data_inicio)}}<br>
     Exemplo de Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br> 
@@ -21,5 +20,6 @@
     <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR INCENTIVADORES</button>
     <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR FORNECEDORES</button>
   </p>
+  <p>{{ JSON.stringify(projeto) }}</p>
 </div>
 
