@@ -28,10 +28,15 @@ export class ApiService {
   }
 
   // Projetos
-  getListaProjetos(queries: { [query: string]: String; } ): Observable<[Projeto]> {
+  getListaProjetos(queries: { [query: string]: String; } ):
+      Observable<{ listaProjetos: [Projeto], count: number, total: number }> {
+
     const searchParams = this.serializeQueries(queries);
+
     return this.http.get(this.configuration.ApiUrl + 'projetos/', { search: searchParams })
-      .map((res: Response) => res.json()._embedded.projetos)
+      .map((res: Response) => ({ listaProjetos: res.json()._embedded.projetos,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
    }
 
@@ -43,10 +48,15 @@ export class ApiService {
   }
 
   // Propostas
-  getListaPropostas(queries: { [query: string]: String; } ): Observable<[Proposta]> {
+  getListaPropostas(queries: { [query: string]: String; } ):
+      Observable<{ listaPropostas: [Proposta], count: number, total: number }> {
+
     const searchParams = this.serializeQueries(queries);
+
     return this.http.get(this.configuration.ApiUrl + 'propostas/', { search: searchParams })
-      .map((res: Response) => res.json()._embedded.propostas)
+      .map((res: Response) => ({ listaPropostas: res.json()._embedded.propostas,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 
@@ -58,10 +68,15 @@ export class ApiService {
   }
 
   // Proponentes
-  getListaProponentes(queries: { [query: string]: String; } ): Observable<[Proponente]> {
+  getListaProponentes(queries: { [query: string]: String; } ):
+      Observable<{ listaProponentes: [Proponente], count: number, total: number }> {
+
     const searchParams = this.serializeQueries(queries);
+
     return this.http.get(this.configuration.ApiUrl + 'proponentes/', { search: searchParams })
-      .map((res: Response) => res.json()._embedded.proponentes)
+      .map((res: Response) => ({ listaProponentes: res.json()._embedded.proponentes,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 
@@ -82,10 +97,15 @@ export class ApiService {
   }
 
   // Incentivadores
-  getListaIncentivadores(queries: { [query: string]: String; } ): Observable<[Incentivador]> {
+  getListaIncentivadores(queries: { [query: string]: String; } ):
+      Observable<{ listaIncentivadores: [Incentivador], count: number, total: number }> {
+
     const searchParams = this.serializeQueries(queries);
+
     return this.http.get(this.configuration.ApiUrl + 'incentivadores/', { search: searchParams })
-      .map((res: Response) => res.json()._embedded.incentivadores)
+      .map((res: Response) => ({ listaIncentivadores: res.json()._embedded.incentivadores,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 
@@ -104,19 +124,15 @@ export class ApiService {
   }
 
   // Fornecedores
-  getListaFornecedores(queries: { [query: string]: String; } ): Observable<[Fornecedor]> {
+  getListaFornecedores(queries: { [query: string]: String; } ):
+      Observable<{ listaFornecedores: [Fornecedor], count: number, total: number }> {
 
     const searchParams = this.serializeQueries(queries);
-    const headers = new Headers();
-    // headers.append('Access-Control-Allow-Headers', 'x-total-count');
-    headers.append('Access-Control-Expose-Headers', 'x-total-count');
-    const options  = new RequestOptions({ headers: headers, search: searchParams});
 
-    return this.http.get(this.configuration.ApiUrl + 'fornecedores/', options)
-      .map((res: Response) => {
-            console.log(res);
-            return res.json()._embedded.fornecedores;
-          })
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/', { search: searchParams })
+      .map((res: Response) => ({ listaFornecedores: res.json()._embedded.fornecedores, 
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 

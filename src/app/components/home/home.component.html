@@ -26,6 +26,7 @@
   <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onRealizarBusca()">Testar Busca</button></p>
   <p>{{ resposta }}</p>
 </div>
+
 <div [ngSwitch]="pesquisaPor">
       
   <div *ngSwitchCase="'projetos'">
@@ -53,7 +54,9 @@
       <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
       </div>
   </div>
+
 </div>
+
 
 <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
 <div *ngIf="buscaSemResultados">
@@ -65,3 +68,22 @@
        [infiniteScrollDistance]="scrollDistance"
        (scrolled)="onScrollDown()"> -->
        
+<div *ngIf="paginador  && !buscaSemResultados">
+  <ul class="pagination">
+    <li [ngClass]="{disabled:paginador.currentPage === 1}">
+      <a (click)="carregarPagina(1)">First</a>
+    </li>
+    <li [ngClass]="{disabled:paginador.currentPage === 1}">
+      <a (click)="carregarPagina(paginador.currentPage - 1)">Previous</a>
+    </li>
+    <li *ngFor="let indice of indicesPaginas" [ngClass]="{active:paginador.currentPage === indice }">
+      <a (click)="carregarPagina(indice)">{{indice}}</a>
+    </li>
+    <li [ngClass]="{disabled:paginador.currentPage === paginador.totalPages}">
+      <a (click)="carregarPagina(paginador.currentPage + 1)">Next</a>
+    </li>
+    <li [ngClass]="{disabled:paginador.currentPage === paginador.totalPages}">
+      <a (click)="carregarPagina(paginador.totalPages)">Last</a>
+    </li>
+  </ul>
+</div>

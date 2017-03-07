@@ -1,3 +1,4 @@
+import { PaginationService } from './services/pagination.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -70,8 +71,8 @@ export function metaFactory(): MetaLoader {
     ApiService,
     ConfigurationService,
     DataFormatterService,
+    PaginationService,
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
-    //MetaService
   ],
   bootstrap: [AppComponent]
 })

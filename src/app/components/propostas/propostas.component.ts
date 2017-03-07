@@ -16,9 +16,11 @@ export class PropostasComponent implements OnInit, OnDestroy {
 
   idProposta: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
-  carregandoDados: Boolean = false;
-  proposta: Proposta; // Usar objeto depois
   JSON: any = JSON;
+
+  carregandoDados: Boolean = false;
+
+  proposta: Proposta;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
