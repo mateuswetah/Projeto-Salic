@@ -13,7 +13,7 @@
 </div>-->
 <div>
   <p>Pesquisar por:
-  <select [(ngModel)]="pesquisaPor">
+  <select #option [ngModel]="pesquisaPor" (ngModelChange)="onTrocaPesquisaPor(option.value)">
     <option value="projetos">projetos</option>
     <option value="propostas">propostas</option>
     <option value="proponentes">proponentes</option>
@@ -69,6 +69,7 @@
        (scrolled)="onScrollDown()"> -->
        
 <div *ngIf="paginador  && !buscaSemResultados">
+  <p>Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</p>
   <ul class="pagination">
     <li [ngClass]="{disabled:paginador.currentPage === 1}">
       <a (click)="carregarPagina(1)">First</a>

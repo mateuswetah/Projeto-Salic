@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
+import { ConfigurationService } from './../../services/configuration.service';
 
 import { Proponente } from './../../models/proponente.model';
 import { Projeto } from './../../models/projeto.model';
@@ -25,13 +26,19 @@ export class ProponentesComponent implements OnInit, OnDestroy {
 
   idProponente: String;
   proponente: Proponente;
-  listaProjetos: [Projeto];
+
+  queriesDeProjeto: { [query: string]: String; } = {};
+  listaProjetos: [Projeto] = undefined;
+  numeroDeItens: number;
+  totalDeItens: number;
+  totalDeItensCarregado = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
               private dataFormatterService: DataFormatterService,
-              private metaService: MetaService) { }
+              private metaService: MetaService,
+              private configurationService: ConfigurationService) { }
 
   ngOnInit() {
    // Obtêm o parâmetro através da rota da URL
@@ -50,7 +57,8 @@ export class ProponentesComponent implements OnInit, OnDestroy {
 
   onLoadProponente(idProponente: String) {
     this.carregandoDados = true;
-
+    this.listaProjetos = undefined; // Garante que o objeto seja sobrescrito
+                                    // caso estejamos voltando de outra página.
     this.apiService.getProponente(idProponente).subscribe(
       proponente => {
         console.log(proponente);
@@ -68,10 +76,23 @@ export class ProponentesComponent implements OnInit, OnDestroy {
     this.carregandoDadosProjetos = true;
     this.buscaPorProjetosSemResultados = false;
 
-    this.apiService.getListaProjetosDoProponente(idProponente).subscribe(
-      projetos => {
-        console.log(projetos);
-        this.listaProjetos = projetos;
+    this.queriesDeProjeto['proponente_id'] = idProponente;
+    this.queriesDeProjeto['limit'] = '' + this.configurationService.limitResultados;
+
+    this.apiService.getListaProjetosDoProponente(this.queriesDeProjeto).subscribe(
+      resposta => {
+        console.log(resposta);
+        if (this.listaProjetos === undefined) {
+          this.listaProjetos = resposta.listaProjetosDoProponente;
+        } else {
+          for (const projeto of resposta.listaProjetosDoProponente) {
+            this.listaProjetos.push(projeto);
+          }
+        }
+        this.numeroDeItens = resposta.count;
+        this.totalDeItens = resposta.total;
+        this.totalDeItensCarregado += this.numeroDeItens;
+
       },
       err => {
         this.carregandoDadosProjetos = false;
@@ -83,6 +104,13 @@ export class ProponentesComponent implements OnInit, OnDestroy {
         }
       },
       () => this.carregandoDadosProjetos = false);
+  }
+
+  carregarMaisProjetos() {
+
+    this.queriesDeProjeto['offset'] = (this.totalDeItensCarregado + this.configurationService.limitResultados - 1) + '';
+    this.onLoadProjetos(this.idProponente);
+
   }
 
   atualizarMetaTags() {
@@ -108,7 +136,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
                                                 submetidos aos Sistema de Apoio às 
                                                 Leis de Incentivo à Cultura.`);
     this.metaService.setTag('site_name', 'Sistema de Visualização do SALIC');
-    //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
+    // this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 
 }

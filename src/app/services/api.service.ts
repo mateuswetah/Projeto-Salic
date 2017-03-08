@@ -81,11 +81,15 @@ export class ApiService {
   }
 
   // Projetos do Proponente
-  getListaProjetosDoProponente(proponente_id: String): Observable<[Projeto]> {
-    const searchParams = this.serializeQueries({'proponente_id': proponente_id});
-    console.log(searchParams);
+  getListaProjetosDoProponente(queries: { [query: string]: String; }):
+      Observable<{ listaProjetosDoProponente: [Projeto], count: number, total: number }> {
+
+    const searchParams = this.serializeQueries(queries);
+
     return this.http.get(this.configuration.ApiUrl + 'projetos/', { search: searchParams})
-      .map((res: Response) => res.json()._embedded.projetos)
+      .map((res: Response) => ({ listaProjetosDoProponente: res.json()._embedded.projetos,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 
@@ -110,9 +114,15 @@ export class ApiService {
   }
 
   // Doações do Incentivador
-  getListaDoacoesDoIncentivador(incentivador_id: String): Observable<[Doacao]> {
-    return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/doacoes/')
-      .map((res: Response) => res.json()._embedded.doacoes)
+  getListaDoacoesDoIncentivador(incentivador_id: String, queries: { [query: string]: String; } ):
+      Observable<{ listaDoacoesDoIncentivador: [Doacao], count: number, total: number }> {
+
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'incentivadores/' + incentivador_id + '/doacoes/', { search: searchParams })
+      .map((res: Response) => ({ listaDoacoesDoIncentivador: res.json()._embedded.doacoes,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 

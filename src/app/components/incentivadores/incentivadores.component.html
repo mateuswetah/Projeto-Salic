@@ -17,10 +17,17 @@
   <!--<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>-->
   <p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
   <div *ngIf="!carregandoDadosDoacoes">
+
+    <h4 *ngIf="!buscaPorDoacoesSemResultados">Doações feitas:</h4>
+    <p *ngIf="totalDeItens > 1">Foram encontradas {{ totalDeItens }} doações feitas por este incentivador: </p>
+    <p *ngIf="totalDeItens == 1">Foi encontrada uma doação feita por este incentivador: </p>
+
     <div *ngFor="let doacao of listaDoacoes">
       <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]">VER PROJETO</button></p>
       <p>{{ JSON.stringify(doacao) }}</p>
     </div>
+
+    <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidas {{ totalDeItensCarregado }} doações. <button (click)="carregarMaisDoacoes()">EXIBIR MAIS</button></p>
 
     <div *ngIf="buscaPorDoacoesSemResultados">
       <p>Não encontramos Doações feitas por este Incentivador.</p>

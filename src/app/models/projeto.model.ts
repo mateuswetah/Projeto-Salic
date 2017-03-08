@@ -32,37 +32,96 @@ export class Projeto {
                 public democratizacao:        String,
                 public sinopse:               String,
                 public resumo:                String,
-                public marcasAnexadas:       {
-
-                                              },
-                public divulgacao:            {
+                public marcasAnexadas:       [
+                                              {
+                              'id_documento': String,
+                                'data_envio': String,
+                                      'link': String,
+                                'id_arquivo': String,
+                                 'descricao': String,
+                              'nome_arquivo': String
+                                              }
+                                             ]
+                                              ,
+                public divulgacao:           [
+                                              {
                                       'peca': String,
                                    'veiculo': String
-                                              },
-                public relatorioFisico:      {
+                                              }
+                                             ],
+                public relatorioFisico:      [
+                                              {
 
-                                              },
-                public relacaoPagamentos:    {
+                                              }
+                                             ],
+                public relacaoPagamentos:    [
+                                              {
 
-                                              },
-                public certidoesNegativas:   {
-
-                                              },
+                                              }
+                                             ],
+                public certidoesNegativas:   [
+                                              {
+                              'data_emissao': String,
+                             'data_validade': String,
+                                  'situacao': String,
+                                 'descricao': String
+                                              }
+                                             ],
                 public readequacoes:          {
-                                   'pedidos': {},
-                                 'pareceres': {},
+                                   'pedidos': [{}],
+                                 'pareceres': [{}],
                                               },
-                public documentosAnexados:   {
-
-                                              },
-                public prorrogacao:           {
-
-                                              },
+                public documentosAnexados:   [
+                                              {
+                                      'nome': String,
+                                      'data': String,
+                             'classificacao': String,
+                                      'link': String
+                                              }
+                                             ],
+                public distribuicao:         [
+                                              {
+                          'qtd_patrocinador': String,
+                            'qtd_proponente': String,
+                                      'area': String,
+                              'posicao_logo': String,
+                                   'produto': String,
+                                  'segmento': String,
+                               'localizacao': String,
+                          'qtd_venda_normal': String,
+                                'qtd_outros': String,
+                               'receita_pro': String,
+                     'preco_unitario_normal': String,
+                             'qtd_produzida': String,
+                     'qtd_venda_promocional': String,
+                'preco_unitario_promocional': String,
+                          'receita_prevista': String,
+                            'receita_normal': String
+                                             }
+                                            ],
+                public prorrogacao:          [
+                                              {
+                               'atendimento': String,
+                                   'usuario': String,
+                                'data_final': String,
+                               'data_pedido': String,
+                                'observacao': String,
+                               'data_inicio': String,
+                                    'estado': String
+                                              }
+                                             ],
                 public captacoes:             {
                                     'PRONAC': String,
                                      'valor': String,
                                'data_recibo': String,
+                              'nome_projeto': String,
                                     'cgccpf': String,
-                               'nome_doador': String
+                               'nome_doador': String,
+                                    '_links':               [
+                                                              {
+                                                     'projeto': String,
+                                                'incentivador': String
+                                                              }
+                                                            ]
                                               } ) {}
 }

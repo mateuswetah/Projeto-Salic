@@ -13,13 +13,23 @@
 <p *ngIf="carregandoDados">Carregando projeto...</p>
 
 <div *ngIf="!carregandoDados">
-  <p *ngIf="projeto != undefined">
-    Exemplo de Data Formatada: {{ projeto.data_inicio }} --> {{ dataFormatterService.formataData(projeto.data_inicio)}} --> {{ dataFormatterService.formataDataExtenso(projeto.data_inicio)}}<br>
-    Exemplo de Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br> 
+  <div *ngIf="projeto != undefined">
+
+    <h4>Exemplo de formatação de dados: </h4> 
+    <p>Data Formatada: {{ projeto.data_inicio }} --> {{ dataFormatterService.formataData(projeto.data_inicio)}} --> {{ dataFormatterService.formataDataExtenso(projeto.data_inicio)}}<br></p>
+    <p>Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br></p>
+
+    <h4>Links de Entidades Relacionadas: </h4>
     <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]">VER PROPONENTE</button>
     <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR INCENTIVADORES</button>
     <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR FORNECEDORES</button>
-  </p>
-  <p>{{ JSON.stringify(projeto) }}</p>
+   
+    <h4 *ngIf="projeto._embedded.captacoes.length > 0">Exemplo de Captações (uma das)</h4>
+    <p *ngIf="projeto._embedded.captacoes.length > 0">{{ projeto._embedded.captacoes[0].valor }} doados pelo {{ projeto._embedded.captacoes[0].nome_doador }}. <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(projeto._embedded.captacoes[0]._links.incentivador)]">IR PARA INCENTIVADOR</button></p>
+
+    <h4>Restante dos dados: </h4> 
+    <p>{{ JSON.stringify(projeto) }}</p>
+  </div>
+  
 </div>
 

@@ -17,10 +17,17 @@
   <!--<button (click)="onLoadProjetos(idProponente)">Carregar Projetos deste Proponente</button>-->
   <p *ngIf="carregandoDadosProjetos">Carregando doações deste incentivador...</p>
   <div *ngIf="!carregandoDadosProjetos">
+    
+    <h4 *ngIf="!buscaPorProjetosSemResultados">Projetos submetidos:</h4>
+    <p *ngIf="totalDeItens > 1">Foram encontrados {{ totalDeItens }} projetos submetidos por este proponente: </p>
+    <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
+
     <div *ngFor="let projeto of listaProjetos">
       <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]">VER PROJETO</button></p>
       <p>{{ JSON.stringify(projeto.resumo) }}</p>
     </div>
+
+    <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos. <button (click)="carregarMaisProjetos()">EXIBIR MAIS</button></p>
 
     <div *ngIf="buscaPorProjetosSemResultados">
       <p>Não encontramos Projetos submetidos por este Proponente.</p>

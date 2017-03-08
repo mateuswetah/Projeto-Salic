@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   buscaSemResultados = false;
 
   // Parâmetros do InifiniteScroll
-  //scrollDistance = 1;
+  // scrollDistance = 1;
   offsetAtual = 0;
 
   // Respostas da API:
@@ -63,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private location: Location,
               private apiService: ApiService,
               private configurationService: ConfigurationService,
               private dataFormatterService: DataFormatterService,
@@ -107,21 +110,74 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.inscricaoQueries.unsubscribe();
   }
 
-  onUpdateQuery() {
-    this.queries['UF'] = 'SP';
-    this.router.navigate([''], { queryParams: {'UF': this.queries['UF']}});
-  }
-
   atualizaQueries(queryParams: any) {
+
+    let nenhumaQueryEnviada = true;
+
+    this.queries = {};
 
     for (const query of this.queriesDoSelecionado) {
       if (queryParams[query]) {
         this.queries[query] = queryParams[query];
+        if (query !== 'offset' && query !== 'limit') {
+          nenhumaQueryEnviada = false;
+        }
       }
+    }
+
+    if (nenhumaQueryEnviada === false) {
+      this.carregarPagina(1);
     }
   }
 
+  onTrocaPesquisaPor(novoPesquisaPor) {
+
+    this.pesquisaPor = novoPesquisaPor;
+    this.paginador = undefined;
+
+    switch (this.pesquisaPor) {
+      case 'projetos':
+        this.queriesDoSelecionado = this.queriesDeProjetos;
+      break;
+      case 'propostas':
+        this.queriesDoSelecionado = this.queriesDePropostas;
+      break;
+      case 'proponentes':
+        this.queriesDoSelecionado = this.queriesDeProponentes;
+      break;
+      case 'incentivadores':
+        this.queriesDoSelecionado = this.queriesDeIncentivadores;
+      break;
+      case 'fornecedores':
+        this.queriesDoSelecionado = this.queriesDeIncentivadores;
+      break;
+      default:
+        this.router.navigate(['falha', 405]);
+    }
+
+    this.atualizaQueries(this.queries);
+
+    const params = new URLSearchParams();
+
+    for (const key in this.queries) {
+      if (this.queries.hasOwnProperty(key)) {
+        params.set(key, String(this.queries[key]));
+      }
+    }
+    this.location.go(this.pesquisaPor, params.toString());
+  }
+
   onRealizarBusca() {
+
+    const params = new URLSearchParams();
+
+    for (const key in this.queries) {
+      if (this.queries.hasOwnProperty(key)) {
+        params.set(key, String(this.queries[key]));
+      }
+    }
+    this.location.go(this.pesquisaPor, params.toString());
+
     this.offsetAtual = 0;
     this.listaProjetos = undefined;
     this.listaPropostas = undefined;
@@ -133,8 +189,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   carregarPagina(indice: number) {
-
-    console.log(indice);
 
     if (indice < 1 || indice > (this.totalDeItems / this.numeroDeItems) + this.numeroDeItems) {
       return;
@@ -269,11 +323,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   atualizaIndicesPaginas() {
 
-    this.paginador = this.paginationService.getPager(this.totalDeItems, this.offsetAtual/this.configurationService.limitResultados + 1, this.configurationService.limitResultados);
+    this.paginador = this.paginationService.getPager( this.totalDeItems, 
+                                                      this.offsetAtual/this.configurationService.limitResultados + 1, 
+                                                      this.configurationService.limitResultados);
     this.indicesPaginas = Array.apply(null, {length: this.totalDeItems/this.numeroDeItems}).map(Number.call, Number);
     this.indicesPaginas = this.indicesPaginas.slice(this.paginador.startPage, this.paginador.endPage);
-    console.log(this.paginador);
-    console.log(this.indicesPaginas);
 
   }
 

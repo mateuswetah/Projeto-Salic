@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Rx';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
+import { ConfigurationService } from './../../services/configuration.service';
 
 import { Incentivador } from './../../models/incentivador.model';
 import { Doacao } from './../../models/doacao.model';
@@ -24,12 +25,18 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
 
   idIncentivador: String;
   incentivador: Incentivador;
-  listaDoacoes: [Doacao];
+
+  queriesDeDoacao: { [query: string]: String; } = {};
+  listaDoacoes: [Doacao] = undefined;
+  numeroDeItens: number;
+  totalDeItens: number;
+  totalDeItensCarregado = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
-              private metaService: MetaService) { }
+              private metaService: MetaService,
+              private configurationService: ConfigurationService) { }
 
   ngOnInit() {
    // Obtêm o parâmetro através da rota da URL
@@ -48,6 +55,8 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
 
   onLoadIncentivador(idIncentivador: String) {
     this.carregandoDados = true;
+    this.listaDoacoes = undefined; // Garante que o objeto seja sobrescrito
+                                    // caso estejamos voltando de outra página.
 
     this.apiService.getIncentivador(idIncentivador).subscribe(
       incentivador => {
@@ -66,10 +75,21 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     this.carregandoDadosDoacoes = true;
     this.buscaPorDoacoesSemResultados = false;
 
-    this.apiService.getListaDoacoesDoIncentivador(idIncentivador).subscribe(
-      doacoes => {
-        console.log(doacoes);
-        this.listaDoacoes = doacoes;
+    this.queriesDeDoacao['limit'] = '' + this.configurationService.limitResultados;
+
+    this.apiService.getListaDoacoesDoIncentivador(idIncentivador, this.queriesDeDoacao).subscribe(
+      resposta => {
+        console.log(resposta);
+        if (this.listaDoacoes === undefined) {
+          this.listaDoacoes = resposta.listaDoacoesDoIncentivador;
+        } else {
+          for (const doacao of resposta.listaDoacoesDoIncentivador) {
+            this.listaDoacoes.push(doacao);
+          }
+        }
+        this.numeroDeItens = resposta.count;
+        this.totalDeItens = resposta.total;
+        this.totalDeItensCarregado += this.numeroDeItens;
       },
       err => {
         this.carregandoDadosDoacoes = false;
@@ -81,6 +101,13 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
         }
       },
       () => this.carregandoDadosDoacoes = false);
+  }
+
+  carregarMaisDoacoes() {
+
+    this.queriesDeDoacao['offset'] = (this.totalDeItensCarregado + this.configurationService.limitResultados - 1) + '';
+    this.onLoadDoacoes(this.idIncentivador);
+
   }
 
   atualizarMetaTags() {
@@ -107,6 +134,6 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
                                                 submetidos aos Sistema de Apoio às 
                                                 Leis de Incentivo à Cultura.`);
     this.metaService.setTag('site_name', 'Sistema de Visualização do SALIC');
-    //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
+    // this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 }
