@@ -1,7 +1,7 @@
-<p>
+<h3>
   Página do Incentivador de id: {{ idIncentivador }} 
-</p>
-<p>Exemplos de ShareButtons: </p>
+</h3>
+<h3>Exemplos de ShareButtons: </h3>
 <share-buttons class="withCount" 
               [url]="this.router.url" 
               [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
@@ -23,7 +23,7 @@
     <p *ngIf="totalDeItens == 1">Foi encontrada uma doação feita por este incentivador: </p>
 
     <div *ngFor="let doacao of listaDoacoes">
-      <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]">VER PROJETO</button></p>
+      <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
       <p>{{ JSON.stringify(doacao) }}</p>
     </div>
 

@@ -1,6 +1,6 @@
-<p>
+<h3>
   Página do Proponente de id: {{ idProponente}} 
-</p>
+</h3>
 <p>Exemplos de ShareButtons: </p>
 <share-buttons class="withCount" 
               [url]="this.router.url" 
@@ -23,7 +23,7 @@
     <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
 
     <div *ngFor="let projeto of listaProjetos">
-      <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]">VER PROJETO</button></p>
+      <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
       <p>{{ JSON.stringify(projeto.resumo) }}</p>
     </div>
 

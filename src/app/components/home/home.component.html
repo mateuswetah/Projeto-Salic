@@ -12,65 +12,105 @@
   </ul>
 </div>-->
 <div>
-  <p>Pesquisar por:
+  <!--<p>Pesquisar por:</p>
   <select #option [ngModel]="pesquisaPor" (ngModelChange)="onTrocaPesquisaPor(option.value)">
     <option value="projetos">projetos</option>
     <option value="propostas">propostas</option>
     <option value="proponentes">proponentes</option>
     <option value="incentivadores">incentivadores</option>
     <option value="fornecedores">fornecedores</option>
-  </select>
-  </p>
+  </select>-->
+
+  <div class="btn-group" dropdown>
+    <button id="single-button" type="button" class="btn btn-default" dropdownToggle>
+      Pesquisar por <span class="caret"></span>
+    </button>
+    <ul dropdownMenu role="menu" aria-labelledby="single-button">
+      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('proponentes')">Proponentes</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores</a></li>
+      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
+    </ul>
+  </div>
 </div>
 <div>
-  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button (click)="onRealizarBusca()">Testar Busca</button></p>
-  <p>{{ resposta }}</p>
+  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button type="button" class="btn btn-success" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></p>
+   <!--<div class="chip">
+    <div class="chip-tag">UF</div>
+         John Doe
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>-->
 </div>
 
 <div [ngSwitch]="pesquisaPor">
       
-  <div *ngSwitchCase="'projetos'">
-    <div *ngFor="let projeto of listaProjetos">
-      <p>{{ projeto.nome }} <button [routerLink]="['/projetos', projeto.PRONAC]">VER PROJETO</button></p>
-    </div>
-  </div>
-  <div *ngSwitchCase="'propostas'">
-    <div *ngFor="let proposta of listaPropostas">
-      <p>{{ proposta.nome }} <button [routerLink]="['/propostas', proposta.id]">VER PROPOSTA</button></p>
-    </div>
-  </div>
-  <div *ngSwitchCase="'proponentes'">
-    <div *ngFor="let proponente of listaProponentes">
-      <p>{{ proponente.nome }} <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]">VER PROPONENTE</button></p>
-    </div>
-  </div>
-  <div *ngSwitchCase="'incentivadores'">
-    <div *ngFor="let incentivador of listaIncentivadores">
-      <p>{{ incentivador.nome }} <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]">VER INCENTIVADOR</button></p>
-    </div>
-  </div>
-  <div *ngSwitchCase="'fornecedores'">
-    <div *ngFor="let fornecedor of listaFornecedores">
-      <p>{{ fornecedor.nome }} <button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]">VER FORNECEDOR</button></p>
+  <ul *ngSwitchCase="'projetos'" class="list-group">
+    <li *ngFor="let projeto of listaProjetos" class="list-group-item">
+      <div class="row">
+        <div class="col-sm-9"><p>{{ projeto.nome }}</p></div> 
+        <div class="col-sm-3"><button [routerLink]="['/projetos', projeto.PRONAC]" 
+                                       type="button" 
+                                       class="btn btn-primary" >VER PROJETO</button></div>
       </div>
-  </div>
+    </li> 
+  </ul>
+  <ul *ngSwitchCase="'propostas'" class="list-group">
+    <li *ngFor="let proposta of listaPropostas" class="list-group-item">
+      <div class="row">
+         <div class="col-sm-9"><p>{{ proposta.nome }}</p></div> 
+         <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
+                                        type="button" 
+                                        class="btn btn-primary" >VER PROPOSTA</button></div>
+      </div>
+    </li>
+  </ul>
+  <ul *ngSwitchCase="'proponentes'" class="list-group">
+    <li *ngFor="let proponente of listaProponentes" class="list-group-item">
+      <div class="row">
+        <div class="col-sm-9"><p>{{ proponente.nome }}</p></div> 
+        <div class="col-sm-3"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" 
+                                       type="button" 
+                                       class="btn btn-primary" >VER PROPONENTE</button></div>
+      </div>                                   
+    </li>
+  </ul>
+  <ul *ngSwitchCase="'incentivadores'" class="list-group">
+    <li *ngFor="let incentivador of listaIncentivadores" class="list-group-item">
+      <div class="row">
+        <div class="col-sm-9"><p>{{ incentivador.nome }}</p></div> 
+        <div class="col-sm-3"><button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" 
+                                       type="button" 
+                                       class="btn btn-primary" >VER INCENTIVADOR</button></div>
+      </div>
+    </li>
+  </ul>
+  <ul *ngSwitchCase="'fornecedores'" class="list-group">
+    <li *ngFor="let fornecedor of listaFornecedores" class="list-group-item">
+      <div class="row">
+      <div class="col-sm-9"><p>{{ fornecedor.nome }}</p></div> 
+      <div class="col-sm-3"><button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" 
+                                       type="button" 
+                                       class="btn btn-primary" >VER FORNECEDOR</button></div>
+      </div>
+    </li>
+  </ul>
 
 </div>
 
 
 <p *ngIf="carregandoDados">Carregando {{ pesquisaPor }}...</p>
-<div *ngIf="buscaSemResultados">
+<alert *ngIf="buscaSemResultados"type="danger">
   <p>Não encontramos {{ pesquisaPor }} com estes parâmetros de pesquisa :(</p>
   <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
-</div>
+</alert>
   <!--<div *ngSwitchCase="'fornecedores'"
          infinite-scroll
        [infiniteScrollDistance]="scrollDistance"
        (scrolled)="onScrollDown()"> -->
        
 <div *ngIf="paginador  && !buscaSemResultados">
-  <alert type="success">Busca realizada com Sucesso</alert>
-  <p>Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</p>
+  <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>
   <ul class="pagination">
     <li [ngClass]="{disabled:paginador.currentPage === 1}">
       <a (click)="carregarPagina(1)">First</a>

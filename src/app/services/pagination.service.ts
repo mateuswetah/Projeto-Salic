@@ -10,7 +10,7 @@ getPager(totalItems: number, currentPage: number = 1, pageSize: number = 15) {
 
       let startPage: number, endPage: number;
 
-      if (totalPages <= 10) {
+      if (totalPages <= pageSize) {
           // Menos de pageSize páginas, então mostra todas.
           startPage = 1;
           endPage = totalPages;

@@ -323,18 +323,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   atualizaIndicesPaginas() {
 
-    this.paginador = this.paginationService.getPager( this.totalDeItems, 
-                                                      this.offsetAtual/this.configurationService.limitResultados + 1, 
-                                                      this.configurationService.limitResultados);
-    this.indicesPaginas = Array.apply(null, {length: this.totalDeItems/this.numeroDeItems}).map(Number.call, Number);
+    this.paginador = this.paginationService.getPager( this.totalDeItems,
+                                                      this.offsetAtual / this.configurationService.limitResultados + 1,
+                                                       this.configurationService.limitResultados);
+    this.indicesPaginas = Array.apply(null, {length: this.totalDeItems / this.numeroDeItems}).map(Number.call, Number);
     this.indicesPaginas = this.indicesPaginas.slice(this.paginador.startPage, this.paginador.endPage);
 
   }
 
-  // onScrollDown () {
-  //   if (!this.carregandoDados) {
-  //     this.offsetAtual += this.configurationService.limitResultados;
-  //     this.carregarDados();
-  //   }
-  // }
 }

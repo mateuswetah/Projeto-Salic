@@ -1,7 +1,7 @@
-<p>
+<h3>
   Página do Projeto de PRONAC {{ PRONAC }}
-</p>
-<p>Exemplos de ShareButtons: </p>
+</h3>
+<h4>Exemplos de ShareButtons: </h4>
 <share-buttons class="withCount" 
               [url]="this.router.url" 
               [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
@@ -9,7 +9,7 @@
 
 <a [routerLink]="['/', 'projetos']">Página Inicial</a>
 
-<button (click)="onLoadProjeto(PRONAC)">Carregar Projeto</button>
+<!--<button (click)="onLoadProjeto(PRONAC)" type="button" class="btn btn-default">Carregar Projeto</button>-->
 <p *ngIf="carregandoDados">Carregando projeto...</p>
 
 <div *ngIf="!carregandoDados">
@@ -20,12 +20,12 @@
     <p>Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br></p>
 
     <h4>Links de Entidades Relacionadas: </h4>
-    <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]">VER PROPONENTE</button>
-    <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR INCENTIVADORES</button>
-    <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}">BUSCAR FORNECEDORES</button>
+    <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary">VER PROPONENTE</button>
+    <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-success">BUSCAR INCENTIVADORES</button>
+    <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-info">BUSCAR FORNECEDORES</button>
    
     <h4 *ngIf="projeto._embedded.captacoes.length > 0">Exemplo de Captações (uma das)</h4>
-    <p *ngIf="projeto._embedded.captacoes.length > 0">{{ projeto._embedded.captacoes[0].valor }} doados pelo {{ projeto._embedded.captacoes[0].nome_doador }}. <button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(projeto._embedded.captacoes[0]._links.incentivador)]">IR PARA INCENTIVADOR</button></p>
+    <p *ngIf="projeto._embedded.captacoes.length > 0">{{ projeto._embedded.captacoes[0].valor }} doados pelo {{ projeto._embedded.captacoes[0].nome_doador }}. <button type="button" class="btn btn-warning" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(projeto._embedded.captacoes[0]._links.incentivador)]">IR PARA INCENTIVADOR</button></p>
 
     <h4>Restante dos dados: </h4> 
     <p>{{ JSON.stringify(projeto) }}</p>

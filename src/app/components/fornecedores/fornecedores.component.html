@@ -1,6 +1,6 @@
-<p>
+<h3>
   Página do Fornecedor de id: {{ idFornecedor }} 
-</p>
+</h3>
 <share-buttons class="withCount" 
               [url]="this.router.url" 
               [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
@@ -19,7 +19,7 @@
     <h4 *ngIf="!buscaPorProdutosSemResultados">Produtos fornecidos:</h4>
 
     <div *ngFor="let produto of listaProdutos">
-      <p>{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]">VER PROJETO</button></p>
+      <p>{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
       <p>{{ JSON.stringify(produto) }}</p>
     </div>
 
