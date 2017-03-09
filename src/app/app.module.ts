@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
+import { AlertModule } from 'ng2-bootstrap';
 
 // Modules de terceiros
 // import { InfiniteScrollModule } from 'angular2-infinite-scroll';
@@ -65,7 +66,8 @@ export function metaFactory(): MetaLoader {
     MetaModule.forRoot({
       provide: MetaLoader,
       useFactory: (metaFactory)
-    })
+    }),
+    AlertModule.forRoot()
   ],
   providers: [
     ApiService,

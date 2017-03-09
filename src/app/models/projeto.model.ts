@@ -110,18 +110,20 @@ export class Projeto {
                                     'estado': String
                                               }
                                              ],
-                public captacoes:             {
-                                    'PRONAC': String,
-                                     'valor': String,
-                               'data_recibo': String,
-                              'nome_projeto': String,
-                                    'cgccpf': String,
-                               'nome_doador': String,
-                                    '_links':               [
-                                                              {
-                                                     'projeto': String,
-                                                'incentivador': String
-                                                              }
-                                                            ]
-                                              } ) {}
+                public _embedded:           {
+                                 'captacoes':               {
+                                                    'PRONAC': String,
+                                                     'valor': String,
+                                               'data_recibo': String,
+                                              'nome_projeto': String,
+                                                    'cgccpf': String,
+                                               'nome_doador': String,
+                                                    '_links':               [
+                                                                              {
+                                                                    'projeto': String,
+                                                                'incentivador': String
+                                                                              }
+                                                                            ]
+                                                            }
+                                            } ) {}
 }

@@ -69,6 +69,7 @@
        (scrolled)="onScrollDown()"> -->
        
 <div *ngIf="paginador  && !buscaSemResultados">
+  <alert type="success">Busca realizada com Sucesso</alert>
   <p>Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</p>
   <ul class="pagination">
     <li [ngClass]="{disabled:paginador.currentPage === 1}">
