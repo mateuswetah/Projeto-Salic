@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
-
-import { AlertModule, DropdownModule, ButtonsModule } from 'ng2-bootstrap/';
+import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule } from 'ng2-bootstrap/';
 
 // Modules de terceiros
-// import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
+
+// Components de Terceiros
+import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
 
 // Components do App
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { ConfigurationService } from './services/configuration.service';
 import { DataFormatterService } from './services/data-formatter.service';
 
 import { CustomReuseStrategy } from './services/route-reuse.strategy';
+import { SobreComponent } from './components/sobre/sobre.component';
 
 export function metaFactory(): MetaLoader {
   return new MetaStaticLoader({
@@ -55,7 +57,9 @@ export function metaFactory(): MetaLoader {
     ProponentesComponent,
     IncentivadoresComponent,
     FornecedoresComponent,
-    FalhaComponent
+    FalhaComponent,
+    SobreComponent,
+    FadingCircleComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,9 @@ export function metaFactory(): MetaLoader {
     }),
     AlertModule.forRoot(),
     DropdownModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    CollapseModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [
     ApiService,

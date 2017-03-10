@@ -1,3 +1,5 @@
+import { Fornecedor } from './../models/fornecedor.model';
+import { Incentivador } from './../models/incentivador.model';
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,6 +10,7 @@ import { ProponentesComponent } from '../components/proponentes/proponentes.comp
 import { IncentivadoresComponent } from '../components/incentivadores/incentivadores.component';
 import { FornecedoresComponent } from '../components/fornecedores/fornecedores.component';
 import { FalhaComponent } from '../components/falha/falha.component';
+import { SobreComponent } from './../components/sobre/sobre.component';
 
 const appRoutes: Routes = [
   {
@@ -20,13 +23,65 @@ const appRoutes: Routes = [
       }
     }
   },
-  { path: 'propostas/:idProposta', component: PropostasComponent},
-  { path: 'proponentes/:idProponente', component: ProponentesComponent},
-  { path: 'incentivadores/:idIncentivador', component: IncentivadoresComponent},
-  { path: 'fornecedores/:idFornecedor', component: FornecedoresComponent},
-  { path: 'falha/:statusFalha', component: FalhaComponent},
-  { path: '', redirectTo: '/projetos', pathMatch: 'full' },
-  { path: ':pesquisaPor', component: HomeComponent },
+  {
+    path: 'propostas/:idProposta',
+    component: PropostasComponent,
+    data: {
+      meta: {
+        title: 'Página de Proposta',
+        description: 'Página de Proposta - Visualização SALIC'
+      }
+    }
+  },
+  {
+    path: 'proponentes/:idProponente',
+    component: ProponentesComponent,
+    data: {
+      meta: {
+        title: 'Página de Proponente',
+        description: 'Página de Proponente - Visualização SALIC'
+      }
+    }
+  },
+  {
+    path: 'incentivadores/:idIncentivador',
+    component: IncentivadoresComponent,
+    data: {
+      meta: {
+        title: 'Página de Incentivador',
+        description: 'Página de Incentivador - Visualização SALIC'
+      }
+    }
+  },
+  {
+    path: 'fornecedores/:idFornecedor',
+    component: FornecedoresComponent,
+    data: {
+      meta: {
+        title: 'Página de Fornecedor',
+        description: 'Página de Fornecedor - Visualização SALIC'
+      }
+    }
+  },
+  {
+    path: 'falha/:statusFalha',
+    component: FalhaComponent
+  },
+  {
+    path: 'sobre', component: SobreComponent
+  },
+  {
+    path: '', redirectTo: '/projetos', pathMatch: 'full' },
+  {
+    path: ':pesquisaPor',
+    component: HomeComponent,
+    data: {
+      meta: {
+        title: 'Página de Pesquisa',
+        description: 'Página de Pesquisa - Visualização SALIC'
+      }
+    }
+  },
 ];
 
 @NgModule({

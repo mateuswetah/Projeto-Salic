@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Rx';
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
-import { PaginationService } from './../../services/pagination.service';
 
 import { Projeto } from './../../models/projeto.model';
 import { Proposta } from './../../models/proposta.model';
@@ -31,10 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   carregandoDados: Boolean = false;
   buscaSemResultados = false;
 
-  // Parâmetros do InifiniteScroll
-  // scrollDistance = 1;
-  offsetAtual = 0;
-
   // Respostas da API:
   listaProjetos:        [Projeto];
   listaPropostas:       [Proposta];
@@ -43,10 +38,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   listaFornecedores:    [Fornecedor];
 
   // Paginacao
+  offsetAtual = 0;
   numeroDeItems: number;
   totalDeItems: number;
-  paginador: any;
-  indicesPaginas = [Number];
+  maximoBotoes = 5;
+  paginaAtual = 1;
 
   // Queries para a busca
   queries: { [query: string]: String; } = {};
@@ -68,8 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               private location: Location,
               private apiService: ApiService,
               private configurationService: ConfigurationService,
-              private dataFormatterService: DataFormatterService,
-              private paginationService: PaginationService) {
+              private dataFormatterService: DataFormatterService) {
               }
 
   ngOnInit() {
@@ -125,15 +120,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.totalDeItems = 0;
+    this.numeroDeItems = 0;
+
     if (nenhumaQueryEnviada === false) {
-      this.carregarPagina(1);
+      this.carregarPagina(0);
     }
   }
 
   onTrocaPesquisaPor(novoPesquisaPor) {
 
     this.pesquisaPor = novoPesquisaPor;
-    this.paginador = undefined;
 
     switch (this.pesquisaPor) {
       case 'projetos':
@@ -169,15 +166,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onRealizarBusca() {
 
-    const params = new URLSearchParams();
-
-    for (const key in this.queries) {
-      if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
-      }
-    }
-    this.location.go(this.pesquisaPor, params.toString());
-
     this.offsetAtual = 0;
     this.listaProjetos = undefined;
     this.listaPropostas = undefined;
@@ -185,35 +173,37 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.listaIncentivadores = undefined;
     this.listaFornecedores = undefined;
 
-    this.carregarPagina(1);
+    this.carregarPagina(0);
   }
 
   carregarPagina(indice: number) {
-
-    if (indice < 1 || indice > (this.totalDeItems / this.numeroDeItems) + this.numeroDeItems) {
-      return;
-    }
-
+    console.log(indice);
     this.carregandoDados = true;
     this.buscaSemResultados = false;
-    this.offsetAtual = (indice - 1) * this.configurationService.limitResultados;
+    this.offsetAtual = (indice * this.configurationService.limitResultados);
 
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
-    this.queries['offset'] = '' + this.offsetAtual;
+    this.queries['offset'] = '' + this.offsetAtual ;
+
+    const params = new URLSearchParams();
+
+    for (const key in this.queries) {
+      if (this.queries.hasOwnProperty(key)) {
+        params.set(key, String(this.queries[key]));
+      }
+    }
+
+    this.location.go(this.pesquisaPor, params.toString());
 
     switch (this.pesquisaPor) {
 
       case 'projetos':
         this.apiService.getListaProjetos(this.queries).subscribe(
           resposta => {
-
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
-            this.atualizaIndicesPaginas();
-
             this.listaProjetos = resposta.listaProjetos;
-
           },
           err => {
             this.carregandoDados = false;
@@ -231,13 +221,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       case 'propostas':
         this.apiService.getListaPropostas(this.queries).subscribe(
           resposta => {
-
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
-            this.atualizaIndicesPaginas();
-
             this.listaPropostas = resposta.listaPropostas;
-
           },
           err => {
             this.carregandoDados = false;
@@ -256,10 +242,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           resposta => {
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
-            this.atualizaIndicesPaginas();
-
             this.listaProponentes = resposta.listaProponentes;
-
           },
           err => {
             this.carregandoDados = false;
@@ -278,10 +261,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           resposta => {
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
-            this.atualizaIndicesPaginas();
-
             this.listaIncentivadores = resposta.listaIncentivadores;
-
           },
           err => {
             this.carregandoDados = false;
@@ -300,10 +280,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           resposta => {
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
-            this.atualizaIndicesPaginas();
-
             this.listaFornecedores = resposta.listaFornecedores;
-
           },
           err => {
             this.carregandoDados = false;
@@ -319,16 +296,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       default:
         this.router.navigate(['falha', 405]);
     }
-  }
-
-  atualizaIndicesPaginas() {
-
-    this.paginador = this.paginationService.getPager( this.totalDeItems,
-                                                      this.offsetAtual / this.configurationService.limitResultados + 1,
-                                                       this.configurationService.limitResultados);
-    this.indicesPaginas = Array.apply(null, {length: this.totalDeItems / this.numeroDeItems}).map(Number.call, Number);
-    this.indicesPaginas = this.indicesPaginas.slice(this.paginador.startPage, this.paginador.endPage);
-
   }
 
 }
