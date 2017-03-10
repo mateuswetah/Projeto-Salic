@@ -23,8 +23,10 @@
     <p *ngIf="totalDeItens == 1">Foi encontrada uma doação feita por este incentivador: </p>
 
     <div *ngFor="let doacao of listaDoacoes">
-      <p>{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
-      <p>{{ JSON.stringify(doacao) }}</p>
+      <div class="panel panel-default container-fluid">
+        <div class="panel-heading row">{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">VER PROJETO</button></div>
+        <div class="panel-body">{{ JSON.stringify(doacao) }}</div>
+      </div>
     </div>
 
     <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidas {{ totalDeItensCarregado }} doações. <button (click)="carregarMaisDoacoes()">EXIBIR MAIS</button></p>

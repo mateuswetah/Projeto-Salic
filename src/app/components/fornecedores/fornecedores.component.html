@@ -19,8 +19,10 @@
     <h4 *ngIf="!buscaPorProdutosSemResultados">Produtos fornecidos:</h4>
 
     <div *ngFor="let produto of listaProdutos">
-      <p>{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
-      <p>{{ JSON.stringify(produto) }}</p>
+      <div class="panel panel-default container-fluid">
+        <div class="panel-heading row">{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">Ver Projeto</button></div>
+        <div class="panel-body">{{ JSON.stringify(produto) }}</div>
+      </div>
     </div>
 
     <div *ngIf="buscaPorProdutosSemResultados">

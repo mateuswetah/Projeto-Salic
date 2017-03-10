@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   numeroDeItems: number;
   totalDeItems: number;
   maximoBotoes = 5;
-  paginaAtual = 1;
+  paginaAtual = 0;
 
   // Queries para a busca
   queries: { [query: string]: String; } = {};
@@ -180,7 +180,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(indice);
     this.carregandoDados = true;
     this.buscaSemResultados = false;
-    this.offsetAtual = (indice * this.configurationService.limitResultados);
+    this.offsetAtual = indice * this.configurationService.limitResultados;
 
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;

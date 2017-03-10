@@ -23,8 +23,9 @@
     <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
 
     <div *ngFor="let projeto of listaProjetos">
-      <p>{{ projeto.nome}} <button [routerLink]="['/projetos/' + projeto.PRONAC]" type="button" class="btn btn-success">VER PROJETO</button></p>
-      <p>{{ JSON.stringify(projeto.resumo) }}</p>
+      <div class="panel panel-default container-fluid">
+        <div class="panel-heading row">{{ projeto.nome }} <button [routerLink]="['/projetos/' + projeto.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">Ver Projeto</button></div>
+        <div class="panel-body">{{ JSON.stringify(projeto.resumo) }}</div>
     </div>
 
     <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos. <button (click)="carregarMaisProjetos()">EXIBIR MAIS</button></p>
