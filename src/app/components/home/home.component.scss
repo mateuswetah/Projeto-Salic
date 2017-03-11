@@ -1,19 +1,46 @@
 .chip {
     display: inline-block;
-    padding: 0 25px;
-    height: 50px;
-    font-size: 16px;
-    line-height: 50px;
-    border-radius: 25px;
-    background-color: #f1f1f1;
+    padding: 0 9px 0px 13px;
+    height: 27px;
+    font-size: 0.8em;
+    line-height: 23px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+
+.chip-wrapper {
+    display: inline;
+    margin: 2px 4px;
 }
 
 .chip-tag {
-    padding: 0 1.0em;
+    padding: 0 0.8em;
     float: left;
-    margin: 0 10px 0 -25px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: #888;
+    margin: 0 5px 0 -13px;
+    height: 25px;
+    min-width: 25px;
+    border-radius: 8px 2px 2px 8px;
+    background-color: #fdfdfd;
+}
+
+.abas-pesquisa {
+    
+    a { bottom: -3px; }
+    a:hover { border-radius: 1px; }
+        
+    .active {
+        a {
+            font-weight: bold;
+            color: 	#555;
+            background-color: white !important;
+            border: 1px #ddd solid; 
+            border-radius: 1px;
+        }
+    }
+
+}
+
+.container-pesquisa {
+    .panel { padding: 0px; }
 }

@@ -1,39 +1,39 @@
+ <!-- Título da Página -->
 <h3>
   Página Inicial
 </h3>
-<!--<div>
-  <ul>
-    <li><a [routerLink]="['', pesquisaPor]" [queryParams]="queries">Página Inicial com Pesquisa por {{ pesquisaPor }} + Queries</a></li>
-    <li><a [routerLink]="['/projetos', 1]">Página de Projeto</a></li>
-    <li><a [routerLink]="['/propostas', 1]">Página de Proposta</a></li>
-    <li><a [routerLink]="['/proponentes', '123456789']">Página de Proponente</a></li>
-    <li><a [routerLink]="['/incentivadores','123456789']">Página de Incentivador</a></li>
-    <li><a [routerLink]="['/fornecedores', '123456789']">Página de Fornecedor</a></li>
-  </ul>
-</div>-->
-<div>
-  <div class="btn-group" dropdown>
-    <button id="single-button" type="button" class="btn btn-default" dropdownToggle>
-      Pesquisar por <span class="caret"></span>
-    </button>
-    <ul dropdownMenu role="menu" aria-labelledby="single-button">
-      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('proponentes')">Proponentes</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores</a></li>
-      <li role="menuitem"><a class="dropdown-item" (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
-    </ul>
-  </div>
-</div>
-<div>
-  <p>Buscar na API por {{ pesquisaPor }} com os campos: {{ JSON.stringify(queries) }} <button type="button" class="btn btn-success" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></p>
-   <!--<div class="chip">
-    <div class="chip-tag">UF</div>
-         John Doe
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-    </div>-->
-</div>
 
+<!-- Caixa de Pesquisa -->
+<div class="row">
+<div class="col-sm-12 col-md-8 col-md-offset-2 text-center abas-pesquisa">
+  <ul class="text-center  nav nav-pills">
+    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
+    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
+    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
+    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
+    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
+  </ul>
+</div>
+<div class="container-pesquisa row">
+  <div class="panel panel-default col-sm-12 col-md-8 col-md-offset-2">
+    <div class="panel-body input-group">
+      <input type="text" [(ngModel)]="queries['nome']" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      </span>
+    </div><!-- /input-group -->
+    <div class="panel-footer">
+      <div class="chip-wrapper" *ngFor="let key of keys()">
+        <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+          <div class="chip-tag">{{key}}</div>
+              {{queries[key]}}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+          </div>
+      </div>
+    </div>
+  </div><!-- /.col-lg-6 -->
+</div>
+</div>
 <div [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
   <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   

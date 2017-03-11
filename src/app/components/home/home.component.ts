@@ -178,6 +178,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   carregarPagina(indice: number) {
     console.log(indice);
+
     this.carregandoDados = true;
     this.buscaSemResultados = false;
     this.offsetAtual = indice * this.configurationService.limitResultados;
@@ -298,4 +299,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Remove uma querie de parâmetro de busca
+  removeQuery(removedKey: string) {
+    this.queries[removedKey] = null;
+
+    this.atualizaQueries(this.queries);
+
+    const params = new URLSearchParams();
+
+    for (const key in this.queries) {
+      if (this.queries.hasOwnProperty(key)) {
+        params.set(key, String(this.queries[key]));
+      }
+    }
+    this.location.go(this.pesquisaPor, params.toString());
+
+    this.carregarPagina(0);
+  }
+
+  // Retorna o dicionário de Queries como um array iterável para a view
+  keys(): Array<string> {
+    return Object.keys(this.queries);
+  }
 }
