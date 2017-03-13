@@ -23,7 +23,10 @@
          "../node_modules/bootstrap/dist/css/bootstrap.min.css",
          "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+          "../node_modules/jquery/dist/jquery.js",
+          "../node_modules/hammerjs/hammer.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

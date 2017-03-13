@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,12 +14,14 @@ import { Proponente } from './../../models/proponente.model';
 import { Incentivador } from './../../models/incentivador.model';
 import { Fornecedor } from './../../models/fornecedor.model';
 
+declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   pesquisaPor = 'projeto';
   carregandoDados: Boolean = false;
   buscaSemResultados = false;
+  selectedIndex = 0;
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -68,6 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               }
 
   ngOnInit() {
+    console.log("ON INIT");
     this.inscricaoPesquisaPor = this.route.params.subscribe (
       (params: any) => {
         this.pesquisaPor = params['pesquisaPor'];
@@ -99,7 +103,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+ngOnChanges() {
+  console.log("AFTER CONTENT INIT");
+}
   ngOnDestroy() {
     this.inscricaoPesquisaPor.unsubscribe();
     this.inscricaoQueries.unsubscribe();
@@ -123,9 +129,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.totalDeItems = 0;
     this.numeroDeItems = 0;
 
-    if (nenhumaQueryEnviada === false) {
+    //if (nenhumaQueryEnviada === false) {
       this.carregarPagina(0);
-    }
+      console.log(nenhumaQueryEnviada);
+    //}
   }
 
   onTrocaPesquisaPor(novoPesquisaPor) {
@@ -164,6 +171,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.location.go(this.pesquisaPor, params.toString());
   }
 
+  onRealizarBuscaComEnter(event) {
+    if (event.keyCode === 13) { this.onRealizarBusca(); }
+  }
+
   onRealizarBusca() {
 
     this.offsetAtual = 0;
@@ -177,7 +188,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   carregarPagina(indice: number) {
-    console.log(indice);
+    console.log('Indice da pg.: ' + indice);
 
     this.carregandoDados = true;
     this.buscaSemResultados = false;
@@ -320,5 +331,71 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Retorna o dicionário de Queries como um array iterável para a view
   keys(): Array<string> {
     return Object.keys(this.queries);
+  }
+
+  ngAfterViewInit() {
+
+    const scrollBarWidths = 40;
+
+    function widthOfList() {
+
+      let itemsWidth = 0;
+
+      $('.aba li').each(function(){
+        const itemWidth = $(this).outerWidth();
+        itemsWidth += itemWidth;
+      });
+
+      return itemsWidth;
+    };
+
+    function widthOfHidden() {
+      return (($('.abas-pesquisa').outerWidth()) - widthOfList() - getLeftPosi()) - scrollBarWidths;
+    };
+
+    function getLeftPosi() {
+      return $('.aba').position().left;
+    };
+
+    function reAdjust() {
+      if (($('.abas-pesquisa').outerWidth()) < widthOfList()) {
+        $('.scroller-right').show();
+      } else {
+        $('.scroller-right').hide();
+      }
+
+      if (getLeftPosi() < 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.item').animate({left: '-=' + getLeftPosi() + 'px'}, 'slow');
+        $('.scroller-left').hide();
+      }
+    }
+
+    reAdjust();
+
+    $(window).on('resize', function(e){
+      reAdjust();
+    });
+
+    $('.scroller-right').click(function() {
+
+      $('.scroller-left').fadeIn('slow');
+      $('.scroller-right').fadeOut('slow');
+
+      $('.aba').animate({left: '+=' + widthOfHidden() + 'px'}, 'slow', function(){
+
+      });
+    });
+
+    $('.scroller-left').click(function() {
+
+      $('.scroller-right').fadeIn('slow');
+      $('.scroller-left').fadeOut('slow');
+
+      $('.aba').animate({ left: '-=' + getLeftPosi() + 'px'}, 'slow', function(){
+
+      });
+    });
   }
 }

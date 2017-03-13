@@ -4,36 +4,59 @@
 </h3>
 
 <!-- Caixa de Pesquisa -->
-<div class="row">
-<div class="col-sm-12 col-md-8 col-md-offset-2 text-center abas-pesquisa">
-  <ul class="text-center  nav nav-pills">
-    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
-    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
-    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
-    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
-    <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
-  </ul>
-</div>
 <div class="container-pesquisa row">
-  <div class="panel panel-default col-sm-12 col-md-8 col-md-offset-2">
-    <div class="panel-body input-group">
-      <input type="text" [(ngModel)]="queries['nome']" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-      </span>
-    </div><!-- /input-group -->
-    <div class="panel-footer">
-      <div class="chip-wrapper" *ngFor="let key of keys()">
-        <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-          <div class="chip-tag">{{key}}</div>
-              {{queries[key]}}
-            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-          </div>
+  <!--<div class="col-md-8 col-md-offset-2 text-center abas-pesquisa">
+    <ul class="hidden-xs text-center  nav nav-pills">
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+  <div class="col-md-8 col-md-offset-2 text-center abas-pesquisa">
+    <ul class="visible-xs-block text-center  nav nav-pills nav-justified">
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
+      <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>-->
+
+    <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+    <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+    <div class="col-md-8 col-md-offset-2 text-center abas-pesquisa">
+      <ul class="nav nav-pills aba">
+        <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
+        <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
+        <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
+        <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
+        <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
+      </ul>
+    </div>
+
+  <div class="row">
+    <div class="panel panel-default col-md-8 col-md-offset-2">
+      <div class="panel-body input-group">
+        <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </span>
+      </div>
+      <div class="panel-footer">
+        <div class="chip-wrapper" *ngFor="let key of keys()">
+          <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+            <div class="chip-tag">{{key}}</div>
+                {{queries[key]}}
+              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+            </div>
+        </div>
       </div>
     </div>
-  </div><!-- /.col-lg-6 -->
+  </div>
 </div>
-</div>
+
 <div [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
   <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
