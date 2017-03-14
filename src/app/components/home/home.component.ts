@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +21,7 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
               }
 
   ngOnInit() {
-    console.log("ON INIT");
+
     this.inscricaoPesquisaPor = this.route.params.subscribe (
       (params: any) => {
         this.pesquisaPor = params['pesquisaPor'];
@@ -103,9 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
       }
     );
   }
-ngOnChanges() {
-  console.log("AFTER CONTENT INIT");
-}
+
   ngOnDestroy() {
     this.inscricaoPesquisaPor.unsubscribe();
     this.inscricaoQueries.unsubscribe();
