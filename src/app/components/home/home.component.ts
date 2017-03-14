@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   numeroDeItems: number;
   totalDeItems: number;
   maximoBotoes = 5;
-  paginaAtual = 0;
+  paginaAtual = 1;
 
   // Queries para a busca
   queries: { [query: string]: String; } = {};
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     );
   }
-
+consoleLog(event){console.log(event);}
   ngOnDestroy() {
     this.inscricaoPesquisaPor.unsubscribe();
     this.inscricaoQueries.unsubscribe();
@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.numeroDeItems = 0;
 
     //if (nenhumaQueryEnviada === false) {
-      this.carregarPagina(0);
+      this.carregarPagina(1);
       console.log(nenhumaQueryEnviada);
     //}
   }
@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.listaIncentivadores = undefined;
     this.listaFornecedores = undefined;
 
-    this.carregarPagina(0);
+    this.carregarPagina(1);
   }
 
   carregarPagina(indice: number) {
@@ -190,7 +190,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.carregandoDados = true;
     this.buscaSemResultados = false;
-    this.offsetAtual = indice * this.configurationService.limitResultados;
+    this.offsetAtual = (indice - 1) * this.configurationService.limitResultados;
 
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
@@ -331,6 +331,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return Object.keys(this.queries);
   }
 
+  // Aqui é configurado o botão de deslizamento das abas de pesquisa
   ngAfterViewInit() {
 
     const scrollBarWidths = 40;

@@ -129,7 +129,7 @@
 <div class="text-center" *ngIf="(numeroDeItems < totalDeItems)">
 
   <pagination [totalItems]="totalDeItems" 
-              (pageChanged)="carregarPagina(paginaAtual)" 
+              (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
               [maxSize]=" maximoBotoes" 
               class="pagination-sm"
               [boundaryLinks]="true" 
