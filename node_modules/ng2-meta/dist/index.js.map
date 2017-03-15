@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":";AACA,+CAA6C;AAApC,qCAAA,WAAW,CAAA;AACpB,6CAA2C;AAAlC,mCAAA,UAAU,CAAA","sourcesContent":["export { MetaConfig } from './models/meta-config';\nexport { MetaService } from './meta.service';\nexport { MetaModule } from './meta.module';"]}

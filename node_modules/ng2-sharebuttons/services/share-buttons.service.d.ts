@@ -1,0 +1,33 @@
+import { EventEmitter } from '@angular/core';
+import { Http, Jsonp } from '@angular/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/empty';
+import { WindowService } from './window.service';
+import { ShareArgs, ShareProvider } from '../helpers';
+export declare class ShareButtonsService {
+    private http;
+    private jsonp;
+    /** Window Object */
+    window: Window;
+    /** Optional parameters */
+    windowWidth: number;
+    windowHeight: number;
+    /** Site Twitter Account: Add Via @TwitterAccount to the tweet  */
+    twitterAccount: string;
+    constructor(window: WindowService, http: Http, jsonp: Jsonp);
+    validateUrl(url: string): any;
+    /** Open share window */
+    share(type: ShareProvider, args: ShareArgs, popUpClosed: EventEmitter<ShareProvider>): void;
+    /** Share Counts */
+    count(type: ShareProvider, url: string, count: EventEmitter<number>): void;
+    private fbCount(url, count);
+    private linkedInCount(url, count);
+    private redditCount(url, count);
+    private gPlusCount(url, count);
+    private pinCount(url, count);
+    private tumblrCount(url, count);
+    private post(url, body);
+    private fetch(url);
+    private fetchJsonp(url);
+    windowAttr(): string;
+}

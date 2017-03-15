@@ -1,0 +1,23 @@
+import { EventEmitter } from '@angular/core';
+import { ShareButton, ShareProvider } from '../../helpers';
+export declare class ShareButtonComponent {
+    /** Share Args */
+    url: string;
+    title: string;
+    description: string;
+    image: string;
+    tags: string;
+    /** Button type e.g. fb, twitter, reddit...etc */
+    button: ShareButton;
+    /** Show count, disabled by default */
+    showCount: boolean;
+    /** Output button count to calculate total share counts */
+    count: EventEmitter<number>;
+    /** Output pop up closed*/
+    popUpClosed: EventEmitter<ShareProvider>;
+    /** Share count for this button */
+    shareCount: number;
+    counter(count: number): void;
+    /** emits closed button type: so user can tell which button has been clicked */
+    shareClosed(provider: ShareProvider): void;
+}

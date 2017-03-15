@@ -1,0 +1,25 @@
+import { OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { ShareButtonsService } from '../../services/share-buttons.service';
+import { ShareProvider } from '../../helpers';
+export declare class ShareButtonDirective implements OnChanges {
+    private sbService;
+    /** Button type e.g. fb, twitter, reddit...etc */
+    private provider;
+    shareButton: string | number;
+    /** Share Args */
+    sbUrl: string;
+    sbTitle: string;
+    sbDescription: string;
+    sbImage: string;
+    sbTags: string;
+    sbShowCount: boolean;
+    /** Output button count to calculate total share counts */
+    sbCount: EventEmitter<number>;
+    /** Output pop up closed*/
+    sbPopUpClosed: EventEmitter<ShareProvider>;
+    onClick(): void;
+    constructor(sbService: ShareButtonsService);
+    ngOnChanges(changes: SimpleChanges): void;
+    /** Open share window */
+    share(): void;
+}
