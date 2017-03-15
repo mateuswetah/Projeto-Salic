@@ -1,0 +1,67 @@
+import { Directive, Input, Output, HostListener, EventEmitter } from '@angular/core';
+import { ShareButtonsService } from '../../services/share-buttons.service';
+import { ShareArgs, ShareProvider, Helper } from '../../helpers';
+export var ShareButtonDirective = (function () {
+    function ShareButtonDirective(sbService) {
+        this.sbService = sbService;
+        /** Output button count to calculate total share counts */
+        this.sbCount = new EventEmitter();
+        /** Output pop up closed*/
+        this.sbPopUpClosed = new EventEmitter();
+    }
+    Object.defineProperty(ShareButtonDirective.prototype, "shareButton", {
+        set: function (value) {
+            this.provider = Helper.getEnumValue(value, ShareProvider);
+            if (typeof this.provider === 'undefined') {
+                throw new Error("[shareButton] must be set to one of the values (numeric or string) of ShareProvider enum: was '" + value + "'");
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ShareButtonDirective.prototype.onClick = function () {
+        this.share();
+    };
+    ShareButtonDirective.prototype.ngOnChanges = function (changes) {
+        /** Validate URL */
+        this.sbUrl = this.sbService.validateUrl(this.sbUrl);
+        if (changes['sbUrl']) {
+            var currUrl = changes['sbUrl'].currentValue;
+            var prevUrl = changes['sbUrl'].previousValue;
+            if (currUrl && currUrl !== prevUrl) {
+                /** Add share count if enabled */
+                if (this.sbShowCount) {
+                    this.sbService.count(this.provider, this.sbUrl, this.sbCount);
+                }
+            }
+        }
+    };
+    /** Open share window */
+    ShareButtonDirective.prototype.share = function () {
+        var args = new ShareArgs(this.sbUrl, this.sbTitle, this.sbDescription, this.sbImage, this.sbTags);
+        this.sbService.share(this.provider, args, this.sbPopUpClosed);
+    };
+    ShareButtonDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[shareButton]'
+                },] },
+    ];
+    /** @nocollapse */
+    ShareButtonDirective.ctorParameters = [
+        { type: ShareButtonsService, },
+    ];
+    ShareButtonDirective.propDecorators = {
+        'shareButton': [{ type: Input },],
+        'sbUrl': [{ type: Input },],
+        'sbTitle': [{ type: Input },],
+        'sbDescription': [{ type: Input },],
+        'sbImage': [{ type: Input },],
+        'sbTags': [{ type: Input },],
+        'sbShowCount': [{ type: Input },],
+        'sbCount': [{ type: Output },],
+        'sbPopUpClosed': [{ type: Output },],
+        'onClick': [{ type: HostListener, args: ['click',] },],
+    };
+    return ShareButtonDirective;
+}());
+//# sourceMappingURL=share-button.directive.js.map

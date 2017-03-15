@@ -1,0 +1,26 @@
+"use strict";
+var rotating_plane_component_1 = require('./spinner/rotating-plane.component');
+exports.RotatingPlaneComponent = rotating_plane_component_1.RotatingPlaneComponent;
+var double_bounce_component_1 = require('./spinner/double-bounce.component');
+exports.DoubleBounceComponent = double_bounce_component_1.DoubleBounceComponent;
+var wave_1 = require('./spinner/wave');
+exports.WaveComponent = wave_1.WaveComponent;
+var wandering_cubes_1 = require('./spinner/wandering-cubes');
+exports.WanderingCubesComponent = wandering_cubes_1.WanderingCubesComponent;
+var pulse_1 = require('./spinner/pulse');
+exports.PulseComponent = pulse_1.PulseComponent;
+var chasing_dots_1 = require('./spinner/chasing-dots');
+exports.ChasingDotsComponent = chasing_dots_1.ChasingDotsComponent;
+var circle_1 = require('./spinner/circle');
+exports.CircleComponent = circle_1.CircleComponent;
+var three_bounce_1 = require('./spinner/three-bounce');
+exports.ThreeBounceComponent = three_bounce_1.ThreeBounceComponent;
+var cube_grid_1 = require('./spinner/cube-grid');
+exports.CubeGridComponent = cube_grid_1.CubeGridComponent;
+var word_press_1 = require('./spinner/word-press');
+exports.WordPressComponent = word_press_1.WordPressComponent;
+var fading_circle_1 = require('./spinner/fading-circle');
+exports.FadingCircleComponent = fading_circle_1.FadingCircleComponent;
+var folding_cube_1 = require('./spinner/folding-cube');
+exports.FoldingCubeComponent = folding_cube_1.FoldingCubeComponent;
+//# sourceMappingURL=spinners.js.map
