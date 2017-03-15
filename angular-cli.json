@@ -7,7 +7,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "/var/www/app.salic",
       "assets": [
         "assets",
         "favicon.ico"

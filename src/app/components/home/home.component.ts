@@ -189,7 +189,7 @@ consoleLog(event){console.log(event);}
     console.log('Indice da pg.: ' + indice);
 
     this.carregandoDados = true;
-    this.buscaSemResultados = false;
+    this.buscaSemResultados = false; 
     this.offsetAtual = (indice - 1) * this.configurationService.limitResultados;
 
     // Adiciona queries extras
