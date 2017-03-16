@@ -10,15 +10,15 @@ export class AppComponent {
 
   title = 'Consulta Salic';
 
-  public isCollapsed: Boolean = true;
+  public menuEscondido: Boolean = true;
 
   constructor(private metaService: MetaService) {}
 
-  public collapsed(event: any): void {
+  public escondido(event: any): void {
     // console.log(event);
   }
 
-  public expanded(event: any): void {
+  public expandido(event: any): void {
     // console.log(event);
   }
 

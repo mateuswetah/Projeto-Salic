@@ -1,10 +1,8 @@
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
-    .panel { padding: 0px; }
 
-    @media all and (max-width: 768px) and (min-width: 1px) {
+    @media all and (min-width: 992px){
         .panel { padding: 0px; }
-
     }
 }
 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
 
-    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- Marca e Menu sanduíche ficam agrupados em telas menores -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" 
               (click)="isCollapsed = !isCollapsed" aria-expanded="false">
@@ -11,10 +11,10 @@
       <!--<span class="visible-xs">SIZE XS</span><span class="visible-sm">SIZE SM</span><span class="visible-md">SIZE MD</span><span class="visible-lg">SIZE LG</span>-->
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div (collapsed)="collapsed($event)"
-         (expanded)="expanded($event)"
-         [collapse]="isCollapsed" class="collapse navbar-collapse">
+    <!-- Coleta os links navs, forms e outros tipos para a troca de menu -->
+    <div (collapsed)="escondido($event)"
+         (expanded)="expandido($event)"
+         [collapse]="menuEscondido" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li routerLinkActive="active"><a [routerLink]="['/sobre']">Sobre</a></li>
       </ul>
