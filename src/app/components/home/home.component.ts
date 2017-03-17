@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit,     
+    trigger,
+    state,
+    style,
+    transition,
+    animate,
+    keyframes } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +25,19 @@ declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+
+        trigger('subirRespostas', [
+          transition('inativo => ativo', [
+                animate(300, keyframes([
+                    style({opacity: 0, transform: 'translateY(200px)', offset: 0}),
+                    style({opacity: 1, transform: 'translateY(-25px)', offset: .75}),
+                    style({opacity: 1, transform: 'translateY(0)', offset: 1})
+        ]))
+    ])
+    ])
+]
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -31,7 +49,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   pesquisaPor = 'projeto';
   carregandoDados: Boolean = false;
   buscaSemResultados = false;
-  selectedIndex = 0;
+  buscaAvancada = false;
+  subirRespostasEstado: String = 'inativo';
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -103,7 +122,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     );
   }
-consoleLog(event){console.log(event);}
+
+  consoleLog(event) { console.log(event); }
+
   ngOnDestroy() {
     this.inscricaoPesquisaPor.unsubscribe();
     this.inscricaoQueries.unsubscribe();
@@ -127,10 +148,10 @@ consoleLog(event){console.log(event);}
     this.totalDeItems = 0;
     this.numeroDeItems = 0;
 
-    //if (nenhumaQueryEnviada === false) {
+    if (nenhumaQueryEnviada === false) {
       this.carregarPagina(1);
       console.log(nenhumaQueryEnviada);
-    //}
+    }
   }
 
   onTrocaPesquisaPor(novoPesquisaPor) {
@@ -158,6 +179,7 @@ consoleLog(event){console.log(event);}
     }
 
     this.atualizaQueries(this.queries);
+    //this.carregarPagina(1);
 
     const params = new URLSearchParams();
 
@@ -187,9 +209,9 @@ consoleLog(event){console.log(event);}
 
   carregarPagina(indice: number) {
     console.log('Indice da pg.: ' + indice);
-
+    this.subirRespostasEstado = 'inativo';
     this.carregandoDados = true;
-    this.buscaSemResultados = false; 
+    this.buscaSemResultados = false;
     this.offsetAtual = (indice - 1) * this.configurationService.limitResultados;
 
     // Adiciona queries extras
@@ -214,6 +236,8 @@ consoleLog(event){console.log(event);}
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaProjetos = resposta.listaProjetos;
+
+            this.subirRespostasEstado = 'ativo';
           },
           err => {
             this.carregandoDados = false;
@@ -234,6 +258,8 @@ consoleLog(event){console.log(event);}
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaPropostas = resposta.listaPropostas;
+
+            this.subirRespostasEstado = 'ativo';
           },
           err => {
             this.carregandoDados = false;
@@ -253,6 +279,8 @@ consoleLog(event){console.log(event);}
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaProponentes = resposta.listaProponentes;
+
+            this.subirRespostasEstado = 'ativo';
           },
           err => {
             this.carregandoDados = false;
@@ -272,6 +300,8 @@ consoleLog(event){console.log(event);}
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaIncentivadores = resposta.listaIncentivadores;
+
+            this.subirRespostasEstado = 'ativo';
           },
           err => {
             this.carregandoDados = false;
@@ -291,6 +321,8 @@ consoleLog(event){console.log(event);}
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaFornecedores = resposta.listaFornecedores;
+
+            this.subirRespostasEstado = 'ativo';
           },
           err => {
             this.carregandoDados = false;

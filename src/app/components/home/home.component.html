@@ -1,7 +1,11 @@
  <!-- Título da Página -->
-<h3>
-  Página Inicial
-</h3>
+<header class="text-center">
+  <h1>
+    <br>
+    Página Inicial
+    <br><br>
+  </h1>
+</header>
 
 <!-- Caixa de Pesquisa -->
 <div class="container-pesquisa row">
@@ -38,87 +42,106 @@
 
   <div class="row">
     <div class="panel panel-default col-md-8 col-md-offset-2">
-      <div class="panel-body input-group">
+      
+      <!-- Busca Simples ============================================================== -->
+      <div *ngIf="!buscaAvancada" class="panel-body input-group">
         <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </span>
       </div>
+
+       <!-- Busca Avançada ============================================================ -->
+      <div *ngIf="buscaAvancada" class="panel-body form-group">
+        <div class="input col-sm-6">
+          <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Nome do Projeto">
+          <!--<div class="form-control-placeholder">Nome</div>-->
+        </div>
+        <div class="input col-sm-6">
+          <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Nome do Proponente">
+        </div>
+      </div>
+
+       <!-- Footer da Busca ============================================================== -->
       <div class="panel-footer">
-        <div class="chip-wrapper" *ngFor="let key of keys()">
+        <button class="btn btn-default" (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</button>
+        <!--<div class="chip-wrapper" *ngFor="let key of keys()">
           <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
             <div class="chip-tag">{{key}}</div>
-                {{queries[key]}}
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-            </div>
+              {{queries[key]}}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+          </div>
+        </div>-->
+        <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div [@subirRespostas]='subirRespostasEstado' class="row">
+  <div class=" col-md-8 col-md-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
+
+    <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
+
+    <div *ngSwitchCase="'projetos'">
+      <div *ngFor="let projeto of listaProjetos" class="panel panel-default">
+        <div class="panel-heading">{{ projeto.nome }}</div>
+        <div class="row panel-body">
+          <div class="col-sm-7"><p>Proponenete: </p><h4>{{ projeto.proponente}}</h4></div> 
+          <div class="col-sm-3 col-xs-6"><p>Área: </p><h4>{{ projeto.area}}</h4></div> 
+          <div class="col-sm-2 col-xs-6"><button [routerLink]="['/projetos', projeto.PRONAC]" 
+                                        type="button" 
+                                        class="btn btn-primary">Ver Projeto</button></div>
+        </div>
+      </div> 
+    </div>
+    <div *ngSwitchCase="'propostas'">
+      <div *ngFor="let proposta of listaPropostas" class="panel panel-default">
+        <div class="panel-heading">{{ proposta.nome }}</div> 
+        <div class="row panel-body">
+          <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
+                                          type="button" 
+                                          class="btn btn-primary" >Ver Prroposta</button></div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
-
-  <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
-
-  <div *ngSwitchCase="'projetos'" >
-    <div *ngFor="let projeto of listaProjetos" class="panel panel-default">
-      <div class="panel-heading">{{ projeto.nome }}</div>
-      <div class="row panel-body">
-        <div class="col-sm-7"><p>Proponenete: </p><h4>{{ projeto.proponente}}</h4></div> 
-        <div class="col-sm-3 col-xs-6"><p>Área: </p><h4>{{ projeto.area}}</h4></div> 
-        <div class="col-sm-2 col-xs-6"><button [routerLink]="['/projetos', projeto.PRONAC]" 
-                                       type="button" 
-                                       class="btn btn-primary">Ver Projeto</button></div>
-      </div>
-    </div> 
-  </div>
-  <div *ngSwitchCase="'propostas'">
-    <div *ngFor="let proposta of listaPropostas" class="panel panel-default">
-      <div class="panel-heading">{{ proposta.nome }}</div> 
-      <div class="row panel-body">
-         <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
+    <div *ngSwitchCase="'proponentes'">
+      <div *ngFor="let proponente of listaProponentes" class="panel panel-default">
+        <div class="panel-heading">{{ proponente.nome }}</div> 
+        <div class="row panel-body">
+          <div class="col-sm-9"><p>CGCCPF: </p><h4>{{ proponente.cgccpf }}</h4></div> 
+          <div class="col-sm-3"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" 
                                         type="button" 
-                                        class="btn btn-primary" >Ver Prroposta</button></div>
+                                        class="btn btn-primary" >Ver Proponente</button></div>
+        </div>                                   
       </div>
     </div>
-  </div>
-  <div *ngSwitchCase="'proponentes'">
-    <div *ngFor="let proponente of listaProponentes" class="panel panel-default">
-      <div class="panel-heading">{{ proponente.nome }}</div> 
-      <div class="row panel-body">
-        <div class="col-sm-9"><p>CGCCPF: </p><h4>{{ proponente.cgccpf }}</h4></div> 
-        <div class="col-sm-3"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" 
-                                       type="button" 
-                                       class="btn btn-primary" >Ver Proponente</button></div>
-      </div>                                   
-    </div>
-  </div>
-  <div *ngSwitchCase="'incentivadores'">
-    <div *ngFor="let incentivador of listaIncentivadores" class="panel panel-default">
-      <div class="panel-heading">{{ incentivador.nome }}</div> 
-      <div class="row panel-body">
-        <div class="col-sm-9"><p>cgccpf: </p><h4>{{ incentivador.cgccpf }}</h4></div>
-        <div class="col-sm-3"><button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" 
-                                       type="button" 
-                                       class="btn btn-primary" >VER INCENTIVADOR</button></div>
+    <div *ngSwitchCase="'incentivadores'">
+      <div *ngFor="let incentivador of listaIncentivadores" class="panel panel-default">
+        <div class="panel-heading">{{ incentivador.nome }}</div> 
+        <div class="row panel-body">
+          <div class="col-sm-9"><p>cgccpf: </p><h4>{{ incentivador.cgccpf }}</h4></div>
+          <div class="col-sm-3"><button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" 
+                                        type="button" 
+                                        class="btn btn-primary" >VER INCENTIVADOR</button></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div *ngSwitchCase="'fornecedores'">
-    <div *ngFor="let fornecedor of listaFornecedores" class="panel panel-default">
-      <div class="panel-heading">{{ fornecedor.nome }}</div> 
-      <div class="row panel-body">
-        <div class="col-sm-9"><p>cgccpf: </p><h4>{{ fornecedor.cgccpf }}</h4></div>
-      <div class="col-sm-3"><button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" 
-                                       type="button" 
-                                       class="btn btn-primary" >VER FORNECEDOR</button></div>
+    <div *ngSwitchCase="'fornecedores'">
+      <div *ngFor="let fornecedor of listaFornecedores" class="panel panel-default">
+        <div class="panel-heading">{{ fornecedor.nome }}</div> 
+        <div class="row panel-body">
+          <div class="col-sm-9"><p>cgccpf: </p><h4>{{ fornecedor.cgccpf }}</h4></div>
+        <div class="col-sm-3"><button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" 
+                                        type="button" 
+                                        class="btn btn-primary" >VER FORNECEDOR</button></div>
+        </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
-
 <sk-fading-circle [isRunning]="carregandoDados"></sk-fading-circle>
 
 <alert *ngIf="buscaSemResultados"type="danger">

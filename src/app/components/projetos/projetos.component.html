@@ -16,6 +16,8 @@
     <h4>Exemplo de formatação de dados: </h4> 
     <p>Data Formatada: {{ projeto.data_inicio }} --> {{ dataFormatterService.formataData(projeto.data_inicio)}} --> {{ dataFormatterService.formataDataExtenso(projeto.data_inicio)}}<br></p>
     <p>Valor Formatado: {{ projeto.valor_solicitado }} --> {{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado)}}<br></p>
+    <p>CGCCPF Formatado: {{ projeto.cgccpf }} --> {{ dataFormatterService.formataCGCCPF(projeto.cgccpf)}}<br></p>
+
 
     <h4>Links de Entidades Relacionadas: </h4>
     <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary" >VER PROPONENTE</button>

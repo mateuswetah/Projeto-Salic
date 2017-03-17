@@ -81,6 +81,25 @@ export class DataFormatterService {
     return valorNum.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' });
   }
 
+  formataCGCCPF(cgccpf: String): String {
+    if (cgccpf.length === 11) {
+      return cgccpf.substr(0, 3) + '.' +
+             cgccpf.substr(3, 3) + '.' +
+             cgccpf.substr(6, 3) + '-' +
+             cgccpf.substr(9, 2);
+
+    } else if ( cgccpf.length === 14) {
+      return cgccpf.substr(0, 2) + '.' +
+             cgccpf.substr(2, 3) + '.' +
+             cgccpf.substr(5, 3) + '/' +
+             cgccpf.substr(8, 4) + '-' +
+             cgccpf.substr(12, 2);
+
+    } else {
+      return cgccpf;
+    }
+  }
+
   constructor() { }
 
 }
