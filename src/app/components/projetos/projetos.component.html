@@ -21,8 +21,8 @@
 
     <h4>Links de Entidades Relacionadas: </h4>
     <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary" >VER PROPONENTE</button>
-    <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-success" [ngClass]="{'disabled': projeto._embedded.captacoes?.length <= 0}">BUSCAR INCENTIVADORES</button>
-    <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-info" [ngClass]="{'disabled': projeto._embedded.relacao_pagamentos?.length <= 0}">BUSCAR FORNECEDORES</button>
+    <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-success" disabled="{ projeto._embedded.captacoes?.length <= 0 }">BUSCAR INCENTIVADORES</button>
+    <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-info" disabled="{ projeto._embedded.relacao_pagamentos?.length <= 0}">BUSCAR FORNECEDORES</button>
    
     <h4>Exemplo de Captações (uma das)</h4>
     <p *ngIf="projeto._embedded.captacoes.length <= 0">Este projeto ainda <strong>não possui Incentivadores</strong> ou captações.</p>
