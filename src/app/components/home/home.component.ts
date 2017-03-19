@@ -1,10 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewInit,     
-    trigger,
-    state,
-    style,
-    transition,
-    animate,
-    keyframes } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit,
+         trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,16 +23,16 @@ declare var $: any;
   styleUrls: ['./home.component.scss'],
   animations: [
 
-        trigger('subirRespostas', [
-          transition('inativo => ativo', [
-                animate(300, keyframes([
-                    style({opacity: 0, transform: 'translateY(200px)', offset: 0}),
-                    style({opacity: 1, transform: 'translateY(-25px)', offset: .75}),
-                    style({opacity: 1, transform: 'translateY(0)', offset: 1})
+    trigger('subirRespostas', [
+      transition('inativo => ativo', [
+        animate(300, keyframes([
+          style({opacity: 0, transform: 'translateY(200px)', offset: 0}),
+          style({opacity: 1, transform: 'translateY(-25px)', offset: .75}),
+          style({opacity: 1, transform: 'translateY(0)', offset: 1})
         ]))
+      ])
     ])
-    ])
-]
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 

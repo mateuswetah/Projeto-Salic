@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { routerTransition } from './../../services/router.animations';
+
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
@@ -13,7 +15,9 @@ import { Projeto } from './../../models/projeto.model';
 @Component({
   selector: 'app-proponentes',
   templateUrl: './proponentes.component.html',
-  styleUrls: ['./proponentes.component.scss']
+  styleUrls: ['./proponentes.component.scss'],
+  animations: [routerTransition()],
+  host: {'[@routerTransition]': ''}
 })
 export class ProponentesComponent implements OnInit, OnDestroy {
 

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { routerTransition } from './../../services/router.animations';
+
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 
@@ -10,7 +12,9 @@ import { Proposta } from './../../models/proposta.model';
 @Component({
   selector: 'app-propostas',
   templateUrl: './propostas.component.html',
-  styleUrls: ['./propostas.component.scss']
+  styleUrls: ['./propostas.component.scss'],
+  animations: [routerTransition()],
+  host: {'[@routerTransition]': ''}
 })
 export class PropostasComponent implements OnInit, OnDestroy {
 

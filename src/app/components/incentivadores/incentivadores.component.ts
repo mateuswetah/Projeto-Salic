@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { routerTransition } from './../../services/router.animations';
+
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
@@ -12,7 +14,9 @@ import { Doacao } from './../../models/doacao.model';
 @Component({
   selector: 'app-incentivadores',
   templateUrl: './incentivadores.component.html',
-  styleUrls: ['./incentivadores.component.scss']
+  styleUrls: ['./incentivadores.component.scss'],
+  animations: [routerTransition()],
+  host: {'[@routerTransition]': ''}
 })
 export class IncentivadoresComponent implements OnInit, OnDestroy {
 

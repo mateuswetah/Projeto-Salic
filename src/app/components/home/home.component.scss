@@ -1,3 +1,9 @@
+// Conteúdo do topo da página
+.container-topo {
+    background-color: #bbb;
+    min-height: 200px;
+}
+
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
@@ -5,26 +11,36 @@
         .panel { padding: 0px; }
     }
 
-    // .form-control-placeholder {
-    //     position: absolute;
-    //     top: 0;
-    //     padding: 21px 0 0 12px;
-    //     pointer-events: none;
-    //     color: #aaa;
-    //     transition: all 200ms;
-    // }
+    .form-control-placeholder {
+        position: absolute;
+        top: 0;
+        padding: 6px 0 0 12px;
+        pointer-events: none;
+        color: #aaa;
+        transition: all 200ms;
+    }
 
-    // .form-control:focus + .form-control-placeholder {
-    //     color: #777;
-    //     font-size: 95%;
-    //     font-weight: bold;
-    //     top: -28px;
-    // }
-    .form-group .input {
-        margin: 4px 0px;
+    .form-control:focus + .form-control-placeholder,
+    .form-control.cheio + .form-control-placeholder {
+        color: #777;
+        font-size: 95%;
+        font-weight: bold;
+        top: -28px;
+    }
+    .form-group {
+        margin: 0px 0px 15px 0px;
+        padding: 0px;
+
+        .row {
+            margin: 0px 0px;
+            padding: 0px;
+        }
+        
+        .row>.input {
+            margin-top: 28px 
+        }
     }
 }
-
 
 // Abas de Pesquisa ----------------------------------------------------------
 .abas-pesquisa {
@@ -117,4 +133,15 @@
     min-width: 25px;
     border-radius: 8px 2px 2px 8px;
     background-color: #fdfdfd;
+}
+
+// Conteúdo da LandingPage
+.container-landpage-1 {
+    background-color: #777;
+    min-height: 200px;
+}
+
+.container-landpage-2 {
+    background-color: #999;
+    min-height: 200px;
 }

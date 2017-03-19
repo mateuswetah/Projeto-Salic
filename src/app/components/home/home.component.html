@@ -1,11 +1,11 @@
  <!-- Título da Página -->
-<header class="text-center">
+<div class="container-topo row text-center">
   <h1>
     <br>
     Página Inicial
     <br><br>
   </h1>
-</header>
+</div>
 
 <!-- Caixa de Pesquisa -->
 <div class="container-pesquisa row">
@@ -53,12 +53,28 @@
 
        <!-- Busca Avançada ============================================================ -->
       <div *ngIf="buscaAvancada" class="panel-body form-group">
-        <div class="input col-sm-6">
-          <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Nome do Projeto">
-          <!--<div class="form-control-placeholder">Nome</div>-->
+        <div class="row">
+          <div class="input col-sm-5">
+            <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
+            <div class="form-control-placeholder">Nome</div>
+          </div>
+          <div class="input col-sm-2">
+            <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
+            <div class="form-control-placeholder">PRONAC</div>
+          </div>
+          <div class="input col-sm-5">
+            <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
+            <div class="form-control-placeholder">Nome do Proponente</div>
+          </div>
         </div>
-        <div class="input col-sm-6">
-          <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Nome do Proponente">
+        <div class="row">
+           <div class="input col-sm-6">
+            <input type="text" [(ngModel)]="queries['municipio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['municipio'] !== undefined && queries['municipio'] !== null && queries['municipio'] !== ''}">
+            <div class="form-control-placeholder">Município</div>
+          </div>
+          <div class="input col-sm-6">
+            <div class="alert alert-danger">AINDA EM IMPLEMENTAÇÃO</div>
+          </div>
         </div>
       </div>
 
@@ -79,7 +95,7 @@
   </div>
 </div>
 
-<div [@subirRespostas]='subirRespostasEstado' class="row">
+<div [@subirRespostas]='subirRespostasEstado' class="container-respostas row">
   <div class=" col-md-8 col-md-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
     <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
@@ -102,7 +118,7 @@
         <div class="row panel-body">
           <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
                                           type="button" 
-                                          class="btn btn-primary" >Ver Prroposta</button></div>
+                                          class="btn btn-primary" >Ver Proposta</button></div>
         </div>
       </div>
     </div>
@@ -124,7 +140,7 @@
           <div class="col-sm-9"><p>cgccpf: </p><h4>{{ incentivador.cgccpf }}</h4></div>
           <div class="col-sm-3"><button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" 
                                         type="button" 
-                                        class="btn btn-primary" >VER INCENTIVADOR</button></div>
+                                        class="btn btn-primary" >Ver Incentivador</button></div>
         </div>
       </div>
     </div>
@@ -135,7 +151,7 @@
           <div class="col-sm-9"><p>cgccpf: </p><h4>{{ fornecedor.cgccpf }}</h4></div>
         <div class="col-sm-3"><button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" 
                                         type="button" 
-                                        class="btn btn-primary" >VER FORNECEDOR</button></div>
+                                        class="btn btn-primary" >Ver Fornecedor</button></div>
         </div>
       </div>
     </div>
@@ -158,4 +174,12 @@
               [boundaryLinks]="true" 
               [rotate]="false"  
               [(ngModel)]="paginaAtual"></pagination>
+</div>
+
+<div class="container-landpage-1 row text-center">
+  <p>Conteúdo da Landing Page</p>
+</div>
+
+<div class="container-landpage-2 row text-center">
+  <p>Outro conteúdo da Landing Page</p>
 </div>
