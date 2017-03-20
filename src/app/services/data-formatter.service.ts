@@ -8,28 +8,34 @@ export class DataFormatterService {
   }
 
   formataData(data: String): String {
-
-    const dataSplit = data.split('-');
-
-    if (dataSplit.length !== 3) {
-      return data;
+    if (data === undefined || data === null) {
+      return 'Não Informada';
     } else {
-      return dataSplit[2] + '/' +
-             dataSplit[1] + '/' +
-             dataSplit[0];
+      const dataSplit = data.split('-');
+
+      if (dataSplit.length !== 3) {
+        return data;
+      } else {
+        return dataSplit[2] + '/' +
+              dataSplit[1] + '/' +
+              dataSplit[0];
+      }
     }
   }
 
   formataDataExtenso(data: String): String {
-
-    const dataSplit = data.split('-');
-
-    if (dataSplit.length !== 3) {
-      return data;
+    if (data === undefined || data === null) {
+      return 'Não Informada';
     } else {
-      return this.obterDiaExtenso(dataSplit[2]) + ' de ' +
-             this.obterMesExtenso(dataSplit[1]) + ' de ' +
-             dataSplit[0];
+      const dataSplit = data.split('-');
+
+      if (dataSplit.length !== 3) {
+        return data;
+      } else {
+        return this.obterDiaExtenso(dataSplit[2]) + ' de ' +
+              this.obterMesExtenso(dataSplit[1]) + ' de ' +
+              dataSplit[0];
+      }
     }
   }
 
@@ -77,26 +83,34 @@ export class DataFormatterService {
   }
 
   formataValorEmReais(valor: String): String {
-    const valorNum = Number(valor);
-    return valorNum.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' });
+    if (valor === undefined || valor === null) {
+      return 'Não Informado';
+    } else {
+      const valorNum = Number(valor);
+      return valorNum.toLocaleString('pt-BR',  { style: 'currency', currency: 'BRL' });
+    }
   }
 
   formataCGCCPF(cgccpf: String): String {
-    if (cgccpf.length === 11) {
-      return cgccpf.substr(0, 3) + '.' +
-             cgccpf.substr(3, 3) + '.' +
-             cgccpf.substr(6, 3) + '-' +
-             cgccpf.substr(9, 2);
-
-    } else if ( cgccpf.length === 14) {
-      return cgccpf.substr(0, 2) + '.' +
-             cgccpf.substr(2, 3) + '.' +
-             cgccpf.substr(5, 3) + '/' +
-             cgccpf.substr(8, 4) + '-' +
-             cgccpf.substr(12, 2);
-
+    if (cgccpf === undefined || cgccpf === null) {
+      return 'Não Informado';
     } else {
-      return cgccpf;
+      if (cgccpf.length === 11) {
+        return cgccpf.substr(0, 3) + '.' +
+              cgccpf.substr(3, 3) + '.' +
+              cgccpf.substr(6, 3) + '-' +
+              cgccpf.substr(9, 2);
+
+      } else if ( cgccpf.length === 14) {
+        return cgccpf.substr(0, 2) + '.' +
+              cgccpf.substr(2, 3) + '.' +
+              cgccpf.substr(5, 3) + '/' +
+              cgccpf.substr(8, 4) + '-' +
+              cgccpf.substr(12, 2);
+
+      } else {
+        return cgccpf;
+      }
     }
   }
 
