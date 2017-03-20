@@ -1,0 +1,155 @@
+// Container principal da página
+.container-busca {
+  padding-top: 50px;
+  width: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+
+// Caixa de Pesquisa ------------------------------------------------------
+.container-pesquisa {
+
+    @media all and (min-width: 992px){
+        .panel { padding: 0px; }
+    }
+
+    .form-control-placeholder {
+        position: absolute;
+        top: 0;
+        padding: 6px 0 0 12px;
+        pointer-events: none;
+        color: #aaa;
+        transition: all 200ms;
+    }
+
+    .form-control:focus + .form-control-placeholder,
+    .form-control.cheio + .form-control-placeholder {
+        color: #777;
+        font-size: 95%;
+        font-weight: bold;
+        top: -28px;
+    }
+    .form-group {
+        margin: 0px 0px 15px 0px;
+        padding: 0px;
+
+        .row {
+            margin: 0px 0px;
+            padding: 0px;
+        }
+        
+        .row>.input {
+            margin-top: 28px 
+        }
+    }
+}
+
+// Abas de Pesquisa ----------------------------------------------------------
+.abas-pesquisa {
+    
+    position: relative;
+    margin-bottom: -6px;
+    overflow: hidden;
+	padding:5px;
+  	height:50px;
+
+    a { bottom: -3px; }
+    a:hover { border-radius: 1px; }
+        
+    .active {
+        a {
+            font-weight: bold;
+            color: 	#555;
+            background-color: white !important;
+            border: 1px #ddd solid; 
+            border-radius: 1px;
+        }
+    }
+
+}
+
+.aba {
+    position:absolute;
+    left:0px;
+    top:0px;
+  	min-width:3000px;
+  	margin-left:12px;
+    margin-top:0px;
+}
+
+.aba li{
+	display:table-cell;
+    position:relative;
+    text-align:center;
+    cursor:grab;
+    cursor:-webkit-grab;
+    color:#efefef;
+    vertical-align:middle;
+}
+
+.scroller {
+  margin-top: 6px;
+  text-align:center;
+  cursor:pointer;
+  display:none;
+  padding:7px 10px 7px 10px;
+  white-space:no-wrap;
+  vertical-align:middle;
+  background-color:#efefef;
+  border-radius: 20px;
+  box-shadow: 0px 4px 5px #777;
+  z-index: 999;
+}
+
+.scroller-right{
+  float:right;
+}
+
+.scroller-left {
+  float:left;
+}
+
+
+// Chips ----------------------------------------------------------
+.chip {
+    display: inline-block;
+    padding: 0 9px 0px 13px;
+    height: 27px;
+    font-size: 0.8em;
+    line-height: 23px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+
+.chip-wrapper {
+    display: inline;
+    margin: 2px 4px;
+}
+
+.chip-tag {
+    padding: 0 0.8em;
+    float: left;
+    margin: 0 5px 0 -13px;
+    height: 25px;
+    min-width: 25px;
+    border-radius: 8px 2px 2px 8px;
+    background-color: #fdfdfd;
+}
+
+// Conteúdo da LandingPage
+.container-landpage-1 {
+    background-color: #777;
+    min-height: 200px;
+}
+
+.container-landpage-2 {
+    background-color: #999;
+    min-height: 200px;
+}
+
+// Resultados da Pesquisa 
+.container-respostas {
+
+}

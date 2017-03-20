@@ -4,6 +4,7 @@ import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '../components/home/home.component';
+import { BuscaComponent } from './../components/busca/busca.component';
 import { ProjetosComponent } from '../components/projetos/projetos.component';
 import { PropostasComponent } from '../components/propostas/propostas.component';
 import { ProponentesComponent } from '../components/proponentes/proponentes.component';
@@ -68,13 +69,26 @@ const appRoutes: Routes = [
     component: FalhaComponent
   },
   {
-    path: 'sobre', component: SobreComponent
+    path: 'sobre',
+    component: SobreComponent
   },
   {
-    path: '', redirectTo: '/projetos', pathMatch: 'full' },
+    path: 'home',
+    component: HomeComponent,
+    data: {
+      meta: {
+        title: 'Página Inicial',
+        description: 'Página Inicial - Visualização SALIC'
+      }
+    }
+  },
+  {
+    path: 'busca', redirectTo: '/projetos', pathMatch: 'full' },
+  {
+    path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: ':pesquisaPor',
-    component: HomeComponent,
+    component: BuscaComponent,
     data: {
       meta: {
         title: 'Página de Pesquisa',

@@ -7,9 +7,7 @@
                 [url]="this.router.url" 
                 [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
                 [showCount]="true" ></share-buttons>
-
-  <a [routerLink]="['/', 'propostas']">Página Inicial</a>
-
+                
   <button (click)="onLoadProposta(idProposta)">Carregar Proposta</button>
   <p *ngIf="carregandoDados">Carregando proposta...</p>
   <div *ngIf="!carregandoDados">

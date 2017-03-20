@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit,
+import { Component, OnInit, AfterViewInit,
          trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
@@ -20,46 +20,12 @@ declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [
-
-    trigger('subirRespostas', [
-      transition('inativo => ativo', [
-        animate(300, keyframes([
-          style({opacity: 0, transform: 'translateY(200px)', offset: 0}),
-          style({opacity: 1, transform: 'translateY(-25px)', offset: .75}),
-          style({opacity: 1, transform: 'translateY(0)', offset: 1})
-        ]))
-      ])
-    ])
-  ]
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
-  inscricaoQueries: Subscription; // Usada para observar mudanças na URL
-  inscricaoPesquisaPor: Subscription;
-
-  JSON: any = JSON;
-
-  pesquisaPor = 'projeto';
-  carregandoDados: Boolean = false;
-  buscaSemResultados = false;
+  pesquisaPor = 'projetos';
   buscaAvancada = false;
-  subirRespostasEstado: String = 'inativo';
-
-  // Respostas da API:
-  listaProjetos:        [Projeto];
-  listaPropostas:       [Proposta];
-  listaProponentes:     [Proponente];
-  listaIncentivadores:  [Incentivador];
-  listaFornecedores:    [Fornecedor];
-
-  // Paginacao
-  offsetAtual = 0;
-  numeroDeItems: number;
-  totalDeItems: number;
-  maximoBotoes = 5;
-  paginaAtual = 1;
 
   // Queries para a busca
   queries: { [query: string]: String; } = {};
@@ -71,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   queriesDePropostas = [ 'limit', 'offset', 'nome', 'data_inicio', 'data_termino' ];
   queriesDeProponentes = [ 'limit', 'offset', 'nome', 'cgccpf', 'url_id',
                            'municipio', 'UF', 'tipo_pessoa', 'sort' ];
-  queriesDeIncentivadores = [ 'limit', 'offset', 'nome', 'cgccpf', 'municipio', 
+  queriesDeIncentivadores = [ 'limit', 'offset', 'nome', 'cgccpf', 'municipio',
                               'UF', 'tipo_pessoa', 'PRONAC', 'sort' ];
   queriesDeFornecedores = [ 'limit', 'offset', 'nome', 'cgccpf', 'PRONAC' ];
 
@@ -85,68 +51,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
               }
 
   ngOnInit() {
-
-    this.inscricaoPesquisaPor = this.route.params.subscribe (
-      (params: any) => {
-        this.pesquisaPor = params['pesquisaPor'];
-        switch (this.pesquisaPor) {
-          case 'projetos':
-            this.queriesDoSelecionado = this.queriesDeProjetos;
-          break;
-          case 'propostas':
-            this.queriesDoSelecionado = this.queriesDePropostas;
-          break;
-          case 'proponentes':
-            this.queriesDoSelecionado = this.queriesDeProponentes;
-          break;
-          case 'incentivadores':
-            this.queriesDoSelecionado = this.queriesDeIncentivadores;
-          break;
-          case 'fornecedores':
-            this.queriesDoSelecionado = this.queriesDeIncentivadores;
-          break;
-          default:
-            this.router.navigate(['falha', 405]);
-        }
-      }
-    );
-
-    this.inscricaoQueries = this.route.queryParams.subscribe (
-      (queryParams: any) => {
-        this.atualizaQueries(queryParams);
-      }
-    );
-  }
-
-  consoleLog(event) { console.log(event); }
-
-  ngOnDestroy() {
-    this.inscricaoPesquisaPor.unsubscribe();
-    this.inscricaoQueries.unsubscribe();
   }
 
   atualizaQueries(queryParams: any) {
-
-    let nenhumaQueryEnviada = true;
 
     this.queries = {};
 
     for (const query of this.queriesDoSelecionado) {
       if (queryParams[query]) {
         this.queries[query] = queryParams[query];
-        if (query !== 'offset' && query !== 'limit') {
-          nenhumaQueryEnviada = false;
-        }
       }
     }
 
-    this.totalDeItems = 0;
-    this.numeroDeItems = 0;
-
-    if (nenhumaQueryEnviada === false) {
-      this.carregarPagina(1);
-      console.log(nenhumaQueryEnviada);
-    }
   }
 
   onTrocaPesquisaPor(novoPesquisaPor) {
@@ -174,16 +90,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.atualizaQueries(this.queries);
-    //this.carregarPagina(1);
-
-    const params = new URLSearchParams();
-
-    for (const key in this.queries) {
-      if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
-      }
-    }
-    this.location.go(this.pesquisaPor, params.toString());
   }
 
   onRealizarBuscaComEnter(event) {
@@ -192,144 +98,32 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onRealizarBusca() {
 
-    this.offsetAtual = 0;
-    this.listaProjetos = undefined;
-    this.listaPropostas = undefined;
-    this.listaProponentes = undefined;
-    this.listaIncentivadores = undefined;
-    this.listaFornecedores = undefined;
-
-    this.carregarPagina(1);
-  }
-
-  carregarPagina(indice: number) {
-    console.log('Indice da pg.: ' + indice);
-    this.subirRespostasEstado = 'inativo';
-    this.carregandoDados = true;
-    this.buscaSemResultados = false;
-    this.offsetAtual = (indice - 1) * this.configurationService.limitResultados;
-
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
-    this.queries['offset'] = '' + this.offsetAtual ;
-
-    const params = new URLSearchParams();
-
-    for (const key in this.queries) {
-      if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
-      }
-    }
-
-    this.location.go(this.pesquisaPor, params.toString());
+    this.queries['offset'] = '0';
 
     switch (this.pesquisaPor) {
 
       case 'projetos':
-        this.apiService.getListaProjetos(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaProjetos = resposta.listaProjetos;
-
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
-
+        this.router.navigate(['projetos'], {queryParams: this.queries});
       break;
 
       case 'propostas':
-        this.apiService.getListaPropostas(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaPropostas = resposta.listaPropostas;
-
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
+        this.router.navigate(['propostas'], {queryParams: this.queries});
       break;
 
       case 'proponentes':
-        this.apiService.getListaProponentes(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaProponentes = resposta.listaProponentes;
-
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
+        this.router.navigate(['proponentes'], {queryParams: this.queries});
       break;
 
       case 'incentivadores':
-        this.apiService.getListaIncentivadores(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaIncentivadores = resposta.listaIncentivadores;
-
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
+        this.router.navigate(['incentivadores'], {queryParams: this.queries});
       break;
 
       case 'fornecedores':
-        this.apiService.getListaFornecedores(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaFornecedores = resposta.listaFornecedores;
-
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
+        this.router.navigate(['fornecedores'], {queryParams: this.queries});
       break;
+
       default:
         this.router.navigate(['falha', 405]);
     }
@@ -341,16 +135,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.atualizaQueries(this.queries);
 
-    const params = new URLSearchParams();
-
-    for (const key in this.queries) {
-      if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
-      }
-    }
-    this.location.go(this.pesquisaPor, params.toString());
-
-    this.carregarPagina(0);
   }
 
   // Retorna o dicionário de Queries como um array iterável para a view
