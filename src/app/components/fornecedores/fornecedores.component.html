@@ -1,33 +1,36 @@
-<h3>
-  Página do Fornecedor de id: {{ idFornecedor }} 
-</h3>
-<share-buttons class="withCount" 
-              [url]="this.router.url" 
-              [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
-              [showCount]="true" ></share-buttons>
-<a [routerLink]="['/', 'fornecedores']">Página Inicial</a>
+<div class="container container-fornecedor">
+  <h3>
+    Página do Fornecedor de id: {{ idFornecedor }} 
+  </h3>
+  <share-buttons class="withCount" 
+                [url]="this.router.url" 
+                [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+                [showCount]="true" ></share-buttons>
+  <a [routerLink]="['/', 'fornecedores']">Página Inicial</a>
 
-<!--<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>-->
-<p *ngIf="carregandoDados">Carregando fornecedor...</p>
+  <!--<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>-->
+  <p *ngIf="carregandoDados">Carregando fornecedor...</p>
 
-<div *ngIf="!carregandoDados">
-  <p>{{ JSON.stringify(fornecedor) }}</p>
-  <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
-  <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
-  <div *ngIf="!carregandoDadosProdutos">
-    
-    <h4 *ngIf="!buscaPorProdutosSemResultados">Produtos fornecidos:</h4>
+  <div *ngIf="!carregandoDados">
+    <p>{{ JSON.stringify(fornecedor) }}</p>
+    <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
+    <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
+    <div *ngIf="!carregandoDadosProdutos">
+      
+      <h4 *ngIf="!buscaPorProdutosSemResultados">Produtos fornecidos:</h4>
 
-    <div *ngFor="let produto of listaProdutos">
-      <div class="panel panel-default container-fluid">
-        <div class="panel-heading row">{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">Ver Projeto</button></div>
-        <div class="panel-body">{{ JSON.stringify(produto) }}</div>
+      <div *ngFor="let produto of listaProdutos">
+        <div class="panel panel-default container-fluid">
+          <div class="panel-heading row">{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">Ver Projeto</button></div>
+          <div class="panel-body">{{ JSON.stringify(produto) }}</div>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="buscaPorProdutosSemResultados">
-      <p>Não encontramos Produtos pertencentes a este Fornecedor.</p>
-    </div>
+      <div *ngIf="buscaPorProdutosSemResultados">
+        <p>Não encontramos Produtos pertencentes a este Fornecedor.</p>
+      </div>
 
+    </div>
   </div>
+  
 </div>

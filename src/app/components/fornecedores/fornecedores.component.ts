@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -8,12 +8,14 @@ import { ApiService } from './../../services/api.service';
 import { Fornecedor } from './../../models/fornecedor.model';
 import { Produto } from './../../models/produto.model';
 
+declare var $: any;
+
 @Component({
   selector: 'app-fornecedores',
   templateUrl: './fornecedores.component.html',
   styleUrls: ['./fornecedores.component.scss']
 })
-export class FornecedoresComponent implements OnInit, OnDestroy {
+export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
 
   inscricao: Subscription; // Usada para observar mudanças na URL
   JSON: any = JSON;
@@ -81,6 +83,11 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
         }
       },
       () => this.carregandoDadosProdutos = false);
+  }
+
+  // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
+  ngAfterViewInit() {
+    $('app-incentivadores').css({position: 'relative'}).appendTo('app-outlet-container');
   }
 
   atualizarMetaTags() {

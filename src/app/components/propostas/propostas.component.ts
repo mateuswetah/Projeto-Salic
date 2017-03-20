@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -9,6 +9,8 @@ import { ApiService } from './../../services/api.service';
 
 import { Proposta } from './../../models/proposta.model';
 
+declare var $: any
+
 @Component({
   selector: 'app-propostas',
   templateUrl: './propostas.component.html',
@@ -16,7 +18,7 @@ import { Proposta } from './../../models/proposta.model';
   animations: [routerTransition()],
   host: {'[@routerTransition]': ''}
 })
-export class PropostasComponent implements OnInit, OnDestroy {
+export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   idProposta: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
@@ -59,6 +61,11 @@ export class PropostasComponent implements OnInit, OnDestroy {
         this.router.navigate(['falha', err]);
       },
       () => this.carregandoDados = false);
+  }
+
+  // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
+  ngAfterViewInit() {
+    $('app-propostas').css({position: 'relative'}).appendTo('app-outlet-container');
   }
 
   atualizarMetaTags() {
