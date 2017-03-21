@@ -61,6 +61,20 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   maximoBotoes = 5;
   paginaAtual = 1;
 
+  // Opções de Ordenação
+  ordenarPor: String = 'PRONAC';
+  ordenarDesc = false;
+  ordenarPorQueries:  { [query: string]: String; }
+                    = { 'PRONAC':           'PRONAC',
+                        'ano_projeto':      'Ano do Projeto',
+                        'data_inicio':      'Data de Início',
+                        'data_termino':     'Data de Término',
+                        'valor_solicitado': 'Valor Solicidado',
+                        'outras_fontes':    'Outras Fontes',
+                        'valor_captado':    'Valor Captado',
+                        'valor_proposta':   'Valor da Proposta',
+                        'valor_projeto':    'Valor do Projeto' };
+
   // Queries para a busca
   queries: { [query: string]: String; } = {};
   queriesDoSelecionado = [];
@@ -118,13 +132,13 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
 
    consoleLog(event) { console.log(event); }
 
-     ngOnDestroy() {
+  ngOnDestroy() {
     this.inscricaoPesquisaPor.unsubscribe();
     this.inscricaoQueries.unsubscribe();
   }
 
   atualizaQueries(queryParams: any) {
-
+    console.log("Atualizando Queries");
     let nenhumaQueryEnviada = true;
 
     this.queries = {};
@@ -140,9 +154,12 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
     this.totalDeItems = 0;
     this.numeroDeItems = 0;
 
+    this.ordenarPor = this.queries['sort'].split(':')[0];
+    this.ordenarDesc = this.queries['sort'].split(':')[1] === 'desc' ? false : true;
+
     //if (nenhumaQueryEnviada === false) {
       this.carregarPagina(1);
-      console.log(nenhumaQueryEnviada);
+      //console.log(nenhumaQueryEnviada);
     //}
   }
 
@@ -190,6 +207,8 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   onRealizarBusca() {
 
     this.offsetAtual = 0;
+    this.paginaAtual = 1;
+
     this.listaProjetos = undefined;
     this.listaPropostas = undefined;
     this.listaProponentes = undefined;
@@ -201,6 +220,7 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
 
   carregarPagina(indice: number) {
     console.log('Indice da pg.: ' + indice);
+
     this.subirRespostasEstado = 'inativo';
     this.carregandoDados = true;
     this.buscaSemResultados = false;
@@ -209,6 +229,7 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
     this.queries['offset'] = '' + this.offsetAtual ;
+    this.queries['sort'] = this.ordenarPor + ':' + (this.ordenarDesc ? 'desc' : 'asc');
 
     const params = new URLSearchParams();
 
@@ -351,8 +372,8 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   }
 
   // Retorna o dicionário de Queries como um array iterável para a view
-  keys(): Array<string> {
-    return Object.keys(this.queries);
+  keys(dicionario): Array<string> {
+    return Object.keys(dicionario);
   }
 
   // Aqui é configurado o botão de deslizamento das abas de pesquisa

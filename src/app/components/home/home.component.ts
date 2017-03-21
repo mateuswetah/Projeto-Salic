@@ -27,6 +27,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   pesquisaPor = 'projetos';
   buscaAvancada = false;
 
+  // Opções de Ordenação
+  ordenarPor = 'PRONAC';
+  ordenarDesc = false;
+  ordenarPorQueries:  { [query: string]: String; }
+                    = { 'PRONAC':           'PRONAC',
+                        'ano_projeto':      'Ano do Projeto',
+                        'data_inicio':      'Data de Início',
+                        'data_termino':     'Data de Término',
+                        'valor_solicitado': 'Valor Solicidado',
+                        'outras_fontes':    'Outras Fontes',
+                        'valor_captado':    'Valor Captado',
+                        'valor_proposta':   'Valor da Proposta',
+                        'valor_projeto':    'Valor do Projeto' };
+
   // Queries para a busca
   queries: { [query: string]: String; } = {};
   queriesDoSelecionado = [];
@@ -101,6 +115,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
     this.queries['offset'] = '0';
+    this.queries['sort'] = this.ordenarPor + ':' + (this.ordenarDesc ? 'desc' : 'asc');
 
     switch (this.pesquisaPor) {
 
@@ -138,8 +153,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   // Retorna o dicionário de Queries como um array iterável para a view
-  keys(): Array<string> {
-    return Object.keys(this.queries);
+  keys(dicionario: { [query: string]: String; }): Array<string> {
+    return Object.keys(dicionario);
   }
 
   // Aqui é configurado o botão de deslizamento das abas de pesquisa
