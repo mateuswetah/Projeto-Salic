@@ -125,5 +125,8 @@ export class Projeto {
                                                                               }
                                                                             ]
                                                             }
-                                            } ) {}
+                                            },
+                public isResumoEscondido: Boolean ) {
+                  this.isResumoEscondido = true;
+                }
 }

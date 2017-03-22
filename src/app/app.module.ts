@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule } from 'ng2-bootstrap/';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MasonryModule } from 'angular2-masonry';
 
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
@@ -78,7 +80,9 @@ export function metaFactory(): MetaLoader {
     DropdownModule.forRoot(),
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    FlexLayoutModule.forRoot(),
+    MasonryModule
   ],
   providers: [
     ApiService,

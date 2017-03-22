@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div [@subirRespostas]='subirRespostasEstado' class="container-respostas row">
+  <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
     <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
     <!-- ORDENAÇÃO, QUANDO DISPONÍVEL =================================================================================-->
@@ -97,23 +97,31 @@
       <br>
       
       <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
-
+     
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
-      <div *ngSwitchCase="'projetos'">
-        <div *ngFor="let projeto of listaProjetos" class="card col-md-6">
-        
+      <masonry [options]="{ transitionDuration: '0.5s' }" *ngSwitchCase="'projetos'" >
+        <masonry-brick *ngFor="let projeto of listaProjetos;" class="card col-md-6">
+
           <div class="panel panel-default">
             <div class="panel-heading">{{ projeto.nome }}</div>
             <div class="panel-body">
               <div class="col-md-6"><p>Proponenete: </p><h5>{{ projeto.proponente}}</h5></div> 
               <div class="col-md-6"><p>CGCCPF: </p><h5>{{ projeto.cgccpf}}</h5></div> 
-              <div class="col-sm-2 col-xs-6"><button [routerLink]="['/projetos', projeto.PRONAC]" 
-                                            type="button" 
-                                            class="btn btn-primary">Ver Projeto</button></div>
+              <div class="col-lg-12" *ngIf="projeto.isResumoEscondido"><p>Resumo: </p><h5>{{ projeto.resumo }}</h5></div>
+              <div class="col-md-12">
+                <button (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
+                          type="button" 
+                          class="btn btn-default">Resumo <span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': !projeto.isResumoEscondido, 'glyphicon-triangle-top': projeto.isResumoEscondido }" aria-hidden="true"></span></button>
+                <button [routerLink]="['/projetos', projeto.PRONAC]" 
+                         type="button" 
+                         class="btn btn-primary">Ver Projeto</button>
+              </div>
             </div>      
           </div>
-        </div> 
-      </div>
+
+        </masonry-brick>
+      </masonry>
+
       <div *ngSwitchCase="'propostas'">
         <div *ngFor="let proposta of listaPropostas" class="card col-md-6">
           <div class="panel panel-default">
