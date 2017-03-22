@@ -30,30 +30,44 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // Opções de Ordenação
   ordenarPor = 'PRONAC';
   ordenarDesc = false;
-  ordenarPorQueries:  { [query: string]: String; }
-                    = { 'PRONAC':           'PRONAC',
-                        'ano_projeto':      'Ano do Projeto',
-                        'data_inicio':      'Data de Início',
-                        'data_termino':     'Data de Término',
-                        'valor_solicitado': 'Valor Solicidado',
-                        'outras_fontes':    'Outras Fontes',
-                        'valor_captado':    'Valor Captado',
-                        'valor_proposta':   'Valor da Proposta',
-                        'valor_projeto':    'Valor do Projeto' };
+  ordenarPorQueries:  { [query: string]: String; } = {}
+  queriesDeOrdemDeProjetos: { [query: string]: String }
+                          = { 'PRONAC':           'PRONAC',
+                              'ano_projeto':      'Ano do Projeto',
+                              'data_inicio':      'Data de Início',
+                              'data_termino':     'Data de Término',
+                              'valor_solicitado': 'Valor Solicidado',
+                              'outras_fontes':    'Outras Fontes',
+                              'valor_captado':    'Valor Captado',
+                              'valor_proposta':   'Valor da Proposta',
+                              'valor_projeto':    'Valor do Projeto' };
+  queriesDeOrdemDePropostas: { [query: string]: String } = {};
+  queriesDeOrdemDeProponentes: { [query: string]: String }
+                             = { 'total_captado': 'Total Captado',
+                                 'cgccpf':        'CGCCPF (FALTA NA API)' };
+  queriesDeOrdemDeIncentivadores: { [query: string]: String }
+                                = { 'total_doado': 'Total Doado',
+                                    'cgccpf':        'CGCCPF (FALTA NA API)' };
+  queriesDeOrdemDeFornecedores: { [query: string]: String } = {};
 
   // Queries para a busca
-  queries: { [query: string]: String; } = {};
+  queries: { [query: string]: String } = {};
   queriesDoSelecionado = [];
-  queriesDeProjetos = [ 'limit', 'offset', 'PRONAC', 'proponente', 'cgccpf',
-                        'nome', 'area', 'segmento', 'UF', 'ano_projeto', 'sort',
-                        'data_inicio', 'data_inicio_min', 'data_inicio_max',
-                        'data_termino', 'data_termino_min', 'data_termino_max' ];
-  queriesDePropostas = [ 'limit', 'offset', 'nome', 'data_inicio', 'data_termino' ];
-  queriesDeProponentes = [ 'limit', 'offset', 'nome', 'cgccpf', 'url_id',
-                           'municipio', 'UF', 'tipo_pessoa', 'sort' ];
-  queriesDeIncentivadores = [ 'limit', 'offset', 'nome', 'cgccpf', 'municipio',
-                              'UF', 'tipo_pessoa', 'PRONAC', 'sort' ];
-  queriesDeFornecedores = [ 'limit', 'offset', 'nome', 'cgccpf', 'PRONAC' ];
+  queriesDeProjetos: { [query: string]: String }
+                    = { 'limit': '', 'offset': '', 'PRONAC': '', 'proponente': '', 'cgccpf': '',
+                        'nome': '', 'area': '', 'segmento': '', 'UF': '', 'ano_projeto': '', 'sort': 'PRONAC',
+                        'data_inicio': '', 'data_inicio_min': '', 'data_inicio_max': '',
+                        'data_termino': '', 'data_termino_min': '', 'data_termino_max': '' };
+  queriesDePropostas: { [query: string]: String }
+                    = { 'limit': '', 'offset': '', 'nome': '', 'data_inicio': '', 'data_termino': '' };
+  queriesDeProponentes: { [query: string]: String }
+                      = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'url_id': '',
+                           'municipio': '', 'UF': '', 'tipo_pessoa': '', 'sort': 'total_captado' };
+  queriesDeIncentivadores: { [query: string]: String }
+                         = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'municipio': '',
+                              'UF': '', 'tipo_pessoa': '', 'PRONAC': '', 'sort': 'total_doado' };
+  queriesDeFornecedores: { [query: string]: String }
+                       = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
 
   constructor(private route: ActivatedRoute,
@@ -65,15 +79,58 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
 
   ngOnInit() {
+    this.queriesDoSelecionado = Object.keys(this.queriesDeProjetos);
+    this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
   }
 
   atualizaQueries(queryParams: any) {
 
     this.queries = {};
+    this.ordenarPor = '';
 
     for (const query of this.queriesDoSelecionado) {
       if (queryParams[query]) {
+
         this.queries[query] = queryParams[query];
+
+        switch (this.pesquisaPor) {
+          case 'projetos':
+            this.queriesDeProjetos = this.queries;
+            this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
+
+            if (this.ordenarPor === '') {
+              this.ordenarPor = 'PRONAC';
+            }
+          break;
+          case 'propostas':
+            this.queriesDePropostas = this.queries;
+            this.ordenarPorQueries = this.queriesDeOrdemDePropostas;
+          break;
+          case 'proponentes':
+            this.queriesDeProponentes = this.queries;
+            this.ordenarPorQueries = this.queriesDeOrdemDeProponentes;
+
+            if (this.ordenarPor === '') {
+              this.ordenarPor = 'total_captado';
+            }
+          break;
+          case 'incentivadores':
+            this.queriesDeIncentivadores = this.queries;
+            this.ordenarPorQueries = this.queriesDeOrdemDeIncentivadores;
+            if (this.ordenarPor === '') {
+              this.ordenarPor = 'total_doado';
+            }
+          break;
+          case 'fornecedores':
+            this.queriesDeFornecedores = this.queries;
+            this.ordenarPorQueries = this.queriesDeOrdemDeFornecedores;
+          break;
+        }
+
+        if (query === 'sort') {
+          this.ordenarPor = this.queries['sort'].split(':')[0];
+          this.ordenarDesc = this.queries['sort'].split(':')[1] === 'desc' ? false : true;
+        }
       }
     }
 
@@ -85,19 +142,29 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     switch (this.pesquisaPor) {
       case 'projetos':
-        this.queriesDoSelecionado = this.queriesDeProjetos;
+        this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
+        this.queries = this.queriesDeProjetos;
+        this.queriesDoSelecionado = Object.keys(this.queriesDeProjetos);
       break;
       case 'propostas':
-        this.queriesDoSelecionado = this.queriesDePropostas;
+      this.ordenarPorQueries = this.queriesDeOrdemDePropostas;
+        this.queries = this.queriesDeProjetos;
+        this.queriesDoSelecionado = Object.keys(this.queriesDePropostas);
       break;
       case 'proponentes':
-        this.queriesDoSelecionado = this.queriesDeProponentes;
+      this.ordenarPorQueries = this.queriesDeOrdemDeProponentes;
+        this.queries = this.queriesDeProponentes;
+        this.queriesDoSelecionado = Object.keys(this.queriesDeProponentes);
       break;
       case 'incentivadores':
-        this.queriesDoSelecionado = this.queriesDeIncentivadores;
+      this.ordenarPorQueries = this.queriesDeOrdemDeIncentivadores;
+        this.queries = this.queriesDeIncentivadores;
+        this.queriesDoSelecionado = Object.keys(this.queriesDeIncentivadores);
       break;
       case 'fornecedores':
-        this.queriesDoSelecionado = this.queriesDeIncentivadores;
+      this.ordenarPorQueries = this.queriesDeOrdemDeFornecedores;
+        this.queries = this.queriesDeFornecedores;
+        this.queriesDoSelecionado = Object.keys(this.queriesDeIncentivadores);
       break;
       default:
         this.router.navigate(['falha', 405]);
@@ -115,7 +182,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
     this.queries['offset'] = '0';
-    this.queries['sort'] = this.ordenarPor + ':' + (this.ordenarDesc ? 'desc' : 'asc');
+
+    if (this.keys(this.ordenarPorQueries).length > 0) {
+      this.ordenarDesc ? (this.queries['sort'] = this.ordenarPor + ':desc') : (this.queries['sort'] = this.ordenarPor + ':asc');
+    }
 
     switch (this.pesquisaPor) {
 

@@ -28,8 +28,12 @@
       <div class="panel panel-default col-md-8 col-md-offset-2">
         
         <!-- Busca Simples ============================================================== -->
-        <div *ngIf="!buscaAvancada" class="panel-body input-group">
-          <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+        <div *ngIf="!buscaAvancada" class="panel-body input-group" [ngSwitch]="pesquisaPor">
+        <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+          <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+          <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+          <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queriesDeIncentivadores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+          <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queriesDeFornecedores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </span>
@@ -72,19 +76,22 @@
               <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
             </div>
           </div>-->
-          <span>Ordenar por: </span>
-          <div class="btn-group" dropdown>
-            <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-              {{ ordenarPorQueries[ordenarPor] }}
-              <span class="caret"></span>
+
+          <div *ngIf="keys(ordenarPorQueries).length > 0" class="pull-right">
+            <span>Ordenar por: </span>
+            <div class="btn-group" dropdown>
+              <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+                {{ ordenarPorQueries[ordenarPor] }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+                <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
+              </ul>
+            </div>
+            <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
             </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-              <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-            </ul>
           </div>
-          <button (click)="ordenarDesc = !ordenarDesc" type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-          </button>
           
           <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </div>
