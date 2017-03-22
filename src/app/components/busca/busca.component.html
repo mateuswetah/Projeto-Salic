@@ -78,7 +78,24 @@
     <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
     <!-- ORDENAÇÃO, QUANDO DISPONÍVEL =================================================================================-->
-      <div *ngIf="keys(ordenarPorQueries).length > 0">
+     	<!--<div class="navbar-fixed-top" >
+        <div [scrollSpyAffix]="{topMargin: 260}" style="height: 40px; background-color:aquamarine;"  *ngIf="keys(ordenarPorQueries).length > 0" >
+          <span>Ordenar por: </span>
+          <div class="btn-group" dropdown>
+            <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+              {{ ordenarPorQueries[ordenarPor] }}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+              <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
+            </ul>
+          </div>
+          <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>-->
+      <div *ngIf="keys(ordenarPorQueries).length > 0" >
         <span>Ordenar por: </span>
         <div class="btn-group" dropdown>
           <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
@@ -99,8 +116,8 @@
       <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
      
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
-      <masonry [options]="{ transitionDuration: '0.5s' }" *ngSwitchCase="'projetos'" >
-        <masonry-brick *ngFor="let projeto of listaProjetos;" class="card col-md-6">
+      <div *ngSwitchCase="'projetos'" >
+        <div *ngFor="let projeto of listaProjetos;" class="card col-md-6">
 
           <div class="panel panel-default">
             <div class="panel-heading">{{ projeto.nome }}</div>
@@ -119,8 +136,8 @@
             </div>      
           </div>
 
-        </masonry-brick>
-      </masonry>
+        </div>
+      </div>
 
       <div *ngSwitchCase="'propostas'">
         <div *ngFor="let proposta of listaPropostas" class="card col-md-6">

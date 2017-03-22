@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Rx';
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
+import { ScrollSpyModule, ScrollSpyService } from 'ng2-scrollspy';
 
 import { Projeto } from './../../models/projeto.model';
 import { Proposta } from './../../models/proposta.model';
@@ -109,7 +110,8 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
               private location: Location,
               private apiService: ApiService,
               private configurationService: ConfigurationService,
-              private dataFormatterService: DataFormatterService) { }
+              private dataFormatterService: DataFormatterService,
+              private scrollSpyService: ScrollSpyService) { }
 
   ngOnInit() {
       this.inscricaoPesquisaPor = this.route.params.subscribe (
@@ -516,6 +518,7 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
 
       });
     });
+
   }
 
 }

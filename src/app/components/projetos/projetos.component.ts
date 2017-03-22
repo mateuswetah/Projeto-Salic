@@ -67,10 +67,10 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
   ngAfterViewInit() {
     $('app-projetos').css({position: 'relative'}).appendTo('app-outlet-container');
-    
   }
 
   atualizarMetaTags() {
+    
     // Meta tags genéricas
     this.metaService.setTitle('Projeto: ' +  this.projeto.nome);
     this.metaService.setTag('description', `Visualização e Consulta de Projetos 
