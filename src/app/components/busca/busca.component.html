@@ -60,13 +60,6 @@
         <!-- Footer da Busca ============================================================== -->
         <div class="panel-footer">
           <button class="btn btn-default" (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</button>
-          <!--<div class="chip-wrapper" *ngFor="let key of keys(queries)">
-            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-              <div class="chip-tag">{{key}}</div>
-                {{queries[key]}}
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-            </div>
-          </div>-->
           <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </div>
 
@@ -74,27 +67,40 @@
     </div>
   </div>
 
+    <div class="container-header-resultados">
+      <div *ngIf="passouDoScrollTop()">
+        <div class="header-respostas fixo">
+          <h3>Resultado </h3>
+          <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+              <!--<div class="chip-tag">{{key}}</div>-->
+                {{queries[key]}}
+              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+            </div>
+          </div>
+          <!--<div class="linha"> </div>-->
+        </div>
+      </div>
+      
+      <div id="headerRespostas" class="header-respostas" *ngIf="keys(ordenarPorQueries).length > 0" >
+          <h3>Resultado </h3>
+          <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+              <!--<div class="chip-tag">{{key}}</div>-->
+                {{queries[key]}}
+              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+            </div>
+          </div>
+          <div class="linha"> </div>
+      </div>
+    </div>
+  
+
   <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
     <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
 
-    <!-- ORDENAÇÃO, QUANDO DISPONÍVEL =================================================================================-->
-     	<!--<div class="navbar-fixed-top" >
-        <div [scrollSpyAffix]="{topMargin: 260}" style="height: 40px; background-color:aquamarine;"  *ngIf="keys(ordenarPorQueries).length > 0" >
-          <span>Ordenar por: </span>
-          <div class="btn-group" dropdown>
-            <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-              {{ ordenarPorQueries[ordenarPor] }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-              <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-            </ul>
-          </div>
-          <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>-->
+      <!-- ORDENAÇÃO, QUANDO DISPONÍVEL =================================================================================-->
+        
       <div *ngIf="keys(ordenarPorQueries).length > 0" >
         <span>Ordenar por: </span>
         <div class="btn-group" dropdown>
@@ -111,10 +117,8 @@
         </button>
       </div>
 
-      <br>
-      
       <alert type="success">Exibindo {{ numeroDeItems }} de um total de {{ totalDeItems }} {{ pesquisaPor }} {{ pesquisaPor==='propostas'?'encontradas':'encontrados' }}.</alert>   
-     
+
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
       <div *ngSwitchCase="'projetos'" >
         <div *ngFor="let projeto of listaProjetos;" class="card col-md-6">

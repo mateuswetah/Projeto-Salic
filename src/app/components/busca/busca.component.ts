@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit,
-         trigger, state, style, transition, animate, keyframes } from '@angular/core';
+         trigger, state, style, transition, animate, keyframes, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Rx';
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
-import { ScrollSpyModule, ScrollSpyService } from 'ng2-scrollspy';
 
 import { Projeto } from './../../models/projeto.model';
 import { Proposta } from './../../models/proposta.model';
@@ -37,7 +36,7 @@ declare var $: any;
 })
 export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
-inscricaoQueries: Subscription; // Usada para observar mudanças na URL
+  inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
 
   JSON: any = JSON;
@@ -110,8 +109,7 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
               private location: Location,
               private apiService: ApiService,
               private configurationService: ConfigurationService,
-              private dataFormatterService: DataFormatterService,
-              private scrollSpyService: ScrollSpyService) { }
+              private dataFormatterService: DataFormatterService) { }
 
   ngOnInit() {
       this.inscricaoPesquisaPor = this.route.params.subscribe (
@@ -519,6 +517,16 @@ inscricaoQueries: Subscription; // Usada para observar mudanças na URL
       });
     });
 
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  passouDoScrollTop(event) {
+    if ($('#headerRespostas').offset() !== undefined) {
+      if (window.pageYOffset > $('#headerRespostas').offset().top) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

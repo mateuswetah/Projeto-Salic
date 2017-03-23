@@ -10,6 +10,8 @@
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
+    background-color: #ccc;
+
     @media all and (min-width: 992px){
         .panel { padding: 0px; }
     }
@@ -110,46 +112,78 @@
   float:left;
 }
 
+// Header dos Resultados
+.container-header-resultados {
 
-// Chips ----------------------------------------------------------
-.chip {
-    display: inline-block;
-    padding: 0 9px 0px 13px;
-    height: 27px;
-    font-size: 0.8em;
-    line-height: 23px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-}
+    .header-respostas {
+        position: absolute;
+        left: 0;
+        display: inline-block;
+        padding: 6px 10px;
+        vertical-align: middle;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+        
+        @media all and (min-width: 992px){
+            padding-left: 18%;
+            padding-right: 18%;
+        }
 
-.chip-wrapper {
-    display: inline;
-    margin: 2px 4px;
-}
+        h3 { display: inline-block; margin: 0px; padding-top: 5px; }
+    }
 
-.chip-tag {
-    padding: 0 0.8em;
-    float: left;
-    margin: 0 5px 0 -13px;
-    height: 25px;
-    min-width: 25px;
-    border-radius: 8px 2px 2px 8px;
-    background-color: #fdfdfd;
-}
+    .fixo {
+        height: 58px; 
+        border-bottom: 4px solid black;
+        background-color:white; 
+        width: 100% !important; 
+        z-index: 99; 
+        top: 0; 
+        position: fixed;
+    }
 
-// Conteúdo da LandingPage
-.container-landpage-1 {
-    background-color: #777;
-    min-height: 200px;
-}
+    .linha {
+        background-color: black;
+        height: 4px;
+        width: 100%;
+        margin-top: 6px;
+    }
 
-.container-landpage-2 {
-    background-color: #999;
-    min-height: 200px;
+    // Chips ----------------------------------------------------------
+    .chip {
+        display: inline-block;
+        padding: 0 9px;
+        height: 27px;
+        font-size: 0.8em;
+        line-height: 23px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: #eee;
+        margin-bottom: 5px;
+    }
+
+    .chip-wrapper {
+        display: inline;
+        margin: 2px 4px;
+    }
+
+    .chip-tag {
+        padding: 0 0.8em;
+        float: left;
+        margin: 0 5px 0 -13px;
+        height: 25px;
+        min-width: 25px;
+        border-radius: 8px 2px 2px 8px;
+        background-color: #fdfdfd;
+    }
+
 }
 
 // Resultados da Pesquisa 
 .container-respostas {
 
+    margin-top: 80px;
+
 }
+

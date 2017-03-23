@@ -10,9 +10,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule } from 'ng2-bootstrap/';
-import { ScrollSpyModule } from 'ng2-scrollspy';
-import { ScrollSpyAffixDirective} from "ng2-scrollspy/dist/plugin/affix.directive"; 
-import { ScrollSpyAffixModule} from "ng2-scrollspy/dist/plugin/affix";
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // Components de Terceiros
 import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
@@ -64,8 +62,7 @@ export function metaFactory(): MetaLoader {
     FornecedoresComponent,
     FalhaComponent,
     SobreComponent,
-    FadingCircleComponent,
-    ScrollSpyAffixDirective
+    FadingCircleComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +80,7 @@ export function metaFactory(): MetaLoader {
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
-    ScrollSpyModule.forRoot()
+    Ng2PageScrollModule.forRoot()
   ],
   providers: [
     ApiService,
