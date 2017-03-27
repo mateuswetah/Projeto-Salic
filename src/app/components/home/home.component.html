@@ -2,45 +2,42 @@
     
   <!-- Título da Página -->
   <div class="container-topo text-center" [ngStyle]="{'background-color': corAleatoriaDoBanner }">
-    <h1>
-      <br>
-      Página Inicial
-      <br><br>
-    </h1>
+>
   </div>
 
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
-    <div class="container col-md-6 col-md-offset-3">
+    <div class="container col-lg-6 col-lg-offset-3">
+      <div class="header-buscador"><p><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscador</p></div>
     
       <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
-        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
-        <div class="text-center abas-pesquisa">
-          <ul class="nav nav-pills aba">
-            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
-            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
-            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
-            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
-            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
-          </ul>
-        </div>
-
-      <div class="row">
+      <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+      <div class="text-center abas-pesquisa">
+        <ul class="nav nav-pills aba">
+          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
+          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
+          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes</a></li>
+          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores</a></li>
+          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
+        </ul>
+      </div>
+      <div class="linha"></div>
+      <div class="container-inputs">
           
           <!-- Busca Simples ============================================================== -->
-          <div *ngIf="!buscaAvancada" class="panel-body input-group" [ngSwitch]="pesquisaPor">
-          <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+          <div *ngIf="!buscaAvancada" class="row form-group input-group" [ngSwitch]="pesquisaPor">
+            <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queriesDeIncentivadores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queriesDeFornecedores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
-            </span>
+              <button class="btn btn-primary" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
+            </span> 
           </div>
 
           <!-- Busca Avançada ============================================================ -->
-          <div *ngIf="buscaAvancada" class="panel-body form-group">
+          <div *ngIf="buscaAvancada" class="form-group">
             <div class="row">
               <div class="input col-sm-5">
                 <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
@@ -85,16 +82,8 @@
           </div>
 
           <!-- Footer da Busca ============================================================== -->
-          <div class="panel-body">
+          <div class="row">
             <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
-            <!--<div class="chip-wrapper" *ngFor="let key of keys(queries)">
-              <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-                <div class="chip-tag">{{key}}</div>
-                  {{queries[key]}}
-                <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-              </div>
-            </div>-->
-            
             <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </div>
 
@@ -104,8 +93,48 @@
 
   <div class="container-info">
     <div class="container">
-      <p>Conteúdo da Landing Page</p>
+      <div class="row" [ngSwitch]="pesquisaPor">
+      <div class="col-xs-12 col-sm-2 icone-entidade">icone</div>
+      <div class="col-xs-12 col-sm-10 descricao-entidade" >
+
+        <h2 *ngSwitchCase="'projetos'">Projetos</h2>
+        <p *ngSwitchCase="'projetos'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+
+        <h2 *ngSwitchCase="'propostas'">Propostas</h2>
+        <p *ngSwitchCase="'propostas'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+
+        <h2 *ngSwitchCase="'proponentes'">Proponentes</h2>
+        <p *ngSwitchCase="'proponentes'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+
+        <h2 *ngSwitchCase="'incentivadores'">Incentivadores</h2>
+        <p *ngSwitchCase="'incentivadores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+
+        <h2 *ngSwitchCase="'fornecedores'">Fornecedores</h2>
+        <p *ngSwitchCase="'fornecedores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+
+      </div>
     </div>
+  </div>
   </div>
 
   <div class="container-dados">
@@ -113,7 +142,22 @@
         <h2>Dados</h2>
       <div class="linha"></div>
       <div class="row">
-      
+        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
+          <p class="estatistica-numero">74.673</p>
+          <p class="estatistica-legenda">Projetos submetidos</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
+          <p class="estatistica-numero">5.482</p>
+          <p class="estatistica-legenda">Projetos aprovados</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-center">
+          <p class="estatistica-numero">R$5.345.843123,54</p>
+          <p class="estatistica-legenda">Reais captados</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
+          <p class="estatistica-numero">74.417</p>
+          <p class="estatistica-legenda">Incentivadores</p>
+        </div>
       </div>
     </div>
   </div>

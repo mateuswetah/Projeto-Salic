@@ -3,6 +3,11 @@
 // Container principal da página
 .container-home {
   background-color: white;
+  min-height: calc(100% - 50px);
+
+  h1, h2, h3, h4, h5 {
+      color: $verde-salic;
+  }
 }
 
 // Conteúdo do topo da página
@@ -10,7 +15,7 @@
     margin-top: -50px;
     color: white;
     background-color: #bbb;
-    min-height:423px;
+    min-height: 423px;
 
     h1 {
         margin-top: 0px;
@@ -23,41 +28,59 @@
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
-    margin-top: -100px;
+    margin-top: -142px;
     
     .container {background-color: $verde-claro;}
 
-    @media all and (min-width: 992px){
-        .panel { padding: 0px; }
+    .header-buscador {
+        background-color: $verde-claro-salic;
+        margin: 0 -15px;
+        height: 42;
+
+        p { padding: 12px; margin-bottom: 0px; }
     }
 
-    .form-control-placeholder {
-        position: absolute;
-        top: 0;
-        padding: 6px 0 0 12px;
-        pointer-events: none;
-        color: #aaa;
-        transition: all 200ms;
+    .linha { 
+        border: 0 solid $verde-salic;
+        height: 1px; 
+        color: $verde-salic;
+        background-color: $verde-salic; 
+        margin: 0 -15px;
     }
-
-    .form-control:focus + .form-control-placeholder,
-    .form-control.cheio + .form-control-placeholder {
-        color: #777;
-        font-size: 95%;
-        font-weight: bold;
-        top: -28px;
-    }
-    .form-group {
-        margin: 0px 0px 15px 0px;
-        padding: 0px;
-
-        .row {
-            margin: 0px 0px;
-            padding: 0px;
+    .container-inputs {
+        padding: 12px 25px;
+    
+        .form-control-placeholder {
+            position: absolute;
+            top: 0;
+            padding: 6px 0 0 12px;
+            pointer-events: none;
+            color: #aaa;
+            transition: all 200ms;
         }
-        
-        .row>.input {
-            margin-top: 28px 
+
+        .form-control:focus + .form-control-placeholder,
+        .form-control.cheio + .form-control-placeholder {
+            color: #777;
+            font-size: 95%;
+            font-weight: bold;
+            top: -28px;
+        }
+
+        .input-group>.form-control, .input-group-btn>.btn {
+            border-radius: 0px;
+        }
+
+        .form-group {
+            margin: 0px -15px 5px -15px;
+            padding: 0px;
+
+            .row {
+                margin: 0px 0px;
+                padding: 0px;
+            }
+            
+            .row>.input { margin-top: 28px; }
         }
     }
 }
@@ -66,20 +89,30 @@
 .abas-pesquisa {
     
     position: relative;
-    margin-bottom: -6px;
     overflow: hidden;
-	padding:5px;
-  	height:50px;
+	padding: 0px 5px;
+  	height: 42px;
+    line-height: 1;
 
-    a { bottom: -3px; color: black; border-radius: 0px;}
-        
+    a { 
+        color: black; 
+        font-size: 1.3em;
+        border-radius: 0px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $verde-claro-salic;
+            border-bottom: 6px $verde-salic solid; 
+        }    
+    }
+
     .active {
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 3px $verde-salic solid; 
+            border-bottom: 5px $verde-salic solid; 
         }
-    }
+    }   
 
 }
 
@@ -96,8 +129,6 @@
 	display:table-cell;
     position:relative;
     text-align:center;
-    cursor:grab;
-    cursor:-webkit-grab;
     color:#efefef;
     vertical-align:middle;
 }
@@ -107,12 +138,12 @@
   text-align:center;
   cursor:pointer;
   display:none;
-  padding:7px 10px 7px 10px;
+  padding:7px 10px;
   white-space:no-wrap;
   vertical-align:middle;
-  background-color:#efefef;
+  background-color: $verde-claro-salic;
   border-radius: 20px;
-  box-shadow: 0px 4px 5px #777;
+  box-shadow: 0px 4px 5px #555;
   z-index: 999;
 }
 
@@ -125,40 +156,43 @@
 }
 
 
-// Chips ----------------------------------------------------------
-.chip {
-    display: inline-block;
-    padding: 0 9px 0px 13px;
-    height: 27px;
-    font-size: 0.8em;
-    line-height: 23px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-}
-
-.chip-wrapper {
-    display: inline;
-    margin: 2px 4px;
-}
-
-.chip-tag {
-    padding: 0 0.8em;
-    float: left;
-    margin: 0 5px 0 -13px;
-    height: 25px;
-    min-width: 25px;
-    border-radius: 8px 2px 2px 8px;
-    background-color: #fdfdfd;
-}
-
 // Conteúdo da LandingPage
 .container-info {
     background-color: white;
-    min-height: 200px;
+    min-height: 280px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+
+    p { font-size: 1.1em; }
+
+    .icone-entidade {
+        background-color: #aaa;
+        height: 140px;
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    .descricao-entidade {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
 
 .container-dados {
     background-color: $verde-claro;
-    min-height: 200px;
+    min-height: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .linha {
+        height: 3px;
+        margin: 0px -20px 20px -20px;
+        background-color: $verde-salic;
+    }
+
+    .estatistica-numero {
+        padding: 5px;
+        font-size: 3.2em;
+        line-height: 0.8em;
+    }
 }
