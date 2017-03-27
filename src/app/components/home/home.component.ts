@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   pesquisaPor = 'projetos';
   buscaAvancada = false;
+  corAleatoriaDoBanner = '';
 
   // Opções de Ordenação
   ordenarPor = 'PRONAC';
@@ -81,6 +82,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.queriesDoSelecionado = Object.keys(this.queriesDeProjetos);
     this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
+
+    this.corAleatoriaDoBanner = this.obterCorDoBanner();
   }
 
   atualizaQueries(queryParams: any) {
@@ -292,5 +295,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       });
     });
+  }
+
+  obterCorDoBanner(): string {
+    const indice: Number = Math.floor(Math.random() * 5);
+
+    switch (indice) {
+      case 0:
+        return '#eb3601';
+      case 1:
+        return '#1066f1';
+      case 2:
+        return '#226000';
+      case 3:
+        return '#acda5d';
+      case 4:
+        return '#f3dc34';
+      default:
+        return '#1066f1';
+    }
   }
 }

@@ -1,0 +1,17 @@
+@import '../styles.scss';
+
+.navbar-default {
+  background-color: $verde-medio;
+  margin-bottom: 0px !important;
+  border-bottom: 0px;
+  border-radius: 0px;
+
+  a, span { color: white;}
+
+  .navbar-nav>.active>a, 
+  .navbar-nav>.active>a:focus, 
+  .navbar-nav>.active>a:hover {
+    background-color: black;
+  }
+
+}

@@ -1,7 +1,7 @@
-<div class="container container-home">
+<div class="container-home">
     
   <!-- Título da Página -->
-  <div class="container-topo row text-center">
+  <div class="container-topo text-center" [ngStyle]="{'background-color': corAleatoriaDoBanner }">
     <h1>
       <br>
       Página Inicial
@@ -11,101 +11,111 @@
 
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
+    <div class="container col-md-6 col-md-offset-3">
     
       <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
-      <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
-      <div class="col-md-8 col-md-offset-2 text-center abas-pesquisa">
-        <ul class="nav nav-pills aba">
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
-        </ul>
-      </div>
-
-    <div class="row">
-      <div class="panel panel-default col-md-8 col-md-offset-2">
-        
-        <!-- Busca Simples ============================================================== -->
-        <div *ngIf="!buscaAvancada" class="panel-body input-group" [ngSwitch]="pesquisaPor">
-        <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-          <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-          <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-          <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queriesDeIncentivadores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-          <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queriesDeFornecedores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit" (click)="onRealizarBusca()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-          </span>
+        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+        <div class="text-center abas-pesquisa">
+          <ul class="nav nav-pills aba">
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos <span class="fa fa-file-text" aria-hidden="true"></span></a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas <span class="fa fa-file" aria-hidden="true"></span></a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes <span class="fa fa-user" aria-hidden="true"></span></a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores <span class="fa fa-dollar" aria-hidden="true"></span></a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores <span class="fa fa-archive" aria-hidden="true"></span></a></li>
+          </ul>
         </div>
 
-        <!-- Busca Avançada ============================================================ -->
-        <div *ngIf="buscaAvancada" class="panel-body form-group">
-          <div class="row">
-            <div class="input col-sm-5">
-              <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
-              <div class="form-control-placeholder">Nome</div>
-            </div>
-            <div class="input col-sm-2">
-              <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
-              <div class="form-control-placeholder">PRONAC</div>
-            </div>
-            <div class="input col-sm-5">
-              <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
-              <div class="form-control-placeholder">Nome do Proponente</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input col-sm-6">
-              <input type="text" [(ngModel)]="queries['municipio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['municipio'] !== undefined && queries['municipio'] !== null && queries['municipio'] !== ''}">
-              <div class="form-control-placeholder">Município</div>
-            </div>
-            <div class="input col-sm-6">
-              <div class="alert alert-danger">AINDA EM IMPLEMENTAÇÃO</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer da Busca ============================================================== -->
-        <div class="panel-footer">
-          <button class="btn btn-default" (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</button>
-          <!--<div class="chip-wrapper" *ngFor="let key of keys(queries)">
-            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-              <div class="chip-tag">{{key}}</div>
-                {{queries[key]}}
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-            </div>
-          </div>-->
-
-          <div *ngIf="keys(ordenarPorQueries).length > 0" class="pull-right">
-            <span>Ordenar por: </span>
-            <div class="btn-group" dropdown>
-              <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-                {{ ordenarPorQueries[ordenarPor] }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-                <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-              </ul>
-            </div>
-            <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
-              <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-            </button>
-          </div>
+      <div class="row">
           
-          <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-        </div>
+          <!-- Busca Simples ============================================================== -->
+          <div *ngIf="!buscaAvancada" class="panel-body input-group" [ngSwitch]="pesquisaPor">
+          <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queriesDeIncentivadores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queriesDeFornecedores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
+            </span>
+          </div>
+
+          <!-- Busca Avançada ============================================================ -->
+          <div *ngIf="buscaAvancada" class="panel-body form-group">
+            <div class="row">
+              <div class="input col-sm-5">
+                <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
+                <div class="form-control-placeholder">Nome</div>
+              </div>
+              <div class="input col-sm-2">
+                <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
+                <div class="form-control-placeholder">PRONAC</div>
+              </div>
+              <div class="input col-sm-5">
+                <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
+                <div class="form-control-placeholder">Nome do Proponente</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input col-sm-6">
+                <input type="text" [(ngModel)]="queries['municipio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['municipio'] !== undefined && queries['municipio'] !== null && queries['municipio'] !== ''}">
+                <div class="form-control-placeholder">Município</div>
+              </div>
+              <div class="input col-sm-6">
+                <div class="alert alert-danger">AINDA EM IMPLEMENTAÇÃO</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6" *ngIf="keys(ordenarPorQueries).length > 0">
+                <span>Ordenar por: </span>
+                <div class="btn-group" dropdown>
+                  <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+                    {{ ordenarPorQueries[ordenarPor] }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+                    <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
+                  </ul>
+                </div>
+                <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
+                  <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Footer da Busca ============================================================== -->
+          <div class="panel-body">
+            <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
+            <!--<div class="chip-wrapper" *ngFor="let key of keys(queries)">
+              <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+                <div class="chip-tag">{{key}}</div>
+                  {{queries[key]}}
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+              </div>
+            </div>-->
+            
+            <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </div>
 
       </div>
     </div>
   </div>
 
-  <div class="container-landpage-1 row text-center">
-    <p>Conteúdo da Landing Page</p>
+  <div class="container-info">
+    <div class="container">
+      <p>Conteúdo da Landing Page</p>
+    </div>
   </div>
 
-  <div class="container-landpage-2 row text-center">
-    <p>Outro conteúdo da Landing Page</p>
+  <div class="container-dados">
+    <div class="container">
+        <h2>Dados</h2>
+      <div class="linha"></div>
+      <div class="row">
+      
+      </div>
+    </div>
   </div>
 
 </div>

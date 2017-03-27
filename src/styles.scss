@@ -1,7 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+// Fonte Base
+$fonte-base: 'Lato', sans-serif;
+
+// Paleta de Cores Original do SALIC
+$primary-color: #333;
+$vermelho-salic: #eb3601;
+$azul-salic: #1066f1;
+$verde-salic: #226000;
+$verde-claro-salic: #acda5d;
+$amarelo-salic: #f3dc34;
+
+// Paleta com variações utizadas no site
+$verde-claro: #def1b5;
+$verde-medio: #5c842c;
+$verde-escuro: #202e1a;
+
+html {
+  width: auto;
+  overflow-x: hidden;
+}
 body {
   background-color: #fbfbfb !important;
+  font-family: $fonte-base;
+   margin: 0;
 }
 footer {
-  background-color: #ddd;
+  background-color: $verde-claro-salic;
+  font-family: $fonte-base;
 }

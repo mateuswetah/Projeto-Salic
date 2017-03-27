@@ -9,7 +9,7 @@ import { RouteReuseStrategy } from '@angular/router';
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
-import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule } from 'ng2-bootstrap/';
+import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, AccordionModule } from 'ng2-bootstrap/';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // Components de Terceiros
@@ -80,6 +80,8 @@ export function metaFactory(): MetaLoader {
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
+    PopoverModule.forRoot(),
+    AccordionModule.forRoot(),
     Ng2PageScrollModule.forRoot()
   ],
   providers: [
