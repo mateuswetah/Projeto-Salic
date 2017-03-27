@@ -10,7 +10,6 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, AccordionModule } from 'ng2-bootstrap/';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // Components de Terceiros
 import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
@@ -69,7 +68,6 @@ export function metaFactory(): MetaLoader {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    //InfiniteScrollModule,
     ShareButtonsModule.forRoot(),
     MetaModule.forRoot({
       provide: MetaLoader,
@@ -81,8 +79,7 @@ export function metaFactory(): MetaLoader {
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
-    AccordionModule.forRoot(),
-    Ng2PageScrollModule.forRoot()
+    AccordionModule.forRoot()
   ],
   providers: [
     ApiService,
