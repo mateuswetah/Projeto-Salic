@@ -6,7 +6,7 @@
 
 # dependencies
 /node_modules
-!/node_modules/bootstrap_salic/*
+!./node_modules/bootstrap_salic/*
 
 # IDEs and editors
 /.idea
