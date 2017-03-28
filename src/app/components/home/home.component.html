@@ -25,7 +25,7 @@
       <div class="container-inputs">
           
           <!-- Busca Simples ============================================================== -->
-          <div *ngIf="!buscaAvancada" class="row form-group input-group" [ngSwitch]="pesquisaPor">
+          <div *ngIf="!buscaAvancada" class="row input-group" [ngSwitch]="pesquisaPor">
             <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
@@ -39,30 +39,47 @@
           <!-- Busca Avançada ============================================================ -->
           <div *ngIf="buscaAvancada" class="form-group">
             <div class="row">
-              <div class="input col-sm-5">
+              <div class="input col-sm-4">
                 <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
-                <div class="form-control-placeholder">Nome</div>
+                <div class="form-control-placeholder">Nome do projeto</div>
               </div>
-              <div class="input col-sm-2">
+              <div class="input col-sm-2 col-xs-6">
                 <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
                 <div class="form-control-placeholder">PRONAC</div>
               </div>
-              <div class="input col-sm-5">
-                <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
-                <div class="form-control-placeholder">Nome do Proponente</div>
+              <div class="input col-sm-2 col-xs-6">
+                <input type="text" [(ngModel)]="queries['area']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}">
+                <div class="form-control-placeholder">Área</div>
               </div>
-            </div>
-            <div class="row">
-              <div class="input col-sm-6">
+              <div class="input col-sm-2 col-xs-6">
+                <input type="text" [(ngModel)]="queries['segmento']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}">
+                <div class="form-control-placeholder">Segmento</div>
+              </div>
+              <div class="input col-sm-2 col-xs-6">
                 <input type="text" [(ngModel)]="queries['municipio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['municipio'] !== undefined && queries['municipio'] !== null && queries['municipio'] !== ''}">
                 <div class="form-control-placeholder">Município</div>
               </div>
-              <div class="input col-sm-6">
-                <div class="alert alert-danger">AINDA EM IMPLEMENTAÇÃO</div>
+            </div>
+            <div class="row">
+              <div class="input col-sm-3">
+                <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
+                <div class="form-control-placeholder">Nome do Proponente</div>
+              </div>
+              <div class="input col-sm-3">
+                <input type="text" [(ngModel)]="queries['cgccpf']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['cgccpf'] !== undefined && queries['cgccpf'] !== null && queries['cgccpf'] !== ''}">
+                <div class="form-control-placeholder">CPF/CNPJ</div>
+              </div>
+              <div class="input col-sm-3 col-xs-6">
+                <input type="text" [(ngModel)]="queries['data_inicio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}">
+                <div class="form-control-placeholder">Data de Início</div>
+              </div>
+              <div class="input col-sm-3 col-xs-6">
+                <input type="text" [(ngModel)]="queries['data_termino']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== ''}">
+                <div class="form-control-placeholder">Data de Término</div>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6" *ngIf="keys(ordenarPorQueries).length > 0">
+              <div class="input col-sm-6" *ngIf="keys(ordenarPorQueries).length > 0">
                 <span>Ordenar por: </span>
                 <div class="btn-group" dropdown>
                   <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
@@ -73,24 +90,25 @@
                     <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
                   </ul>
                 </div>
-                
-                <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
-                  <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-                </button>
+                  <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Footer da Busca ============================================================== -->
+            <div class="row footer-busca">
+              <div class="col-lg-12">
+                <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
+                <button *ngIf="buscaAvancada" class="btn btn-primary pull-right" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
               </div>
             </div>
 
-          </div>
-
-          <!-- Footer da Busca ============================================================== -->
-          <div class="row">
-            <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
-            <button *ngIf="buscaAvancada" class="btn btn-default pull-right" type="submit" (click)="onRealizarBusca()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-          </div>
-
+        </div>
       </div>
     </div>
-  </div>
 
   <div class="container-info">
     <div class="container">
