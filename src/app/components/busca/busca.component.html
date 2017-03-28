@@ -115,7 +115,7 @@
   </div>
 
   <!-- ORDENAÇÃO E PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
-  <div class="col-lg-8 col-md-12 col-lg-offset-2 container-ordenacao" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'inline-block' : 'none' }">
+  <div class="col-lg-8 col-md-12 col-lg-offset-2 container-ordenacao" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
     <div class="row">     
       <div *ngIf="keys(ordenarPorQueries).length > 0" class="col-md-6">
         <span>Ordenar por: </span>

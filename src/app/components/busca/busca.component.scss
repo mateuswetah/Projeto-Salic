@@ -232,9 +232,13 @@
     .card {
         
         overflow: hidden;
-        height: 392px;
+        height: 615px;
         padding: 0px;
         margin-bottom: 10px; 
+
+        @media all and (min-width: 768px){
+            height: 392px;
+        }        
 
         .texto-elipsado{
             p, h5, .card-title{
@@ -259,7 +263,11 @@
             padding: 15px 15px 65px 15px;
             margin: 10px;
             // border-top: 3px solid #000; 
-            height: 392px;
+            height: 615px;
+
+            @media all and (min-width: 768px){
+                height: 392px;
+            } 
 
             .resposta-label {
                 font-size: 1.0em;
@@ -274,7 +282,10 @@
         .card-resumo {
             background-color: rgba(32, 46, 26, 0.9);
             color: white;
-            height: 382px;
+            height: 605px;
+            @media all and (min-width: 768px){
+                height: 382px;
+            }
             position: absolute;
             overflow-y: auto;
             top: 0%;
