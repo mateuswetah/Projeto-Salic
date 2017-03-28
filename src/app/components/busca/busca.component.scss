@@ -3,7 +3,7 @@
 // Container principal da página
 .container-busca {
   background-color: white;
-  min-height: calc(100%);
+  min-height: calc(100% - 80px);
 
   h1, h2, h3, h4, h5 {
       color: $verde-salic;
@@ -144,10 +144,11 @@
 // Header dos Resultados
 .container-header-resultados {
 
+    display: inline-block;
+
     .header-respostas {
         position: absolute;
         left: 0;
-        display: inline-block;
         padding: 6px 10px;
         vertical-align: middle;
         margin-left: 0px;
@@ -163,7 +164,7 @@
     }
 
     .fixo {
-        height: 58px; 
+        min-height: 58px; 
         border-bottom: 2px solid $verde-salic;
         background-color:white; 
         width: 100% !important; 
@@ -209,10 +210,24 @@
 
 }
 
+// Ordenacao e paginação
+.container-ordenacao {
+    margin-top: 85px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .row { padding: 5px 0px; }
+
+    .paginacao-superior {
+        margin-top: -18px;
+        margin-bottom: -15px;
+    }
+
+    .itens-por-pagina {padding-bottom: 10px; }
+}
+
 // Resultados da Pesquisa 
 .container-respostas {
-
-    margin-top: 80px;
 
     .card {
         

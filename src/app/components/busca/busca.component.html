@@ -75,8 +75,7 @@
           </div>
         </div>
 
-        <!-- Footer da Busca ============================================================== -->
-        
+        <!-- Footer da Busca ============================================================== -->   
           <div class="row footer-busca">
             <div class="col-lg-12">
             <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
@@ -87,40 +86,38 @@
     </div>
   </div>
 
-    <div class="container-header-resultados">
-      <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
-        <div class="header-respostas fixo">
-          <h3>Resultado </h3>
-          <div class="chip-wrapper" *ngFor="let key of keys(queries)">
-            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-              <!--<div class="chip-tag">{{key}}</div>-->
-                {{queries[key]}}
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-            </div>
+  <div class="container-header-resultados">
+    <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
+      <div class="header-respostas fixo">
+        <h3>Resultado </h3>
+        <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+          <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+            <!--<div class="chip-tag">{{key}}</div>-->
+              {{queries[key]}}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
           </div>
-          <!--<div class="linha"> </div>-->
         </div>
-      </div>
-      
-      <div id="headerRespostas" class="header-respostas" *ngIf="keys(ordenarPorQueries).length > 0" >
-          <h3>Resultado </h3>
-          <div class="chip-wrapper" *ngFor="let key of keys(queries)">
-            <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-              <!--<div class="chip-tag">{{key}}</div>-->
-                {{queries[key]}}
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-            </div>
-          </div>
-          <div class="linha"> </div>
+        <!--<div class="linha"> </div>-->
       </div>
     </div>
-  
+    
+    <div id="headerRespostas" class="header-respostas" *ngIf="keys(ordenarPorQueries).length > 0" >
+        <h3>Resultado </h3>
+        <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+          <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+            <!--<div class="chip-tag">{{key}}</div>-->
+              {{queries[key]}}
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+          </div>
+        </div>
+        <div class="linha"> </div>
+    </div>
+  </div>
 
-  <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
-    <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">
-
-      <!-- ORDENAÇÃO, QUANDO DISPONÍVEL =================================================================================-->  
-      <div *ngIf="keys(ordenarPorQueries).length > 0" >
+  <!-- ORDENAÇÃO E PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
+  <div class="col-lg-8 col-md-12 col-lg-offset-2 container-ordenacao" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'inline-block' : 'none' }">
+    <div class="row">     
+      <div *ngIf="keys(ordenarPorQueries).length > 0" class="col-md-6">
         <span>Ordenar por: </span>
         <div class="btn-group" dropdown>
           <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
@@ -135,10 +132,47 @@
           <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
         </button>
       </div>
+    </div>
+    <div class="row">
 
-      <div><em>Exibindo {{ pesquisaPor }}:</em> {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItems }}.
-      <button (click)="baixarCSVDaConsulta()" class="btn btn-default">Baixar CSV <span class="glyphicon glyphicon-download" ></span></button>
-      </div>   
+      <div class="col-sm-5 quantidade-respostas">
+        <p>Exibindo itens: {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItems }}. 
+          <a (click)="baixarCSVDaConsulta()" class="btn btn-default">Baixar <span class="glyphicon glyphicon-download" ></span></a></p>
+      </div>
+  
+      <div class="col-sm-3 itens-por-pagina" >
+        <span>Itens por página: </span>
+        <div class="btn-group" dropdown>
+          <button class="btn btn-default" type="button" id="seletorNumeroDeItens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+            {{ configurationService.limitResultados }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+            <li *ngFor="let limit of opcoesDePaginacao" role="menuitem"><a (click)="configurationService.limitResultados = limit; onRealizarBusca();" class="dropdown-item">{{ limit }}</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-4 paginacao-superior" *ngIf="(numeroDeItems < totalDeItems)">
+
+        <pagination [totalItems]="totalDeItems" 
+                    (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
+                    [maxSize]=" maximoBotoes - 2" 
+                    class="pagination-sm"
+                    [boundaryLinks]="true" 
+                    [rotate]="false"  
+                    [(ngModel)]="paginaAtual"
+                    nextText="&#x25B8;"
+                    lastText="&#x25B8;&#x25B8;"
+                    firstText="&#x25C2;&#x25C2;"
+                    previousText="&#x25C2;"></pagination>
+      </div>
+    </div>
+  </div>
+
+
+  <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
+    <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">  
 
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
       <div *ngSwitchCase="'projetos'" >
@@ -233,6 +267,7 @@
 
     </div>
   </div>
+
   <sk-fading-circle [isRunning]="carregandoDados"></sk-fading-circle>
 
   <alert *ngIf="buscaSemResultados" class="col-lg-8 col-md-12 col-lg-offset-2" type="danger">
@@ -244,11 +279,15 @@
 
     <pagination [totalItems]="totalDeItems" 
                 (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
-                [maxSize]=" maximoBotoes" 
+                [maxSize]=" maximoBotoes + 2" 
                 class="pagination-sm"
                 [boundaryLinks]="true" 
                 [rotate]="false"  
-                [(ngModel)]="paginaAtual"></pagination>
+                [(ngModel)]="paginaAtual"
+                nextText="&#x25B8;"
+                lastText="&#x25B8;&#x25B8;"
+                firstText="&#x25C2;&#x25C2;"
+                previousText="&#x25C2;"></pagination>
   </div>
 
 </div>

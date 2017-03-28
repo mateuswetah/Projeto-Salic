@@ -58,7 +58,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   offsetAtual = 0;
   numeroDeItems: number;
   totalDeItems: number;
-  maximoBotoes = 5;
+  maximoBotoes = 4;
+  opcoesDePaginacao = [10, 25, 50, 100];
   paginaAtual = 1;
 
   // Opções de Ordenação
