@@ -1,49 +1,72 @@
+@import '../../../styles.scss';
+
 // Container principal da página
 .container-busca {
-  padding-top: 50px;
-  width: auto;
-  overflow-x: hidden;
   background-color: white;
   min-height: calc(100%);
+
+  h1, h2, h3, h4, h5 {
+      color: $verde-salic;
+  }
+
 }
 
 
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
-    background-color: #ccc;
+    background-color: $verde-claro;
 
-    @media all and (min-width: 992px){
-        .panel { padding: 0px; }
+    .linha { 
+        border: 0 solid $verde-salic;
+        height: 1px; 
+        color: $verde-salic;
+        background-color: $verde-salic; 
+        margin: 0 -15px;
     }
 
-    .form-control-placeholder {
-        position: absolute;
-        top: 0;
-        padding: 6px 0 0 12px;
-        pointer-events: none;
-        color: #aaa;
-        transition: all 200ms;
-    }
+    .container-inputs {
+        padding: 0px 10px 15px 10px;
 
-    .form-control:focus + .form-control-placeholder,
-    .form-control.cheio + .form-control-placeholder {
-        color: #777;
-        font-size: 95%;
-        font-weight: bold;
-        top: -28px;
-    }
-    .form-group {
-        margin: 0px 0px 15px 0px;
-        padding: 0px;
-
-        .row {
-            margin: 0px 0px;
-            padding: 0px;
+        .form-control-placeholder {
+            position: absolute;
+            top: 0;
+            padding: 6px 0 0 12px;
+            pointer-events: none;
+            color: #aaa;
+            transition: all 200ms;
         }
-        
-        .row>.input {
-            margin-top: 28px 
+
+        .form-control:focus + .form-control-placeholder,
+        .form-control.cheio + .form-control-placeholder {
+            color: #444;
+            font-size: 95%;
+            top: -28px;
+        }
+
+        .input-group>.form-control, .input-group-btn>.btn, .row>.btn {
+            border-radius: 0px;
+        }
+
+        .input-group {
+            padding: 15px;
+        }
+
+        .form-group {
+            margin: 0px -15px 15px -15px;
+            padding: 0px;
+
+            .row {
+                margin: 0px 0px;
+                padding: 0px;
+            }
+            
+            .row>.input { margin-top: 28px; }
+        }
+
+        .footer-busca {
+            padding-left: 10px;
+            padding-right: 10px;
         }
     }
 }
@@ -52,23 +75,30 @@
 .abas-pesquisa {
     
     position: relative;
-    margin-bottom: -6px;
     overflow: hidden;
-	padding:5px;
-  	height:50px;
+	padding: 0px 5px;
+  	height: 42px;
+    line-height: 1;
 
-    a { bottom: -3px; }
-    a:hover { border-radius: 1px; }
-        
+    a { 
+        color: black; 
+        font-size: 1.3em;
+        border-radius: 0px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $verde-claro-salic;
+            border-bottom: 6px $verde-salic solid; 
+        }    
+    }
+
     .active {
         a {
-            font-weight: bold;
-            color: 	#555;
-            background-color: white !important;
-            border: 1px #ddd solid; 
-            border-radius: 1px;
+            color: black;
+            background-color: transparent;
+            border-bottom: 5px $verde-salic solid; 
         }
-    }
+    }   
 
 }
 
@@ -85,8 +115,6 @@
 	display:table-cell;
     position:relative;
     text-align:center;
-    cursor:grab;
-    cursor:-webkit-grab;
     color:#efefef;
     vertical-align:middle;
 }
@@ -96,12 +124,12 @@
   text-align:center;
   cursor:pointer;
   display:none;
-  padding:7px 10px 7px 10px;
+  padding:7px 10px;
   white-space:no-wrap;
   vertical-align:middle;
-  background-color:#efefef;
+  background-color: $verde-claro-salic;
   border-radius: 20px;
-  box-shadow: 0px 4px 5px #777;
+  box-shadow: 0px 4px 5px #555;
   z-index: 999;
 }
 
@@ -136,7 +164,7 @@
 
     .fixo {
         height: 58px; 
-        border-bottom: 4px solid black;
+        border-bottom: 2px solid $verde-salic;
         background-color:white; 
         width: 100% !important; 
         z-index: 99; 
@@ -145,8 +173,8 @@
     }
 
     .linha {
-        background-color: black;
-        height: 4px;
+        background-color: $verde-salic;
+        height: 2px;
         width: 100%;
         margin-top: 6px;
     }
@@ -159,9 +187,9 @@
         font-size: 0.8em;
         line-height: 23px;
         border-radius: 8px;
-        border: 1px solid #ddd;
-        background-color: #eee;
+        background-color: $verde-salic;
         margin-bottom: 5px;
+        color: white;
     }
 
     .chip-wrapper {
@@ -189,15 +217,9 @@
     .card {
         
         overflow: hidden;
-        height: 300px;
+        height: 392px;
         padding: 0px;
         margin-bottom: 10px; 
-
-        .linha {
-            height: 3px;
-            background-color: #000;
-            margin: 10px 10px -10px 10px;
-        }
 
         .texto-elipsado{
             p, h5, .card-title{
@@ -208,47 +230,59 @@
             }
         }
 
+        .card-header {
+            background-color: $verde-salic;
+            color: white;
+            margin: 10px 10px -10px 10px;
+            padding: 10px;
+
+            p { margin-bottom: 0px; font-size: 1.25em;}
+        }
+
         .card-resposta {
-            background-color: #ddd;
-            padding: 15px; 
+            background-color: $verde-claro;
+            padding: 15px 15px 65px 15px;
             margin: 10px;
             // border-top: 3px solid #000; 
-            height: 300px;
+            height: 392px;
+
+            .resposta-label {
+                font-size: 1.0em;
+                font-weight: 300;
+                margin-bottom: 0px;  
+            }
+            .resposta-valor {
+                font-size: 1.25em;
+            }
         }
 
         .card-resumo {
-            background-color: #999;
-            height: 290px;
+            background-color: rgba(32, 46, 26, 0.9);
+            color: white;
+            height: 382px;
             position: absolute;
             overflow-y: auto;
             top: 0%;
-            padding: 15px; 
+            padding: 15px 15px 65px 15px; 
             margin: 10px;
             transition-property: all;
             transition-duration: .5s;
             transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+            p { font-size: 1.15em }
         }
 
         .card-botoes {
             bottom: 15px;
             position: absolute; 
             z-index: 50;
+
+            .btn {
+                border-radius: 0px;
+            }
         }
 
     }
-
-
-
-    //  .popover-resumo {
-    //      background-color:white;
-         
-    //      display: block;
-    //      position: absolute;
-    //      width: 100%;
-    //      bottom: 20;
-    //      left: 0;
-    //      margin: 0 auto;
-    //  }
 
 }
 

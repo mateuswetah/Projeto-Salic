@@ -2,7 +2,7 @@
     
   <!-- Título da Página -->
   <div class="container-topo text-center" [ngStyle]="{'background-color': corAleatoriaDoBanner }">
->
+
   </div>
 
   <!-- Caixa de Pesquisa -->
@@ -73,6 +73,7 @@
                     <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
                   </ul>
                 </div>
+                
                 <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
                   <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
                 </button>
