@@ -167,7 +167,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ordenarPor = '';
 
     for (const query of this.queriesDoSelecionado) {
-      if (queryParams[query]) {
+      if (queryParams[query] && queryParams[query] !== '' && queryParams[query] !== undefined) {
 
         this.queries[query] = queryParams[query];
 
@@ -218,7 +218,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.totalDeItems = 0;
     this.numeroDeItems = 0;
 
-
     //if (nenhumaQueryEnviada === false) {
       this.carregarPagina(1);
       //console.log(nenhumaQueryEnviada);
@@ -260,13 +259,16 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
      this.atualizaQueries(this.queries);
-    //this.carregarPagina(1);
 
     const params = new URLSearchParams();
 
     for (const key in this.queries) {
       if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
+        if (this.queries[key] === '') {
+          this.queries[key] = null;
+        } else {
+          params.set(key, String(this.queries[key]));
+        }
       }
     }
     this.location.go(this.pesquisaPor, params.toString());
@@ -310,7 +312,12 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     for (const key in this.queries) {
       if (this.queries.hasOwnProperty(key)) {
-        params.set(key, String(this.queries[key]));
+
+        if (this.queries[key] === '') {
+          this.queries[key] = null;
+        } else {
+          params.set(key, String(this.queries[key]));
+        }
       }
     }
 
@@ -428,6 +435,11 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  // Trata da rotina de baixar CSVs
+  baixarCSVDaConsulta() {
+      //window.open('http://hmg.api.salic.cultura.gov.br/beta/projetos/?limit=100&offset=0');
+  }
+
   // Remove uma querie de parâmetro de busca
   removeQuery(removedKey: string) {
     this.queries[removedKey] = null;
@@ -443,7 +455,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.location.go(this.pesquisaPor, params.toString());
 
-    this.carregarPagina(0);
   }
 
   // Retorna o dicionário de Queries como um array iterável para a view
@@ -527,6 +538,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
     return false;
+  }
+
+  obterStringDeQuantidadeNaResposta() {
+    return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItems));
   }
 
 }

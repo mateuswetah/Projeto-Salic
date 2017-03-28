@@ -189,6 +189,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (this.keys(this.ordenarPorQueries).length > 0) {
       this.ordenarDesc ? (this.queries['sort'] = this.ordenarPor + ':desc') : (this.queries['sort'] = this.ordenarPor + ':asc');
     }
+    console.log(this.queries);
 
     switch (this.pesquisaPor) {
 

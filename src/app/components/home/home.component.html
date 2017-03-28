@@ -26,11 +26,11 @@
           
           <!-- Busca Simples ============================================================== -->
           <div *ngIf="!buscaAvancada" class="row input-group" [ngSwitch]="pesquisaPor">
-            <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queriesDeProjetos['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-            <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queriesDePropostas['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-            <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queriesDeProponentes['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-            <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queriesDeIncentivadores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
-            <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queriesDeFornecedores['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'incentivadores'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
+            <input *ngSwitchCase="'fornecedores'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
             <span class="input-group-btn">
               <button class="btn btn-primary" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
             </span> 
