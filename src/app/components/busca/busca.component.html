@@ -35,7 +35,7 @@
         <div *ngIf="buscaAvancada" class="form-group">
           <div class="row">
             <div class="input col-sm-4">
-              <input type="text" [ngModel]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
+              <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
               <div class="form-control-placeholder">Nome do projeto</div>
             </div>
             <div class="input col-sm-2 col-xs-6">

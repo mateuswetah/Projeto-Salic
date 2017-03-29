@@ -272,7 +272,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     }
-    this.location.go(this.pesquisaPor, params.toString());
+    this.location.go('/' + this.pesquisaPor, params.toString());
   }
 
   onRealizarBuscaComEnter(event) {
@@ -322,7 +322,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
-    this.location.go(this.pesquisaPor, params.toString());
+    this.location.go('/' + this.pesquisaPor, params.toString());
 
     switch (this.pesquisaPor) {
 
@@ -454,7 +454,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
         params.set(key, String(this.queries[key]));
       }
     }
-    this.location.go(this.pesquisaPor, params.toString());
+    this.location.go('/' + this.pesquisaPor, params.toString());
 
   }
 

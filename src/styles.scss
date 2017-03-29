@@ -20,11 +20,13 @@ $verde-escuro: #202e1a;
 html {
   width: auto;
   overflow-x: hidden;
+  height: 100%;
 }
 body {
   background-color: #fbfbfb !important;
   font-family: $fonte-base;
   margin: 0;
+  width: 100%;
 }
 footer {
   background-color: $verde-claro-salic;

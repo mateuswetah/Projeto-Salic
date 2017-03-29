@@ -194,23 +194,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
     switch (this.pesquisaPor) {
 
       case 'projetos':
-        this.router.navigate(['projetos'], {queryParams: this.queries});
+        this.router.navigate(['/projetos'], {queryParams: this.queries});
       break;
 
       case 'propostas':
-        this.router.navigate(['propostas'], {queryParams: this.queries});
+        this.router.navigate(['/propostas'], {queryParams: this.queries});
       break;
 
       case 'proponentes':
-        this.router.navigate(['proponentes'], {queryParams: this.queries});
+        this.router.navigate(['/proponentes'], {queryParams: this.queries});
       break;
 
       case 'incentivadores':
-        this.router.navigate(['incentivadores'], {queryParams: this.queries});
+        this.router.navigate(['/incentivadores'], {queryParams: this.queries});
       break;
 
       case 'fornecedores':
-        this.router.navigate(['fornecedores'], {queryParams: this.queries});
+        this.router.navigate(['/fornecedores'], {queryParams: this.queries});
       break;
 
       default:
