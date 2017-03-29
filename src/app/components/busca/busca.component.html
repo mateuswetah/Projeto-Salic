@@ -2,21 +2,22 @@
     
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
-    <div class="container col-lg-6 col-lg-offset-3">
-      
-      <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
-      <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
-      <div class="text-center abas-pesquisa">
-        <ul class="nav nav-pills aba">
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes</a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores</a></li>
-          <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
-        </ul>
+    <div class="container-abas">
+      <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">   
+        <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+        <div class="text-center abas-pesquisa">
+          <ul class="nav nav-pills aba">
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'proponentes'}"><a (click)="onTrocaPesquisaPor('proponentes')">Proponentes</a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'incentivadores'}"><a (click)="onTrocaPesquisaPor('incentivadores')">Incentivadores</a></li>
+            <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="linha"></div>
+    </div>
+    <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
       <div class="container-inputs">
         
         <!-- Busca Simples ============================================================== -->

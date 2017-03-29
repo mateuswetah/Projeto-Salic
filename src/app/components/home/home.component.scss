@@ -27,28 +27,16 @@
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
-    margin-top: -142px;
+    margin-top: -84px;
     
-    .container { background-color: $verde-claro; }
-
-    .header-buscador {
-        background-color: $verde-claro-salic;
-        margin: 0 -15px;
-        height: 42;
-
-        p { padding: 12px; margin-bottom: 0px; }
+    .container { 
+        border-radius: 5px;
+        box-shadow: 0px 1px 6px #444;
+        padding: 0px;
     }
-
-    .linha { 
-        border: 0 solid $verde-salic;
-        height: 1px; 
-        color: $verde-salic;
-        background-color: $verde-salic; 
-        margin: 0 -15px;
-    }
-
     .container-inputs {
-        padding: 0px 10px 15px 10px;
+        padding: 0px 25px 15px 25px;
+        background-color: $verde-claro; 
 
         .form-control-placeholder {
             position: absolute;
@@ -64,10 +52,6 @@
             color: #444;
             font-size: 95%;
             top: -28px;
-        }
-
-        .input-group>.form-control, .input-group-btn>.btn, button {
-            border-radius: 0px;
         }
 
         .input-group {
@@ -97,6 +81,10 @@
 	padding: 0px 5px;
   	height: 42px;
     line-height: 1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid $verde-salic;
+    background-color: $verde-claro-salic;
 
     a { 
         color: black; 
@@ -105,7 +93,6 @@
         cursor: pointer;
 
         &:hover {
-            background-color: $verde-claro-salic;
             border-bottom: 6px $verde-salic solid; 
         }    
     }
@@ -114,7 +101,7 @@
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 5px $verde-salic solid; 
+            border-bottom: 6px $verde-salic solid; 
         }
     }   
 
@@ -125,38 +112,44 @@
     left:0px;
     top:0px;
   	min-width:3000px;
-  	margin-left:12px;
-    margin-top:0px;
-}
+    margin-top: 0px;
+    margin-left: 14px;
 
-.aba li{
-	display:table-cell;
-    position:relative;
-    text-align:center;
-    color:#efefef;
-    vertical-align:middle;
+    li {
+        display:table-cell;
+        position:relative;
+        text-align:center;
+        color:#efefef;
+        vertical-align:middle;
+    }
+
+    li>a { padding: 10px; }
 }
 
 .scroller {
-  margin-top: 6px;
   text-align:center;
   cursor:pointer;
   display:none;
-  padding:7px 10px;
+  padding: 11px 10px;
   white-space:no-wrap;
   vertical-align:middle;
-  background-color: $verde-claro-salic;
-  border-radius: 20px;
-  box-shadow: 0px 4px 5px #555;
+  background-color: $verde-salic;
   z-index: 999;
+
+  i { color: white; }
 }
 
 .scroller-right{
-  float:right;
+  float: right;
+  margin-right: 15px;
+  border-top-left-radius: 5px;
+  
 }
 
 .scroller-left {
-  float:left;
+  float: left;
+  margin-left: 15px;
+  border-top-right-radius: 5px;
 }
 
 
@@ -164,7 +157,7 @@
 .container-info {
     background-color: white;
     min-height: 280px;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 20px;
 
     p { font-size: 1.1em; }

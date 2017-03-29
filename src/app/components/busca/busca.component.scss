@@ -16,6 +16,11 @@
 
     background-color: $verde-claro;
 
+    .container-abas {
+        background-color: $verde-claro-salic;
+        height: 42px;
+    }
+
     .linha { 
         border: 0 solid $verde-salic;
         height: 1px; 
@@ -25,7 +30,7 @@
     }
 
     .container-inputs {
-        padding: 0px 10px 15px 10px;
+        padding: 0px 25px 15px 25px;
 
         .form-control-placeholder {
             position: absolute;
@@ -78,6 +83,10 @@
 	padding: 0px 5px;
   	height: 42px;
     line-height: 1;
+    background-color: $verde-claro-salic;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid $verde-salic;
 
     a { 
         color: black; 
@@ -86,7 +95,6 @@
         cursor: pointer;
 
         &:hover {
-            background-color: $verde-claro-salic;
             border-bottom: 6px $verde-salic solid; 
         }    
     }
@@ -95,7 +103,7 @@
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 5px $verde-salic solid; 
+            border-bottom: 6px $verde-salic solid; 
         }
     }   
 
@@ -106,39 +114,44 @@
     left:0px;
     top:0px;
   	min-width:3000px;
-  	margin-left:12px;
-    margin-top:0px;
-}
+    margin-top: 0px;
+    margin-left: 14px;
 
-.aba li{
-	display:table-cell;
-    position:relative;
-    text-align:center;
-    color:#efefef;
-    vertical-align:middle;
+    li {
+        display:table-cell;
+        position:relative;
+        text-align:center;
+        color:#efefef;
+        vertical-align:middle;
+    }
+
+    li>a { padding: 10px; }
 }
 
 .scroller {
-  margin-top: 6px;
   text-align:center;
   cursor:pointer;
   display:none;
-  padding:7px 10px;
+  padding: 11px 10px;
   white-space:no-wrap;
   vertical-align:middle;
-  background-color: $verde-claro-salic;
-  border-radius: 20px;
-  box-shadow: 0px 4px 5px #555;
+  background-color: $verde-salic;
   z-index: 999;
+
+  i { color: white; }
 }
 
 .scroller-right{
-  float:right;
+  float: right;
+  border-top-left-radius: 5px;
+  
 }
 
 .scroller-left {
-  float:left;
+  float: left;
+  border-top-right-radius: 5px;
 }
+
 
 // Header dos Resultados
 .container-header-resultados {
@@ -279,7 +292,7 @@
         }
 
         .card-resumo {
-            background-color: rgba(32, 46, 26, 0.9);
+            background-color: rgba(32, 46, 26, 0.95);
             color: white;
             height: 605px;
             @media all and (min-width: 768px){

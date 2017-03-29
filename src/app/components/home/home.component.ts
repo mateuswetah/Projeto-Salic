@@ -303,15 +303,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     switch (indice) {
       case 0:
-        return '#eb3601';
+        return '#f3dc34';
       case 1:
         return '#1066f1';
-      case 2:
-        return '#226000';
-      case 3:
-        return '#acda5d';
-      case 4:
-        return '#f3dc34';
       default:
         return '#1066f1';
     }

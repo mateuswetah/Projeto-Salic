@@ -7,12 +7,11 @@
 
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
-    <div class="container col-lg-6 col-lg-offset-3">
-      <div class="header-buscador"><p><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscador</p></div>
-    
+    <div class="container col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+ 
       <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
       <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
-      <div class="text-center abas-pesquisa">
+      <div class="abas-pesquisa">
         <ul class="nav nav-pills aba">
           <li role="presentation" [ngClass]="{'active': pesquisaPor === 'projetos'}"><a (click)="onTrocaPesquisaPor('projetos')">Projetos</a></li>
           <li role="presentation" [ngClass]="{'active': pesquisaPor === 'propostas'}"><a (click)="onTrocaPesquisaPor('propostas')">Propostas</a></li>
@@ -21,7 +20,7 @@
           <li role="presentation" [ngClass]="{'active': pesquisaPor === 'fornecedores'}"><a (click)="onTrocaPesquisaPor('fornecedores')">Fornecedores</a></li>
         </ul>
       </div>
-      <div class="linha"></div>
+
       <div class="container-inputs">
           
           <!-- Busca Simples ============================================================== -->
@@ -78,30 +77,13 @@
                 <div class="form-control-placeholder">Data de Término</div>
               </div>
             </div>
-            <div class="row">
-              <div class="input col-sm-6" *ngIf="keys(ordenarPorQueries).length > 0">
-                <span>Ordenar por: </span>
-                <div class="btn-group" dropdown>
-                  <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-                    {{ ordenarPorQueries[ordenarPor] }}
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-                    <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-                  </ul>
-                </div>
-                  <button (click)="ordenarDesc = !ordenarDesc;" type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
 
             </div>
 
             <!-- Footer da Busca ============================================================== -->
             <div class="row footer-busca">
               <div class="col-lg-12">
-                <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
+                <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? '&#x25B4; Busca Simples' : '&#x25B8; Busca Avançada' }}</a>
                 <button *ngIf="buscaAvancada" class="btn btn-primary pull-right" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
               </div>
             </div>
