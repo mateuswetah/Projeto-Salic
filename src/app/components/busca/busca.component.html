@@ -314,7 +314,7 @@
         <div class="modal-body">
           <p><strong>Há mais de 100 resultados nesta consulta.</strong> Nós só sonseguimos gerar CSVs com no máximo 100 itens por vez, por isso organizamos sua consulta por partes abaixo:</p>
           <ul *ngFor="let link of linksParaCSVs; let i = index;">
-            <li>CSV com itens {{ i*(100) + 1 }} até {{ i*(100) + 100 }} <a href="{{ link }}"class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>
+            <li>CSV com itens {{ i*(100) + 1 }} até {{ i*(100) + 100 }} <a  target="_blank" href="{{ link }}" class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>
             <!--<li *ngIf=" i*(100) + 100 >= totalDeItems">CSV com itens {{ i*(100) + 1 }} até {{ totalDeItems + 1 }} <a href="{{ link }}"class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>-->
             <br>
           </ul>
