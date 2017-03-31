@@ -79,17 +79,18 @@
         <!-- Footer da Busca ============================================================== -->   
           <div class="row footer-busca">
             <div class="col-lg-12">
-            <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? 'Busca Simples' : 'Busca Avançada' }}</a>
+            <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? '&#x25B4; Busca Simples' : '&#x25B8; Busca Avançada' }}</a>
             <button *ngIf="buscaAvancada" class="btn btn-primary pull-right" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
   <div class="container-header-resultados">
     <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
-      <div class="header-respostas fixo">
+      <div class="header-respostas fixo ">
         <h3>Resultado </h3>
         <div class="chip-wrapper" *ngFor="let key of keys(queries)">
           <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
@@ -98,6 +99,7 @@
             <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
           </div>
         </div>
+        <a (click)="baixarCSVDaConsulta()" class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a>
         <!--<div class="linha"> </div>-->
       </div>
     </div>
@@ -111,38 +113,46 @@
             <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
           </div>
         </div>
+         <a (click)="baixarCSVDaConsulta()" class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a>
         <div class="linha"> </div>
     </div>
   </div>
 
   <!-- ORDENAÇÃO E PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
-  <div class="col-lg-8 col-md-12 col-lg-offset-2 container-ordenacao" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
-    <div class="row">     
-      <div *ngIf="keys(ordenarPorQueries).length > 0" class="col-md-6">
+  <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
+    
+    <!-- ORDENAÇÃO ==============================================-->
+    <div class="row container-ordenacao"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">     
+      <div class="col-md-6">
         <span>Ordenar por: </span>
-        <div class="btn-group" dropdown>
-          <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-            {{ ordenarPorQueries[ordenarPor] }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-            <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-          </ul>
+          <div class="btn-group" dropdown>
+            <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+              {{ ordenarPorQueries[ordenarPor] }}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+              <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+            </button>
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
-        <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" type="button" class="btn btn-default" aria-label="Left Align">
-          <span class="glyphicon glyphicon-sort-by-attributes" [ngClass]="{'glyphicon-sort-by-attributes': !ordenarDesc, 'glyphicon-sort-by-attributes-alt': ordenarDesc }" aria-hidden="true"></span>
-        </button>
-      </div>
     </div>
-    <div class="row">
 
-      <div class="col-sm-5 quantidade-respostas">
-        <p>Exibindo itens: {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItems }}. 
-          <a (click)="baixarCSVDaConsulta()" class="btn btn-default">Baixar <span class="glyphicon glyphicon-download" ></span></a></p>
+    <!-- PAGINAÇÃO ==============================================-->
+    <div class="row container-paginacao">
+      <div class="col-sm-4 col-xs-6 quantidade-respostas">
+        <p>Exibindo itens: {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItems }}.</p>
       </div>
   
-      <div class="col-sm-3 itens-por-pagina" >
-        <span>Itens por página: </span>
+      <div class="col-sm-4 col-xs-6 itens-por-pagina" >
+        <p>Itens por página: </p>
         <div class="btn-group" dropdown>
           <button class="btn btn-default" type="button" id="seletorNumeroDeItens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
             {{ configurationService.limitResultados }}
@@ -154,7 +164,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4 paginacao-superior" *ngIf="(numeroDeItems < totalDeItems)">
+      <div class="col-sm-4 col-xs-12 paginacao-superior" *ngIf="(numeroDeItems < totalDeItems)">
 
         <pagination [totalItems]="totalDeItems" 
                     (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
@@ -289,6 +299,28 @@
                 lastText="&#x25B8;&#x25B8;"
                 firstText="&#x25C2;&#x25C2;"
                 previousText="&#x25C2;"></pagination>
+  </div>
+
+  <!-- MODAL PARA BAIXAR LISTA DE CSVs ===================================================================-->
+  <div bsModal #modalDeCSVs="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Baixar CSVs" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Baixa CSVs da Consulta</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeCSV()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Há mais de 100 resultados nesta consulta.</strong> Nós só sonseguimos gerar CSVs com no máximo 100 itens por vez, por isso organizamos sua consulta por partes abaixo:</p>
+          <ul *ngFor="let link of linksParaCSVs; let i = index;">
+            <li>CSV com itens {{ i*(100) + 1 }} até {{ i*(100) + 100 }} <a href="{{ link }}"class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>
+            <!--<li *ngIf=" i*(100) + 100 >= totalDeItems">CSV com itens {{ i*(100) + 1 }} até {{ totalDeItems + 1 }} <a href="{{ link }}"class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>-->
+            <br>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

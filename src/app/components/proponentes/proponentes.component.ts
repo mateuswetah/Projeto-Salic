@@ -143,10 +143,10 @@ export class ProponentesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.metaService.setTag('og:title', 'Proponente: ' +  this.proponente.nome);
     this.metaService.setTag('og:typle', 'article');
     this.metaService.setTag('og:url', this.router.url);
-    this.metaService.setTag('og:description', `Visualização e Consulta de Projetos 
-                                                submetidos aos Sistema de Apoio às 
-                                                Leis de Incentivo à Cultura.`);
-    this.metaService.setTag('site_name', 'Sistema de Visualização do SALIC');
+    this.metaService.setTag('og:description', `Portal de Visualização do 
+                                               Sistema de Apoio às 
+                                               Leis de Incentivo à Cultura.`);
+    this.metaService.setTag('site_name', 'VERSALIC');
     // this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 

@@ -2,12 +2,11 @@
 
 // Container principal da página
 .container-busca {
-  background-color: white;
+  background-color: #fbfbfb;
 
   h1, h2, h3, h4, h5 {
       color: $verde-salic;
   }
-
 }
 
 
@@ -48,10 +47,6 @@
             top: -28px;
         }
 
-        .input-group>.form-control, .input-group-btn>.btn, button {
-            border-radius: 0px;
-        }
-
         .input-group {
             padding: 15px;
         }
@@ -65,13 +60,13 @@
                 padding: 0px;
             }
             
-            .row>.input { margin-top: 28px; }
+            .row>.input { 
+                margin-top: 28px; 
+                padding-left: 5px;
+                padding-left: 5px;
+            }
         }
 
-        .footer-busca {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
     }
 }
 
@@ -93,10 +88,12 @@
         font-size: 1.3em;
         border-radius: 0px;
         cursor: pointer;
+        padding: 10px;
 
         &:hover {
-            border-bottom: 6px $verde-salic solid; 
-        }    
+            background-color: $verde-claro;
+            border-bottom: 3px solid $verde-salic;
+        }  
     }
 
     .active {
@@ -125,7 +122,6 @@
         vertical-align:middle;
     }
 
-    li>a { padding: 10px; }
 }
 
 .scroller {
@@ -143,13 +139,11 @@
 
 .scroller-right{
   float: right;
-  border-top-left-radius: 5px;
-  
+
 }
 
 .scroller-left {
   float: left;
-  border-top-right-radius: 5px;
 }
 
 
@@ -166,6 +160,7 @@
         margin-left: 0px;
         margin-right: 0px;
         width: 100%;
+        z-index: 99;
         
         @media all and (min-width: 992px){
             padding-left: 18%;
@@ -224,18 +219,38 @@
 
 // Ordenacao e paginação
 .container-ordenacao {
+
     margin-top: 80px;
     padding-left: 20px;
     padding-right: 20px;
 
     .row { padding: 5px 0px; }
 
+}
+
+.container-paginacao {
+
+    background-color: $verde-claro;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+
+    @media all and (min-width: 768px){
+        div { text-align: 100%; }
+    }   
+
     .paginacao-superior {
         margin-top: -18px;
         margin-bottom: -15px;
+        text-align-last: end;
     }
 
-    .itens-por-pagina {padding-bottom: 10px; }
+    p { display: inline-block; }
+
+    .quantidade-respostas { padding-top: 8px; }
+
+    .itens-por-pagina { text-align: center; }
+
 }
 
 // Resultados da Pesquisa 

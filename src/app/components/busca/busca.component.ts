@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy, AfterViewInit,
-         trigger, state, style, transition, animate, keyframes, HostListener } from '@angular/core';
+         trigger, state, style, transition, animate, keyframes, HostListener, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+
+import { ModalDirective } from 'ng2-bootstrap/modal';
 
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
@@ -36,6 +38,8 @@ declare var $: any;
 })
 export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild('modalDeCSVs') public modalDeCSVs: ModalDirective;
+
   inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
 
@@ -46,6 +50,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   buscaSemResultados = false;
   buscaAvancada = false;
   subirRespostasEstado: String = 'inativo';
+  linksParaCSVs: String[];
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -438,7 +443,48 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Trata da rotina de baixar CSVs
   baixarCSVDaConsulta() {
-      //window.open('http://hmg.api.salic.cultura.gov.br/beta/projetos/?limit=100&offset=0');
+
+    if (this.totalDeItems <= 100) {
+
+      const params = new URLSearchParams();
+
+      for (const key in this.queries) {
+        if (this.queries.hasOwnProperty(key)) {
+          if (key !== 'offset' && key !== 'limit') {
+            params.set(key, String(this.queries[key]));
+          }
+        }
+      }
+
+      window.open(this.configurationService.ApiUrl + this.pesquisaPor + '?' + params.toString() + '&offset=0&limit=100&format=csv');
+
+    } else {
+
+      this.linksParaCSVs = [];
+      let itensRestantes = this.totalDeItems;
+      let offsetAtual = 0;
+
+      const params = new URLSearchParams();
+
+      for (const key in this.queries) {
+        if (this.queries.hasOwnProperty(key)) {
+          if (key !== 'offset' && key !== 'limit') {
+            params.set(key, String(this.queries[key]));
+          }
+        }
+      }
+
+      while (itensRestantes > 0) {
+
+        this.linksParaCSVs.push(this.configurationService.ApiUrl + this.pesquisaPor + '?' + params.toString() +
+                           '&offset=' + offsetAtual + '&limit=100&format=csv');
+        itensRestantes = itensRestantes - 100;
+        offsetAtual = offsetAtual + 100;
+
+      }
+
+      this.modalDeCSVs.show();
+    }
   }
 
   // Remove uma querie de parâmetro de busca
@@ -543,6 +589,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   obterStringDeQuantidadeNaResposta() {
     return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItems));
+  }
+
+  public esconderModalDeCSV(): void {
+    this.modalDeCSVs.hide();
   }
 
 }

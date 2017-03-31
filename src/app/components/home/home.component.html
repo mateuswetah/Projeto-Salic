@@ -1,8 +1,10 @@
 <div class="container-home">
     
   <!-- Título da Página -->
-  <div class="container-topo text-center" [ngStyle]="{'background-color': corAleatoriaDoBanner }">
-
+  <div class="container-topo text-center">
+    <div class="banner-img">
+      <div class="logo"><span class="logo-ver">VER</span><span class=logo-salic>SALIC</span></div>
+    </div>
   </div>
 
   <!-- Caixa de Pesquisa -->
@@ -95,47 +97,47 @@
   <div class="container-info">
     <div class="container">
       <div class="row" [ngSwitch]="pesquisaPor">
-      <div class="col-xs-12 col-sm-2 icone-entidade">icone</div>
-      <div class="col-xs-12 col-sm-10 descricao-entidade" >
+        <div class="col-xs-12 col-sm-2 icone-entidade">icone</div>
+        <div class="col-xs-12 col-sm-10 descricao-entidade" >
 
-        <h2 *ngSwitchCase="'projetos'">Projetos</h2>
-        <p *ngSwitchCase="'projetos'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
-        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
-        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
-        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
-        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+          <h2 *ngSwitchCase="'projetos'">Projetos</h2>
+          <p *ngSwitchCase="'projetos'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+          quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+          in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+          sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+          feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
 
-        <h2 *ngSwitchCase="'propostas'">Propostas</h2>
-        <p *ngSwitchCase="'propostas'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
-        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
-        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
-        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
-        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+          <h2 *ngSwitchCase="'propostas'">Propostas</h2>
+          <p *ngSwitchCase="'propostas'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+          quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+          in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+          sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+          feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
 
-        <h2 *ngSwitchCase="'proponentes'">Proponentes</h2>
-        <p *ngSwitchCase="'proponentes'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
-        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
-        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
-        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
-        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+          <h2 *ngSwitchCase="'proponentes'">Proponentes</h2>
+          <p *ngSwitchCase="'proponentes'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+          quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+          in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+          sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+          feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
 
-        <h2 *ngSwitchCase="'incentivadores'">Incentivadores</h2>
-        <p *ngSwitchCase="'incentivadores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
-        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
-        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
-        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
-        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+          <h2 *ngSwitchCase="'incentivadores'">Incentivadores</h2>
+          <p *ngSwitchCase="'incentivadores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+          quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+          in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+          sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+          feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
 
-        <h2 *ngSwitchCase="'fornecedores'">Fornecedores</h2>
-        <p *ngSwitchCase="'fornecedores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
-        quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
-        in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
-        sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
-        feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
+          <h2 *ngSwitchCase="'fornecedores'">Fornecedores</h2>
+          <p *ngSwitchCase="'fornecedores'">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed 
+          quis purus suscipit, feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna 
+          in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quamLorem ipsum dolor 
+          sit amet, consectetur adipiscing elit. Nam fermentum porttor mi. Etam rhoncus condimentum turpis. Sed quis purus suscipit, 
+          feugiat magna in, pretum quam Etam rhoncus condimentum turpis. Sed quis purus suscipit, feugiat magna in, pretum quam </p>
 
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div class="container-dados">

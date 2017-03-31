@@ -1,7 +1,7 @@
 @import '../styles.scss';
 
 .navbar-default {
-  background-color: $verde-medio;
+  background-color: $verde-salic;
   margin-bottom: 0px !important;
   border: none;
   border-radius: 0px;
@@ -9,8 +9,20 @@
   a, span { color: white;}
 
   .navbar-nav>.active>a {
-    color: white;
-    background-color: black;
+    color: $verde-salic;
+    background-color: $verde-claro-salic;
+  }
+
+  .navbar-nav>li:hover, .navbar-nav>li:focus {
+    color: $verde-salic;
+    background-color: $verde-claro;
+  }
+
+  .logo {
+    font-family: $fonte-logo;
+
+    .logo-ver { font-weight: 700 };
+    .logo-salic { font-weight: 500; }
   }
 
 }
