@@ -3,7 +3,7 @@
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
     <div class="container-abas">
-      <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">   
+      <div class="col-md-8 col-md-offset-2 col-lg-7 col-lg-offset-3">   
         <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
         <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
         <div class="text-center abas-pesquisa">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
       <div class="container-inputs">
         
         <!-- Busca Simples ============================================================== -->
@@ -119,7 +119,7 @@
   </div>
 
   <!-- ORDENAÇÃO E PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
-  <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
+  <div class="col-lg-10 col-md-12 col-lg-offset-1" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
     
     <!-- ORDENAÇÃO ==============================================-->
     <div class="row container-ordenacao"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">     
@@ -183,40 +183,42 @@
 
 
   <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
-    <div class="col-lg-8 col-md-12 col-lg-offset-2" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">  
+    <div class="col-lg-10 col-md-12 col-lg-offset-1" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">  
 
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
       <div *ngSwitchCase="'projetos'" >
         <div *ngFor="let projeto of listaProjetos;" class="card col-md-6" >
           <div class="card-header texto-elipsado"><p>{{ projeto.nome }}</p></div>
-            <div class="card-resposta texto-elipsado">
-              <div class="row">
-                <div class="col-sm-4"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>
-                <div class="col-sm-4"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
-                <div class="col-sm-4"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
-              </div>
-              <div class="row">
-                <div class="col-sm-8"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
-                <div class="col-sm-4"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ projeto.cgccpf }}</p></div>
-              </div>
-              <div class="row">
-                <div class="col-sm-8"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
-                <div class="col-sm-4"><p class="resposta-label">Cidade: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-                <div class="col-sm-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
-              </div>
-              <div class="card-botoes">
-                <a (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
-                <a [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</a>
-              </div>
-
-                
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-3"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>
+              <div class="col-sm-4"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
             </div>
-            <div class="card-resumo" [ngStyle]="{'top': projeto.isResumoEscondido ? '45px' : '100%' }">
-              <p>{{projeto.resumo}}</p>
+            <div class="row">
+              <div class="col-sm-7"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ projeto.cgccpf }}</p></div>
             </div>
+            <div class="row">
+              <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">Cidade: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+            </div>                
+          </div>
+          <div class="card-botoes">
+            <div class="card-botao-resumo col-sm-6">
+            <a (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
+            </div>
+            <div class="card-botao-ver col-sm-6">
+              <button class="btn btn-primary" [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</button>
+            </div>
+          </div>
+          <div class="card-resumo" [ngStyle]="{'top': projeto.isResumoEscondido ? '40px' : '100%', 'background-color': projeto.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
+            <p>{{projeto.resumo}}</p>
+          </div>
         </div>
       </div>
 
@@ -283,7 +285,6 @@
   </alert>
       
   <div class="text-center" *ngIf="(numeroDeItems < totalDeItems)">
-
     <pagination [totalItems]="totalDeItems" 
                 (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
                 [maxSize]=" maximoBotoes + 2" 

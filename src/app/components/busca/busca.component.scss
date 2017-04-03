@@ -92,7 +92,7 @@
 
     a { 
         color: black; 
-        font-size: 1.3em;
+        font-size: 1.2em;
         border-radius: 0px;
         cursor: pointer;
         padding: 10px;
@@ -107,7 +107,7 @@
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 6px $verde-salic solid; 
+            border-bottom: 8px $verde-salic solid; 
         }
     }   
 
@@ -135,7 +135,7 @@
   text-align:center;
   cursor:pointer;
   display:none;
-  padding: 11px 10px;
+  padding: 9px 10px 10px 10px;
   white-space:no-wrap;
   vertical-align:middle;
   background-color: $verde-salic;
@@ -251,8 +251,6 @@
             text-align: center;
         }
 
-        .pagination-sm > li > a { padding: 70px; font-size: 16px !important; background-color: aqua}
-
     }
 
     p { display: inline-block; }
@@ -292,7 +290,7 @@
         margin-bottom: 10px; 
 
         @media all and (min-width: 768px){
-            height: 330px;
+            height: 331px;
         }        
 
         .texto-elipsado{
@@ -308,49 +306,48 @@
             background-color: $cinza;
             color: $verde-salic;
             margin: 10px 10px -10px 10px;
-            padding: 10px 20px;
+            padding: 6px 20px;
             border: 1px solid $cinza-escuro;
-            border-bottom: none;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
+            height: 40px;
 
             p { margin-bottom: 0px; font-size: 1.25em;}
         }
 
         .card-resposta {
             background-color: $cinza-claro;
-            border: 1px solid $cinza-escuro;
-            padding: 20px 20px 65px 20px;
+            border-left: 1px solid $cinza-escuro;
+            border-right: 1px solid $cinza-escuro;
+            padding: 20px;
             margin: 10px;
-            height: 615px;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+            height: 524px;
 
             @media all and (min-width: 768px){
-                height: 274px;
+                height: 240px;
             } 
 
             .resposta-label {
-                font-size: 1.0em;
+                font-size: 12pt;
                 font-weight: 300;
+                line-height: 12pt;
                 margin-bottom: 0px;  
             }
             .resposta-valor {
-                font-size: 1.25em;
+                font-size: 15pt;
             }
         }
 
         .card-resumo {
             background-color: rgba(32, 46, 26, 0.95);
             color: white;
-            height: 605px;
+            height: 524px;
             @media all and (min-width: 768px){
-                height: 222px;
+                height: 240px;
             }
             position: absolute;
             overflow-y: auto;
-            top: 0%;
-            padding: 20px 20px 65px 20px; 
+            padding: 20px 20px 20px 20px; 
             margin: 10px;
             transition-property: all;
             transition-duration: .5s;
@@ -361,19 +358,34 @@
 
         .card-botoes {
             background-color: $cinza;
-            position: relative;
             color: $verde-salic;
-            border-top: 1px solid $cinza-escuro;
+            margin: -10px 10px 10px 10px;
+            border: 1px solid $cinza-escuro;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
-            margin: 0 -20px;
-            height: 52px;
-            padding: 20px;
-            top: -20px;
-            z-index: 30;
+            height: 41px;
+            padding: 8px 20px;
 
             a {
                 font-size: 1.125;
+                cursor: pointer;
+
+                &:hover {
+                    color: $verde-salic;
+                }
+            }
+
+            .card-botao-resumo {
+                display: inline-block;
+                padding-left: 0px;  
+
+            }
+
+            .card-botao-ver {
+                text-align: end;
+                display: inline-block;
+                padding-right: 0px;
+                margin-top: -5px; 
             }
         }
 
