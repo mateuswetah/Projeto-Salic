@@ -3,6 +3,7 @@
 // Container principal da página
 .container-home {
   background-color: white;
+  overflow-x: hidden;
 
   h1, h2, h3, h4, h5 {
       color: $verde-salic;
@@ -48,6 +49,7 @@
 
             @media all and (max-width: 400px){
                 font-size: 4.0em;
+                padding-top: 100px;
             }
 
             .logo-ver { font-weight: 700 };
@@ -67,6 +69,10 @@
         border-radius: 5px;
         box-shadow: 0px 1px 6px #444;
         padding: 0px;
+        max-width: 900px;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .container-inputs {
@@ -105,6 +111,11 @@
             .row>.input { margin-top: 28px; }
         }
 
+    }
+
+    .footer-busca {
+        a { cursor: pointer; }
+        a:hover { color: $verde-salic }
     }
 }
 
@@ -222,7 +233,13 @@
 
     .estatistica-numero {
         padding: 5px;
-        font-size: 3.2em;
+        font-size: 3.1em;
         line-height: 0.8em;
+
+        @media all and (max-width: 400px){
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
     }
 }

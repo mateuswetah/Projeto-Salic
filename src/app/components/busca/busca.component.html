@@ -104,7 +104,7 @@
       </div>
     </div>
     
-    <div id="headerRespostas" class="header-respostas" *ngIf="keys(ordenarPorQueries).length > 0" >
+    <div id="headerRespostas" class="header-respostas">
         <h3>Resultado </h3>
         <div class="chip-wrapper" *ngFor="let key of keys(queries)">
           <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
@@ -208,12 +208,8 @@
                 <div class="col-sm-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
               </div>
               <div class="card-botoes">
-                <button (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
-                          type="button" 
-                          class="btn btn-default">Resumo <span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-top': !projeto.isResumoEscondido }" aria-hidden="true"></span></button>
-                <button [routerLink]="['/projetos', projeto.PRONAC]" 
-                        type="button" 
-                        class="btn btn-primary">Ver Projeto</button>
+                <a (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
+                <a [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</a>
               </div>
 
                 
@@ -314,7 +310,7 @@
         <div class="modal-body">
           <p><strong>Há mais de 100 resultados nesta consulta.</strong> Nós só sonseguimos gerar CSVs com no máximo 100 itens por vez, por isso organizamos sua consulta por partes abaixo:</p>
           <ul *ngFor="let link of linksParaCSVs; let i = index;">
-            <li>CSV com itens {{ i*(100) + 1 }} até {{ i*(100) + 100 }} <a  target="_blank" href="{{ link }}" class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>
+            <li>CSV com itens {{ i*(100) + 1 }} até {{ i*(100) + 100 }} <a download="consulta_teste.csv" filename="consulta_teste.csv" target="consulta_teste.csv" href="{{ link }}" class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>
             <!--<li *ngIf=" i*(100) + 100 >= totalDeItems">CSV com itens {{ i*(100) + 1 }} até {{ totalDeItems + 1 }} <a href="{{ link }}"class="btn btn-default pull-right">Baixar <span class="glyphicon glyphicon-download" ></span></a></li>-->
             <br>
           </ul>

@@ -3,6 +3,8 @@
 // Container principal da página
 .container-busca {
   background-color: #fbfbfb;
+  overflow-x: hidden;
+  width: 100%;
 
   h1, h2, h3, h4, h5 {
       color: $verde-salic;
@@ -68,6 +70,11 @@
         }
 
     }
+
+    .footer-busca {
+        a { cursor: pointer; }
+        a:hover { color: $verde-salic }
+    }
 }
 
 // Abas de Pesquisa ----------------------------------------------------------
@@ -81,7 +88,7 @@
     background-color: $verde-claro-salic;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border-bottom: 2px solid $verde-salic;
+    // border-bottom: 2px solid $verde-salic;
 
     a { 
         color: black; 
@@ -221,8 +228,8 @@
 .container-ordenacao {
 
     margin-top: 80px;
-    padding-left: 20px;
-    padding-right: 20px;
+    // padding-left: 20px;
+    // padding-right: 20px;
 
     .row { padding: 5px 0px; }
 
@@ -230,31 +237,52 @@
 
 .container-paginacao {
 
-    background-color: $verde-claro;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-
-    @media all and (min-width: 768px){
-        div { text-align: 100%; }
-    }   
+    //background-color: $verde-claro;
+    // padding-left: 20px;
+    // padding-right: 20px;
+    padding-top: 10px;   
 
     .paginacao-superior {
         margin-top: -18px;
         margin-bottom: -15px;
-        text-align-last: end;
+        text-align: end;
+
+        @media all and (max-width: 768px){
+            text-align: center;
+        }
+
+        .pagination-sm > li > a { padding: 70px; font-size: 16px !important; background-color: aqua}
+
     }
 
     p { display: inline-block; }
 
-    .quantidade-respostas { padding-top: 8px; }
+    .quantidade-respostas { 
+        padding-top: 8px; 
 
-    .itens-por-pagina { text-align: center; }
+        @media all and (max-width: 440px){
+            text-align: center; 
+            width: 100%;
+        }
+    }
+
+    .itens-por-pagina { 
+        text-align: center; 
+
+        @media all and (max-width: 440px){
+            width: 100%;
+        }    
+    }
 
 }
 
 // Resultados da Pesquisa 
 .container-respostas {
+
+    display: inline-block;
+    width: 100%;
+
+    .col-lg-8, .col-md-12 { padding: 0px; }
 
     .card {
         
@@ -264,7 +292,7 @@
         margin-bottom: 10px; 
 
         @media all and (min-width: 768px){
-            height: 392px;
+            height: 330px;
         }        
 
         .texto-elipsado{
@@ -277,23 +305,29 @@
         }
 
         .card-header {
-            background-color: $verde-salic;
-            color: white;
+            background-color: $cinza;
+            color: $verde-salic;
             margin: 10px 10px -10px 10px;
-            padding: 10px;
+            padding: 10px 20px;
+            border: 1px solid $cinza-escuro;
+            border-bottom: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
 
             p { margin-bottom: 0px; font-size: 1.25em;}
         }
 
         .card-resposta {
-            background-color: $verde-claro;
-            padding: 15px 15px 65px 15px;
+            background-color: $cinza-claro;
+            border: 1px solid $cinza-escuro;
+            padding: 20px 20px 65px 20px;
             margin: 10px;
-            // border-top: 3px solid #000; 
             height: 615px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
 
             @media all and (min-width: 768px){
-                height: 392px;
+                height: 274px;
             } 
 
             .resposta-label {
@@ -311,12 +345,12 @@
             color: white;
             height: 605px;
             @media all and (min-width: 768px){
-                height: 382px;
+                height: 222px;
             }
             position: absolute;
             overflow-y: auto;
             top: 0%;
-            padding: 15px 15px 65px 15px; 
+            padding: 20px 20px 65px 20px; 
             margin: 10px;
             transition-property: all;
             transition-duration: .5s;
@@ -326,12 +360,20 @@
         }
 
         .card-botoes {
-            bottom: 15px;
-            position: absolute; 
-            z-index: 50;
+            background-color: $cinza;
+            position: relative;
+            color: $verde-salic;
+            border-top: 1px solid $cinza-escuro;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin: 0 -20px;
+            height: 52px;
+            padding: 20px;
+            top: -20px;
+            z-index: 30;
 
-            .btn {
-                border-radius: 0px;
+            a {
+                font-size: 1.125;
             }
         }
 

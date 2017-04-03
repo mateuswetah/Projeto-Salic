@@ -4,7 +4,8 @@
     <!-- Marca e Menu sanduíche ficam agrupados em telas menores -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" 
-              (click)="menuEscondido = !menuEscondido" aria-expanded="false">
+              (click)="menuEscondido = !menuEscondido" aria-expanded="false"
+              [ngStyle]="{'background-color': menuEscondido ? '$verde-salic' : '$verde-claro-salic' }">
         <span class="glyphicon glyphicon-menu-hamburger"></span>
       </button>
       <a class="navbar-brand logo" [routerLink]="['/home']"><span class="logo-ver">VER</span><span class="logo-salic">SALIC</span></a>

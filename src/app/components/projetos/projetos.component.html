@@ -30,7 +30,7 @@
 
       <h4>Exemplo de Relações Pagamento (produtos) (uma das)</h4>
       <p *ngIf="projeto._embedded.relacao_pagamentos.length <= 0">Este projeto ainda <strong>não possui Fornecedores</strong> ou Relações Pagamento.</p>
-      <p *ngIf="projeto._embedded.relacao_pagamentos.length > 0">{{ projeto._embedded.relacao_pagamentos[0].nome }} fornecido pelo {{ projeto._embedded.relacao_pagamentos[0].nome_fornecedor }}.<!-- <button type="button" class="btn btn-warning" [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(projeto._embedded.relacoes_pagamentos[0]._links.fornecedor)]">IR PARA FORNECEDOR</button>--></p>
+      <p *ngIf="projeto._embedded.relacao_pagamentos.length > 0">{{ projeto._embedded.relacao_pagamentos[0].nome }} fornecido pelo {{ projeto._embedded.relacao_pagamentos[0].nome_fornecedor }}. <button type="button" class="btn btn-warning" [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(projeto._embedded.relacao_pagamentos[0]._links.fornecedor)]">IR PARA FORNECEDOR</button></p>
 
       <h4>Restante dos dados: </h4> 
       <p>{{ JSON.stringify(projeto) }}</p>

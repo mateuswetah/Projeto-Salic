@@ -3,8 +3,10 @@
 .navbar-default {
   background-color: $verde-salic;
   margin-bottom: 0px !important;
-  border: none;
+  border: none !important;
   border-radius: 0px;
+
+  .navbar-collapse { border: none;}
 
   a, span { color: white;}
 
@@ -16,6 +18,18 @@
   .navbar-nav>li:hover, .navbar-nav>li:focus {
     color: $verde-salic;
     background-color: $verde-claro;
+  }
+
+  button {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: none;
+
+    &:hover, &:focus {
+      background-color: $verde-claro-salic;
+      border-color: $verde-salic;
+    }
+
   }
 
   .logo {

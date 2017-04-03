@@ -51,12 +51,32 @@ export class Projeto {
                                              ],
                 public relatorioFisico:      [
                                               {
-
+                                      'etapa': String,
+                                    'unidade': String,
+                                       'item': String,
+                             'perc_executado': String,
+                            'perc_a_executar': String,
+                           'valor_programado': String,
+                             'qtd_programada': String,
+                            'valor_executado': String,
+                          'id_planilha_etapa': String
                                               }
                                              ],
                 public relacaoPagamentos:    [
                                               {
-
+                      'id_planilha_aprovacao': String,
+                              'justificativa': String,
+                             'data_pagamento': String,
+                                       'nome': String,
+                                     'cgccpf': String,
+                             'data_aprovacao': String,
+                            'valor_pagamento': String,
+                                 'nm_arquivo': String,
+                                 'id_arquivo': String,
+                            'nome_fornecedor': String,
+                   'id_comprovante_pagamento': String,
+                     'nr_documento_pagamento': String,
+                             'tipo_documento': String
                                               }
                                              ],
                 public certidoesNegativas:   [
@@ -67,10 +87,26 @@ export class Projeto {
                                  'descricao': String
                                               }
                                              ],
-                public readequacoes:          {
-                                   'pedidos': [{}],
-                                 'pareceres': [{}],
-                                              },
+                public readequacoes:         [
+                                              {
+                                 'is_arquivo': String,
+                               'nome_arquivo': String,
+                             'st_atendimento': String,
+                      'descricao_readequacao': String,
+                    'descricao_justificativa': String,
+                   'descricao_encaminhamento': String,
+                        'descricao_avaliacao': String,
+                      'descricao_solicitacao': String,
+                               'id_avaliador': String,
+                        'id_tipo_readequacao': String,
+                          'si_encaminhamento': String,
+                             'id_readequacao': String,
+                             'id_solicitante': String,
+                                  'st_estado': String,
+                           'data_solicitacao': String
+                             'data_avaliador': String
+                                              }
+                                             ],
                 public documentosAnexados:   [
                                               {
                                       'nome': String,
