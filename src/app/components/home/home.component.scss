@@ -125,7 +125,7 @@
     position: relative;
     overflow: hidden;
 	padding: 0px 5px;
-  	height: 42px;
+  	height: 43px;
     line-height: 1;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -134,7 +134,8 @@
 
     a { 
         color: black; 
-        font-size: 1.3em;
+        font-size: 1.2em;
+        font-weight: 300;
         border-radius: 0px;
         cursor: pointer;
 
@@ -148,7 +149,7 @@
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 7px $verde-salic solid; 
+            border-bottom: 8px $verde-salic solid; 
         }
     }   
 
@@ -177,7 +178,7 @@
   text-align:center;
   cursor:pointer;
   display:none;
-  padding: 11px 10px;
+  padding: 10px;
   white-space: no-wrap;
   vertical-align: middle;
   background-color: $verde-salic;

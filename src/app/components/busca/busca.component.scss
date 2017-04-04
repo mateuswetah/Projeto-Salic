@@ -43,7 +43,8 @@
         }
 
         .form-control:focus + .form-control-placeholder,
-        .form-control.cheio + .form-control-placeholder {
+        .form-control.cheio + .form-control-placeholder,
+         {
             color: #444;
             font-size: 95%;
             top: -28px;
@@ -54,18 +55,18 @@
         }
 
         .form-group {
-            margin: 0px -15px 15px -15px;
+            margin: 0px 0px 15px 0px;
             padding: 0px;
 
             .row {
-                margin: 0px 0px;
+                margin: 0px -5px;
                 padding: 0px;
             }
             
             .row>.input { 
                 margin-top: 28px; 
                 padding-left: 5px;
-                padding-left: 5px;
+                padding-right: 5px;
             }
         }
 
@@ -92,14 +93,15 @@
 
     a { 
         color: black; 
-        font-size: 1.2em;
+        font-size: 1.1em;
         border-radius: 0px;
         cursor: pointer;
-        padding: 10px;
+        
+        font-weight: 300;
 
         &:hover {
             background-color: $verde-claro;
-            border-bottom: 3px solid $verde-salic;
+            border-bottom: 6px solid $verde-salic;
         }  
     }
 
@@ -128,6 +130,8 @@
         color:#efefef;
         vertical-align:middle;
     }
+
+     li>a { padding: 10px; }
 
 }
 
@@ -167,7 +171,6 @@
         margin-left: 0px;
         margin-right: 0px;
         width: 100%;
-        z-index: 99;
         
         @media all and (min-width: 992px){
             padding-left: 18%;
@@ -182,7 +185,7 @@
         border-bottom: 2px solid $verde-salic;
         background-color:white; 
         width: 100% !important; 
-        z-index: 99; 
+        z-index: 999;
         top: 0; 
         position: fixed;
     }
@@ -365,6 +368,8 @@
             border-bottom-right-radius: 5px;
             height: 41px;
             padding: 8px 20px;
+            position: relative;
+            z-index: 99;
 
             a {
                 font-size: 1.125;

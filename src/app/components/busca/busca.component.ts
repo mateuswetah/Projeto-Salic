@@ -109,6 +109,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   queriesDeFornecedores: { [query: string]: String }
                        = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
+  areasDeProjetos = ['Todas as áreas', 'Artes Cênicas', 'Audiovisual', 'Música', 'Artes Visuais', 'Patrimônio Cultural', 'Humanidades', 'Artes Integradas'];
+
 
   constructor(private route: ActivatedRoute,
               private router: Router,
