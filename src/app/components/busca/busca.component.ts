@@ -39,6 +39,7 @@ declare var $: any;
 export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('modalDeCSVs') public modalDeCSVs: ModalDirective;
+  filtrosEscondido: Boolean = true;
 
   inscricaoQueries: Subscription; // Usada para observar mudanças na URL
   inscricaoPesquisaPor: Subscription;
@@ -549,12 +550,47 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
         $('.item').animate({left: '-=' + getLeftPosi() + 'px'}, 'slow');
         $('.scroller-left').hide();
       }
+
+    }
+
+    function organizaChips() {
+
+      let constante = 150;
+
+      if ($('#containerChipsButton').is(':visible')) {
+        constante += 55;
+      }
+
+      if ($('#containerChipsRow').innerWidth() > $('#containerChips').innerWidth() - constante ) {
+
+        let chipRemovido = $('#containerChipsRow .chip-wrapper').last();
+        $('#containerChipsRow .chip-wrapper').last().remove();
+        $('#containerChipsPanel').append(chipRemovido);
+
+        //$('#containerChipsRow').hide();
+        // $('#containerChipsPanel').show();
+        $('#containerChipsButton').show();
+
+      } else {
+
+        let chipRemovido = $('#containerChipsPanel .chip-wrapper').last();
+        $('#containerChipsPanel .chip-wrapper').last().remove();
+        $('#containerChipsRow').append(chipRemovido);
+
+        //$('#containerChipsRow').show();
+        //$('#containerChipsPanel').hide();
+        $('#containerChipsButton').hide();
+      }
     }
 
     reAdjust();
+    organizaChips();
 
     $(window).on('resize', function(e){
+      console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
+      console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
       reAdjust();
+      organizaChips();
     });
 
     $('.scroller-right').click(function() {
@@ -595,6 +631,14 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public esconderModalDeCSV(): void {
     this.modalDeCSVs.hide();
+  }
+
+  public escondido(event: any): void {
+    // console.log(event);
+  }
+
+  public expandido(event: any): void {
+    // console.log(event);
   }
 
 }

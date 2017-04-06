@@ -19,6 +19,7 @@
 
     .container-abas {
         background-color: $verde-claro-salic;
+        border-bottom: 1px solid $verde-salic;
         height: 42px;
     }
 
@@ -31,7 +32,7 @@
     }
 
     .container-inputs {
-        padding: 0px 25px 15px 25px;
+        padding: 0px 15px 15px 15px;
 
         .form-control-placeholder {
             position: absolute;
@@ -50,6 +51,18 @@
             top: -28px;
         }
 
+        .btn.btn-default.form-control {
+            text-align: left !important;
+
+            .caret {
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin-right: 12px;
+                margin-top: 15px;
+            }
+        }
+
         .input-group {
             padding: 15px;
         }
@@ -65,8 +78,8 @@
             
             .row>.input { 
                 margin-top: 28px; 
-                padding-left: 5px;
-                padding-right: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
             }
         }
 
@@ -89,19 +102,20 @@
     background-color: $verde-claro-salic;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    border-bottom: 1px solid $verde-salic;
     // border-bottom: 2px solid $verde-salic;
 
     a { 
         color: black; 
-        font-size: 1.1em;
+        font-size: 1.0em;
         border-radius: 0px;
         cursor: pointer;
-        
         font-weight: 300;
+        margin-top: 2px;
 
         &:hover {
             background-color: $verde-claro;
-            border-bottom: 6px solid $verde-salic;
+            border-bottom: 4px solid $verde-salic;
         }  
     }
 
@@ -109,7 +123,7 @@
         a {
             color: black;
             background-color: transparent;
-            border-bottom: 8px $verde-salic solid; 
+            border-bottom: 4px $verde-salic solid; 
         }
     }   
 
@@ -161,58 +175,99 @@
 // Header dos Resultados
 .container-header-resultados {
 
-    display: inline-block;
+    background-color: $cinza;
+    border-top: 1px solid $cinza-escuro;
+    border-bottom: 1px solid $cinza-escuro;
+    overflow: hidden;
 
     .header-respostas {
-        position: absolute;
-        left: 0;
-        padding: 6px 10px;
         vertical-align: middle;
         margin-left: 0px;
         margin-right: 0px;
         width: 100%;
-        
-        @media all and (min-width: 992px){
-            padding-left: 18%;
-            padding-right: 18%;
+
+        .divisor {
+            display: inline-block;
+            width: 1px;
+            min-height: 50px;
+            background-color: $cinza-escuro;
+            margin: -6px 4px -6px 4px;
+            vertical-align: middle;
+            z-index: 120;
         }
 
-        h3 { display: inline-block; margin: 0px; padding-top: 5px; }
+        .header-respostas-titulo { 
+            display: inline-block; 
+            margin: 0px; 
+            font-size: 1.125em;
+            font-weight: 300;    
+        }
     }
 
     .fixo {
-        min-height: 58px; 
-        border-bottom: 2px solid $verde-salic;
-        background-color:white; 
+        display: inline-block;
+        background-color: $cinza;
+        border-top: 1px solid $cinza-escuro;
+        border-bottom: 1px solid $cinza-escuro;
         width: 100% !important; 
         z-index: 999;
         top: 0; 
+        left: 0;
         position: fixed;
     }
 
-    .linha {
-        background-color: $verde-salic;
-        height: 2px;
-        width: 100%;
-        margin-top: 6px;
+    .container-chips-panel {
+        background-color: #ccc;
+        position: absolute;
+        top: 51px;
+        left: 0px;
+        right: 0px;
+        padding: 10px 25px;
+        border: 1px solid $cinza-escuro;
+        margin: auto 0px;
+        z-index: 99;
+    }
+    .container-chips { 
+        display: inline-block;
+        padding: 12px 10px;
+        min-height: 48px;
+
+        @media (max-width: 768px) {
+            padding: 14px 0px 14px 15px;
+        }
+
+        @media (max-width: 992px) and (min-width: 768px) {
+            border-bottom: 1px solid $cinza-escuro;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #containerChipsRow {
+            display: inline-block;
+            background-color: $cinza;
+            min-width: 60%;
+        } 
+
+        #containerChipsButton { display: none }   
     }
 
     // Chips ----------------------------------------------------------
     .chip {
         display: inline-block;
-        padding: 0 9px;
-        height: 22px;
-        font-size: 0.8em;
-        line-height: 23px;
+        padding: 0px 9px 0px 9px;
+        height: 18px;
+        font-size: 0.75em;
+        font-weight: 300;
+        line-height: 19px;
         border-radius: 8px;
-        background-color: $verde-salic;
-        margin-bottom: 5px;
-        color: white;
+        background-color: white;
+        border: 1px solid $cinza-escuro;
     }
 
     .chip-wrapper {
-        display: inline;
-        margin: 2px 4px 2px 4px;
+        display: inline-block;
+        margin: 2px;
+        
     }
 
     .chip-tag {
@@ -225,25 +280,44 @@
         background-color: #fdfdfd;
     }
 
-}
 
-// Ordenacao e paginação
-.container-ordenacao {
+    // Ordenacao e paginação
+    .container-ordenacao {
+        display: inline-block;
+        padding: 6px;
 
-    margin-top: 80px;
-    // padding-left: 20px;
-    // padding-right: 20px;
+        .btn-group { 
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
 
-    .row { padding: 5px 0px; }
+        @media (max-width: 768px) {
+            text-align: center;
+            padding: 6px 0px 6px 0px;
+        }
+    }
+
+    .container-baixar {
+        display: inline-block; 
+        text-align: start;
+        padding: 6px;
+
+        @media (max-width: 768px) {
+            padding: 6px 14px 6px 0px;
+            text-align: end;
+        }
+
+        button {
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+    }
 
 }
 
 .container-paginacao {
 
-    //background-color: $verde-claro;
-    // padding-left: 20px;
-    // padding-right: 20px;
-    padding-top: 10px;   
+    padding-top: 15px;   
 
     .paginacao-superior {
         margin-top: -18px;
@@ -282,18 +356,19 @@
 
     display: inline-block;
     width: 100%;
+    margin-top: -10px;
 
     .col-lg-8, .col-md-12 { padding: 0px; }
 
     .card {
         
         overflow: hidden;
-        height: 615px;
-        padding: 0px;
-        margin-bottom: 10px; 
+        height: 625px;
+        padding: 19px;
+        margin-bottom: 19px; 
 
         @media all and (min-width: 768px){
-            height: 331px;
+            height: 355px;
         }        
 
         .texto-elipsado{
@@ -324,34 +399,35 @@
             border-right: 1px solid $cinza-escuro;
             padding: 20px;
             margin: 10px;
-            height: 524px;
+            height: 515px;
 
             @media all and (min-width: 768px){
-                height: 240px;
+                height: 245px;
             } 
 
             .resposta-label {
-                font-size: 12pt;
+                font-size: 1em;
                 font-weight: 300;
-                line-height: 12pt;
+                line-height: 1.05em;
                 margin-bottom: 0px;  
             }
             .resposta-valor {
-                font-size: 15pt;
+                font-size: 1.25em;
             }
         }
 
         .card-resumo {
             background-color: rgba(32, 46, 26, 0.95);
             color: white;
-            height: 524px;
+            height: 515px;
             @media all and (min-width: 768px){
-                height: 240px;
+                height: 245px;
             }
             position: absolute;
             overflow-y: auto;
             padding: 20px 20px 20px 20px; 
-            margin: 10px;
+            margin: 10px 30px;
+            right: 0;
             transition-property: all;
             transition-duration: .5s;
             transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
@@ -359,17 +435,22 @@
             p { font-size: 1.15em }
         }
 
+        .card-botoes-container {
+            height: 41px;
+            position: relative;
+            z-index: 99;
+            background-color: #fbfbfb;
+        }
+
         .card-botoes {
             background-color: $cinza;
             color: $verde-salic;
-            margin: -10px 10px 10px 10px;
             border: 1px solid $cinza-escuro;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
-            height: 41px;
             padding: 8px 20px;
-            position: relative;
-            z-index: 99;
+            margin: -10px 10px 10px 10px;
+            height: 100%;
 
             a {
                 font-size: 1.125;
@@ -390,7 +471,6 @@
                 text-align: end;
                 display: inline-block;
                 padding-right: 0px;
-                margin-top: -5px; 
             }
         }
 
