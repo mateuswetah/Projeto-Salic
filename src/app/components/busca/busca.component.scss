@@ -216,8 +216,13 @@
         z-index: 999;
         top: 0; 
         left: 0;
-        overflow: hidden;
         position: fixed;
+
+        &>div {
+            padding-left: 0px; 
+            padding-right: 0px; 
+            margin-right: 0px;
+        }
     }
 
     .container-chips-panel {

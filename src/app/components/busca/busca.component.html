@@ -101,7 +101,7 @@
 
         <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
           <div class="header-respostas fixo row">
-            <div class="col-lg-10 col-md-12 col-lg-offset-1" style="padding-left: 0px; margin-right: 0px;">
+            <div class="col-lg-10 col-md-12 col-lg-offset-1" >
               <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
               <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
@@ -152,19 +152,19 @@
                     <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
                   </button>
                 </div>
-                <span class="divisor pull-right"></span>
               </div>
 
               <!-- BAIXAR CONSULTA ==============================================-->
 
               <div class="col-md-2 col-sm-4 col-xs-4 container-baixar">
+                <span class="divisor pull-left"></span>
                 <a (click)="baixarCSVDaConsulta()" class="btn btn-default"><span class="visible-xs-inline hidden-lg hidden-md hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline visible-lg-inline visible-md-inline">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></a>
               </div>
             </div>
           </div>
         </div>
         
-        <div id="headerRespostas" class="header-respostas row" ngClass="{ (passouDoScrollTop() && !buscaSemResultados && !carregandoDados) ? 'fixo' : ''}">
+        <div id="headerRespostas" class="header-respostas row">
           <div class="col-lg-10 col-md-12 col-lg-offset-1">
           <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
