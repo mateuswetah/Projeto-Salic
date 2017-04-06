@@ -178,7 +178,6 @@
     background-color: $cinza;
     border-top: 1px solid $cinza-escuro;
     border-bottom: 1px solid $cinza-escuro;
-    overflow: hidden;
 
     .header-respostas {
         vertical-align: middle;
@@ -194,6 +193,10 @@
             margin: -6px 4px -6px 4px;
             vertical-align: middle;
             z-index: 120;
+
+            @media (max-width: 440px) {
+                margin: -6px 0px;
+            }
         }
 
         .header-respostas-titulo { 
@@ -213,6 +216,7 @@
         z-index: 999;
         top: 0; 
         left: 0;
+        overflow: hidden;
         position: fixed;
     }
 
@@ -291,6 +295,14 @@
             padding-bottom: 2px;
         }
 
+        
+        @media (max-width: 440px) {
+            button {
+                padding: 6px 6px;
+            }
+        }
+    
+
         @media (max-width: 768px) {
             text-align: center;
             padding: 6px 0px 6px 0px;
@@ -317,7 +329,8 @@
 
 .container-paginacao {
 
-    padding-top: 15px;   
+    padding-top: 20px;
+    margin: 0 -20px;   
 
     .paginacao-superior {
         margin-top: -18px;

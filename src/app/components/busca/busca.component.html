@@ -104,7 +104,7 @@
             <div class="col-lg-10 col-md-12 col-lg-offset-1" style="padding-left: 0px; margin-right: 0px;">
               <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
-              <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-4"> 
+              <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
                 <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
                 <div id="containerChipsRow" class="hidden-xs">   
                   <div class="chip-wrapper" *ngFor="let key of keys(queries)">
@@ -115,7 +115,7 @@
                   </div>
                 </div>
                 <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
-                <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros aplicados' : '&#x25B4; Filtros aplicados' }}</a>
+                <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
               </div>
               <div id="containerChipsPanel" class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
                 <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
@@ -157,7 +157,7 @@
 
               <!-- BAIXAR CONSULTA ==============================================-->
 
-              <div class="col-md-2 col-sm-4 col-xs-3 container-baixar">
+              <div class="col-md-2 col-sm-4 col-xs-4 container-baixar">
                 <a (click)="baixarCSVDaConsulta()" class="btn btn-default"><span class="visible-xs-inline hidden-lg hidden-md hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline visible-lg-inline visible-md-inline">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></a>
               </div>
             </div>
@@ -168,7 +168,7 @@
           <div class="col-lg-10 col-md-12 col-lg-offset-1">
           <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
-          <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-4"> 
+          <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
             <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
             <div id="containerChipsRow" class="hidden-xs">   
               <div class="chip-wrapper" *ngFor="let key of keys(queries)">
@@ -179,7 +179,7 @@
               </div>
             </div>
             <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
-            <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros aplicados' : '&#x25B4; Filtros aplicados' }}</a>
+            <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
           </div>
           <div id="containerChipsPanel" class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
             <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
@@ -220,7 +220,7 @@
 
           <!-- BAIXAR CONSULTA ==============================================-->
 
-          <div class="col-md-2 col-sm-4 col-xs-3 container-baixar">
+          <div class="col-md-2 col-sm-4 col-xs-4 container-baixar">
             <span class="divisor pull-left"></span>
             <button (click)="baixarCSVDaConsulta()" class="btn btn-default"><span class="visible-xs-inline hidden-lg hidden-md hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline visible-lg-inline visible-md-inline">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></button>
           </div>
