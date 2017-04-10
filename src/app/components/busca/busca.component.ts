@@ -16,6 +16,9 @@ import { Proposta } from './../../models/proposta.model';
 import { Proponente } from './../../models/proponente.model';
 import { Incentivador } from './../../models/incentivador.model';
 import { Fornecedor } from './../../models/fornecedor.model';
+import { Segmentos } from './../../models/segmentos.model';
+import { Estados } from './../../models/estados.model';
+
 
 declare var $: any;
 
@@ -110,7 +113,13 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   queriesDeFornecedores: { [query: string]: String }
                        = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
-  areasDeProjetos = ['Todas as áreas', 'Artes Cênicas', 'Audiovisual', 'Música', 'Artes Visuais', 'Patrimônio Cultural', 'Humanidades', 'Artes Integradas'];
+  areasDeProjetos = ['Todas as áreas', 'Artes Cênicas',
+                     'Audiovisual', 'Música',
+                     'Artes Visuais', 'Patrimônio Cultural',
+                     'Humanidades', 'Artes Integradas'];
+
+  segmentosDeProjetos = new Segmentos();
+  estados = new Estados();
 
 
   constructor(private route: ActivatedRoute,
@@ -627,6 +636,27 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   obterStringDeQuantidadeNaResposta() {
     return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItems));
+  }
+
+  checaChipsValidos(keys: string[]) {
+    const indexOffset = keys.indexOf('offset');
+    if (indexOffset > -1) { keys.splice(indexOffset, 1); }
+    const indexSort = keys.indexOf('sort');
+    if (indexSort > -1) { keys.splice(indexSort, 1); }
+    const indexLimit = keys.indexOf('limit');
+    if (indexLimit > -1) { keys.splice(indexLimit, 1); }
+
+    return keys;
+  }
+
+  formataChip (key: string) {
+    if (key === 'area') {
+      return this.areasDeProjetos[String(this.queries[key])];
+    } else if (key === 'segmento') {
+      return this.segmentosDeProjetos.obterNomePorCod(this.queries[key]);
+    } else {
+      return this.queries[key];
+    }
   }
 
   public esconderModalDeCSV(): void {

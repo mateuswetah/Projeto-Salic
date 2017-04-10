@@ -2,7 +2,7 @@
 
 // Container principal da página
 .container-busca {
-  background-color: #fbfbfb;
+  background-color: $background-salic;
   overflow-x: hidden;
   width: 100%;
 
@@ -80,6 +80,21 @@
                 margin-top: 28px; 
                 padding-left: 10px;
                 padding-right: 10px;
+
+                button {
+                    text-overflow: ellipsis;
+                    overflow-x: hidden; 
+                }
+
+                .dropdown-menu {
+                    overflow-y: scroll;
+                    max-height: 480px;
+
+                    @media (max-width: 768px) {
+                        max-height: 236px;
+                    }
+
+                }
             }
         }
 
@@ -258,6 +273,14 @@
         } 
 
         #containerChipsButton { display: none }   
+
+        a {
+            cursor: pointer;
+
+            &:hover {
+                color: $verde-salic;
+            }
+        }
     }
 
     // Chips ----------------------------------------------------------
@@ -304,6 +327,13 @@
         @media (max-width: 440px) {
             button {
                 padding: 6px 6px;
+            }
+        }
+
+        #seletorOrdenarPor {
+            @media (max-width: 340px) {
+                span.visible-xs-inline-block { display: none !important;}
+                &:before{ content: 'Ordem'; }
             }
         }
     
@@ -381,12 +411,13 @@
     .card {
         
         overflow: hidden;
-        height: 625px;
-        padding: 19px;
+        height: 612px;
+        padding: 6px;
         margin-bottom: 19px; 
 
         @media all and (min-width: 768px){
             height: 355px;
+            padding: 19px;
         }        
 
         .texto-elipsado{
@@ -435,16 +466,17 @@
         }
 
         .card-resumo {
-            background-color: rgba(32, 46, 26, 0.95);
+            background-color: rgba(32, 46, 26, 0.90);
             color: white;
             height: 515px;
             @media all and (min-width: 768px){
                 height: 245px;
+                margin: 10px 29px;
             }
             position: absolute;
             overflow-y: auto;
-            padding: 20px 20px 20px 20px; 
-            margin: 10px 30px;
+            padding: 20px; 
+            margin: -3px 16px;
             right: 0;
             transition-property: all;
             transition-duration: .5s;
@@ -457,7 +489,7 @@
             height: 41px;
             position: relative;
             z-index: 99;
-            background-color: #fbfbfb;
+            background-color: $background-salic;
         }
 
         .card-botoes {

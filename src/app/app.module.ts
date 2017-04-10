@@ -9,7 +9,7 @@ import { RouteReuseStrategy } from '@angular/router';
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
-import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule } from 'ng2-bootstrap/';
+import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule, DatepickerModule } from 'ng2-bootstrap/';
 
 // Components de Terceiros
 import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
@@ -79,7 +79,8 @@ export function metaFactory(): MetaLoader {
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   providers: [
     ApiService,

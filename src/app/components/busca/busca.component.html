@@ -43,27 +43,48 @@
               <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
               <div class="form-control-placeholder">PRONAC</div>
             </div>
-            <!--<div class="input col-sm-2 col-xs-6">
-              <input type="text" [(ngModel)]="queries['area']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}">
-              <div class="form-control-placeholder">Área</div>
-            </div>-->
+            <!-- AREA =========================================-->
             <div class="input col-sm-2 col-xs-6 btn-group" dropdown>
-              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                 {{ areasDeProjetos[queries['area']] }}
-                <span class="caret"></span>
+                <span class="caret"></span> 
               </button>
               <div class="form-control-placeholder">Área</div>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-                <li *ngFor="let area of areasDeProjetos; let i = index" role="menuitem"><a (click)="i > 0 ? queries['area'] = i : queries['area'] = null;" class="dropdown-item">{{ area }}</a></li>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorAreaDoProjeto">
+                <li *ngFor="let area of areasDeProjetos; let i = index" role="menuitem">
+                  <a (click)="i > 0 ? queries['area'] = i : queries['area'] = null;
+                              queries['segmento'] !== null && queries['segmento'] !== undefined && 
+                              queries['segmento'] !== '0' && queries['area'] !== null && 
+                              queries['area'] != segmentosDeProjetos.obterAreaCodPorCod(queries['segmento']) ? queries['segmento'] = null : true;" class="dropdown-item">{{ area }}</a>
+                  </li>
               </ul>
             </div>
-            <div class="input col-sm-2 col-xs-6">
-              <input type="text" [(ngModel)]="queries['segmento']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}">
+            <!-- SEGMENTO ======================================-->
+            <div class="input col-sm-2 col-xs-6 btn-group" dropdown>
+               <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                {{ segmentosDeProjetos.obterNomePorCod(queries['segmento']) }}
+                <span class="caret"></span>
+              </button>
               <div class="form-control-placeholder">Segmento</div>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorSegmentoDoProjeto">
+                <li *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index" role="menuitem">
+                  <a (click)="i > 0 ? queries['segmento'] = segmento.cod : queries['segmento'] = null; 
+                              i > 0 ? queries['area'] = segmento.areaCod : queries['segmento'] = null;" class="dropdown-item">{{ segmento.nome }}</a>
+                </li>
+              </ul>
             </div>
-            <div class="input col-sm-2 col-xs-6">
-              <input type="text" [(ngModel)]="queries['municipio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['municipio'] !== undefined && queries['municipio'] !== null && queries['municipio'] !== ''}">
-              <div class="form-control-placeholder">Município</div>
+            <!-- UF ==============================================-->        
+            <div class="input col-sm-2 col-xs-6 btn-group" dropdown>
+              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                {{ queries['UF'] }}
+                <span class="caret"></span> 
+              </button>
+              <div class="form-control-placeholder">UF</div>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorEstados">
+                <li *ngFor="let estado of estados.listaEstados; let i = index" role="menuitem">
+                  <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null" class="dropdown-item">{{ estado.nome }}</a>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="row">
@@ -74,11 +95,13 @@
             <div class="input col-sm-3">
               <input type="text" [(ngModel)]="queries['cgccpf']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['cgccpf'] !== undefined && queries['cgccpf'] !== null && queries['cgccpf'] !== ''}">
               <div class="form-control-placeholder">CPF/CNPJ</div>
-            </div>
+            </div>    
+            <!-- DATA DE INÍCIO ============================================-->
             <div class="input col-sm-3 col-xs-6">
               <input type="text" [(ngModel)]="queries['data_inicio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}">
               <div class="form-control-placeholder">Data de Início</div>
             </div>
+            <!-- DATA DE TÉRMINO ============================================-->
             <div class="input col-sm-3 col-xs-6">
               <input type="text" [(ngModel)]="queries['data_termino']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== ''}">
               <div class="form-control-placeholder">Data de Término</div>
@@ -108,8 +131,8 @@
                 <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
                 <div id="containerChipsRow" class="hidden-xs">   
                   <div class="chip-wrapper" *ngFor="let key of keys(queries)">
-                    <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-                        {{ key == 'area' ? areasDeProjetos[queries[key]] : queries[key] }}
+                    <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined && key != 'sort' && key != 'offset' && key != 'limit'" >
+                        {{ formataChip (key) }}
                       <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
                     </div>
                   </div>
@@ -171,12 +194,13 @@
           <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
             <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
             <div id="containerChipsRow" class="hidden-xs">   
-              <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+              <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queries))">
                 <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
-                    {{ key == 'area' ? areasDeProjetos[queries[key]] : queries[key] }}
+                    {{ formataChip (key) }}
                   <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
                 </div>
               </div>
+              <span *ngIf="checaChipsValidos(keys(queries)).length <= 0">Nenhum filtro de pesquisa.</span>
             </div>
             <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
             <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
@@ -209,10 +233,10 @@
               </ul>
             </div>
             <div class="btn-group" role="group">
-              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Ordenação crescente">
+              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
                 <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
               </button>
-              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Ordenação decrescente">
+              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
                 <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
               </button>
             </div>
