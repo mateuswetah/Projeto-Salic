@@ -10,7 +10,8 @@
       "outDir": "/var/www/app.salic",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",

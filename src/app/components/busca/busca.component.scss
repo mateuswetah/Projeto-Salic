@@ -34,6 +34,11 @@
     .container-inputs {
         padding: 0px 15px 15px 15px;
 
+
+    ngb-datepicker {
+        display: inline-block !important;
+    }
+
         .form-control-placeholder {
             position: absolute;
             top: 0;

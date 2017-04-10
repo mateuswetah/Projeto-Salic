@@ -19,7 +19,6 @@ import { Fornecedor } from './../../models/fornecedor.model';
 import { Segmentos } from './../../models/segmentos.model';
 import { Estados } from './../../models/estados.model';
 
-
 declare var $: any;
 
 @Component({
@@ -56,7 +55,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   subirRespostasEstado: String = 'inativo';
   linksParaCSVs: String[];
   dataInicio: Date = new Date();
-  minDate: Date = void 0;
 
   // Respostas da API:
   listaProjetos:        [Projeto];

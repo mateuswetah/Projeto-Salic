@@ -139,14 +139,15 @@
 
               <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
                 <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
-                <div id="containerChipsRow" class="hidden-xs">   
-                  <div class="chip-wrapper" *ngFor="let key of keys(queries)">
-                    <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined && key != 'sort' && key != 'offset' && key != 'limit'" >
-                        {{ formataChip (key) }}
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+                  <div id="containerChipsRow" class="hidden-xs">   
+                    <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queries))">
+                      <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
+                          {{ formataChip (key) }}
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+                      </div>
                     </div>
+                    <span *ngIf="checaChipsValidos(keys(queries)).length <= 0">Nenhum filtro de pesquisa.</span>
                   </div>
-                </div>
                 <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
                 <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
               </div>
