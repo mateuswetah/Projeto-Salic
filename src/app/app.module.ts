@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
 import { RouteReuseStrategy } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
@@ -87,6 +88,7 @@ export function metaFactory(): MetaLoader {
     ConfigurationService,
     DataFormatterService,
     PaginationService,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
   ],
   bootstrap: [AppComponent]

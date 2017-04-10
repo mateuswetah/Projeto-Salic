@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit,
          trigger, state, style, transition, animate, keyframes, HostListener, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -55,6 +55,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   buscaAvancada = false;
   subirRespostasEstado: String = 'inativo';
   linksParaCSVs: String[];
+  dataInicio: Date = new Date();
+  minDate: Date = void 0;
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -127,7 +129,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
               private location: Location,
               private apiService: ApiService,
               private configurationService: ConfigurationService,
-              private dataFormatterService: DataFormatterService) { }
+              private dataFormatterService: DataFormatterService,
+              private datePipe: DatePipe) { }
 
   ngOnInit() {
       this.inscricaoPesquisaPor = this.route.params.subscribe (
@@ -657,6 +660,13 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       return this.queries[key];
     }
+  }
+
+  public obterDataInicio(): String {
+    if (this.queries['data_inicio'] !== null && this.queries['data_inicio'] !== undefined && this.queries['data_inicio'] !== '') {
+      return this.dataInicio && String(this.dataInicio.getTime()) || String(new Date().getTime());
+    }
+    return '';
   }
 
   public esconderModalDeCSV(): void {

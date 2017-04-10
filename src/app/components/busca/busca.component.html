@@ -97,9 +97,19 @@
               <div class="form-control-placeholder">CPF/CNPJ</div>
             </div>    
             <!-- DATA DE INÍCIO ============================================-->
-            <div class="input col-sm-3 col-xs-6">
-              <input type="text" [(ngModel)]="queries['data_inicio']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}">
-              <div class="form-control-placeholder">Data de Início</div>
+            <div class="input col-sm-3 col-xs-6 btn-group" dropdown>
+              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                {{ obterDataInicio() | date:'dd/MM/yyyy' }}
+                <span class="caret"></span> 
+              </button>
+              <div class="form-control-placeholder">Data Início</div>
+              <div class="dropdown-menu" role="menu" aria-labelledby="seletorDataInicio">
+                  <datepicker (selectionDone)="queries['data_inicio'] = datePipe.transform(dataInicio, 'yyyy-MM-dd'); consoleLog('OOOOOIII')" 
+                              [(ngModel)]="dataInicio"
+                              [minDate]="minDate" 
+                              [showWeeks]="false" 
+                              [dateDisabled]="false"></datepicker>
+              </div>
             </div>
             <!-- DATA DE TÉRMINO ============================================-->
             <div class="input col-sm-3 col-xs-6">
