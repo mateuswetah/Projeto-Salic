@@ -82,12 +82,12 @@
               <div class="form-control-placeholder">UF</div>
               <ul class="dropdown-menu" role="menu" aria-labelledby="seletorEstados">
                 <li *ngFor="let estado of estados.listaEstados; let i = index" role="menuitem">
-                  <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null" class="dropdown-item">{{ estado.nome }}</a>
+                  <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null">{{ estado.nome }}</a>
                 </li>
               </ul>
             </div>
             <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select class="form-control" aria-labelledby="seletorEstados" 
+              <select class="form-control" aria-labelledby="seletorEstados" [ngModel]="queries['UF']"
               (change)="($event.target.value === 'null' || $event.target.value === 'Todos os estados') ? queries['UF'] = null : queries['UF'] = $event.target.value" 
               [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}">
                 <option [value]="i > 0 ? estado.UF : null" *ngFor="let estado of estados.listaEstados; let i = index">{{ i > 0 ? estado.nome : '' }}</option>
@@ -187,12 +187,13 @@
                 <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
               </div>
               <div class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
-                <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+                <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queries))">
                   <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
                       {{ key == 'area' ? areasDeProjetos[queries[key]] : queries[key] }}
                     <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
                   </div>
                 </div>
+                <span *ngIf="checaChipsValidos(keys(queries)).length <= 0">Nenhum filtro de pesquisa.</span>
               </div>
 
               <!-- ORDENAÇÃO ==============================================-->
@@ -252,12 +253,13 @@
             <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
           </div>
           <div class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
-            <div class="chip-wrapper" *ngFor="let key of keys(queries)">
+            <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queries))">
               <div class="chip" *ngIf="queries[key] != null && queries[key] != '' && queries[key] != undefined" >
                   {{ key == 'area' ? areasDeProjetos[queries[key]] : queries[key] }}
                 <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
               </div>
             </div>
+            <span *ngIf="checaChipsValidos(keys(queries)).length <= 0">Nenhum filtro de pesquisa.</span>
           </div>
 
           <!-- ORDENAÇÃO ==============================================-->
@@ -377,32 +379,44 @@
           </div>
         </div>
       </div>
-
+      
       <div *ngSwitchCase="'propostas'">
         <div *ngFor="let proposta of listaPropostas" class="card col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">{{ proposta.nome }}</div> 
             <div class="panel-body">
               <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
-                                              type="button" 
-                                              class="btn btn-primary" >Ver Proposta</button></div>
+                                            type="button" 
+                                            class="btn btn-primary" >Ver Proposta</button></div>
+            </div>   
+          </div>                                                        
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'proponentes'">
+        <div *ngFor="let proponente of listaProponentes" class="card card-proponente col-md-6">
+          <div class="card-header texto-elipsado" title="{{ proponente.nome }}"><p>{{ proponente.nome }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-4"><p class="resposta-label">Tipo de Pessoa: </p><p class="resposta-valor">{{ proponente.tipo_pessoa }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ proponente.cgccpf }}</p></div> 
+              <div class="col-sm-2"><p class="resposta-label">UF: </p><p class="resposta-valor">{{ proponente.UF }}</p></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ proponente.municipio }}</p></div>
+              <div class="col-sm-8"><p class="resposta-label">Total Captado: </p><p class="resposta-valor">{{ proponente.total_captado }}</p></div>
+            </div>
+          <div class="card-botoes-container">
+            <div class="card-botoes">
+              <div class="card-botao-resumo col-sm-6">
+                <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" >VER PROPONENTE</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div *ngSwitchCase="'proponentes'">
-        <div *ngFor="let proponente of listaProponentes" class="card col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">{{ proponente.nome }}</div> 
-            <div class="panel-body">
-              <div class="col-sm-9"><p>CGCCPF: </p><h4>{{ proponente.cgccpf }}</h4></div> 
-              <div class="col-sm-3"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" 
-                                            type="button" 
-                                            class="btn btn-primary" >Ver Proponente</button></div>
-            </div>   
-          </div>                                
         </div>
       </div>
+
       <div *ngSwitchCase="'incentivadores'">
         <div *ngFor="let incentivador of listaIncentivadores" class="card col-md-6">
           <div class="panel panel-default">
@@ -416,6 +430,7 @@
           </div>
         </div>
       </div>
+
       <div *ngSwitchCase="'fornecedores'">
         <div *ngFor="let fornecedor of listaFornecedores" class="card col-md-6">
           <div class="panel panel-default">

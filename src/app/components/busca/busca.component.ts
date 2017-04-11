@@ -522,6 +522,11 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   // Remove uma querie de parâmetro de busca
   removeQuery(removedKey: string) {
     this.queries[removedKey] = null;
+    if (removedKey === 'data_inicio') {
+      $('input[name=calendarioIncio]')[0].value = null;
+    } else if (removedKey === 'data_termino') {
+      $('input[name=calendarioTermino]')[0].value = null;
+    }
 
     this.atualizaQueries(this.queries);
 
@@ -665,6 +670,16 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     if (indexSort > -1) { keys.splice(indexSort, 1); }
     const indexLimit = keys.indexOf('limit');
     if (indexLimit > -1) { keys.splice(indexLimit, 1); }
+    const indexArea = keys.indexOf('area');
+    if (indexArea > -1 && this.queries['area'] === null) { keys.splice(indexLimit, 1); }
+    const indexSegmento = keys.indexOf('segmento');
+    if (indexSegmento > -1 && this.queries['segmento'] === null) { keys.splice(indexLimit, 1); }
+    const indexUF = keys.indexOf('UF');
+    if (indexUF > -1 && this.queries['UF'] === null) { keys.splice(indexLimit, 1); }
+    const indexDataInicio = keys.indexOf('data_inicio');
+    if (indexDataInicio > -1 && this.queries['data_inicio'] === null) { keys.splice(indexLimit, 1); }
+    const indexDataTermino = keys.indexOf('data_termino');
+    if (indexDataTermino > -1 && this.queries['data_termino'] === null) { keys.splice(indexLimit, 1); }
 
     return keys;
   }

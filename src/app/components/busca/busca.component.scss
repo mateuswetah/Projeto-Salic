@@ -2,7 +2,6 @@
 
 // Container principal da página
 .container-busca {
-  background-color: $background-salic;
   overflow-x: hidden;
   width: 100%;
 
@@ -428,12 +427,12 @@
     .card {
         
         overflow: hidden;
-        height: 612px;
+        height: 622px;
         padding: 6px;
         margin-bottom: 19px; 
 
         @media all and (min-width: 768px){
-            height: 355px;
+            height: 360px;
             padding: 19px;
         }        
 
@@ -465,10 +464,10 @@
             border-right: 1px solid $cinza-escuro;
             padding: 20px;
             margin: 10px;
-            height: 515px;
+            height: 525px;
 
             @media all and (min-width: 768px){
-                height: 245px;
+                height: 250px;
             } 
 
             .resposta-label {
@@ -485,9 +484,9 @@
         .card-resumo {
             background-color: rgba(32, 46, 26, 0.90);
             color: white;
-            height: 515px;
+            height: 525px;
             @media all and (min-width: 768px){
-                height: 245px;
+                height: 250px;
                 margin: 10px 29px;
             }
             position: absolute;
@@ -541,6 +540,27 @@
             }
         }
 
+    }
+
+    .card-proponente {
+        height: 397px;
+
+        @media all and (min-width: 768px){
+            height: 247px;
+        } 
+
+        .card-resposta {
+            height: 300px;
+
+            @media all and (min-width: 768px){
+                height: 136px;
+            } 
+        }
+
+        .card-botoes {
+            top: 5px;
+            margin: 0 -21px;
+        }
     }
 
 }
