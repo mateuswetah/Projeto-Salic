@@ -105,12 +105,13 @@
                       [options]="opcoesCalendario" 
                       #dp="ngx-mydatepicker" 
                       (dateChanged)="onObterDataInicio($event)"
-                      [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}"/>
+                      (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
+                      [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== '', 'invalido': !dataInicioValida }"/>
                 <div class="form-control-placeholder">Data de Início</div>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
                         <i class="glyphicon glyphicon-remove"></i>
-                    </button>
+                    </button>-->
                     <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
@@ -124,14 +125,15 @@
                       [(ngModel)]="dataTermino" 
                       [options]="opcoesCalendario" 
                       #dp2="ngx-mydatepicker" 
-                      (dateChanged)="onObterDataTermino($event)"
-                      [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== ''}"/>
+                      (dateChanged)="onObterDataTermino($event);"
+                      (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
+                      [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== '', 'invalido': !dataTerminoValida }"/>
                 <div class="form-control-placeholder">Data de Término</div>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" (click)="dp2.clearDate()">
+                    <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
                         <i class="glyphicon glyphicon-remove"></i>
-                    </button>
-                    <button type="button" class="btn btn-default" (click)="dp2.toggleCalendar()">
+                    </button>-->
+                    <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
                 </span>
@@ -330,7 +332,7 @@
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
       <div *ngSwitchCase="'projetos'" >
         <div *ngFor="let projeto of listaProjetos;" class="card col-md-6" >
-          <div class="card-header texto-elipsado"><p>{{ projeto.nome }}</p></div>
+          <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
             <div class="row">
               <div class="col-sm-3"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>

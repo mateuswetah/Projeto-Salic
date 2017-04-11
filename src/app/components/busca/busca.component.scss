@@ -38,11 +38,12 @@
             position: absolute;
             text-overflow: ellipsis;
             top: 0;
-            padding: 6px 0 0 12px;
+            padding: 8px 0 0 12px;
             pointer-events: none;
             color: #aaa;
             transition: all 200ms;
             z-index: 88;
+            font-size: 0.850em;
         }
 
         .form-control:focus + .form-control-placeholder,
@@ -106,6 +107,11 @@
             input {
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 0px;
+            }
+
+            input.invalido {
+                border-color: darkred;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 24, 24, 0.6);
             }
         }
 
@@ -468,7 +474,7 @@
             .resposta-label {
                 font-size: 1em;
                 font-weight: 300;
-                line-height: 1.05em;
+                line-height: 1.15em;
                 margin-bottom: 0px;  
             }
             .resposta-valor {

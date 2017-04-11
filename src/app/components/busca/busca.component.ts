@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ModalDirective } from 'ng2-bootstrap/modal';
-import { IMyOptions, IMyDateModel } from 'ngx-mydatepicker';
+import { IMyOptions, IMyDateModel, IMyInputFieldChanged } from 'ngx-mydatepicker';
 
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
@@ -71,6 +71,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   };
   public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
   public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
+  dataInicioValida = true;
+  dataTerminoValida = true;
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -176,7 +178,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
           default:
             this.router.navigate(['falha', 405]);
         }
-
+        this.dataTerminoValida = true;
+        this.dataInicioValida = true;
       }
     );
 
