@@ -74,7 +74,7 @@
               </ul>
             </div>
             <!-- UF ==============================================-->        
-            <div class="input col-sm-2 col-xs-6 btn-group" dropdown>
+            <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
               <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                 {{ queries['UF'] }}
                 <span class="caret"></span> 
@@ -86,7 +86,17 @@
                 </li>
               </ul>
             </div>
+            <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+              <select class="form-control" aria-labelledby="seletorEstados" 
+              (change)="($event.target.value === 'null' || $event.target.value === 'Todos os estados') ? queries['UF'] = null : queries['UF'] = $event.target.value" 
+              [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}">
+                <option [value]="i > 0 ? estado.UF : null" *ngFor="let estado of estados.listaEstados; let i = index">{{ i > 0 ? estado.nome : '' }}</option>
+              </select>
+              <div class="form-control-placeholder">UF</div>
+            </div>
+
           </div>
+          <!-- NOME DO PROPONENTE ==========================================-->
           <div class="row">
             <div class="input col-sm-3">
               <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
