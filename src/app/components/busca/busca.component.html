@@ -97,24 +97,44 @@
               <div class="form-control-placeholder">CPF/CNPJ</div>
             </div>    
             <!-- DATA DE INÍCIO ============================================-->
-            <div class="input col-sm-3 col-xs-6 btn-group" dropdown>
-              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ obterDataInicio() | date:'dd/MM/yyyy' }}
-                <span class="caret"></span> 
-              </button>
-              <div class="form-control-placeholder">Data Início</div>
-              <div class="dropdown-menu" role="menu" aria-labelledby="seletorDataInicio">
-                  <datepicker (selectionDone)="queries['data_inicio'] = datePipe.transform(dataInicio, 'yyyy-MM-dd'); consoleLog('OOOOOIII')" 
-                              [(ngModel)]="dataInicio"
-                              [minDate]="minDate" 
-                              [showWeeks]="false" 
-                              [dateDisabled]="false"></datepicker>
-              </div>
+            <div class="input calendario col-sm-3 col-xs-6">
+                <input class="form-control" 
+                      style="float:none" placeholder="" 
+                      ngx-mydatepicker name="calendarioIncio"
+                      [(ngModel)]="dataInicio" 
+                      [options]="opcoesCalendario" 
+                      #dp="ngx-mydatepicker" 
+                      (dateChanged)="onObterDataInicio($event)"
+                      [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== ''}"/>
+                <div class="form-control-placeholder">Data de Início</div>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
             </div>
             <!-- DATA DE TÉRMINO ============================================-->
-            <div class="input col-sm-3 col-xs-6">
-              <input type="text" [(ngModel)]="queries['data_termino']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== ''}">
-              <div class="form-control-placeholder">Data de Término</div>
+            <div class="input calendario col-sm-3 col-xs-6">
+                <input class="form-control" 
+                      style="float:none" placeholder="" 
+                      ngx-mydatepicker name="calendarioTermino"
+                      [(ngModel)]="dataTermino" 
+                      [options]="opcoesCalendario" 
+                      #dp2="ngx-mydatepicker" 
+                      (dateChanged)="onObterDataTermino($event)"
+                      [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== ''}"/>
+                <div class="form-control-placeholder">Data de Término</div>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dp2.clearDate()">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" (click)="dp2.toggleCalendar()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
             </div>
           </div>
         </div>

@@ -10,7 +10,8 @@ import { DatePipe } from '@angular/common';
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
-import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule, DatepickerModule } from 'ng2-bootstrap/';
+import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule } from 'ng2-bootstrap/';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 // Components de Terceiros
 import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
@@ -81,7 +82,7 @@ export function metaFactory(): MetaLoader {
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
-    DatepickerModule.forRoot()
+    NgxMyDatePickerModule
   ],
   providers: [
     ApiService,

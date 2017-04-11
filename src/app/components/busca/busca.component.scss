@@ -34,18 +34,15 @@
     .container-inputs {
         padding: 0px 15px 15px 15px;
 
-
-    ngb-datepicker {
-        display: inline-block !important;
-    }
-
         .form-control-placeholder {
             position: absolute;
+            text-overflow: ellipsis;
             top: 0;
             padding: 6px 0 0 12px;
             pointer-events: none;
             color: #aaa;
             transition: all 200ms;
+            z-index: 88;
         }
 
         .form-control:focus + .form-control-placeholder,
@@ -100,6 +97,15 @@
                     }
 
                 }
+            }
+        }
+
+        .calendario {
+            display: table;
+            
+            input {
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
             }
         }
 

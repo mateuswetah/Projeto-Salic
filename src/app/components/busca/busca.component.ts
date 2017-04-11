@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { ModalDirective } from 'ng2-bootstrap/modal';
+import { IMyOptions, IMyDateModel } from 'ngx-mydatepicker';
 
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
@@ -54,7 +55,22 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   buscaAvancada = false;
   subirRespostasEstado: String = 'inativo';
   linksParaCSVs: String[];
-  dataInicio: Date = new Date();
+
+  // Configurações de Calendário
+  private opcoesCalendario: IMyOptions = {
+      dateFormat: 'dd/mm/yyyy',
+      todayBtnTxt: 'Hoje',
+      firstDayOfWeek: 'su',
+      sunHighlight: false,
+      ariaLabelPrevMonth: 'Mês anterior.',
+      ariaLabelNextMonth: 'Próximo mês.',
+      ariaLabelPrevYear: 'Próximo ano.',
+      ariaLabelNextYear: 'Próximo ano.',
+      dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+      monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
+  };
+  public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -660,11 +676,20 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public obterDataInicio(): String {
-    if (this.queries['data_inicio'] !== null && this.queries['data_inicio'] !== undefined && this.queries['data_inicio'] !== '') {
-      return this.dataInicio && String(this.dataInicio.getTime()) || String(new Date().getTime());
+  public onObterDataInicio(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_inicio'] = null;
+    } else {
+      this.queries['data_inicio'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
-    return '';
+  }
+
+  public onObterDataTermino(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_termino'] = null;
+    } else {
+      this.queries['data_termino'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
   }
 
   public esconderModalDeCSV(): void {
