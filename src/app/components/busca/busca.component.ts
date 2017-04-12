@@ -666,20 +666,27 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   checaChipsValidos(keys: string[]) {
     const indexOffset = keys.indexOf('offset');
     if (indexOffset > -1) { keys.splice(indexOffset, 1); }
+
     const indexSort = keys.indexOf('sort');
     if (indexSort > -1) { keys.splice(indexSort, 1); }
+
     const indexLimit = keys.indexOf('limit');
     if (indexLimit > -1) { keys.splice(indexLimit, 1); }
+
     const indexArea = keys.indexOf('area');
-    if (indexArea > -1 && this.queries['area'] === null) { keys.splice(indexLimit, 1); }
+    if (indexArea > -1 && this.queries['area'] === null) { keys.splice(indexArea, 1); }
+
     const indexSegmento = keys.indexOf('segmento');
-    if (indexSegmento > -1 && this.queries['segmento'] === null) { keys.splice(indexLimit, 1); }
+    if (indexSegmento > -1 && this.queries['segmento'] === null) { keys.splice(indexSegmento, 1); }
+
     const indexUF = keys.indexOf('UF');
-    if (indexUF > -1 && this.queries['UF'] === null) { keys.splice(indexLimit, 1); }
+    if (indexUF > -1 && this.queries['UF'] === null) { keys.splice(indexUF, 1); }
+
     const indexDataInicio = keys.indexOf('data_inicio');
-    if (indexDataInicio > -1 && this.queries['data_inicio'] === null) { keys.splice(indexLimit, 1); }
+    if (indexDataInicio > -1 && this.queries['data_inicio'] === null) { keys.splice(indexDataInicio, 1); }
+
     const indexDataTermino = keys.indexOf('data_termino');
-    if (indexDataTermino > -1 && this.queries['data_termino'] === null) { keys.splice(indexLimit, 1); }
+    if (indexDataTermino > -1 && this.queries['data_termino'] === null) { keys.splice(indexDataTermino, 1); }
 
     return keys;
   }
@@ -689,10 +696,38 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       return this.areasDeProjetos[String(this.queries[key])];
     } else if (key === 'segmento') {
       return this.segmentosDeProjetos.obterNomePorCod(this.queries[key]);
+    } else if (key === 'data_inicio') {
+      return this.dataFormatterService.formataData(this.queries[key]);
+    } else if (key === 'data_termino') {
+      return this.dataFormatterService.formataData(this.queries[key]);
     } else {
       return this.queries[key];
     }
   }
+
+  mudarEstadoPorSelect($event) {
+    if ($event.target.value === 'null' || $event.target.value === 'Todos os estados') {
+      this.queries['UF'] = null;
+    } else {
+      this.queries['UF'] = $event.target.value;
+    }
+  }
+
+  mudarSegmentoPorSelect($event) {
+    $event.target.value !== 'null' ? this.queries['segmento'] = $event.target.value : this.queries['segmento'] = null;
+    $event.target.value !== 'null' ? this.queries['area'] = this.segmentosDeProjetos.obterAreaCodPorCod($event.target.value): this.queries['segmento'] = null;
+  }
+
+  mudarAreaPorSelect($event) {
+    $event.target.value > 0 ? this.queries['area'] = $event.target.value : this.queries['area'] = null;
+    if (this.queries['segmento'] !== null && this.queries['segmento'] !== undefined && this.queries['area'] !== null && this.queries['area'] != this.segmentosDeProjetos.obterAreaCodPorCod(this.queries['segmento'])) {
+      this.queries['segmento'] = null;
+      console.log("Apaguei!");
+     }
+    console.log(this.queries['area']);
+    console.log(this.queries['segmento']);
+    console.log(this.segmentosDeProjetos.obterNomePorCod(this.queries['segmento']));
+}
 
   public onObterDataInicio(event: IMyDateModel): void {
     if (event.jsdate === null) {

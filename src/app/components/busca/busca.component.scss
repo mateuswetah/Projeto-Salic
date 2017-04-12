@@ -89,7 +89,7 @@
                 }
 
                 .dropdown-menu {
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     max-height: 480px;
 
                     @media (max-width: 768px) {
