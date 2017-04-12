@@ -181,8 +181,8 @@
     <div class="container-header-resultados row">
 
         <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
-          <div class="header-respostas fixo row">
-            <div class="col-lg-10 col-md-12 col-lg-offset-1" >
+          <div class="header-respostas fixo col-lg-12">
+            <div class="row" >
               <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
               <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
@@ -247,8 +247,8 @@
           </div>
         </div>
         
-        <div id="headerRespostas" class="header-respostas row">
-          <div class="col-lg-10 col-md-12 col-lg-offset-1">
+        <div id="headerRespostas" class="header-respostas col-lg-12">
+          <div class="row">
           <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
           <div id="containerChips" class="container-chips col-md-6 col-sm-12 col-xs-3"> 
@@ -315,7 +315,7 @@
     </div>
 
   <!-- PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
-  <div class="col-lg-10 col-md-12 col-lg-offset-1" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
+  <div class="col-lg-12 col-sm-12" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
 
     <!-- PAGINAÇÃO ==============================================-->
     <div class="row container-paginacao">
@@ -355,17 +355,17 @@
 
 
   <div [@subirRespostas]='subirRespostasEstado' class="container-respostas">
-    <div class="col-lg-10 col-md-12 col-lg-offset-1" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">  
+    <div class="col-lg-12 col-sm-12" [ngSwitch]="pesquisaPor" *ngIf="!buscaSemResultados && !carregandoDados">  
 
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
-      <div *ngSwitchCase="'projetos'" >
-        <div *ngFor="let projeto of listaProjetos;" class="card col-md-6" >
+      <div *ngSwitchCase="'projetos'" class="row">
+        <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6 col-lg-4" >
           <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
             <div class="row">
               <div class="col-sm-3"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>
-              <div class="col-sm-4"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
-              <div class="col-sm-5"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
+              <div class="col-sm-4 col-xs-6"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
+              <div class="col-sm-5 col-xs-6"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
             </div>
             <div class="row">
               <div class="col-sm-7"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
@@ -376,16 +376,17 @@
               <div class="col-sm-5"><p class="resposta-label">Cidade: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
             </div>
             <div class="row">
-              <div class="col-sm-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-              <div class="col-sm-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+              <div class="col-xs-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+              <div class="col-xs-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
             </div>                
           </div>
           <div class="card-botoes-container">
             <div class="card-botoes">
-              <div class="card-botao-resumo col-sm-6">
-                <a (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
+              <div class="card-botao-resumo col-xs-6" 
+                  [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+              <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
               </div>
-              <div class="card-botao-ver col-sm-6">
+              <div class="card-botao-ver col-xs-6">
                 <a [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</a>
               </div>
             </div>

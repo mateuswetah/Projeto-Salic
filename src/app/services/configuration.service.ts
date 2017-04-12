@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
 export class ConfigurationService {
 
    public ApiUrl: String = 'http://hmg.api.salic.cultura.gov.br/beta/';
-   public limitResultados = 10;
+   public limitResultados = 12;
 }
