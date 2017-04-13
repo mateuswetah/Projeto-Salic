@@ -71,6 +71,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   };
   public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
   public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
+
   dataInicioValida = true;
   dataTerminoValida = true;
 
@@ -114,6 +115,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Queries para a busca
   queries: { [query: string]: String } = {};
+  queriesRecebidas: { [query: string]: String } = {};
   queriesDoSelecionado = [];
   queriesDeProjetos: { [query: string]: String }
                     = { 'limit': '', 'offset': '', 'PRONAC': '', 'proponente': '', 'cgccpf': '',
@@ -202,10 +204,14 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     let nenhumaQueryEnviada = true;
 
     this.queries = {};
+    this.queriesRecebidas = {};
     this.ordenarPor = '';
 
     for (const query of this.queriesDoSelecionado) {
-      if (queryParams[query] && queryParams[query] !== '' && queryParams[query] !== undefined) {
+      if (queryParams[query] !== null &&
+          queryParams[query] !== '' &&
+          queryParams[query] !== undefined &&
+          queryParams[query] !== 'null') {
 
         this.queries[query] = queryParams[query];
 
@@ -256,6 +262,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.totalDeItems = 0;
     this.numeroDeItems = 0;
 
+    this.queriesRecebidas = JSON.parse(JSON.stringify(this.queries));
+
+    this.atualizaInputsDeData();
+
     //if (nenhumaQueryEnviada === false) {
       this.carregarPagina(1);
       //console.log(nenhumaQueryEnviada);
@@ -302,7 +312,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     for (const key in this.queries) {
       if (this.queries.hasOwnProperty(key)) {
-        if (this.queries[key] === '') {
+        if (this.queries[key] === '' || this.queries[key] === 'null' || this.queries[key] == null) {
           this.queries[key] = null;
         } else {
           params.set(key, String(this.queries[key]));
@@ -351,7 +361,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     for (const key in this.queries) {
       if (this.queries.hasOwnProperty(key)) {
 
-        if (this.queries[key] === '') {
+        if (this.queries[key] === '' || this.queries[key] === 'null' || this.queries[key] == null) {
           this.queries[key] = null;
         } else {
           params.set(key, String(this.queries[key]));
@@ -360,6 +370,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.location.go('/' + this.pesquisaPor, params.toString());
+    this.queriesRecebidas = JSON.parse(JSON.stringify(this.queries));
+    this.atualizaInputsDeData();
 
     switch (this.pesquisaPor) {
 
@@ -371,6 +383,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
             this.listaProjetos = resposta.listaProjetos;
 
             this.subirRespostasEstado = 'ativo';
+            this.organizaChips();
           },
           err => {
             this.carregandoDados = false;
@@ -522,9 +535,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   // Remove uma querie de parâmetro de busca
   removeQuery(removedKey: string) {
     this.queries[removedKey] = null;
-    if (removedKey === 'data_inicio') {
+
+    if (removedKey === 'data_inicio_min') {
       $('input[name=calendarioIncio]')[0].value = null;
-    } else if (removedKey === 'data_termino') {
+    } else if (removedKey === 'data_termino_max') {
       $('input[name=calendarioTermino]')[0].value = null;
     }
 
@@ -587,44 +601,14 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
 
-    function organizaChips() {
-
-      let constante = 150;
-
-      if ($('#containerChipsButton').is(':visible')) {
-        constante += 55;
-      }
-
-      if ($('#containerChipsRow').innerWidth() > $('#containerChips').innerWidth() - constante ) {
-
-        let chipRemovido = $('#containerChipsRow .chip-wrapper').last();
-        $('#containerChipsRow .chip-wrapper').last().remove();
-        $('#containerChipsPanel').append(chipRemovido);
-
-        //$('#containerChipsRow').hide();
-        // $('#containerChipsPanel').show();
-        $('#containerChipsButton').show();
-
-      } else {
-
-        let chipRemovido = $('#containerChipsPanel .chip-wrapper').last();
-        $('#containerChipsPanel .chip-wrapper').last().remove();
-        $('#containerChipsRow').append(chipRemovido);
-
-        //$('#containerChipsRow').show();
-        //$('#containerChipsPanel').hide();
-        $('#containerChipsButton').hide();
-      }
-    }
-
     reAdjust();
-    organizaChips();
+    this.organizaChips();
 
     $(window).on('resize', function(e){
       console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
       console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
       reAdjust();
-      organizaChips();
+      this.organizaChips();
     });
 
     $('.scroller-right').click(function() {
@@ -651,6 +635,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   passouDoScrollTop(event) {
+
     if ($('#headerRespostas').offset() !== undefined) {
       if (window.pageYOffset > $('#headerRespostas').offset().top) {
         return true;
@@ -674,39 +659,39 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     if (indexLimit > -1) { keys.splice(indexLimit, 1); }
 
     const indexArea = keys.indexOf('area');
-    if (indexArea > -1 && this.queries['area'] === null) { keys.splice(indexArea, 1); }
+    if (indexArea > -1 && this.queriesRecebidas['area'] === null) { keys.splice(indexArea, 1); }
 
     const indexSegmento = keys.indexOf('segmento');
-    if (indexSegmento > -1 && this.queries['segmento'] === null) { keys.splice(indexSegmento, 1); }
+    if (indexSegmento > -1 && this.queriesRecebidas['segmento'] === null) { keys.splice(indexSegmento, 1); }
 
     const indexUF = keys.indexOf('UF');
-    if (indexUF > -1 && this.queries['UF'] === null) { keys.splice(indexUF, 1); }
+    if (indexUF > -1 && this.queriesRecebidas['UF'] === null) { keys.splice(indexUF, 1); }
 
-    const indexDataInicio = keys.indexOf('data_inicio');
-    if (indexDataInicio > -1 && this.queries['data_inicio'] === null) { keys.splice(indexDataInicio, 1); }
+    const indexDataInicio = keys.indexOf('data_inicio_min');
+    if (indexDataInicio > -1 && this.queriesRecebidas['data_inicio_min'] === null) { keys.splice(indexDataInicio, 1); }
 
-    const indexDataTermino = keys.indexOf('data_termino');
-    if (indexDataTermino > -1 && this.queries['data_termino'] === null) { keys.splice(indexDataTermino, 1); }
+    const indexDataTermino = keys.indexOf('data_termino_max');
+    if (indexDataTermino > -1 && this.queriesRecebidas['data_termino_max'] === null) { keys.splice(indexDataTermino, 1); }
 
     return keys;
   }
 
   formataChip (key: string) {
     if (key === 'area') {
-      return this.areasDeProjetos[String(this.queries[key])];
+      return this.areasDeProjetos[String(this.queriesRecebidas[key])];
     } else if (key === 'segmento') {
-      return this.segmentosDeProjetos.obterNomePorCod(this.queries[key]);
-    } else if (key === 'data_inicio') {
-      return this.dataFormatterService.formataData(this.queries[key]);
-    } else if (key === 'data_termino') {
-      return this.dataFormatterService.formataData(this.queries[key]);
+      return this.segmentosDeProjetos.obterNomePorCod(this.queriesRecebidas[key]);
+    } else if (key === 'data_inicio_min') {
+      return this.dataFormatterService.formataData(this.queriesRecebidas[key]);
+    } else if (key === 'data_termino_max') {
+      return this.dataFormatterService.formataData(this.queriesRecebidas[key]);
     } else {
-      return this.queries[key];
+      return this.queriesRecebidas[key];
     }
   }
 
   mudarEstadoPorSelect($event) {
-    if ($event.target.value === 'null' || $event.target.value === 'Todos os estados') {
+    if ($event.target.value === '' || $event.target.value === 'Todos os estados') {
       this.queries['UF'] = null;
     } else {
       this.queries['UF'] = $event.target.value;
@@ -731,17 +716,44 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public onObterDataInicio(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_inicio'] = null;
+       this.queries['data_inicio_min'] = null;
     } else {
-      this.queries['data_inicio'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   public onObterDataTermino(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_termino'] = null;
+       this.queries['data_termino_max'] = null;
     } else {
-      this.queries['data_termino'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  atualizaInputsDeData() {
+    if (this.queries['data_inicio_min']) {
+
+      const dataSplit = this.queries['data_inicio_min'].split('-');
+
+      if (dataSplit.length === 3) {
+        this.dataInicio = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+      }
+
+    }
+    if (this.queries['data_termino_max']) {
+
+      const dataSplit = this.queries['data_termino_max'].split('-');
+      console.log(dataSplit);
+      this.dataFinal = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+
     }
   }
 
@@ -756,5 +768,36 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   public expandido(event: any): void {
     // console.log(event);
   }
+
+  organizaChips() {
+
+    let constante = 150;
+
+    if ($('#containerChipsButton').is(':visible')) {
+      constante += 55;
+    }
+
+    if ($('#containerChipsRow').innerWidth() > $('#containerChips').innerWidth() - constante ) {
+
+      let chipRemovido = $('#containerChipsRow .chip-wrapper').last();
+      $('#containerChipsRow .chip-wrapper').last().remove();
+      $('#containerChipsPanel').append(chipRemovido);
+
+      //$('#containerChipsRow').hide();
+      // $('#containerChipsPanel').show();
+      $('#containerChipsButton').show();
+
+    } else {
+
+      let chipRemovido = $('#containerChipsPanel .chip-wrapper').last();
+      $('#containerChipsPanel .chip-wrapper').last().remove();
+      $('#containerChipsRow').append(chipRemovido);
+
+      //$('#containerChipsRow').show();
+      //$('#containerChipsPanel').hide();
+      $('#containerChipsButton').hide();
+    }
+  }
+
 
 }

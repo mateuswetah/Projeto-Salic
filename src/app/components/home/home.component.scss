@@ -78,6 +78,8 @@
     .container-inputs {
         padding: 0px 25px 15px 25px;
         background-color: $verde-claro; 
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
 
         .form-control-placeholder {
             position: absolute;
@@ -139,7 +141,6 @@
     a { 
         color: black; 
         font-size: 1.0em;
-        font-weight: 300;
         border-radius: 0px;
         cursor: pointer;
         margin-top: 5px;
