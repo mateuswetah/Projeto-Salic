@@ -133,13 +133,14 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   queriesDeFornecedores: { [query: string]: String }
                        = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
+  // Dropdowns e selects
   areasDeProjetos = ['Todas as áreas', 'Artes Cênicas',
                      'Audiovisual', 'Música',
                      'Artes Visuais', 'Patrimônio Cultural',
                      'Humanidades', 'Artes Integradas'];
-
   segmentosDeProjetos = new Segmentos();
   estados = new Estados();
+  tiposPessoa = ['Qualquer tipo', 'Física', 'Jurídica'];
 
 
   constructor(private route: ActivatedRoute,
@@ -673,6 +674,9 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     const indexDataTermino = keys.indexOf('data_termino_max');
     if (indexDataTermino > -1 && this.queriesRecebidas['data_termino_max'] === null) { keys.splice(indexDataTermino, 1); }
 
+    const indexTipoPessoa = keys.indexOf('tipo_pessoa');
+    if (indexTipoPessoa > -1 && this.queriesRecebidas['tipo_pessoa'] === null) { keys.splice(indexTipoPessoa, 1); }
+
     return keys;
   }
 
@@ -713,6 +717,15 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(this.queries['segmento']);
     console.log(this.segmentosDeProjetos.obterNomePorCod(this.queries['segmento']));
 }
+
+  mudarTipoPessoaPorSelect($event) {
+    console.log($event.target.value);
+    if ($event.target.value !== null && $event.target.value !== '' && $event.target.value !== 'Qualquer tipo') {
+      $event.target.value === 'fisica' ? this.queries['tipo_pessoa'] = 'fisica' : this.queries['tipo_pessoa'] = 'juridica';
+    } else {
+      this.queries['tipo_pessoa'] = null;
+    }
+  }
 
   public onObterDataInicio(event: IMyDateModel): void {
     if (event.jsdate === null) {

@@ -12,6 +12,10 @@
        margin: 0px;
   } 
 
+  .navbar-header {
+    @media (max-width: 768px){ margin: 0 -24px; } 
+  }
+
   .navbar-collapse { border: none;}
 
   a, span { color: white;}

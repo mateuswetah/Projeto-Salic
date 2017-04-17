@@ -465,20 +465,27 @@
     display: inline-block;
     width: 100%;
     margin-top: -10px;
-
+/*
+    @media (max-width: 1360px) {
+        margin: 0 auto;
+        max-width: 960px;
+        display: inherit;
+    }
+*/
     .card {
         
         overflow: hidden;
-        height: 477px;
+        height: 475px;
         padding: 6px;
         margin-bottom: 19px; 
 
         @media all and (min-width: 768px){
-            height: 340px;
+            height: 338px;
             padding: 19px;
         }    
 
         @media (max-width: 1360px) {
+
             &.col-lg-4 {
                 width: 50%;
             }
@@ -608,7 +615,7 @@
 
                 >span {
                     display: inline-block;
-                    padding: 8px 16px 8px 18px;
+                    padding: 8px 16px 7px 18px;
                     margin: -1px;
                     border-bottom-left-radius: 5px;
                     border-bottom-right-radius: 5px;
@@ -622,7 +629,7 @@
                 background-color: $cinza;
                 text-align: end;
                 display: inline-block;
-                padding: 8px 15px;
+                padding: 8px 15px 7px 15px;
                 border-bottom-right-radius: 5px;
                 border-left: none;
                 border-bottom: 1px solid $cinza-escuro;
@@ -635,17 +642,17 @@
     }
 
     .card-proponente {
-        height: 426px;
+        height: 428px;
 
         @media all and (min-width: 768px){
-            height: 239px;
+            height: 240px;
         } 
 
         .card-resposta {
-            height: 332px;
+            height: 334px;
 
             @media all and (min-width: 768px){
-                height: 136px;
+                height: 138px;
             } 
         }
 
@@ -670,17 +677,17 @@
     }
 
     .card-fornecedor {
-         height: 223px;
+         height: 225px;
 
         @media all and (min-width: 768px){
-            height: 186px;
+            height: 188px;
         } 
 
         .card-resposta {
-            height: 165px;
+            height: 167px;
 
             @media all and (min-width: 768px){
-                height: 136px;
+                height: 138px;
             } 
         }
 
