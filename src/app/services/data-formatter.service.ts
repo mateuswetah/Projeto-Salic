@@ -114,6 +114,16 @@ export class DataFormatterService {
     }
   }
 
+  formataTipoPessoa (tipo: String) {
+    if (tipo === 'juridica') {
+      return 'Jurídica';
+    } else if (tipo === 'fisica') {
+      return 'Física';
+    } else {
+      return tipo;
+    }
+  }
+
   constructor() { }
 
 }

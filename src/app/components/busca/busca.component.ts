@@ -467,7 +467,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
             this.totalDeItems = resposta.total;
             this.numeroDeItems = resposta.count;
             this.listaFornecedores = resposta.listaFornecedores;
-
+            console.log(resposta);
             this.subirRespostasEstado = 'ativo';
           },
           err => {

@@ -128,7 +128,7 @@
 
     .footer-busca {
         a { cursor: pointer; }
-        a:hover { color: $verde-salic }
+        a:hover { color: $verde-salic; text-decoration: none; }
 
         padding-right: 15px;
         padding-left: 15px;
@@ -158,6 +158,7 @@
         &:hover {
             background-color: $verde-claro;
             border-bottom: 4px solid $verde-salic;
+            text-decoration: none;
         }  
     }
 
@@ -285,7 +286,7 @@
     }
     .container-chips { 
         display: inline-block;
-        padding: 8px 10px 6px 30px;
+        padding: 10px 10px 8px 30px;
         min-height: 48px;
 
         @media (max-width: 768px) {
@@ -299,7 +300,7 @@
         }
 
         #containerChipsRow {
-            display: inline-block;
+            display: inline;
             background-color: $cinza;
             min-width: 60%;
         } 
@@ -311,6 +312,7 @@
 
             &:hover {
                 color: $verde-salic;
+                text-decoration: none;
             }
         }
     }
@@ -474,7 +476,19 @@
         @media all and (min-width: 768px){
             height: 340px;
             padding: 19px;
-        }        
+        }    
+
+        @media (max-width: 1360px) {
+            &.col-lg-4 {
+                width: 50%;
+            }
+        }  
+
+        @media (max-width: 860px) {
+            &.col-md-6 {
+                width: 100%;
+            }
+        }       
 
         .texto-elipsado{
             p, h5, .card-title{
@@ -577,16 +591,31 @@
 
                 &:hover {
                     color: $verde-salic;
+                    text-decoration: none;
                 }
             }
 
             .card-botao-resumo {
                 background-color: $cinza;
                 display: inline-block;
-                padding: 8px 16px;  
                 border-bottom-left-radius: 5px;
-                border: 1px solid $cinza-escuro;
+                border-bottom: 1px solid $cinza-escuro;
+                border-top: 1px solid $cinza-escuro;
+                border-left: 1px solid $cinza-escuro;
+                border-right: none;
+                padding: 0px;
                 margin-top: -1px;
+
+                >span {
+                    display: inline-block;
+                    padding: 8px 16px 8px 18px;
+                    margin: -1px;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    border-bottom: 1px solid $cinza-escuro;
+                    border-top: 1px solid $cinza-escuro;
+                    border-left: 1px solid $cinza-escuro;   
+                }
             }
 
             .card-botao-ver {
@@ -595,7 +624,10 @@
                 display: inline-block;
                 padding: 8px 15px;
                 border-bottom-right-radius: 5px;
-                border: 1px solid $cinza-escuro;
+                border-left: none;
+                border-bottom: 1px solid $cinza-escuro;
+                border-top: 1px solid $cinza-escuro;
+                border-right: 1px solid $cinza-escuro; 
                 margin-top: -1px;
             }
         }
@@ -603,26 +635,57 @@
     }
 
     .card-proponente {
-        height: 397px;
+        height: 426px;
 
         @media all and (min-width: 768px){
-            height: 247px;
+            height: 239px;
         } 
 
         .card-resposta {
-            height: 300px;
+            height: 332px;
 
             @media all and (min-width: 768px){
                 height: 136px;
             } 
         }
 
-        .card-botoes {
-            top: 5px;
-            margin: 0 -35px;
+        .card-botoes-container {
+            top: 8px;
+            
+            .card-botoes {
+                margin: 0 -35px;
+                
 
-            .card-botao-ver { border-bottom-left-radius: 5px; }
+                @media (max-width: 440px) {
+                    margin: 0 -31px;
+                }
+
+                .card-botao-ver { 
+                    text-align: start;
+                    border-bottom-left-radius: 5px; 
+                    border-left: 1px solid $cinza-escuro;
+                }
+            }
         }
+    }
+
+    .card-fornecedor {
+         height: 223px;
+
+        @media all and (min-width: 768px){
+            height: 186px;
+        } 
+
+        .card-resposta {
+            height: 165px;
+
+            @media all and (min-width: 768px){
+                height: 136px;
+            } 
+        }
+
+        .card-botoes-container>.card-botoes>.card-botao-ver { text-align: start; }
+
     }
 
 }

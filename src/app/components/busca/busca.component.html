@@ -32,137 +32,219 @@
           </span>
         </div>
 
-        <!-- Busca Avançada ============================================================ -->
-        <div *ngIf="buscaAvancada" class="form-group">
-          <div class="row">
-            <div class="input col-sm-4">
-              <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
-              <div class="form-control-placeholder">Nome do projeto</div>
-            </div>
-            <div class="input col-sm-2 col-xs-6">
-              <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
-              <div class="form-control-placeholder">PRONAC</div>
-            </div>
-            <!-- AREA =========================================-->
-            <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ areasDeProjetos[queries['area']] }}
-                <span class="caret"></span> 
-              </button>
-              <div class="form-control-placeholder">Área</div>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorAreaDoProjeto">
-                <li *ngFor="let area of areasDeProjetos; let i = index" role="menuitem">
-                  <a (click)="i > 0 ? queries['area'] = i : queries['area'] = null;
-                              queries['segmento'] !== null && queries['segmento'] !== undefined && 
-                              queries['segmento'] !== '0' && queries['area'] !== null && 
-                              queries['area'] != segmentosDeProjetos.obterAreaCodPorCod(queries['segmento']) ? queries['segmento'] = null : true;" class="dropdown-item">{{ area }}</a>
+        <!-- Busca Avançada ==================================================================================================== -->
+        <div *ngIf="buscaAvancada">
+          <div [ngSwitch]="pesquisaPor" class="form-group">
+            <!-- PROJETOS BUSCA AVANÇADA ====================================================================================== -->
+            <div *ngSwitchCase="'projetos'" class="row">
+              <div class="input col-sm-4">
+                <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
+                <div class="form-control-placeholder">Nome do projeto</div>
+              </div>
+              <div class="input col-sm-2 col-xs-6">
+                <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
+                <div class="form-control-placeholder">PRONAC</div>
+              </div>
+              <!-- AREA =========================================-->
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ areasDeProjetos[queries['area']] }}
+                  <span class="caret"></span> 
+                </button>
+                <div class="form-control-placeholder">Área</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorAreaDoProjeto">
+                  <li *ngFor="let area of areasDeProjetos; let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['area'] = i : queries['area'] = null;
+                                queries['segmento'] !== null && queries['segmento'] !== undefined && 
+                                queries['segmento'] !== '0' && queries['area'] !== null && 
+                                queries['area'] != segmentosDeProjetos.obterAreaCodPorCod(queries['segmento']) ? queries['segmento'] = null : true;" class="dropdown-item">{{ area }}</a>
+                    </li>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['area']"
+                  (change)="mudarAreaPorSelect($event)"
+                  [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== ''}">
+                  <option [value]="i > 0 ?  i : null" *ngFor="let area of areasDeProjetos; let i = index">{{ area }} </option>
+                </select>
+                <div class="form-control-placeholder">Área</div>
+              </div>
+              <!-- SEGMENTO ======================================-->
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ segmentosDeProjetos.obterNomePorCod(queries['segmento']) }}
+                  <span class="caret"></span>
+                </button>
+                <div class="form-control-placeholder">Segmento</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorSegmentoDoProjeto">
+                  <li *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['segmento'] = segmento.cod : queries['segmento'] = null; 
+                                i > 0 ? queries['area'] = segmento.areaCod : queries['segmento'] = null;" class="dropdown-item">{{ segmento.nome }}</a>
                   </li>
-              </ul>
-            </div>
-            <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['area']"
-                (change)="mudarAreaPorSelect($event)"
-                [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== ''}">
-                <option [value]="i > 0 ?  i : null" *ngFor="let area of areasDeProjetos; let i = index">{{ area }} </option>
-              </select>
-              <div class="form-control-placeholder">Área</div>
-            </div>
-            <!-- SEGMENTO ======================================-->
-            <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-               <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ segmentosDeProjetos.obterNomePorCod(queries['segmento']) }}
-                <span class="caret"></span>
-              </button>
-              <div class="form-control-placeholder">Segmento</div>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorSegmentoDoProjeto">
-                <li *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index" role="menuitem">
-                  <a (click)="i > 0 ? queries['segmento'] = segmento.cod : queries['segmento'] = null; 
-                              i > 0 ? queries['area'] = segmento.areaCod : queries['segmento'] = null;" class="dropdown-item">{{ segmento.nome }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['segmento']"
-                (change)="mudarSegmentoPorSelect($event)"
-                [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== ''}">
-                <option [value]="i > 0 ? segmento.cod : null" *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index">{{ segmento.nome }} </option>
-              </select>
-              <div class="form-control-placeholder">Segmento</div>
-            </div>
-            <!-- UF ==============================================-->        
-            <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-              <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ queries['UF'] }}
-                <span class="caret"></span> 
-              </button>
-              <div class="form-control-placeholder">UF</div>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="seletorEstados">
-                <li *ngFor="let estado of estados.listaEstados; let i = index" role="menuitem">
-                  <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null">{{ estado.nome }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select id="seletorEstados" class="form-control" aria-labelledby="seletorEstados" [ngModel]="queries['UF']"
-              (change)="mudarEstadoPorSelect($event)" 
-              [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== ''}">
-                <option [value]="i > 0 ? estado.UF : ''" *ngFor="let estado of estados.listaEstados; let i = index">{{ estado.nome }}</option>
-              </select>
-              <div class="form-control-placeholder">UF</div>
-            </div>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['segmento']"
+                  (change)="mudarSegmentoPorSelect($event)"
+                  [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== ''}">
+                  <option [value]="i > 0 ? segmento.cod : null" *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index">{{ segmento.nome }} </option>
+                </select>
+                <div class="form-control-placeholder">Segmento</div>
+              </div>
+              <!-- UF ==============================================-->        
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ queries['UF'] }}
+                  <span class="caret"></span> 
+                </button>
+                <div class="form-control-placeholder">UF</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorEstados">
+                  <li *ngFor="let estado of estados.listaEstados; let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null">{{ estado.nome }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select id="seletorEstados" class="form-control" aria-labelledby="seletorEstados" [ngModel]="queries['UF']"
+                (change)="mudarEstadoPorSelect($event)" 
+                [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== ''}">
+                  <option [value]="i > 0 ? estado.UF : ''" *ngFor="let estado of estados.listaEstados; let i = index">{{ estado.nome }}</option>
+                </select>
+                <div class="form-control-placeholder">UF</div>
+              </div>
 
-          </div>
-          <!-- NOME DO PROPONENTE ==========================================-->
-          <div class="row">
-            <div class="input col-sm-3">
-              <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
-              <div class="form-control-placeholder">Nome do Proponente</div>
             </div>
-            <div class="input col-sm-3">
-              <input type="text" [(ngModel)]="queries['cgccpf']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['cgccpf'] !== undefined && queries['cgccpf'] !== null && queries['cgccpf'] !== ''}">
-              <div class="form-control-placeholder">CPF/CNPJ</div>
-            </div>    
-            <!-- DATA DE INÍCIO ============================================-->
-            <div class="input calendario col-sm-3 col-xs-6">
-                <input class="form-control" 
-                      style="float:none" placeholder="" 
-                      ngx-mydatepicker name="calendarioIncio"
-                      [(ngModel)]="dataInicio" 
-                      [options]="opcoesCalendario" 
-                      #dp="ngx-mydatepicker" 
-                      (dateChanged)="onObterDataInicio($event)"
-                      (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
-                <div class="form-control-placeholder">Início a partir de</div>
-                <span class="input-group-btn">
-                    <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </button>-->
-                    <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </span>
+            <div *ngSwitchCase="'projetos'"  class="row">
+              <!-- NOME DO PROPONENTE ==========================================-->
+              <div class="input col-sm-3">
+                <input type="text" [(ngModel)]="queries['proponente']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['proponente'] !== undefined && queries['proponente'] !== null && queries['proponente'] !== ''}">
+                <div class="form-control-placeholder">Nome do Proponente</div>
+              </div>
+              <div class="input col-sm-3">
+                <input type="text" [(ngModel)]="queries['cgccpf']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['cgccpf'] !== undefined && queries['cgccpf'] !== null && queries['cgccpf'] !== ''}">
+                <div class="form-control-placeholder">CPF/CNPJ</div>
+              </div>    
+              <!-- DATA DE INÍCIO ============================================-->
+              <div class="input calendario col-sm-3 col-xs-6">
+                  <input class="form-control" 
+                        style="float:none" placeholder="" 
+                        ngx-mydatepicker name="calendarioIncio"
+                        [(ngModel)]="dataInicio" 
+                        [options]="opcoesCalendario" 
+                        #dp="ngx-mydatepicker" 
+                        (dateChanged)="onObterDataInicio($event)"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
+                  <div class="form-control-placeholder">Início a partir de</div>
+                  <span class="input-group-btn">
+                      <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                          <i class="glyphicon glyphicon-remove"></i>
+                      </button>-->
+                      <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                      </button>
+                  </span>
+              </div>
+              <!-- DATA DE TÉRMINO ============================================-->
+              <div class="input calendario col-sm-3 col-xs-6">
+                  <input class="form-control" 
+                        style="float:none" placeholder="" 
+                        ngx-mydatepicker name="calendarioTermino"
+                        [(ngModel)]="dataFinal" 
+                        [options]="opcoesCalendario" 
+                        #dp2="ngx-mydatepicker" 
+                        (dateChanged)="onObterDataTermino($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                  <div class="form-control-placeholder">Término até</div>
+                  <span class="input-group-btn">
+                      <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
+                          <i class="glyphicon glyphicon-remove"></i>
+                      </button>-->
+                      <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                      </button>
+                  </span>
+              </div>
             </div>
-            <!-- DATA DE TÉRMINO ============================================-->
-            <div class="input calendario col-sm-3 col-xs-6">
-                <input class="form-control" 
-                      style="float:none" placeholder="" 
-                      ngx-mydatepicker name="calendarioTermino"
-                      [(ngModel)]="dataFinal" 
-                      [options]="opcoesCalendario" 
-                      #dp2="ngx-mydatepicker" 
-                      (dateChanged)="onObterDataTermino($event);"
-                      (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
-                <div class="form-control-placeholder">Término até</div>
-                <span class="input-group-btn">
-                    <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </button>-->
-                    <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </span>
+           <!-- PROPOSTAS BUSCA AVANÇADA ====================================================================================== -->
+            <div *ngSwitchCase="'propostas'" class="row">
+              <div class="input col-sm-4">
+                <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
+                <div class="form-control-placeholder">Nome do projeto</div>
+              </div>
+              <div class="input col-sm-2 col-xs-6">
+                <input type="text" [(ngModel)]="queries['PRONAC']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['PRONAC'] !== undefined && queries['PRONAC'] !== null && queries['PRONAC'] !== ''}">
+                <div class="form-control-placeholder">PRONAC</div>
+              </div>
+              <!-- AREA =========================================-->
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ areasDeProjetos[queries['area']] }}
+                  <span class="caret"></span> 
+                </button>
+                <div class="form-control-placeholder">Área</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorAreaDoProjeto">
+                  <li *ngFor="let area of areasDeProjetos; let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['area'] = i : queries['area'] = null;
+                                queries['segmento'] !== null && queries['segmento'] !== undefined && 
+                                queries['segmento'] !== '0' && queries['area'] !== null && 
+                                queries['area'] != segmentosDeProjetos.obterAreaCodPorCod(queries['segmento']) ? queries['segmento'] = null : true;" class="dropdown-item">{{ area }}</a>
+                    </li>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['area']"
+                  (change)="mudarAreaPorSelect($event)"
+                  [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== ''}">
+                  <option [value]="i > 0 ?  i : null" *ngFor="let area of areasDeProjetos; let i = index">{{ area }} </option>
+                </select>
+                <div class="form-control-placeholder">Área</div>
+              </div>
+              <!-- SEGMENTO ======================================-->
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ segmentosDeProjetos.obterNomePorCod(queries['segmento']) }}
+                  <span class="caret"></span>
+                </button>
+                <div class="form-control-placeholder">Segmento</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorSegmentoDoProjeto">
+                  <li *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['segmento'] = segmento.cod : queries['segmento'] = null; 
+                                i > 0 ? queries['area'] = segmento.areaCod : queries['segmento'] = null;" class="dropdown-item">{{ segmento.nome }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select class="form-control" aria-labelledby="seletorSegmentoDoProjeto" [ngModel]="queries['segmento']"
+                  (change)="mudarSegmentoPorSelect($event)"
+                  [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== ''}">
+                  <option [value]="i > 0 ? segmento.cod : null" *ngFor="let segmento of segmentosDeProjetos.segmentosFiltrados(queries['area']); let i = index">{{ segmento.nome }} </option>
+                </select>
+                <div class="form-control-placeholder">Segmento</div>
+              </div>
+              <!-- UF ==============================================-->        
+              <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
+                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                  {{ queries['UF'] }}
+                  <span class="caret"></span> 
+                </button>
+                <div class="form-control-placeholder">UF</div>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="seletorEstados">
+                  <li *ngFor="let estado of estados.listaEstados; let i = index" role="menuitem">
+                    <a (click)="i > 0 ? queries['UF'] = estado.UF : queries['UF'] = null">{{ estado.nome }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
+                <select id="seletorEstados" class="form-control" aria-labelledby="seletorEstados" [ngModel]="queries['UF']"
+                (change)="mudarEstadoPorSelect($event)" 
+                [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== ''}">
+                  <option [value]="i > 0 ? estado.UF : ''" *ngFor="let estado of estados.listaEstados; let i = index">{{ estado.nome }}</option>
+                </select>
+                <div class="form-control-placeholder">UF</div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -369,11 +451,11 @@
             </div>
             <div class="row">
               <div class="col-sm-7"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
-              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ projeto.cgccpf }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
             </div>
             <div class="row">
               <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
-              <div class="col-sm-5"><p class="resposta-label">Cidade: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
             </div>
             <div class="row">
               <div class="col-xs-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
@@ -382,9 +464,11 @@
           </div>
           <div class="card-botoes-container">
             <div class="card-botoes">
-              <div class="card-botao-resumo col-xs-6" 
-                  [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
-              <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
+              <div class="card-botao-resumo col-xs-6">
+              <span (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
+                   [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}" ><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
+              </span>
               </div>
               <div class="card-botao-ver col-xs-6">
                 <a [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</a>
@@ -398,7 +482,7 @@
       </div>
       
       <div *ngSwitchCase="'propostas'">
-        <div *ngFor="let proposta of listaPropostas" class="card col-md-6">
+        <div *ngFor="let proposta of listaPropostas" class="card col-sm-12 col-md-6 col-lg-4">
           <div class="panel panel-default">
             <div class="panel-heading">{{ proposta.nome }}</div> 
             <div class="panel-body">
@@ -411,52 +495,69 @@
       </div>
 
       <div *ngSwitchCase="'proponentes'">
-        <div *ngFor="let proponente of listaProponentes" class="card card-proponente col-md-6">
+        <div *ngFor="let proponente of listaProponentes" class="card card-proponente col-sm-12 col-md-6 col-lg-4">
           <div class="card-header texto-elipsado" title="{{ proponente.nome }}"><p>{{ proponente.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
             <div class="row">
-              <div class="col-sm-4"><p class="resposta-label">Tipo de Pessoa: </p><p class="resposta-valor">{{ proponente.tipo_pessoa }}</p></div>
-              <div class="col-sm-6"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ proponente.cgccpf }}</p></div> 
-              <div class="col-sm-2"><p class="resposta-label">UF: </p><p class="resposta-valor">{{ proponente.UF }}</p></div>
+              <div class="col-sm-3"><p class="resposta-label">Pessoa: </p><p class="resposta-valor">{{ dataFormatterService.formataTipoPessoa(proponente.tipo_pessoa)  }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor" title="{{ dataFormatterService.formataCGCCPF(proponente.cgccpf) }}">{{ dataFormatterService.formataCGCCPF(proponente.cgccpf) }}</p></div> 
+              <div class="col-sm-4"><p class="resposta-label">Município: </p><p class="resposta-valor" title="{{ proponente.municipio }}">{{ proponente.municipio }}</p></div>
             </div>
             <div class="row">
-              <div class="col-sm-4"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ proponente.municipio }}</p></div>
-              <div class="col-sm-8"><p class="resposta-label">Total Captado: </p><p class="resposta-valor">{{ proponente.total_captado }}</p></div>
-            </div>
-          <div class="card-botoes-container">
-            <div class="card-botoes">
-              <div class="card-botao-ver col-xs-12">
-                <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" >VER PROPONENTE</a>
+              <div class="col-sm-2"><p class="resposta-label">UF: </p><p class="resposta-valor">{{ proponente.UF }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">Responsável: </p><p class="resposta-valor">{{ proponente.responsavel }}</p></div>
+              <div class="col-sm-4"><p class="resposta-label">Total Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(proponente.total_captado) }}</p></div>
+            </div> 
+            <div class="card-botoes-container">
+              <div class="card-botoes">
+                <div class="card-botao-ver col-xs-12">
+                  <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" >VER PROPONENTE</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
 
       <div *ngSwitchCase="'incentivadores'">
-        <div *ngFor="let incentivador of listaIncentivadores" class="card col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">{{ incentivador.nome }}</div> 
-            <div class="panel-body">
-              <div class="col-sm-9"><p>cgccpf: </p><h4>{{ incentivador.cgccpf }}</h4></div>
-              <div class="col-sm-3"><button [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" 
-                                            type="button" 
-                                            class="btn btn-primary" >Ver Incentivador</button></div>
+        <div *ngFor="let incentivador of listaIncentivadores" class="card card-proponente col-sm-12 col-md-6 col-lg-4">
+          <div class="card-header texto-elipsado" title="{{ incentivador.nome }}"><p>{{ incentivador.nome }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-3"><p class="resposta-label">Tipo de Pessoa: </p><p class="resposta-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipo_pessoa) }}</p></div>
+              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor" title="{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}">{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}</p></div> 
+              <div class="col-sm-4"><p class="resposta-label">Município: </p><p class="resposta-valor" title="{{ incentivador.municipio }}">{{ incentivador.municipio }}</p></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2"><p class="resposta-label">UF: </p><p class="resposta-valor">{{ incentivador.UF }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">Responsável: </p><p class="resposta-valor">{{ incentivador.responsavel }}</p></div>
+              <div class="col-sm-4"><p class="resposta-label">Total Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(incentivador.total_doado) }}</p></div>
+            </div> 
+            <div class="card-botoes-container">
+              <div class="card-botoes">
+                <div class="card-botao-ver col-xs-12">
+                  <a [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" >VER INCENTIVADOR</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div *ngSwitchCase="'fornecedores'">
-        <div *ngFor="let fornecedor of listaFornecedores" class="card col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">{{ fornecedor.nome }}</div> 
-            <div class="panel-body">
-              <div class="col-sm-9"><p>cgccpf: </p><h4>{{ fornecedor.cgccpf }}</h4></div>
-            <div class="col-sm-3"><button [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" 
-                                            type="button" 
-                                            class="btn btn-primary" >Ver Fornecedor</button></div>
+        <div *ngFor="let fornecedor of listaFornecedores" class="card card-proponente card-fornecedor col-sm-12 col-md-6 col-lg-4">
+          <div class="card-header texto-elipsado" title="{{ fornecedor.nome }}"><p>{{ fornecedor.nome }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-6"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor" title="{{ dataFormatterService.formataCGCCPF(fornecedor.cgccpf) }}">{{ dataFormatterService.formataCGCCPF(fornecedor.cgccpf) }}</p></div> 
+              <div class="col-sm-6"><p class="resposta-label">Email: </p><p class="resposta-valor">{{ fornecedor.email ? fornecedor.email : 'Não informado' }}</p></div>
+            </div>
+            <div class="card-botoes-container">
+              <div class="card-botoes">
+                <div class="card-botao-ver col-xs-12">
+                  <a [routerLink]="['/fornecedors', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" >VER FORNECEDOR</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
