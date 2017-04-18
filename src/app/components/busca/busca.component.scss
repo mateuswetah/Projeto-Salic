@@ -269,7 +269,6 @@
         &>div {
             padding-left: 0px; 
             padding-right: 0px; 
-            margin-right: 0px;
         }
     }
 
@@ -286,7 +285,7 @@
     }
     .container-chips { 
         display: inline-block;
-        padding: 10px 10px 8px 30px;
+        padding: 12px 10px 8px 30px;
         min-height: 48px;
 
         @media (max-width: 768px) {
@@ -332,7 +331,7 @@
 
     .chip-wrapper {
         display: inline-block;
-        margin: 2px;
+        margin: -1px 2px 2px 2px;
         
     }
 
