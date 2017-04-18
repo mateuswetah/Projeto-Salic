@@ -571,14 +571,13 @@
             </div>                
           </div>
           <div class="card-botoes-container">
-            <div class="card-botoes">
-              <div class="card-botao-resumo col-xs-6">
-              <span (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
-                   [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+            <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+              <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
+                   [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
                 <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}" ><span class="glyphicon" [ngClass]="{'glyphicon-triangle-bottom': projeto.isResumoEscondido, 'glyphicon-triangle-right': !projeto.isResumoEscondido }" aria-hidden="true"></span> RESUMO</a>
               </span>
-              </div>
-              <div class="card-botao-ver col-xs-6">
+              
+              <div class="card-botao-ver">
                 <a [routerLink]="['/projetos', projeto.PRONAC]" >VER PROJETO</a>
               </div>
             </div>

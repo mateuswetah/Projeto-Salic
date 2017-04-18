@@ -584,13 +584,15 @@
         }
 
         .card-botoes {
-            background-color: $background-salic;
+            background-color: $cinza;
             color: $verde-salic;
             padding: 0;
-            margin: -10px 10px 10px 10px;
+            margin: -12px 10px 10px 10px;
             height: 100%;
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
+            border: 1px solid $cinza-escuro;
+            overflow: hidden;
 
             a {
                 font-size: 1.125;
@@ -604,38 +606,22 @@
 
             .card-botao-resumo {
                 background-color: $cinza;
+                border-right: none;
                 display: inline-block;
+                padding: 8px 16px 9px 18px;
                 border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
                 border-bottom: 1px solid $cinza-escuro;
                 border-top: 1px solid $cinza-escuro;
-                border-left: 1px solid $cinza-escuro;
-                border-right: none;
-                padding: 0px;
-                margin-top: -1px;
-
-                >span {
-                    display: inline-block;
-                    padding: 8px 16px 7px 18px;
-                    margin: -1px;
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
-                    border-bottom: 1px solid $cinza-escuro;
-                    border-top: 1px solid $cinza-escuro;
-                    border-left: 1px solid $cinza-escuro;   
-                }
+                border-left: 1px solid $cinza-escuro;   
+                margin: -1px;
             }
 
             .card-botao-ver {
-                background-color: $cinza;
                 text-align: end;
+                float: right;
                 display: inline-block;
-                padding: 8px 15px 7px 15px;
-                border-bottom-right-radius: 5px;
-                border-left: none;
-                border-bottom: 1px solid $cinza-escuro;
-                border-top: 1px solid $cinza-escuro;
-                border-right: 1px solid $cinza-escuro; 
-                margin-top: -1px;
+                padding: 8px 15px 8px 15px;
             }
         }
 
@@ -645,7 +631,7 @@
         height: 428px;
 
         @media all and (min-width: 768px){
-            height: 240px;
+            height: 241px;
         } 
 
         .card-resposta {
@@ -660,17 +646,15 @@
             top: 8px;
             
             .card-botoes {
-                margin: 0 -35px;
+                margin: 0 -28px;
                 
 
                 @media (max-width: 440px) {
-                    margin: 0 -31px;
+                    margin: 0 -26px;
                 }
 
                 .card-botao-ver { 
                     text-align: start;
-                    border-bottom-left-radius: 5px; 
-                    border-left: 1px solid $cinza-escuro;
                 }
             }
         }
@@ -684,14 +668,18 @@
         } 
 
         .card-resposta {
-            height: 167px;
+            height: 158px;
 
             @media all and (min-width: 768px){
-                height: 138px;
+                height: 80px;
             } 
         }
 
-        .card-botoes-container>.card-botoes>.card-botao-ver { text-align: start; }
+        .card-botoes-container>.card-botoes{
+
+            .card-botao-ver { text-align: start; }
+
+        }
 
     }
 
