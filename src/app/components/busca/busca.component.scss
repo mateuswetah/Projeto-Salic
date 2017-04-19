@@ -16,12 +16,16 @@
 .container-pesquisa {
 
     background-color: $verde-claro;
-    width: initial;
+    margin-left: 0px;
+    margin-right: 0px;
 
     .container-abas {
         background-color: $verde-claro-salic;
         border-bottom: 1px solid $verde-salic;
         height: 43px;
+        overflow-y: hidden;
+
+        &>div { padding: 0; overflow-y: hidden;}
     }
 
     .linha { 
@@ -33,7 +37,7 @@
     }
 
     .container-inputs {
-        padding: 0px 15px 15px 15px;
+        padding: 0px 0px 15px 0px;
 
         @media (max-width: 992px) and (min-width: 768px) {
             padding: 0px 30px 15px 30px;
@@ -140,9 +144,11 @@
 .abas-pesquisa {
     
     position: relative;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 	padding: 0px 5px;
-  	height: 42px;
+  	height: 54px;
+    margin-bottom: -15px;
     line-height: 1;
     background-color: $verde-claro-salic;
     border-top-left-radius: 5px;
@@ -174,9 +180,10 @@
 
 .aba {
     position:absolute;
+    overflow-y: hidden;
     left:0px;
     top:0px;
-  	min-width:3000px;
+  	min-width: 545px;
     margin-top: 0px;
     margin-left: 14px;
 

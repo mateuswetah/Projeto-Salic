@@ -566,15 +566,15 @@
               <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
             </div>
             <div class="row">
-              <div class="col-xs-6"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-              <div class="col-xs-6"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+              <div class="col-xs-7"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+              <div class="col-xs-5"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
             </div>                
           </div>
           <div class="card-botoes-container">
             <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
               <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
                    [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
-                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }} RESUMO</a>
+                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}  RESUMO</a>
               </span>
               
               <div class="card-botao-ver">

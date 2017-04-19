@@ -12,10 +12,6 @@
        margin: 0px;
   } 
 
-  .navbar-header {
-    @media (max-width: 768px){ margin: 0 -24px; } 
-  }
-
   .navbar-collapse { border: none;}
 
   a, span { color: white;}
@@ -34,6 +30,7 @@
     padding-top: 6px;
     padding-bottom: 6px;
     border: none;
+    margin-right: 5px;
 
     &:hover, &:focus {
       background-color: $verde-claro-salic;
@@ -45,7 +42,8 @@
   .logo {
     font-family: $fonte-logo;
     font-size: 1.95em;
-    padding: 15px 30px;
+    padding: 15px 30px 15px 15px;
+    margin-left: 0px;
 
     .logo-ver { font-weight: 700 };
     .logo-salic { font-weight: 500; }
