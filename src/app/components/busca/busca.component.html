@@ -3,7 +3,7 @@
   <!-- Caixa de Pesquisa -->
   <div class="container-pesquisa row">
     <div class="container-abas">
-      <div class="col-md-10 col-md-offset-2 col-lg-8 col-lg-offset-2">   
+      <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">   
         <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
         <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
         <div class="text-center abas-pesquisa">
@@ -141,7 +141,7 @@
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
                       <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                          <i class="glyphicon glyphicon-calendar"></i>
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>
               </div>
@@ -162,7 +162,7 @@
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
                       <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
-                          <i class="glyphicon glyphicon-calendar"></i>
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>
               </div>
@@ -190,7 +190,7 @@
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
                       <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
-                          <i class="glyphicon glyphicon-calendar"></i>
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>
               </div>
@@ -211,7 +211,7 @@
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
                       <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
-                          <i class="glyphicon glyphicon-calendar"></i>
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>
               </div>
@@ -232,7 +232,7 @@
                   {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                   <span class="caret"></span> 
                 </button>
-                <div class="form-control-placeholder hidden-sm">Tipo de pessoa</div>
+                <div class="form-control-placeholder hidden-sm">Pessoa</div>
                 <div class="form-control-placeholder visible-inline-sm hidden-md hidden-lg">Pessoa</div>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="seletorTipoDePessoa">
                   <li *ngFor="let tipo of tiposPessoa; let i = index" role="menuitem">
@@ -246,7 +246,7 @@
                   [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== ''}">
                   <option [value]="i > 0 ? (tipo === 'Física' ? 'fisica' : 'juridica') : 'Qualquer tipo'" *ngFor="let tipo of tiposPessoa; let i = index">{{ tipo }} </option>
                 </select>
-                <div class="form-control-placeholder">Tipo de pessoa</div>
+                <div class="form-control-placeholder">Pessoa</div>
               </div>
               <!-- UF ==============================================-->        
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
@@ -295,7 +295,7 @@
                   {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                   <span class="caret"></span> 
                 </button>
-                <div class="form-control-placeholder hidden-sm">Tipo de pessoa</div>
+                <div class="form-control-placeholder hidden-sm">Pessoa</div>
                 <div class="form-control-placeholder visible-inline-sm hidden-md hidden-lg">Pessoa</div>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="seletorTipoDePessoa">
                   <li *ngFor="let tipo of tiposPessoa; let i = index" role="menuitem">
@@ -309,7 +309,7 @@
                   [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== ''}">
                   <option [value]="i > 0 ? (tipo === 'Física' ? 'fisica' : 'juridica') : 'Qualquer tipo'" *ngFor="let tipo of tiposPessoa; let i = index">{{ tipo }} </option>
                 </select>
-                <div class="form-control-placeholder">Tipo de pessoa</div>
+                <div class="form-control-placeholder">Pessoa</div>
               </div>
               <!-- UF ==============================================-->        
               <div class="input col-sm-3 col-md-1 col-xs-6 btn-group hidden-xs" dropdown>
@@ -566,15 +566,15 @@
               <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
             </div>
             <div class="row">
-              <div class="col-xs-7"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-              <div class="col-xs-5"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+              <div class="col-xs-7"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+              <div class="col-xs-5"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
             </div>                
           </div>
           <div class="card-botoes-container">
             <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
               <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
                    [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
-                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}  RESUMO</a>
+                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
               </span>
               
               <div class="card-botao-ver">
@@ -588,7 +588,7 @@
         </div>
       </div>
       
-      <div *ngSwitchCase="'propostas'">
+      <div *ngSwitchCase="'propostas'" class="row">
         <div *ngFor="let proposta of listaPropostas" class="card col-sm-12 col-md-6 col-lg-4">
           <div class="panel panel-default">
             <div class="panel-heading">{{ proposta.nome }}</div> 
@@ -601,7 +601,7 @@
         </div>
       </div>
 
-      <div *ngSwitchCase="'proponentes'">
+      <div *ngSwitchCase="'proponentes'" class="row">
         <div *ngFor="let proponente of listaProponentes" class="card card-proponente col-sm-12 col-md-6 col-lg-4">
           <div class="card-header texto-elipsado" title="{{ proponente.nome }}"><p>{{ proponente.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
@@ -626,7 +626,7 @@
         </div>
       </div>
 
-      <div *ngSwitchCase="'incentivadores'">
+      <div *ngSwitchCase="'incentivadores'" class="row">
         <div *ngFor="let incentivador of listaIncentivadores" class="card card-proponente col-sm-12 col-md-6 col-lg-4">
           <div class="card-header texto-elipsado" title="{{ incentivador.nome }}"><p>{{ incentivador.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
@@ -651,7 +651,7 @@
         </div>
       </div>
 
-      <div *ngSwitchCase="'fornecedores'">
+      <div *ngSwitchCase="'fornecedores'" class="row">
         <div *ngFor="let fornecedor of listaFornecedores" class="card card-proponente card-fornecedor col-sm-12 col-md-6 col-lg-4">
           <div class="card-header texto-elipsado" title="{{ fornecedor.nome }}"><p>{{ fornecedor.nome }}</p></div>
           <div class="card-resposta texto-elipsado">

@@ -76,7 +76,7 @@
         }
 
         .input-group {
-            padding: 15px;
+            padding: 28px 15px 15px 15px;
         }
 
         .form-group {
@@ -148,7 +148,7 @@
     overflow-y: hidden;
 	padding: 0px 5px;
   	height: 54px;
-    margin-bottom: -15px;
+    margin-bottom: -12px;
     line-height: 1;
     background-color: $verde-claro-salic;
     border-top-left-radius: 5px;
@@ -549,16 +549,17 @@
 
             .resposta-label {
                 font-size: 1.0em;
-                font-weight: 300;
                 line-height: 1.15em;
                 margin-bottom: 0px;  
             }
             .resposta-valor {
                 font-size: 1.0em;
+                font-weight: 600;
             }
 
             .resposta-valor-destaque {
                font-size: 1.125em; 
+               font-weight: 600;
             }
         }
 
@@ -636,14 +637,14 @@
     }
 
     .card-proponente {
-        height: 428px;
+        height: 435px;
 
         @media all and (min-width: 768px){
-            height: 241px;
+            height: 244px;
         } 
 
         .card-resposta {
-            height: 334px;
+            height: 338px;
 
             @media all and (min-width: 768px){
                 height: 138px;
@@ -669,10 +670,10 @@
     }
 
     .card-fornecedor {
-         height: 225px;
+         height: 227px;
 
         @media all and (min-width: 768px){
-            height: 188px;
+            height: 189px;
         } 
 
         .card-resposta {

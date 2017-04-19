@@ -586,19 +586,25 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       return $('.aba').position().left;
     };
 
+    function getScrollPosi() {
+      return $('.abas-pesquisa').scrollLeft();
+    };
+
     function reAdjust() {
       if (($('.abas-pesquisa').outerWidth()) < widthOfList()) {
         $('.scroller-right').show();
       } else {
         $('.scroller-right').hide();
       }
-
+      console.log(getScrollPosi());
+      console.log("L=" + getLeftPosi());
       if (getLeftPosi() < 0) {
         $('.scroller-left').show();
       } else {
         $('.item').animate({left: '-=' + getLeftPosi() + 'px'}, 'slow');
         $('.scroller-left').hide();
       }
+
 
     }
 
@@ -610,6 +616,22 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
       reAdjust();
       this.organizaChips();
+    });
+
+    $('.abas-pesquisa').scroll(function() {
+
+      if (getScrollPosi() > 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.scroller-left').hide();
+      }
+      console.log("S=" + getScrollPosi());
+      console.log("W=" + $('.abas-pesquisa').outerWidth());
+      if (getScrollPosi() < $('.abas-pesquisa').outerWidth()) {
+        $('.scroller-rigth').show();
+      } else {
+        $('.scroller-right').hide();
+      }
     });
 
     $('.scroller-right').click(function() {
