@@ -580,6 +580,8 @@
             position: relative;
             z-index: 99;
             background-color: $background-salic;
+            display: inline-block;
+            width: 100%;
         }
 
         .card-botoes {
