@@ -5,6 +5,8 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { IMyOptions, IMyDateModel, IMyInputFieldChanged } from 'ngx-mydatepicker';
+
 import { ApiService } from './../../services/api.service';
 import { ConfigurationService } from './../../services/configuration.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
@@ -14,6 +16,8 @@ import { Proposta } from './../../models/proposta.model';
 import { Proponente } from './../../models/proponente.model';
 import { Incentivador } from './../../models/incentivador.model';
 import { Fornecedor } from './../../models/fornecedor.model';
+import { Segmentos } from './../../models/segmentos.model';
+import { Estados } from './../../models/estados.model';
 
 declare var $: any;
 
@@ -27,6 +31,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
   pesquisaPor = 'projetos';
   buscaAvancada = false;
   corAleatoriaDoBanner = '';
+
+    // Configurações de Calendário
+  private opcoesCalendario: IMyOptions = {
+      dateFormat: 'dd/mm/yyyy',
+      todayBtnTxt: 'Hoje',
+      firstDayOfWeek: 'su',
+      sunHighlight: false,
+      ariaLabelPrevMonth: 'Mês anterior.',
+      ariaLabelNextMonth: 'Próximo mês.',
+      ariaLabelPrevYear: 'Próximo ano.',
+      ariaLabelNextYear: 'Próximo ano.',
+      dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+      monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
+  };
+  public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
+
+  dataInicioValida = true;
+  dataTerminoValida = true;
 
   // Opções de Ordenação
   ordenarPor = 'PRONAC';
@@ -70,6 +93,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   queriesDeFornecedores: { [query: string]: String }
                        = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
+  // Dropdowns e selects
+  areasDeProjetos = ['Todas as áreas', 'Artes Cênicas',
+                     'Audiovisual', 'Música',
+                     'Artes Visuais', 'Patrimônio Cultural',
+                     'Humanidades', 'Artes Integradas'];
+  segmentosDeProjetos = new Segmentos();
+  estados = new Estados();
+  tiposPessoa = ['Qualquer tipo', 'Física', 'Jurídica'];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -229,6 +260,82 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // Retorna o dicionário de Queries como um array iterável para a view
   keys(dicionario: { [query: string]: String; }): Array<string> {
     return Object.keys(dicionario);
+  }
+
+    mudarEstadoPorSelect($event) {
+    if ($event.target.value === '' || $event.target.value === 'Todos os estados') {
+      this.queries['UF'] = null;
+    } else {
+      this.queries['UF'] = $event.target.value;
+    }
+  }
+
+  mudarSegmentoPorSelect($event) {
+    $event.target.value !== 'null' ? this.queries['segmento'] = $event.target.value : this.queries['segmento'] = null;
+    $event.target.value !== 'null' ? this.queries['area'] = this.segmentosDeProjetos.obterAreaCodPorCod($event.target.value): this.queries['segmento'] = null;
+  }
+
+  mudarAreaPorSelect($event) {
+    $event.target.value > 0 ? this.queries['area'] = $event.target.value : this.queries['area'] = null;
+    if (this.queries['segmento'] !== null && this.queries['segmento'] !== undefined && this.queries['area'] !== null && this.queries['area'] != this.segmentosDeProjetos.obterAreaCodPorCod(this.queries['segmento'])) {
+      this.queries['segmento'] = null;
+      console.log("Apaguei!");
+     }
+    console.log(this.queries['area']);
+    console.log(this.queries['segmento']);
+    console.log(this.segmentosDeProjetos.obterNomePorCod(this.queries['segmento']));
+}
+
+  mudarTipoPessoaPorSelect($event) {
+    console.log($event.target.value);
+    if ($event.target.value !== null && $event.target.value !== '' && $event.target.value !== 'Qualquer tipo') {
+      $event.target.value === 'fisica' ? this.queries['tipo_pessoa'] = 'fisica' : this.queries['tipo_pessoa'] = 'juridica';
+    } else {
+      this.queries['tipo_pessoa'] = null;
+    }
+  }
+
+  public onObterDataInicio(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_inicio_min'] = null;
+    } else {
+      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  public onObterDataTermino(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_termino_max'] = null;
+    } else {
+      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  atualizaInputsDeData() {
+    if (this.queries['data_inicio_min']) {
+
+      const dataSplit = this.queries['data_inicio_min'].split('-');
+
+      if (dataSplit.length === 3) {
+        this.dataInicio = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+      }
+
+    }
+    if (this.queries['data_termino_max']) {
+
+      const dataSplit = this.queries['data_termino_max'].split('-');
+      console.log(dataSplit);
+      this.dataFinal = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+
+    }
   }
 
   // Aqui é configurado o botão de deslizamento das abas de pesquisa

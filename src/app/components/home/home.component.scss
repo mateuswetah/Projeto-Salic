@@ -98,33 +98,52 @@
         background-color: $verde-claro; 
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+        @media (max-width: 992px) and (min-width: 768px) {
+            padding: 0px 30px 15px 30px;
+        }
 
         .form-control-placeholder {
             position: absolute;
+            text-overflow: ellipsis;
             top: 0;
-            padding: 6px 0 0 12px;
+            padding: 8px 0 0 12px;
             pointer-events: none;
             color: #aaa;
             transition: all 200ms;
+            z-index: 88;
+            font-size: 0.850em;
         }
 
         .form-control:focus + .form-control-placeholder,
-        .form-control.cheio + .form-control-placeholder {
+        .form-control.cheio + .form-control-placeholder,
+         {
             color: #444;
             font-size: 95%;
             top: -28px;
         }
 
+        .btn.btn-default.form-control {
+            text-align: left !important;
+
+            .caret {
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin-right: 12px;
+                margin-top: 15px;
+            }
+        }
+
         .input-group {
-            padding: 15px;
+            padding: 28px 15px 15px 15px;
         }
 
         .form-group {
-            margin: 0px -15px 15px -15px;
+            margin: 0px -5px 15px -5px;
             padding: 0px;
 
             .row {
-                margin: 0px 0px;
+                margin: 0px -5px;
                 padding: 0px;
             }
             
@@ -132,6 +151,39 @@
                 margin-top: 28px; 
                 padding-left: 10px;
                 padding-right: 10px;
+
+                button {
+                    text-overflow: ellipsis;
+                    overflow-x: hidden; 
+                }
+
+                .dropdown-menu {
+                    overflow-y: auto;
+                    max-height: 480px;
+
+                    @media (max-width: 768px) {
+                        max-height: 236px;
+                    }
+
+                }
+            }
+        }
+
+        .calendario {
+            display: table;
+            
+            input {
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+
+            input.invalido {
+                border-color: darkred;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 24, 24, 0.6);
+            }
+
+            .btn {
+                z-index: 90;
             }
         }
 
@@ -139,7 +191,8 @@
 
     .footer-busca {
         a { cursor: pointer; }
-        a:hover { color: $verde-salic }
+        a:hover { color: $verde-salic; text-decoration: none; }
+        
     }
 }
 
@@ -230,18 +283,27 @@
     min-height: 280px;
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
 
     p { font-size: 1.1em; }
 
-    .icone-entidade {
-        background-color: #aaa;
-        height: 140px;
-        padding: 10px;
-        margin-top: 15px;
+    .container-icone {
+        margin: 35px auto 10px auto;
+        padding: 15px;
+        background-color: $verde-claro;
+        border-radius: 80px;
+        height: 160px;
+        width: 160px;
+        text-align: center;
+
+        .icone-entidade {   
+            margin: 10px;
+            height: 100px;
+            width: 100px;
+        }
     }
-
     .descricao-entidade {
-
+        text-align: left;
         padding-left: 40px;
         padding-right: 40px;
 
