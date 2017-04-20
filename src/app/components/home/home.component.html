@@ -431,19 +431,19 @@
       <div class="linha"></div>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <p class="estatistica-numero">74.673</p>
+          <div counto [step]="30" [countTo]="121083" [countFrom]="0" [duration]="5" (countoChange)="counto1 = $event" class="estatistica-numero">{{ counto1 | numero }}</div>
           <p class="estatistica-legenda">Projetos submetidos</p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <p class="estatistica-numero">5.482</p>
+          <div counto [step]="30" [countTo]="5482" [countFrom]="0" [duration]="5" (countoChange)="counto2 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto2 | numero }}</div>
           <p class="estatistica-legenda">Projetos aprovados</p>
         </div>
         <div class="col-xs-12 col-sm-6 text-center">
-          <p class="estatistica-numero">R$5.345.843.123,54</p>
+          <div counto [step]="30" [countTo]="5345843123" [countFrom]="0" [duration]="5" (countoChange)="counto3 = $event" class="estatistica-numero" class="estatistica-numero">R${{ counto3 | numero }}</div>
           <p class="estatistica-legenda">Reais captados</p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <p class="estatistica-numero">74.417</p>
+          <div counto [step]="30" [countTo]="74417" [countFrom]="0" [duration]="5" (countoChange)="counto4 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto4 | numero }}</div>
           <p class="estatistica-legenda">Incentivadores</p>
         </div>
       </div>

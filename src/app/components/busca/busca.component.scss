@@ -36,6 +36,11 @@
         margin: 0 -15px;
     }
 
+    &>div {
+        transition: height 0.8s;
+        -webkit-transition: height 0.8s;
+    }
+
     .container-inputs {
         padding: 0px 0px 15px 0px;
 
@@ -160,6 +165,9 @@
         font-size: 1.0em;
         border-radius: 0px;
         cursor: pointer;
+        border-bottom: 4px $verde-claro-salic solid; 
+        transition: border-bottom-color  0.4s;
+        -webkit-transition: border-bottom-color  0.4s;
 
         &:hover {
             background-color: $verde-claro;

@@ -81,8 +81,8 @@
 // Caixa de Pesquisa ------------------------------------------------------
 .container-pesquisa {
 
-    margin-top: -84px;
-    
+    margin: -84px 0px 0px 0px;
+
     .container { 
         border-radius: 5px;
         box-shadow: 0px 0px 6px #222;
@@ -91,6 +91,8 @@
         float: none;
         margin-left: auto;
         margin-right: auto;
+        transition: width 0.5s, height 0.8s;
+        -webkit-transition: width 0.5s, height 0.8s;
     }
 
     .container-inputs {
@@ -98,6 +100,12 @@
         background-color: $verde-claro; 
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+
+        @media (max-width: 768px){ 
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
         @media (max-width: 992px) and (min-width: 768px) {
             padding: 0px 30px 15px 30px;
         }
@@ -217,6 +225,9 @@
         border-radius: 0px;
         cursor: pointer;
         margin-top: 5px;
+        border-bottom: 6px $verde-claro-salic solid; 
+        transition: border-bottom-color  0.4s;
+        -webkit-transition: border-bottom-color  0.4s;
 
         &:hover {
             border-bottom: 6px $verde-salic solid; 
@@ -268,12 +279,10 @@
 
 .scroller-right{
   float: right;
-  margin-right: 15px;  
 }
 
 .scroller-left {
   float: left;
-  margin-left: 15px;
 }
 
 
@@ -327,8 +336,12 @@
 
     .estatistica-numero {
         padding: 5px;
-        font-size: 3.1em;
+        font-size: 2.8em;
         line-height: 0.8em;
+
+        @media all and (max-width: 1200px){
+            font-size: 2.5em;
+        }
 
         @media all and (max-width: 480px){
             font-size: 1.75em;

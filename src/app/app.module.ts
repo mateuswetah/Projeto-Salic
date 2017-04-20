@@ -1,6 +1,6 @@
 import { PaginationService } from './services/pagination.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './modules/app.rounting.module';
@@ -12,6 +12,7 @@ import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule } from 'ng2-bootstrap/';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { CountoModule } from 'angular2-counto';
 
 // Components de Terceiros
 import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
@@ -34,6 +35,14 @@ import { ConfigurationService } from './services/configuration.service';
 import { DataFormatterService } from './services/data-formatter.service';
 
 import { CustomReuseStrategy } from './services/route-reuse.strategy';
+
+@Pipe({name: 'numero'})
+export class NumeroPipe implements PipeTransform {
+  transform(value: number, args: string[]): any {
+    value = Math.round(value);
+    return value.toLocaleString();
+  }
+}
 
 export function metaFactory(): MetaLoader {
   return new MetaStaticLoader({
@@ -63,7 +72,8 @@ export function metaFactory(): MetaLoader {
     FornecedoresComponent,
     FalhaComponent,
     SobreComponent,
-    FadingCircleComponent
+    FadingCircleComponent,
+    NumeroPipe
   ],
   imports: [
     BrowserModule,
@@ -82,7 +92,8 @@ export function metaFactory(): MetaLoader {
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
-    NgxMyDatePickerModule
+    NgxMyDatePickerModule,
+    CountoModule
   ],
   providers: [
     ApiService,
