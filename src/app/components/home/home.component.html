@@ -380,7 +380,9 @@
   <div class="container-info">
     <div class="container">
       <div class="row" [ngSwitch]="pesquisaPor">
-        <div class="col-xs-12 col-sm-4 col-md-2"><div class="container-icone"><img class="icone-entidade" src="../../../assets/ic_projetos.svg"/></div></div>
+        <div class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone" [ngStyle]="{'background-image': 'url(../../../assets/ic_' + pesquisaPor + '.svg)'}"></div>
+        </div>
         <div class="col-xs-12 col-sm-8 col-md-10 descricao-entidade" >
 
           <h2 *ngSwitchCase="'projetos'">Projetos</h2>

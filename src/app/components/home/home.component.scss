@@ -290,17 +290,15 @@
     .container-icone {
         margin: 35px auto 10px auto;
         padding: 15px;
-        background-color: $verde-claro;
         border-radius: 80px;
         height: 160px;
         width: 160px;
         text-align: center;
+        background-color: $verde-claro;
+        background-position:50% 50%;
+        background-repeat: no-repeat; 
+        background-size: 80px;
 
-        .icone-entidade {   
-            margin: 10px;
-            height: 100px;
-            width: 100px;
-        }
     }
     .descricao-entidade {
         text-align: left;

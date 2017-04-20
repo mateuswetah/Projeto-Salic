@@ -589,15 +589,33 @@
       </div>
       
       <div *ngSwitchCase="'propostas'" class="row">
-        <div *ngFor="let proposta of listaPropostas" class="card col-sm-12 col-md-6 col-lg-4">
-          <div class="panel panel-default">
-            <div class="panel-heading">{{ proposta.nome }}</div> 
-            <div class="panel-body">
-              <div class="col-sm-3"><button [routerLink]="['/propostas', proposta.id]" 
-                                            type="button" 
-                                            class="btn btn-primary" >Ver Proposta</button></div>
-            </div>   
-          </div>                                                        
+        <div *ngFor="let proposta of listaPropostas" class="card card-proposta col-sm-12 col-md-6 col-lg-4">
+          <div class="card-header texto-elipsado" title="{{ proposta.nome }}"><p>{{ proposta.nome }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-6"><p class="resposta-label">Mecanismo: </p><p class="resposta-valor">{{ proposta.mecanismo }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">Data Arquivamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(proposta.data_arquivamento) }}</p></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><p class="resposta-label">Data Início: </p><p class="resposta-valor">{{ dataFormatterService.formataData(proposta.data_inicio) }}</p></div>
+              <div class="col-sm-6"><p class="resposta-label">Data Término: </p><p class="resposta-valor">{{ dataFormatterService.formataData(proposta.data_termino) }}</p></div>
+            </div>                
+          </div>
+          <div class="card-botoes-container">
+            <div class="card-botoes" [ngStyle]="{'border-top-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+              <span class="card-botao-resumo" (click)="proposta.isResumoEscondido = !proposta.isResumoEscondido"
+                   [ngStyle]="{'background-color': !proposta.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !proposta.isResumoEscondido ? '0px' : '5px'}">
+                <a [ngStyle]="{'color': proposta.isResumoEscondido ? 'white' : '#226000'}">{{ !proposta.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
+              </span>
+              
+              <div class="card-botao-ver">
+                <a [routerLink]="['/propostas', proposta.id]" ><img class="card-icon" src="../../../assets/ic_propostas.svg"/> &nbsp; VER PROPOSTA</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-resumo" [ngStyle]="{'top': proposta.isResumoEscondido ? '59px' : '101%', 'background-color': proposta.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
+            <p>{{proposta.resumo}}</p>
+          </div>
         </div>
       </div>
 
@@ -618,7 +636,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" >VER PROPONENTE</a>
+                  <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" ><img class="card-icon" src="../../../assets/ic_proponentes.svg"/> VER PROPONENTE</a>
                 </div>
               </div>
             </div>
@@ -631,7 +649,7 @@
           <div class="card-header texto-elipsado" title="{{ incentivador.nome }}"><p>{{ incentivador.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
             <div class="row">
-              <div class="col-sm-3"><p class="resposta-label">Tipo de Pessoa: </p><p class="resposta-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipo_pessoa) }}</p></div>
+              <div class="col-sm-3"><p class="resposta-label">Pessoa: </p><p class="resposta-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipo_pessoa) }}</p></div>
               <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor" title="{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}">{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}</p></div> 
               <div class="col-sm-4"><p class="resposta-label">Município: </p><p class="resposta-valor" title="{{ incentivador.municipio }}">{{ incentivador.municipio }}</p></div>
             </div>
@@ -643,7 +661,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" >VER INCENTIVADOR</a>
+                  <a [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" ><img class="card-icon" style="height: 1.3em" src="../../../assets/ic_incentivadores.svg"/> VER INCENTIVADOR</a>
                 </div>
               </div>
             </div>
@@ -662,7 +680,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/fornecedors', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" >VER FORNECEDOR</a>
+                  <a [routerLink]="['/fornecedors', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" ><img class="card-icon" src="../../../assets/ic_fornecedores.svg"/> &nbsp; VER FORNECEDOR</a>
                 </div>
               </div>
             </div>

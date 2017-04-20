@@ -18,6 +18,9 @@ export class Proposta {
                 public providencia:           String,
                 public democratizacao:        String,
                 public sinopse:               String,
-                public resumo:                String) {}
+                public resumo:                String,
+                public isResumoEscondido: Boolean ) {
+                  this.isResumoEscondido = true;
+                }
 
 }

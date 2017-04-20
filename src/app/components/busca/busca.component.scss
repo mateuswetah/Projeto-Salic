@@ -258,7 +258,6 @@
             display: inline-block; 
             margin: 0px; 
             font-size: 1.125em;
-            font-weight: 300;    
         }
     }
 
@@ -513,11 +512,11 @@
         }
 
         .card-header {
-            background-color: $cinza;
-            color: $verde-salic;
+            background-color: $verde-salic;
+            color: white;
             margin: 10px 10px -10px 10px;
             padding: 6px 20px;
-            border: 1px solid $cinza-escuro;
+            border: 1px solid $verde-escuro;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
             height: 40px;
@@ -581,6 +580,12 @@
             transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
             p { font-size: 1.15em }
+
+            min-width: calc(100% - 32px);
+
+            @media all and (min-width: 768px){
+                min-width: calc(100% - 58px);
+            }
         }
 
         .card-botoes-container {
@@ -641,6 +646,22 @@
 
     }
 
+    .card-proposta {
+        height: 323px;
+
+        @media all and (min-width: 768px){
+            height: 233px;
+        } 
+
+        .card-resposta {
+            height: 228px;
+
+            @media all and (min-width: 768px){
+                height: 125px;
+            } 
+        }
+    }
+
     .card-proponente {
         height: 435px;
 
@@ -667,9 +688,6 @@
                     margin: 0 -26px;
                 }
 
-                .card-botao-ver { 
-                    text-align: start;
-                }
             }
         }
     }
@@ -687,12 +705,6 @@
             @media all and (min-width: 768px){
                 height: 80px;
             } 
-        }
-
-        .card-botoes-container>.card-botoes{
-
-            .card-botao-ver { text-align: start; }
-
         }
 
     }
