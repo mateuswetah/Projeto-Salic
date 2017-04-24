@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.9065857mm"
+   height="5.2916665mm"
+   viewBox="0 0 7.9065858 5.2916665"
+   version="1.1"
+   id="svg5976"
+   sodipodi:docname="ic_incentivadores_branco.svg"
+   inkscape:version="0.92.1 r15371">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1128"
+     inkscape:window-height="480"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="5.9000002"
+     inkscape:cx="2.5855775"
+     inkscape:cy="7.8871245"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg5976" />
+  <defs
+     id="defs5970" />
+  <metadata
+     id="metadata5973">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="matrix(0.26458333,0,0,0.26458333,-17.94205,-18.957024)"
+     style="fill:#ffffff">
+    <g
+       id="g82"
+       transform="matrix(0.11564309,0,0,-0.11564309,91.32757,83.728627)"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1">
+      <path
+         d="m 0,0 c -0.264,0.298 -0.539,0.58 -0.819,0.851 l 0.005,0.004 C -2.98,2.344 -4.343,3.59 -4.702,3.93 l -0.215,0.208 -16.601,16.601 c -8.127,8.021 -19.374,19.233 -34.894,34.875 L -85.524,38.638 c -3.62,-2.111 -7.74,-3.226 -11.915,-3.226 -8.398,0 -16.24,4.503 -20.467,11.752 l -0.546,0.937 c -6.576,11.278 -2.751,25.804 8.527,32.381 0,0 8.46,4.934 18.389,10.723 -19.539,19.245 -36.917,2.52 -50.816,-5.224 -14.279,-7.955 -25.017,-2.661 -25.017,-2.661 l -35.973,11.637 V 23.468 c 0,0 10.18,-1.054 34.249,-12.134 l 4.016,5.156 c 3.939,5.059 9.878,7.96 16.293,7.96 4.566,0 9.068,-1.547 12.676,-4.357 L -75.71,-26.94 c 4.351,-3.388 7.121,-8.267 7.802,-13.738 0.68,-5.472 -0.811,-10.881 -4.197,-15.231 l -3.659,-4.697 c 2.459,-1.91 3.86,-2.998 3.86,-2.998 l 0.101,0.092 0.078,-0.092 c 4.933,-5.563 12.947,-6.513 17.898,-2.122 l 17.931,15.901 35.863,31.802 C 4.918,-13.632 4.933,-5.563 0,0"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
+         id="path84" />
+    </g>
+    <g
+       id="g86"
+       transform="matrix(0.11564309,0,0,-0.11564309,78.945525,91.074554)"
+       style="fill:#ffffff">
+      <path
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
+         d="m 0,0 -56.82,44.248 c -5.335,4.153 -6.291,11.845 -2.138,17.179 l 7.976,10.242 c 4.154,5.334 11.845,6.291 17.179,2.137 L 23.019,29.559 c 5.334,-4.154 6.291,-11.846 2.136,-17.18 L 17.18,2.137 C 13.026,-3.197 5.335,-4.154 0,0"
+         id="path88" />
+    </g>
+    <g
+       id="g90"
+       transform="matrix(0.11564309,0,0,-0.11564309,97.695631,73.856212)"
+       style="fill:#ffffff">
+      <path
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
+         d="m 0,0 -41.085,-8.218 c 0,0 -10.057,-4.588 -21.046,4.773 -10.989,9.36 -16.677,14.169 -16.677,14.169 0,0 -11.701,15.742 -31.307,4.038 h -0.001 l -49.502,-28.865 c -6.206,-3.62 -8.304,-11.585 -4.685,-17.793 l 0.546,-0.936 c 3.619,-6.207 11.585,-8.304 17.792,-4.685 l 29.138,16.991 2.895,1.688 c 2.28,0.825 5.65,0.992 9.171,-2.529 6.273,-6.273 52.322,-52.321 52.322,-52.321 0,0 8.414,-7.955 18.816,-6.578 6.944,0.919 23.427,4.632 33.623,7 z"
+         id="path92" />
+    </g>
+  </g>
+</svg>

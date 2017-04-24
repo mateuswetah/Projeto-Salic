@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg6608"
+   version="1.1"
+   viewBox="0 0 4.5357137 5.291666"
+   height="5.291666mm"
+   width="4.5357137mm"
+   sodipodi:docname="ic_propostas_branco.svg"
+   inkscape:version="0.92.1 r15371">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="913"
+     inkscape:window-height="480"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="11.800001"
+     inkscape:cx="8.5714274"
+     inkscape:cy="9.9999988"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg6608" />
+  <defs
+     id="defs6602">
+    <clipPath
+       id="clipPath18"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path16"
+         d="M 0,686 H 1038 V 0 H 0 Z" />
+    </clipPath>
+  </defs>
+  <metadata
+     id="metadata6605">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-89.958335,-131.44643)"
+     id="layer1"
+     style="fill:#ffffff">
+    <g
+       id="g12"
+       transform="matrix(0.02519841,0,0,-0.02519841,79.300466,139.43297)"
+       style="fill:#ffffff">
+      <g
+         clip-path="url(#clipPath18)"
+         id="g14"
+         style="fill:#ffffff">
+        <g
+           transform="translate(527.958,253.1963)"
+           id="g20"
+           style="fill:#ffffff">
+          <path
+             id="path22"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 0,0 c 0,-3.125 1.094,-5.781 3.281,-7.969 2.188,-2.187 4.844,-3.281 7.969,-3.281 H 75 V -135 c 0,-3.125 -1.094,-5.781 -3.281,-7.969 -2.188,-2.187 -4.844,-3.281 -7.969,-3.281 h -157.5 c -3.125,0 -5.781,1.094 -7.968,3.281 -2.188,2.188 -3.282,4.844 -3.282,7.969 V 52.5 c 0,3.125 1.094,5.781 3.282,7.969 2.187,2.187 4.843,3.281 7.968,3.281 H 0 Z m 15,3.75 v 55.313 c 1.719,-1.094 3.125,-2.188 4.219,-3.282 L 67.031,7.969 c 1.094,-1.094 2.188,-2.5 3.282,-4.219 z" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

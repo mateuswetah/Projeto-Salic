@@ -503,8 +503,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Garante que a query de ordenação inserida está utilizando o pesquisaPor adequado.
   verificaValidadeDasQueries () {
-console.log("PESQUISA POR " + this.pesquisaPor);
-console.log("URL " + JSON.stringify(this.queries));
     if (this.queries['sort'] !== null && this.queries['sort'] !== '' && this.queries['sort'] !== undefined ) {
       switch (this.pesquisaPor) {
 
