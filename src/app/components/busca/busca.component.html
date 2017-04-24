@@ -146,7 +146,7 @@
                   </span>
               </div>
               <!-- DATA DE TÉRMINO ============================================-->
-              <div class="input calendario col-sm-3 col-xs-6">
+              <div class="input calendario calendario-direita col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
                         ngx-mydatepicker name="calendarioTermino"
@@ -162,6 +162,26 @@
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
                       <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </button>
+                  </span>
+              </div>
+              <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
+                  <input class="form-control" 
+                        style="float:none" placeholder="" 
+                        ngx-mydatepicker name="calendarioTermino"
+                        [(ngModel)]="dataFinal" 
+                        [options]="opcoesCalendario2" 
+                        #dp3="ngx-mydatepicker" 
+                        (dateChanged)="onObterDataTermino($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                  <div class="form-control-placeholder">Término até</div>
+                  <span class="input-group-btn">
+                      <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
+                          <i class="glyphicon glyphicon-remove"></i>
+                      </button>-->
+                      <button type="button" class="btn btn-default" (click)="dp3.clearDate(); dp3.toggleCalendar()">
                           <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>
@@ -195,13 +215,13 @@
                   </span>
               </div>
               <!-- DATA DE TÉRMINO ============================================-->
-              <div class="input calendario col-sm-3 col-xs-6">
+              <div class="input calendario col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
                         ngx-mydatepicker name="calendarioTermino"
                         [(ngModel)]="dataFinal" 
                         [options]="opcoesCalendario" 
-                        #dp2="ngx-mydatepicker" 
+                        #dp4="ngx-mydatepicker" 
                         (dateChanged)="onObterDataTermino($event);"
                         (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
                         [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
@@ -210,7 +230,27 @@
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
                           <i class="glyphicon glyphicon-remove"></i>
                       </button>-->
-                      <button type="button" class="btn btn-default" (click)="dp2.clearDate(); dp2.toggleCalendar()">
+                      <button type="button" class="btn btn-default" (click)="dp4.clearDate(); dp4.toggleCalendar()">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </button>
+                  </span>
+              </div>
+              <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
+                  <input class="form-control" 
+                        style="float:none" placeholder="" 
+                        ngx-mydatepicker name="calendarioTermino"
+                        [(ngModel)]="dataFinal" 
+                        [options]="opcoesCalendario2" 
+                        #dp5="ngx-mydatepicker" 
+                        (dateChanged)="onObterDataTermino($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                  <div class="form-control-placeholder">Término até</div>
+                  <span class="input-group-btn">
+                      <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
+                          <i class="glyphicon glyphicon-remove"></i>
+                      </button>-->
+                      <button type="button" class="btn btn-default" (click)="dp5.clearDate(); dp5.toggleCalendar()">
                           <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                   </span>

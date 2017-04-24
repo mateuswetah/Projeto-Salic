@@ -32,12 +32,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
   buscaAvancada = false;
   corAleatoriaDoBanner = '';
 
-    // Configurações de Calendário
+  // Configurações de Calendário
   private opcoesCalendario: IMyOptions = {
       dateFormat: 'dd/mm/yyyy',
       todayBtnTxt: 'Hoje',
       firstDayOfWeek: 'su',
       sunHighlight: false,
+      ariaLabelPrevMonth: 'Mês anterior.',
+      ariaLabelNextMonth: 'Próximo mês.',
+      ariaLabelPrevYear: 'Próximo ano.',
+      ariaLabelNextYear: 'Próximo ano.',
+      dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+      monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
+  };
+  private opcoesCalendario2: IMyOptions = {
+      dateFormat: 'dd/mm/yyyy',
+      todayBtnTxt: 'Hoje',
+      firstDayOfWeek: 'su',
+      sunHighlight: false,
+      alignSelectorRight: true,
       ariaLabelPrevMonth: 'Mês anterior.',
       ariaLabelNextMonth: 'Próximo mês.',
       ariaLabelPrevYear: 'Próximo ano.',
@@ -173,7 +186,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onTrocaPesquisaPor(novoPesquisaPor) {
 
     this.pesquisaPor = novoPesquisaPor;
-
+    
     switch (this.pesquisaPor) {
       case 'projetos':
         this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
@@ -211,8 +224,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (event.keyCode === 13) { this.onRealizarBusca(); }
   }
 
-  onRealizarBusca() {
+  consoleLog(str: String) {
+    console.log(str);
+  }
 
+  onRealizarBusca() {
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
     this.queries['offset'] = '0';

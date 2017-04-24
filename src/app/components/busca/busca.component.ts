@@ -69,6 +69,19 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
       monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
   };
+  private opcoesCalendario2: IMyOptions = {
+      dateFormat: 'dd/mm/yyyy',
+      todayBtnTxt: 'Hoje',
+      firstDayOfWeek: 'su',
+      sunHighlight: false,
+      alignSelectorRight: true,
+      ariaLabelPrevMonth: 'Mês anterior.',
+      ariaLabelNextMonth: 'Próximo mês.',
+      ariaLabelPrevYear: 'Próximo ano.',
+      ariaLabelNextYear: 'Próximo ano.',
+      dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
+      monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
+  };
   public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
   public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
 
@@ -266,7 +279,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.queriesRecebidas = JSON.parse(JSON.stringify(this.queries));
 
     this.atualizaInputsDeData();
-
     //if (nenhumaQueryEnviada === false) {
       this.carregarPagina(1);
       //console.log(nenhumaQueryEnviada);
@@ -342,6 +354,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   carregarPagina(indice: number) {
+
     console.log('Indice da pg.: ' + indice);
 
     this.subirRespostasEstado = 'inativo';
@@ -374,117 +387,174 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.queriesRecebidas = JSON.parse(JSON.stringify(this.queries));
     this.atualizaInputsDeData();
 
-    switch (this.pesquisaPor) {
+    if (this.verificaValidadeDasQueries()) {
+      switch (this.pesquisaPor) {
+        case 'projetos':
+          this.apiService.getListaProjetos(this.queries).subscribe(
+            resposta => {
+              this.totalDeItems = resposta.total;
+              this.numeroDeItems = resposta.count;
+              this.listaProjetos = resposta.listaProjetos;
 
-      case 'projetos':
-        this.apiService.getListaProjetos(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaProjetos = resposta.listaProjetos;
+              this.subirRespostasEstado = 'ativo';
+              this.organizaChips();
+            },
+            err => {
+              this.carregandoDados = false;
 
-            this.subirRespostasEstado = 'ativo';
-            this.organizaChips();
-          },
-          err => {
-            this.carregandoDados = false;
+              if (err === 404) {
+                this.buscaSemResultados = true;
+              } else {
+                this.router.navigate(['falha', err]);
+              }
+            },
+            () => this.carregandoDados = false);
 
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
+        break;
 
-      break;
+        case 'propostas':
+          this.apiService.getListaPropostas(this.queries).subscribe(
+            resposta => {
+              this.totalDeItems = resposta.total;
+              this.numeroDeItems = resposta.count;
+              this.listaPropostas = resposta.listaPropostas;
 
-      case 'propostas':
-        this.apiService.getListaPropostas(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaPropostas = resposta.listaPropostas;
+              this.subirRespostasEstado = 'ativo';
+            },
+            err => {
+              this.carregandoDados = false;
 
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
+              if (err === 404) {
+                this.buscaSemResultados = true;
+              } else {
+                this.router.navigate(['falha', err]);
+              }
+            },
+            () => this.carregandoDados = false);
+        break;
 
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
-      break;
+        case 'proponentes':
+          this.apiService.getListaProponentes(this.queries).subscribe(
+            resposta => {
+              this.totalDeItems = resposta.total;
+              this.numeroDeItems = resposta.count;
+              this.listaProponentes = resposta.listaProponentes;
 
-      case 'proponentes':
-        this.apiService.getListaProponentes(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaProponentes = resposta.listaProponentes;
+              this.subirRespostasEstado = 'ativo';
+            },
+            err => {
+              this.carregandoDados = false;
 
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
+              if (err === 404) {
+                this.buscaSemResultados = true;
+              } else {
+                this.router.navigate(['falha', err]);
+              }
+            },
+            () => this.carregandoDados = false);
+        break;
 
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
-      break;
+        case 'incentivadores':
+          this.apiService.getListaIncentivadores(this.queries).subscribe(
+            resposta => {
+              this.totalDeItems = resposta.total;
+              this.numeroDeItems = resposta.count;
+              this.listaIncentivadores = resposta.listaIncentivadores;
 
-      case 'incentivadores':
-        this.apiService.getListaIncentivadores(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaIncentivadores = resposta.listaIncentivadores;
+              this.subirRespostasEstado = 'ativo';
+            },
+            err => {
+              this.carregandoDados = false;
 
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
+              if (err === 404) {
+                this.buscaSemResultados = true;
+              } else {
+                this.router.navigate(['falha', err]);
+              }
+            },
+            () => this.carregandoDados = false);
+        break;
 
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
-      break;
+        case 'fornecedores':
+          this.apiService.getListaFornecedores(this.queries).subscribe(
+            resposta => {
+              this.totalDeItems = resposta.total;
+              this.numeroDeItems = resposta.count;
+              this.listaFornecedores = resposta.listaFornecedores;
+              console.log(resposta);
+              this.subirRespostasEstado = 'ativo';
+            },
+            err => {
+              this.carregandoDados = false;
 
-      case 'fornecedores':
-        this.apiService.getListaFornecedores(this.queries).subscribe(
-          resposta => {
-            this.totalDeItems = resposta.total;
-            this.numeroDeItems = resposta.count;
-            this.listaFornecedores = resposta.listaFornecedores;
-            console.log(resposta);
-            this.subirRespostasEstado = 'ativo';
-          },
-          err => {
-            this.carregandoDados = false;
-
-            if (err === 404) {
-              this.buscaSemResultados = true;
-            } else {
-              this.router.navigate(['falha', err]);
-            }
-          },
-          () => this.carregandoDados = false);
-      break;
-      default:
-        this.router.navigate(['falha', 405]);
+              if (err === 404) {
+                this.buscaSemResultados = true;
+              } else {
+                this.router.navigate(['falha', err]);
+              }
+            },
+            () => this.carregandoDados = false);
+        break;
+        default:
+          this.router.navigate(['falha', 405]);
+      }
     }
+  }
+
+  // Garante que a query de ordenação inserida está utilizando o pesquisaPor adequado.
+  verificaValidadeDasQueries () {
+console.log("PESQUISA POR " + this.pesquisaPor);
+console.log("URL " + JSON.stringify(this.queries));
+    if (this.queries['sort'] !== null && this.queries['sort'] !== '' && this.queries['sort'] !== undefined ) {
+      switch (this.pesquisaPor) {
+
+        case 'projetos':
+          for (const key in this.queriesDeOrdemDeProjetos) {
+            if (key === this.queries['sort'].split(':')[0]) {
+              return true;
+            }
+          }
+          return false;
+
+        case 'propostas':
+          for (const key in this.queriesDeOrdemDePropostas) {
+            if (key === this.queries['sort'].split(':')[0]) {
+              return true;
+            }
+          }
+          return false;
+
+        case 'proponentes':
+          for (const key in this.queriesDeOrdemDeProponentes) {
+            if (key === this.queries['sort'].split(':')[0]) {
+              return true;
+            }
+          }
+          return false;
+
+        case 'incentivadores':
+          for (const key in this.queriesDeOrdemDeIncentivadores) {
+            if (key === this.queries['sort'].split(':')[0]) {
+              return true;
+            }
+          }
+          return false;
+        
+        case 'fornecedores':
+          for (const key in this.queriesDeOrdemDeFornecedores) {
+            if (key === this.queries['sort'].split(':')[0]) {
+              return true;
+            }
+          }
+          return false;
+
+        default:
+          return false;
+      }
+    } else {
+      return true;
+    }
+
   }
 
   // Trata da rotina de baixar CSVs
