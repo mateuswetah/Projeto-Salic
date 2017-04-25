@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { routerTransition } from './../../services/router.animations';
+import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
@@ -16,7 +16,7 @@ declare var $: any;
   selector: 'app-projetos',
   templateUrl: './projetos.component.html',
   styleUrls: ['./projetos.component.scss'],
-  animations: [routerTransition()],
+  animations: [RouterTransition()],
   host: {'[@routerTransition]': ''}
 })
 export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {

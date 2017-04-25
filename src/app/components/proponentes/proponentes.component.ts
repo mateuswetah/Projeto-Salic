@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { routerTransition } from './../../services/router.animations';
+import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
@@ -18,7 +18,7 @@ declare var $: any;
   selector: 'app-proponentes',
   templateUrl: './proponentes.component.html',
   styleUrls: ['./proponentes.component.scss'],
-  animations: [routerTransition()],
+  animations: [RouterTransition()],
   host: {'[@routerTransition]': ''}
 })
 export class ProponentesComponent implements OnInit, OnDestroy, AfterViewInit {

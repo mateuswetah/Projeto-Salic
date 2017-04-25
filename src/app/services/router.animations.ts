@@ -1,10 +1,10 @@
 import {trigger, state, animate, style, transition} from '@angular/core';
 
-export function routerTransition() {
+export function RouterTransition() {
   return slideToLeft();
 }
 
-function slideToLeft() {
+export function slideToLeft() {
   return trigger('routerTransition', [
     state('void', style({position: 'absolute', display: 'block', width: '100%'}) ),
     state('*', style({position: 'absolute', display: 'block',  width: '100%'}) ),

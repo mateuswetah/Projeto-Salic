@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { routerTransition } from './../../services/router.animations';
+import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
@@ -17,7 +17,7 @@ declare var $: any;
   selector: 'app-incentivadores',
   templateUrl: './incentivadores.component.html',
   styleUrls: ['./incentivadores.component.scss'],
-  animations: [routerTransition()],
+  animations: [RouterTransition()],
   host: {'[@routerTransition]': ''}
 })
 export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit {

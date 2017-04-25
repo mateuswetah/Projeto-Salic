@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { RouterTransition } from './../../services/router.animations';
+
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 
@@ -13,7 +15,9 @@ declare var $: any;
 @Component({
   selector: 'app-fornecedores',
   templateUrl: './fornecedores.component.html',
-  styleUrls: ['./fornecedores.component.scss']
+  styleUrls: ['./fornecedores.component.scss'],
+  animations: [RouterTransition()],
+  host: {'[@routerTransition]': ''}
 })
 export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
 

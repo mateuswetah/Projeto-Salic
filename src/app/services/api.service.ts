@@ -40,6 +40,18 @@ export class ApiService {
       .catch((error: any) => this.handleError(error));
    }
 
+  // Total Projetos
+  getTotalProjetos():
+      Observable<{ total: number }> {
+
+    const queries: { [query: string]: String; } = {'limit': '1'};
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'projetos/', { search: searchParams })
+      .map((res: Response) => ({ total: res.json().total }))
+      .catch((error: any) => this.handleError(error));
+   }
+
   // Proposta
   getProposta(id: String): Observable<Proposta> {
     return this.http.get(this.configuration.ApiUrl + 'propostas/' + id + '/')
@@ -60,6 +72,18 @@ export class ApiService {
       .catch((error: any) => this.handleError(error));
   }
 
+  // Total Prpostas
+  getTotalPropostas():
+      Observable<{ total: number }> {
+
+    const queries: { [query: string]: String; } = {'limit': '1'};
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'propostas/', { search: searchParams })
+      .map((res: Response) => ({ total: res.json().total }))
+      .catch((error: any) => this.handleError(error));
+   }
+
   // Proponente
   getProponente(proponente_id: String): Observable<Proponente> {
     return this.http.get(this.configuration.ApiUrl + 'proponentes/' + proponente_id + '/')
@@ -79,6 +103,18 @@ export class ApiService {
                                  total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
+
+  // Total Proponentes
+  getTotalProponentes():
+      Observable<{ total: number }> {
+
+    const queries: { [query: string]: String; } = {'limit': '1'};
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'proponentes/', { search: searchParams })
+      .map((res: Response) => ({ total: res.json().total }))
+      .catch((error: any) => this.handleError(error));
+   }
 
   // Projetos do Proponente
   getListaProjetosDoProponente(queries: { [query: string]: String; }):
@@ -113,6 +149,18 @@ export class ApiService {
       .catch((error: any) => this.handleError(error));
   }
 
+  // Total Incentivadores
+  getTotalIncentivadores():
+      Observable<{ total: number }> {
+
+    const queries: { [query: string]: String; } = {'limit': '1'};
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'incentivadores/', { search: searchParams })
+      .map((res: Response) => ({ total: res.json().total }))
+      .catch((error: any) => this.handleError(error));
+   }
+
   // Doações do Incentivador
   getListaDoacoesDoIncentivador(incentivador_id: String, queries: { [query: string]: String; } ):
       Observable<{ listaDoacoesDoIncentivador: [Doacao], count: number, total: number }> {
@@ -145,6 +193,18 @@ export class ApiService {
                                  total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
+
+  // Total Projetos
+  getTotalFornecedores():
+      Observable<{ total: number }> {
+
+    const queries: { [query: string]: String; } = {'limit': '1'};
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/', { search: searchParams })
+      .map((res: Response) => ({ total: res.json().total }))
+      .catch((error: any) => this.handleError(error));
+   }
 
   // Produtos do Fornecedor
   getListaProdutosDoFornecedor(fornecedor_id: String): Observable<[Produto]> {

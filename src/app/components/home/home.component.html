@@ -136,13 +136,13 @@
               <div class="input calendario col-sm-3 col-xs-6">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioIncio"
-                        [(ngModel)]="dataInicio" 
+                        ngx-mydatepicker name="calendarioInicioProjeto"
+                        [(ngModel)]="dataInicioProjeto" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataInicio($event)"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
+                        (dateChanged)="onObterdataInicioProjeto($event)"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioProjetoValida = true : dataInicioProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioProjetoValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -157,13 +157,13 @@
               <div class="input calendario calendario-direita col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProjeto" 
                         [options]="opcoesCalendario" 
                         #dp2="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProjeto($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -177,13 +177,13 @@
               <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProjeto"
+                        [(ngModel)]="dataTerminoProjeto" 
                         [options]="opcoesCalendario2" 
                         #dp3="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProjeto($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -205,13 +205,13 @@
               <div class="input calendario col-sm-3 col-xs-6">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioIncio"
-                        [(ngModel)]="dataInicio" 
+                        ngx-mydatepicker name="calendarioInicioProposta"
+                        [(ngModel)]="dataInicioProposta" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataInicio($event)"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
+                        (dateChanged)="onObterdataInicioProposta($event)"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioPropostaValida = true : dataInicioPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== '', 'invalido': !dataInicioPropostaValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -226,13 +226,13 @@
               <div class="input calendario col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProposta" 
                         [options]="opcoesCalendario" 
                         #dp4="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProposta($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -246,13 +246,13 @@
               <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProposta" 
                         [options]="opcoesCalendario2" 
                         #dp5="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProposta($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -409,7 +409,8 @@
           <div class="row footer-busca">
             <div class="col-lg-12">
               <a (click)="buscaAvancada = !buscaAvancada">{{ buscaAvancada ? '&#x25B4; Busca Simples' : '&#x25B8; Busca Avançada' }}</a>
-              <a *ngIf="!buscaAvancada" class="pull-right" type="submit" (click)="onRealizarBusca()">Ver {{ pesquisaPor === 'propostas' ? 'todas as' : 'todos os' }} {{ pesquisaPor }}</a>
+              <a *ngIf="!buscaAvancada" class="pull-right hidden-xs visible-inline-sm" type="submit" (click)="onRealizarBusca()">&#43; Ver {{ pesquisaPor === 'propostas' ? 'todas as' : 'todos os' }} {{ pesquisaPor }}</a>
+              <a *ngIf="!buscaAvancada" class="pull-right hidden-sm hidden-md hidden-lg visible-inline-xs" type="submit" (click)="onRealizarBusca()">&#43; {{ pesquisaPor === 'propostas' ? 'Todas as' : 'Todos os' }} {{ pesquisaPor }}</a>
               <button *ngIf="buscaAvancada" class="btn btn-primary pull-right" type="submit" (click)="onRealizarBusca()">BUSCAR</button>
             </div>
           </div>
@@ -471,21 +472,25 @@
         <h2>Dados</h2>
       <div class="linha"></div>
       <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <div counto [step]="30" [countTo]="121083" [countFrom]="0" [duration]="5" (countoChange)="counto1 = $event" class="estatistica-numero">{{ counto1 | numero }}</div>
-          <p class="estatistica-legenda">Projetos submetidos</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div counto [step]="30" [countTo]="totalProjetos" [countFrom]="0" [duration]="5" (countoChange)="counto1 = $event" class="estatistica-numero">{{ counto1 | numero }}</div>
+          <p class="estatistica-legenda">Projetos enviados</p>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <div counto [step]="30" [countTo]="5482" [countFrom]="0" [duration]="5" (countoChange)="counto2 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto2 | numero }}</div>
-          <p class="estatistica-legenda">Projetos aprovados</p>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div counto [step]="30" [countTo]="totalPropostas" [countFrom]="0" [duration]="5" (countoChange)="counto2 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto2 | numero }}</div>
+          <p class="estatistica-legenda">Propostas submetidas</p>
         </div>
-        <div class="col-xs-12 col-sm-6 text-center">
-          <div counto [step]="30" [countTo]="5345843123" [countFrom]="0" [duration]="5" (countoChange)="counto3 = $event" class="estatistica-numero" class="estatistica-numero">R${{ counto3 | numero }}</div>
-          <p class="estatistica-legenda">Reais captados</p>
+        <div class="col-xs-12 col-sm-4 col-md-2 text-center">
+          <div counto [step]="30" [countTo]="totalProponentes" [countFrom]="0" [duration]="5" (countoChange)="counto3 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto3 | numero }}</div>
+          <p class="estatistica-legenda">Proponentes cadastrados</p>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-2 text-center">
-          <div counto [step]="30" [countTo]="74417" [countFrom]="0" [duration]="5" (countoChange)="counto4 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto4 | numero }}</div>
-          <p class="estatistica-legenda">Incentivadores</p>
+        <div class="col-xs-12 col-sm-4 col-md-2 text-center">
+          <div counto [step]="30" [countTo]="totalIncentivadores" [countFrom]="0" [duration]="5" (countoChange)="counto4 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto4 | numero }}</div>
+          <p class="estatistica-legenda">Incentivadores contribuindo</p>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 text-center">
+          <div counto [step]="30" [countTo]="totalFornecedores" [countFrom]="0" [duration]="5" (countoChange)="counto5 = $event" class="estatistica-numero" class="estatistica-numero">{{ counto5 | numero }}</div>
+          <p class="estatistica-legenda">Fornecedores</p>
         </div>
       </div>
     </div>

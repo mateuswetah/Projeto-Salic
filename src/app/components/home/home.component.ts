@@ -28,9 +28,14 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+  // Variáveis locais
   pesquisaPor = 'projetos';
   buscaAvancada = false;
-  corAleatoriaDoBanner = '';
+  totalProjetos = 0;
+  totalPropostas = 0;
+  totalProponentes = 0;
+  totalIncentivadores = 0;
+  totalFornecedores = 0;
 
   // Configurações de Calendário
   private opcoesCalendario: IMyOptions = {
@@ -58,11 +63,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
       monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
   };
-  public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
-  public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataInicioProjeto: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataTerminoProjeto: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataInicioProposta: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataTerminoProposta: { date: { year: Number , month: Number, day: Number }} = null;
 
-  dataInicioValida = true;
-  dataTerminoValida = true;
+  dataInicioProjetoValida = true;
+  dataTerminoProjetoValida = true;
+  dataInicioPropostaValida = true;
+  dataTerminoPropostaValida = true;
 
   // Opções de Ordenação
   ordenarPor = 'PRONAC';
@@ -127,7 +136,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.queriesDoSelecionado = Object.keys(this.queriesDeProjetos);
     this.ordenarPorQueries = this.queriesDeOrdemDeProjetos;
 
-    this.corAleatoriaDoBanner = this.obterCorDoBanner();
+    // Atualizar estatísticas.
+    this.obterEstatisticas();
+
   }
 
   atualizaQueries(queryParams: any) {
@@ -229,6 +240,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onRealizarBusca() {
+
     // Adiciona queries extras
     this.queries['limit'] = '' + this.configurationService.limitResultados;
     this.queries['offset'] = '0';
@@ -278,7 +290,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return Object.keys(dicionario);
   }
 
-    mudarEstadoPorSelect($event) {
+  // Obter estatísticas exibidas na sessão dados pela API
+  obterEstatisticas() {
+
+    this.apiService.getTotalProjetos().subscribe(
+      resposta => { this.totalProjetos = resposta.total; },
+      err => { this.totalProjetos = 0; }
+    );
+
+    this.apiService.getTotalPropostas().subscribe(
+      resposta => { this.totalPropostas = resposta.total; },
+      err => { this.totalPropostas = 0; }
+    );
+
+    this.apiService.getTotalProponentes().subscribe(
+      resposta => { this.totalProponentes = resposta.total; },
+      err => { this.totalProponentes = 0; }
+    );
+
+    this.apiService.getTotalIncentivadores().subscribe(
+      resposta => { this.totalIncentivadores = resposta.total; },
+      err => { this.totalIncentivadores = 0; }
+    );
+
+    this.apiService.getTotalFornecedores().subscribe(
+      resposta => { this.totalFornecedores = resposta.total; },
+      err => { this.totalFornecedores = 0; }
+    );
+  }
+
+  mudarEstadoPorSelect($event) {
     if ($event.target.value === '' || $event.target.value === 'Todos os estados') {
       this.queries['UF'] = null;
     } else {
@@ -311,7 +352,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onObterDataInicio(event: IMyDateModel): void {
+  public onObterdataInicioProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
        this.queries['data_inicio_min'] = null;
     } else {
@@ -319,11 +360,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onObterDataTermino(event: IMyDateModel): void {
+  public onObterdataInicioProposta(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_inicio'] = null;
+    } else {
+      this.queries['data_inicio'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  public onObterDataTerminoProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
        this.queries['data_termino_max'] = null;
     } else {
       this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  public onObterDataTerminoProposta(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_termino'] = null;
+    } else {
+      this.queries['data_termino'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
@@ -333,7 +390,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const dataSplit = this.queries['data_inicio_min'].split('-');
 
       if (dataSplit.length === 3) {
-        this.dataInicio = {
+        this.dataInicioProjeto = {
           date: { year: Number(dataSplit[0]),
                   month: Number(dataSplit[1]),
                   day: Number(dataSplit[2]) }
@@ -345,7 +402,31 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
       const dataSplit = this.queries['data_termino_max'].split('-');
       console.log(dataSplit);
-      this.dataFinal = {
+      this.dataTerminoProjeto = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+
+    }
+    if (this.queries['data_inicio']) {
+
+      const dataSplit = this.queries['data_inicio'].split('-');
+
+      if (dataSplit.length === 3) {
+        this.dataInicioProposta = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+      }
+
+    }
+    if (this.queries['data_termino']) {
+
+      const dataSplit = this.queries['data_termino'].split('-');
+      console.log(dataSplit);
+      this.dataTerminoProposta = {
           date: { year: Number(dataSplit[0]),
                   month: Number(dataSplit[1]),
                   day: Number(dataSplit[2]) }
@@ -421,16 +502,4 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  obterCorDoBanner(): string {
-    const indice: Number = Math.floor(Math.random() * 5);
-
-    switch (indice) {
-      case 0:
-        return '#f3dc34';
-      case 1:
-        return '#1066f1';
-      default:
-        return '#1066f1';
-    }
-  }
 }

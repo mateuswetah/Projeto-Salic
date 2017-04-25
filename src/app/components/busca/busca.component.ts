@@ -677,13 +677,13 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     reAdjust();
-    this.organizaChips();
+    //this.organizaChips();
 
     $(window).on('resize', function(e){
       console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
       console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
       reAdjust();
-      this.organizaChips();
+      //this.organizaChips();
     });
 
     $('.abas-pesquisa').scroll(function() {
