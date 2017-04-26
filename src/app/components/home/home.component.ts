@@ -34,8 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   totalProjetos = 0;
   totalPropostas = 0;
   totalProponentes = 0;
-  totalIncentivadores = 0;,
-    "ng2-page-scroll": "^4.0.0-beta.5",
+  totalIncentivadores = 0;
   totalFornecedores = 0;
 
   // Configurações de Calendário
