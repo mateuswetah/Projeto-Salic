@@ -36,7 +36,6 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     // Obtêm o parâmetro através da rota da URL
-    this.atualizarMetaTags();
    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.PRONAC = params['PRONAC'];
