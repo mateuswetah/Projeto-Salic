@@ -73,27 +73,28 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // Meta tags genéricas
     this.metaService.setTitle('Projeto: ' +  this.projeto.nome);
-    this.metaService.setTag('description', `Visualização e Consulta de Projetos 
-                                            submetidos aos Sistema de Apoio às 
-                                            Leis de Incentivo à Cultura.`);
+    this.metaService.setTag('description', `Portal de Visualização do 
+                                               Sistema de Apoio às 
+                                               Leis de Incentivo à Cultura.`);
     // Meta tags do Twitter
     this.metaService.setTag('twitter:card', 'summary');
     this.metaService.setTag('twitter:site', '@publisher_handle');
     this.metaService.setTag('twitter:title', 'Projeto: ' +  this.projeto.nome);
-    this.metaService.setTag('twitter:description', `Visualização e Consulta de Projetos 
-                                                    submetidos aos Sistema de Apoio às 
-                                                    Leis de Incentivo à Cultura.`);
+    this.metaService.setTag('twitter:description', `Portal de Visualização do 
+                                               Sistema de Apoio às 
+                                               Leis de Incentivo à Cultura.`);
     this.metaService.setTag('twitter:creator', '@author_handle');
 
     // Meta tags do Open Graph
     this.metaService.setTag('og:title', 'Projeto: ' +  this.projeto.nome);
     this.metaService.setTag('og:typle', 'article');
     this.metaService.setTag('og:locale', 'pt-BR');
-    this.metaService.setTag('og:url', this.router.url);
+    this.metaService.setTag('og:url', location.href);
     this.metaService.setTag('og:description', `Portal de Visualização do 
                                                Sistema de Apoio às 
                                                Leis de Incentivo à Cultura.`);
     this.metaService.setTag('site_name', 'VERSALIC');
+
     //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 

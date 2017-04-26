@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Projeto',
-        description: 'Página de Projeto - Visualização SALIC'
+        description: 'Página de Projeto - VERSALIC'
       }
     }
   },
@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Proposta',
-        description: 'Página de Proposta - Visualização SALIC'
+        description: 'Página de Proposta - VERSALIC'
       }
     }
   },
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Proponente',
-        description: 'Página de Proponente - Visualização SALIC'
+        description: 'Página de Proponente - VERSALIC'
       }
     }
   },
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Incentivador',
-        description: 'Página de Incentivador - Visualização SALIC'
+        description: 'Página de Incentivador - VERSALIC'
       }
     }
   },
@@ -60,7 +60,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Fornecedor',
-        description: 'Página de Fornecedor - Visualização SALIC'
+        description: 'Página de Fornecedor - VERSALIC'
       }
     }
   },
@@ -78,7 +78,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página Inicial',
-        description: 'Página Inicial - Visualização SALIC'
+        description: 'Página Inicial - VERSALIC'
       }
     }
   },
@@ -92,7 +92,7 @@ const appRoutes: Routes = [
     data: {
       meta: {
         title: 'Página de Pesquisa',
-        description: 'Página de Pesquisa - Visualização SALIC'
+        description: 'Página de Pesquisa - VERSALIC'
       }
     }
   },
