@@ -155,6 +155,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   estados = new Estados();
   tiposPessoa = ['Qualquer tipo', 'Física', 'Jurídica'];
 
+  taxaDuracaoCarregamento = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -388,6 +389,15 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.atualizaInputsDeData();
 
     if (this.verificaValidadeDasQueries()) {
+
+      // Usado para modificar a frase de carregando.
+      setTimeout(() => {
+        this.taxaDuracaoCarregamento = 5;
+      }, 5000);
+      setTimeout(() => {
+        this.taxaDuracaoCarregamento = 10;
+      }, 10000);
+
       switch (this.pesquisaPor) {
         case 'projetos':
           this.apiService.getListaProjetos(this.queries).subscribe(
@@ -408,7 +418,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => this.carregandoDados = false);
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
 
         break;
 
@@ -430,7 +440,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => this.carregandoDados = false);
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
         break;
 
         case 'proponentes':
@@ -451,7 +461,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => this.carregandoDados = false);
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
         break;
 
         case 'incentivadores':
@@ -472,7 +482,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => this.carregandoDados = false);
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
         break;
 
         case 'fornecedores':
@@ -493,7 +503,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => this.carregandoDados = false);
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
         break;
         default:
           this.router.navigate(['falha', 405]);

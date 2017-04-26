@@ -731,14 +731,19 @@
     </div>
   </div>
 
-  <sk-fading-circle [isRunning]="carregandoDados"></sk-fading-circle>
+  <div class="spinner">
+    <sk-folding-cube [isRunning]="carregandoDados"></sk-folding-cube>
+    <p *ngIf="taxaDuracaoCarregamento === 0">Buscando {{ pesquisaPor }}...</p>
+    <p *ngIf="taxaDuracaoCarregamento === 5">Ordenando resultados...</p>
+    <p *ngIf="taxaDuracaoCarregamento === 10">Ainda trabalhando...</p>
+  </div>
 
   <alert *ngIf="buscaSemResultados" class="col-lg-8 col-md-12 col-lg-offset-2" type="danger">
     <p>Não encontramos {{ pesquisaPor }} com estes parâmetros de pesquisa :(</p>
     <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
   </alert>
       
-  <div class="text-center" *ngIf="(numeroDeItems < totalDeItems)">
+  <div class="text-center" *ngIf="(numeroDeItems < totalDeItems) && !carregandoDados">
     <pagination [totalItems]="totalDeItems" 
                 (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
                 [maxSize]=" maximoBotoes + 2" 

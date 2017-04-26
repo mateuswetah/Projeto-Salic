@@ -15,7 +15,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { CountoModule } from 'angular2-counto';
 
 // Components de Terceiros
-import { FadingCircleComponent } from 'ng2-spin-kit/app/spinner/fading-circle';
+import { FoldingCubeComponent } from 'ng2-spin-kit/app/spinner/folding-cube';
 
 // Components do App
 import { AppComponent } from './app.component';
@@ -72,7 +72,7 @@ export function metaFactory(): MetaLoader {
     FornecedoresComponent,
     FalhaComponent,
     SobreComponent,
-    FadingCircleComponent,
+    FoldingCubeComponent,
     NumeroPipe
   ],
   imports: [
