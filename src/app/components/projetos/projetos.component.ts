@@ -26,6 +26,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   carregandoDados: Boolean = true;
   projeto: Projeto;
   JSON: any = JSON;
+  url: string = location.href;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -89,12 +90,12 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.metaService.setTag('og:title', 'Projeto: ' +  this.projeto.nome);
     this.metaService.setTag('og:typle', 'article');
     this.metaService.setTag('og:locale', 'pt-BR');
-    this.metaService.setTag('og:url', location.href);
+    this.metaService.setTag('og:url', this.url);
     this.metaService.setTag('og:description', `Portal de Visualização do 
                                                Sistema de Apoio às 
                                                Leis de Incentivo à Cultura.`);
     this.metaService.setTag('site_name', 'VERSALIC');
-
+    console.log(this.url);
     //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 
