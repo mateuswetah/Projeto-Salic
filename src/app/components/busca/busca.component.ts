@@ -82,11 +82,15 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       dayLabels: {su: 'Dom', mo: 'Seg', tu: 'Ter', we: 'Qua', th: 'Qui', fr: 'Sex', sa: 'Sáb'},
       monthLabels: { 1: 'Jan', 2: 'Fev', 3: 'Mar', 4: 'Abr', 5: 'Mai', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez' }
   };
-  public dataInicio: { date: { year: Number , month: Number, day: Number }} = null;
-  public dataFinal: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataInicioProjeto: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataTerminoProjeto: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataInicioProposta: { date: { year: Number , month: Number, day: Number }} = null;
+  public dataTerminoProposta: { date: { year: Number , month: Number, day: Number }} = null;
 
-  dataInicioValida = true;
-  dataTerminoValida = true;
+  dataInicioProjetoValida = true;
+  dataTerminoProjetoValida = true;
+  dataInicioPropostaValida = true;
+  dataTerminoPropostaValida = true;
 
   // Respostas da API:
   listaProjetos:        [Projeto];
@@ -811,7 +815,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     $event.target.value > 0 ? this.queries['area'] = $event.target.value : this.queries['area'] = null;
     if (this.queries['segmento'] !== null && this.queries['segmento'] !== undefined && this.queries['area'] !== null && this.queries['area'] != this.segmentosDeProjetos.obterAreaCodPorCod(this.queries['segmento'])) {
       this.queries['segmento'] = null;
-      console.log("Apaguei!");
      }
     console.log(this.queries['area']);
     console.log(this.queries['segmento']);
@@ -827,7 +830,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public onObterDataInicio(event: IMyDateModel): void {
+  public onObterDataInicioProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
        this.queries['data_inicio_min'] = null;
     } else {
@@ -835,7 +838,23 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public onObterDataTermino(event: IMyDateModel): void {
+  public onObterDataInicioProposta(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_inicio_min'] = null;
+    } else {
+      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  public onObterDataTerminoProjeto(event: IMyDateModel): void {
+    if (event.jsdate === null) {
+       this.queries['data_termino_max'] = null;
+    } else {
+      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+    }
+  }
+
+  public onObterDataTerminoProposta(event: IMyDateModel): void {
     if (event.jsdate === null) {
        this.queries['data_termino_max'] = null;
     } else {
@@ -844,12 +863,12 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   atualizaInputsDeData() {
-    if (this.queries['data_inicio_min']) {
+    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'projetos') {
 
       const dataSplit = this.queries['data_inicio_min'].split('-');
 
       if (dataSplit.length === 3) {
-        this.dataInicio = {
+        this.dataInicioProjeto = {
           date: { year: Number(dataSplit[0]),
                   month: Number(dataSplit[1]),
                   day: Number(dataSplit[2]) }
@@ -857,11 +876,35 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
     }
-    if (this.queries['data_termino_max']) {
+    if (this.queries['data_termino_max'] && this.pesquisaPor === 'projetos') {
 
       const dataSplit = this.queries['data_termino_max'].split('-');
       console.log(dataSplit);
-      this.dataFinal = {
+      this.dataTerminoProjeto = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+
+    }
+    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'propostas') {
+
+      const dataSplit = this.queries['data_inicio_min'].split('-');
+
+      if (dataSplit.length === 3) {
+        this.dataInicioProposta = {
+          date: { year: Number(dataSplit[0]),
+                  month: Number(dataSplit[1]),
+                  day: Number(dataSplit[2]) }
+                };
+      }
+
+    }
+    if (this.queries['data_termino_max'] && this.pesquisaPor === 'propostas') {
+
+      const dataSplit = this.queries['data_termino_max'].split('-');
+      console.log(dataSplit);
+      this.dataTerminoProposta = {
           date: { year: Number(dataSplit[0]),
                   month: Number(dataSplit[1]),
                   day: Number(dataSplit[2]) }
@@ -869,6 +912,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
   }
+
 
   public esconderModalDeCSV(): void {
     this.modalDeCSVs.hide();

@@ -128,13 +128,13 @@
               <div class="input calendario col-sm-3 col-xs-6">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioIncio"
-                        [(ngModel)]="dataInicio" 
+                        ngx-mydatepicker name="calendarioInicioProjeto"
+                        [(ngModel)]="dataInicioProjeto" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataInicio($event)"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
+                        (dateChanged)="onObterDataInicioProjeto($event)"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioProjetoValida = true : dataInicioProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioProjetoValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -149,13 +149,13 @@
               <div class="input calendario calendario-direita col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProjeto" 
                         [options]="opcoesCalendario" 
                         #dp2="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProjeto($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -169,13 +169,13 @@
               <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProjeto"
+                        [(ngModel)]="dataTerminoProjeto" 
                         [options]="opcoesCalendario2" 
                         #dp3="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProjeto($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -197,13 +197,13 @@
               <div class="input calendario col-sm-3 col-xs-6">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioIncio"
-                        [(ngModel)]="dataInicio" 
+                        ngx-mydatepicker name="calendarioInicioProposta"
+                        [(ngModel)]="dataInicioProposta" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataInicio($event)"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioValida = true : dataInicioValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioValida }"/>
+                        (dateChanged)="onObterDataInicioProposta($event)"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataInicioPropostaValida = true : dataInicioPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioPropostaValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -218,13 +218,13 @@
               <div class="input calendario col-sm-3 col-xs-6 visible-inline-md hidden-sm hidden-xs">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProposta" 
                         [options]="opcoesCalendario" 
                         #dp4="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProposta($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -238,13 +238,13 @@
               <div class="input calendario col-sm-3 col-xs-6 hidden-lg hidden-md visible-inline-sm">
                   <input class="form-control" 
                         style="float:none" placeholder="" 
-                        ngx-mydatepicker name="calendarioTermino"
-                        [(ngModel)]="dataFinal" 
+                        ngx-mydatepicker name="calendarioTerminoProposta"
+                        [(ngModel)]="dataTerminoProposta" 
                         [options]="opcoesCalendario2" 
                         #dp5="ngx-mydatepicker" 
-                        (dateChanged)="onObterDataTermino($event);"
-                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoValida = true : dataTerminoValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoValida }"/>
+                        (dateChanged)="onObterDataTerminoProposta($event);"
+                        (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">

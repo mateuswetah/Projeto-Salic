@@ -336,7 +336,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     $event.target.value > 0 ? this.queries['area'] = $event.target.value : this.queries['area'] = null;
     if (this.queries['segmento'] !== null && this.queries['segmento'] !== undefined && this.queries['area'] !== null && this.queries['area'] != this.segmentosDeProjetos.obterAreaCodPorCod(this.queries['segmento'])) {
       this.queries['segmento'] = null;
-      console.log("Apaguei!");
      }
     console.log(this.queries['area']);
     console.log(this.queries['segmento']);
@@ -352,7 +351,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onObterdataInicioProjeto(event: IMyDateModel): void {
+  public onObterDataInicioProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
        this.queries['data_inicio_min'] = null;
     } else {
@@ -360,11 +359,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onObterdataInicioProposta(event: IMyDateModel): void {
+  public onObterDataInicioProposta(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_inicio'] = null;
+       this.queries['data_inicio_min'] = null;
     } else {
-      this.queries['data_inicio'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
@@ -378,14 +377,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   public onObterDataTerminoProposta(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_termino'] = null;
+       this.queries['data_termino_max'] = null;
     } else {
-      this.queries['data_termino'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   atualizaInputsDeData() {
-    if (this.queries['data_inicio_min']) {
+    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'projetos') {
 
       const dataSplit = this.queries['data_inicio_min'].split('-');
 
@@ -398,7 +397,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
     }
-    if (this.queries['data_termino_max']) {
+    if (this.queries['data_termino_max'] && this.pesquisaPor === 'projetos') {
 
       const dataSplit = this.queries['data_termino_max'].split('-');
       console.log(dataSplit);
@@ -409,9 +408,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 };
 
     }
-    if (this.queries['data_inicio']) {
+    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'propostas') {
 
-      const dataSplit = this.queries['data_inicio'].split('-');
+      const dataSplit = this.queries['data_inicio_min'].split('-');
 
       if (dataSplit.length === 3) {
         this.dataInicioProposta = {
@@ -422,9 +421,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
     }
-    if (this.queries['data_termino']) {
+    if (this.queries['data_termino_max'] && this.pesquisaPor === 'propostas') {
 
-      const dataSplit = this.queries['data_termino'].split('-');
+      const dataSplit = this.queries['data_termino_max'].split('-');
       console.log(dataSplit);
       this.dataTerminoProposta = {
           date: { year: Number(dataSplit[0]),

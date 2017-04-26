@@ -140,7 +140,7 @@
                         [(ngModel)]="dataInicioProjeto" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterdataInicioProjeto($event)"
+                        (dateChanged)="onObterDataInicioProjeto($event)"
                         (inputFieldChanged)="$event.value.length === 0 ?  dataInicioProjetoValida = true : dataInicioProjetoValida = $event.valid;"
                         [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioProjetoValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
@@ -209,9 +209,9 @@
                         [(ngModel)]="dataInicioProposta" 
                         [options]="opcoesCalendario" 
                         #dp="ngx-mydatepicker" 
-                        (dateChanged)="onObterdataInicioProposta($event)"
+                        (dateChanged)="onObterDataInicioProposta($event)"
                         (inputFieldChanged)="$event.value.length === 0 ?  dataInicioPropostaValida = true : dataInicioPropostaValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_inicio'] !== undefined && queries['data_inicio'] !== null && queries['data_inicio'] !== '', 'invalido': !dataInicioPropostaValida }"/>
+                        [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioPropostaValida }"/>
                   <div class="form-control-placeholder">Início a partir de</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -232,7 +232,7 @@
                         #dp4="ngx-mydatepicker" 
                         (dateChanged)="onObterDataTerminoProposta($event);"
                         (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -252,7 +252,7 @@
                         #dp5="ngx-mydatepicker" 
                         (dateChanged)="onObterDataTerminoProposta($event);"
                         (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
-                        [ngClass]="{'cheio': queries['data_termino'] !== undefined && queries['data_termino'] !== null && queries['data_termino'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
+                        [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                   <div class="form-control-placeholder">Término até</div>
                   <span class="input-group-btn">
                       <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
