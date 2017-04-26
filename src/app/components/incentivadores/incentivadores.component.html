@@ -1,18 +1,16 @@
 <div class="container container-incentivador">
-  <div class="container">
+  <div *ngIf="!carregandoDados" class="container">
     <h3>
       Página do Incentivador de id: {{ idIncentivador }} 
     </h3>
-    <h3>Exemplos de ShareButtons: </h3>
     <share-buttons class="withCount" 
-                  [url]="this.router.url" 
+                  [url]="url" 
+                  [title]="'Incentivador: ' + incentivador.nome" 
+                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
                   [showCount]="true" ></share-buttons>
 
-    <!--<button (click)="onLoadIncentivador(idIncentivador)">Carregar Incentivador</button>-->
-    <p *ngIf="carregandoDados">Carregando incentivador...</p>
-
-    <div *ngIf="!carregandoDados">
+    <div>
       <p>{{ JSON.stringify(incentivador) }}</p>
       <!--<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>-->
       <p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>

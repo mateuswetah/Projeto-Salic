@@ -23,6 +23,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
 
   inscricao: Subscription; // Usada para observar mudanças na URL
   JSON: any = JSON;
+  url: string = location.href;
 
   carregandoDados: Boolean = false;
   carregandoDadosProdutos: Boolean = false;
@@ -97,15 +98,15 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
   atualizarMetaTags() {
     // Meta tags genéricas
     this.metaService.setTitle('Fornecedor: ' +  this.fornecedor.nome);
-    this.metaService.setTag('description', `Visualização e Consulta de Projetos 
-                                            submetidos aos Sistema de Apoio às 
+    this.metaService.setTag('description', `Portal de Visualização do 
+                                            Sistema de Apoio às 
                                             Leis de Incentivo à Cultura.`);
     // Meta tags do Twitter
     this.metaService.setTag('twitter:card', 'summary');
     this.metaService.setTag('twitter:site', '@publisher_handle');
     this.metaService.setTag('twitter:title', 'Fornecedor: ' +  this.fornecedor.nome);
-    this.metaService.setTag('twitter:description', `Visualização e Consulta de Projetos 
-                                                    submetidos aos Sistema de Apoio às 
+    this.metaService.setTag('twitter:description', `Portal de Visualização do 
+                                                    Sistema de Apoio às 
                                                     Leis de Incentivo à Cultura.`);
     this.metaService.setTag('twitter:creator', '@author_handle');
 
@@ -113,7 +114,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
     this.metaService.setTag('og:title', 'Fornecedor: ' +  this.fornecedor.nome);
     this.metaService.setTag('og:typle', 'article');
     this.metaService.setTag('og:locale', 'pt-BR');
-    this.metaService.setTag('og:url', this.router.url);
+    this.metaService.setTag('og:url', this.url);
     this.metaService.setTag('og:description', `Portal de Visualização do 
                                                Sistema de Apoio às 
                                                Leis de Incentivo à Cultura.`);

@@ -1,17 +1,16 @@
 <div class="container-fornecedor">
-  <div class="container">
+  <div  *ngIf="!carregandoDados" class="container">
     <h3>
       Página do Fornecedor de id: {{ idFornecedor }} 
     </h3>
     <share-buttons class="withCount" 
-                  [url]="this.router.url" 
+                  [url]="url" 
+                  [title]="'Fornecedor: ' + fornecedor.nome" 
+                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
                   [showCount]="true" ></share-buttons>
 
-    <!--<button (click)="onLoadFornecedor(idFornecedor)">Carregar Fornecedor</button>-->
-    <p *ngIf="carregandoDados">Carregando fornecedor...</p>
-
-    <div *ngIf="!carregandoDados">
+    <div>
       <p>{{ JSON.stringify(fornecedor) }}</p>
       <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
       <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>

@@ -1,16 +1,14 @@
 <div class="container-proponente">
-  <div class="container">
+  <div *ngIf="!carregandoDados" class="container">
     <h3>
       Página do Proponente de id: {{ idProponente }}
     </h3>
-    <p>Exemplos de ShareButtons: </p>
     <share-buttons class="withCount" 
-                  [url]="this.router.url" 
+                  [url]="url" 
+                  [title]="'Proponente: ' + proponente.nome" 
+                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
                   [showCount]="true" ></share-buttons>
-
-    <!--<button (click)="onLoadProponente(idProponente)">Carregar Proponente</button>-->
-    <p *ngIf="carregandoDados">Carregando proponente...</p>
     
     <div class="row">
       <div class="col-md-8 col-md-offset-2" *ngIf="!carregandoDados">

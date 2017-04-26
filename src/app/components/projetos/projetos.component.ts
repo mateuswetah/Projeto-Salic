@@ -95,7 +95,6 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
                                                Sistema de Apoio às 
                                                Leis de Incentivo à Cultura.`);
     this.metaService.setTag('site_name', 'VERSALIC');
-    console.log(this.url);
     //this.metaService.setTag('fb:admins', ''); // usada apenas se tivermos uma página do facebook
   }
 
