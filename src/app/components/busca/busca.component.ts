@@ -199,8 +199,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
           default:
             this.router.navigate(['falha', 405]);
         }
-        this.dataTerminoValida = true;
-        this.dataInicioValida = true;
+        this.dataTerminoProjetoValida = true;
+        this.dataInicioProjetoValida = true;
+        this.dataTerminoPropostaValida = true;
+        this.dataInicioPropostaValida = true;
       }
     );
 

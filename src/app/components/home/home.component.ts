@@ -139,6 +139,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Atualizar estatísticas.
     this.obterEstatisticas();
 
+    this.dataTerminoProjetoValida = true;
+    this.dataInicioProjetoValida = true;
+    this.dataTerminoPropostaValida = true;
+    this.dataInicioPropostaValida = true;
+
   }
 
   atualizaQueries(queryParams: any) {
