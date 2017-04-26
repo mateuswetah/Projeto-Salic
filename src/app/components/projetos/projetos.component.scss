@@ -1,7 +1,22 @@
+@import '../../../styles.scss';
+
 // Container principal da página
 .container-projeto {
   padding-top: 50px;
   width: auto;
   overflow-x: hidden;
-  background-color: white;
+  background-color: $background-salic;
+  min-height: calc(100vh - 110px) !important;
+
+  .pagina-titulo {
+    color: $verde-salic;
+    font-size: 1.750em;
+  }
+
+}
+
+// Spinner
+.spinner {
+    text-align: center;
+    margin: 50vh auto 0 auto;
 }

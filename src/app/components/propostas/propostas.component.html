@@ -1,5 +1,5 @@
 <div class="container container-proposta">
-  <div class="container">
+  <div *ngIf="!carregandoDados" class="container">
     <h3>
       Página da Proposta de ID: {{ idProposta }}
     </h3>
@@ -10,9 +10,14 @@
                   [showCount]="true" ></share-buttons>
                   
     <button (click)="onLoadProposta(idProposta)">Carregar Proposta</button>
-    <p *ngIf="carregandoDados">Carregando proposta...</p>
-    <div *ngIf="!carregandoDados">
+    <div>
       <p>{{ JSON.stringify(proposta) }}</p>
     </div>
+  </div>
+  <div *ngIf="carregandoDados" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
+    <p *ngIf="taxaDuracaoCarregamento === 0">Buscando {{ pesquisaPor }}...</p>
+    <p *ngIf="taxaDuracaoCarregamento === 5">Ordenando resultados...</p>
+    <p *ngIf="taxaDuracaoCarregamento === 10">Ainda trabalhando...</p>
   </div>
 </div>
