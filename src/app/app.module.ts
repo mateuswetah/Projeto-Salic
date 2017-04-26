@@ -10,12 +10,12 @@ import { DatePipe } from '@angular/common';
 // Modules de terceiros
 import { ShareButtonsModule } from 'ng2-sharebuttons';
 import { MetaModule,  MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
-import { AlertModule, DropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule } from 'ng2-bootstrap/';
+import { AlertModule, BsDropdownModule, ButtonsModule, CollapseModule, PaginationModule, PopoverModule, ModalModule } from 'ngx-bootstrap/';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { CountoModule } from 'angular2-counto';
 
 // Components de Terceiros
-import { FoldingCubeComponent } from 'ng2-spin-kit/app/spinner/folding-cube';
+import { NgSpinKitModule } from 'ng-spin-kit';
 
 // Components do App
 import { AppComponent } from './app.component';
@@ -72,7 +72,6 @@ export function metaFactory(): MetaLoader {
     FornecedoresComponent,
     FalhaComponent,
     SobreComponent,
-    FoldingCubeComponent,
     NumeroPipe
   ],
   imports: [
@@ -80,13 +79,14 @@ export function metaFactory(): MetaLoader {
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    NgSpinKitModule,
     ShareButtonsModule.forRoot(),
     MetaModule.forRoot({
       provide: MetaLoader,
       useFactory: (metaFactory)
     }),
     AlertModule.forRoot(),
-    DropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
     PaginationModule.forRoot(),

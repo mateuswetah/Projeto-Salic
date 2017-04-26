@@ -5,7 +5,7 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { ModalDirective } from 'ng2-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { IMyOptions, IMyDateModel, IMyInputFieldChanged } from 'ngx-mydatepicker';
 
 import { ApiService } from './../../services/api.service';

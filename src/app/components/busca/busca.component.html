@@ -731,8 +731,8 @@
     </div>
   </div>
 
-  <div class="spinner">
-    <sk-folding-cube [isRunning]="carregandoDados"></sk-folding-cube>
+  <div *ngIf="carregandoDados" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
     <p *ngIf="taxaDuracaoCarregamento === 0">Buscando {{ pesquisaPor }}...</p>
     <p *ngIf="taxaDuracaoCarregamento === 5">Ordenando resultados...</p>
     <p *ngIf="taxaDuracaoCarregamento === 10">Ainda trabalhando...</p>
