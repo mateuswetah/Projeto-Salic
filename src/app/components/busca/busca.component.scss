@@ -9,6 +9,10 @@
   h1, h2, h3, h4, h5 {
       color: $verde-salic;
   }
+
+  .dropdown-menu {
+    cursor: pointer;
+  }
 }
 
 
@@ -82,6 +86,8 @@
 
         .input-group {
             padding: 28px 15px 15px 15px;
+            -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
         }
 
         .form-group {
@@ -341,6 +347,7 @@
         border-radius: 10px;
         background-color: white;
         border: 1px solid $cinza-escuro;
+        cursor: pointer;
     }
 
     .chip-wrapper {
@@ -363,11 +370,16 @@
     // Ordenacao e paginação
     .container-ordenacao {
         display: inline-block;
-        padding: 6px;
+        padding: 6px 30px 6px 6px;
+        text-align: right;
+
+        &>div { display: inline-block; }
 
         @media (max-width: 992px) and (min-width: 768px) {
             padding-left: 30px;
+            text-align: left;
         }
+
 
         .btn-group { 
             padding-top: 2px;
@@ -391,18 +403,18 @@
 
         @media (max-width: 768px) {
             text-align: center;
-            padding: 6px 0px;
+            padding: 6px 14px 6px 6px;
         }
     }
 
     .container-baixar {
         display: inline-block; 
         text-align: end;
-        padding: 6px 30px 6px 6px;
+        margin-left: 10px;
 
-        @media (max-width: 768px) {
-            padding: 6px 14px 6px 0px;
-            text-align: end;
+        @media (max-width: 992px) {
+            float: right;
+
         }
 
         button {
@@ -445,6 +457,8 @@
 
     .itens-por-pagina { 
         text-align: center; 
+        
+        &>div { display: inline-block; }
 
         @media all and (max-width: 440px){
             width: 100%;
@@ -538,10 +552,10 @@
             border-right: 1px solid $cinza-escuro;
             padding: 20px;
             margin: 10px;
-            height: 380px;
+            height: 377px;
 
             @media all and (min-width: 768px){
-                height: 230px;
+                height: 227px;
             } 
             
             div {
@@ -662,10 +676,10 @@
         } 
 
         .card-resposta {
-            height: 228px;
+            height: 225px;
 
             @media all and (min-width: 768px){
-                height: 125px;
+                height: 122px;
             } 
         }
     }
@@ -678,10 +692,10 @@
         } 
 
         .card-resposta {
-            height: 338px;
+            height: 335px;
 
             @media all and (min-width: 768px){
-                height: 138px;
+                height: 135px;
             } 
         }
 
@@ -708,10 +722,10 @@
         } 
 
         .card-resposta {
-            height: 158px;
+            height: 156px;
 
             @media all and (min-width: 768px){
-                height: 80px;
+                height: 79px;
             } 
         }
 

@@ -413,7 +413,6 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
               this.listaProjetos = resposta.listaProjetos;
 
               this.subirRespostasEstado = 'ativo';
-              this.organizaChips();
             },
             err => {
               this.carregandoDados = false;
@@ -619,12 +618,19 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Remove uma querie de parâmetro de busca
   removeQuery(removedKey: string) {
+
     this.queries[removedKey] = null;
 
-    if (removedKey === 'data_inicio_min') {
-      $('input[name=calendarioIncio]')[0].value = null;
-    } else if (removedKey === 'data_termino_max') {
-      $('input[name=calendarioTermino]')[0].value = null;
+    if (removedKey === 'data_inicio_min' && this.pesquisaPor === 'projetos') {
+      $('input[name=calendarioInicioProjeto]')[0].value = null;
+    } else if (removedKey === 'data_termino_max' && this.pesquisaPor === 'projetos') {
+      $('input[name=calendarioTerminoProjeto]')[0].value = null;
+    }
+
+    if (removedKey === 'data_inicio_min' && this.pesquisaPor === 'propostas') {
+      $('input[name=calendarioInicioProposta]')[0].value = null;
+    } else if (removedKey === 'data_termino_max' && this.pesquisaPor === 'propostas') {
+      $('input[name=calendarioTerminoProposta]')[0].value = null;
     }
 
     this.atualizaQueries(this.queries);
@@ -680,8 +686,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       } else {
         $('.scroller-right').hide();
       }
-      console.log(getScrollPosi());
-      console.log("L=" + getLeftPosi());
+
       if (getLeftPosi() < 0) {
         $('.scroller-left').show();
       } else {
@@ -689,17 +694,40 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
         $('.scroller-left').hide();
       }
 
+    }
 
+    function organizaChips() {
+
+      let constante = 150;
+
+      if ($('#containerChipsButton').is(':visible')) {
+        constante += 55;
+      }
+
+      if ($('#containerChipsRow').innerWidth() > $('#containerChips').innerWidth() - constante ) {
+
+        let chipRemovido = $('#containerChipsRow .chip-wrapper').last();
+        $('#containerChipsRow .chip-wrapper').last().remove();
+        $('#containerChipsPanel').append(chipRemovido);
+
+        $('#containerChipsButton').show();
+
+      } else {
+
+        let chipRemovido = $('#containerChipsPanel .chip-wrapper').last();
+        $('#containerChipsPanel .chip-wrapper').last().remove();
+        $('#containerChipsRow').append(chipRemovido);
+
+        $('#containerChipsButton').hide();
+      }
     }
 
     reAdjust();
-    //this.organizaChips();
 
     $(window).on('resize', function(e){
       console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
       console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
       reAdjust();
-      //this.organizaChips();
     });
 
     $('.abas-pesquisa').scroll(function() {
@@ -709,8 +737,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
       } else {
         $('.scroller-left').hide();
       }
-      console.log("S=" + getScrollPosi());
-      console.log("W=" + $('.abas-pesquisa').outerWidth());
+
       if (getScrollPosi() < $('.abas-pesquisa').outerWidth()) {
         $('.scroller-rigth').show();
       } else {
@@ -927,36 +954,4 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   public expandido(event: any): void {
     // console.log(event);
   }
-
-  organizaChips() {
-
-    let constante = 150;
-
-    if ($('#containerChipsButton').is(':visible')) {
-      constante += 55;
-    }
-
-    if ($('#containerChipsRow').innerWidth() > $('#containerChips').innerWidth() - constante ) {
-
-      let chipRemovido = $('#containerChipsRow .chip-wrapper').last();
-      $('#containerChipsRow .chip-wrapper').last().remove();
-      $('#containerChipsPanel').append(chipRemovido);
-
-      //$('#containerChipsRow').hide();
-      // $('#containerChipsPanel').show();
-      $('#containerChipsButton').show();
-
-    } else {
-
-      let chipRemovido = $('#containerChipsPanel .chip-wrapper').last();
-      $('#containerChipsPanel .chip-wrapper').last().remove();
-      $('#containerChipsRow').append(chipRemovido);
-
-      //$('#containerChipsRow').show();
-      //$('#containerChipsPanel').hide();
-      $('#containerChipsButton').hide();
-    }
-  }
-
-
 }

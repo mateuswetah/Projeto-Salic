@@ -21,7 +21,7 @@
       <div class="container-inputs">
         
         <!-- Busca Simples ============================================================== -->
-        <div *ngIf="!buscaAvancada" class="row input-group" [ngSwitch]="pesquisaPor">
+        <div [ngStyle]="{ display: !buscaAvancada ? 'table' : 'none' }" class="row input-group" [ngSwitch]="pesquisaPor">
           <input *ngSwitchCase="'projetos'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
           <input *ngSwitchCase="'propostas'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
           <input *ngSwitchCase="'proponentes'" type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" placeholder="Pesquisar por {{ pesquisaPor }}">
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Busca Avançada ==================================================================================================== -->
-        <div *ngIf="buscaAvancada">
+        <div [ngStyle]="{ display: buscaAvancada ? 'inline-block' : 'none' }">
           <div [ngSwitch]="pesquisaPor" class="form-group">
             <!-- PROJETOS BUSCA AVANÇADA ====================================================================================== -->
             <div *ngSwitchCase="'projetos'" class="row">
@@ -408,80 +408,14 @@
       </div>
     </div>
   </div>
-    <div class="container-header-resultados row">
+  <div class="container-header-resultados row">
 
-        <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
-          <div class="header-respostas fixo col-lg-12">
-            <div class="row" >
-
-              <!-- FILTRAGEM PELOS CHIPS ==============================================-->
-              <div id="containerChips" class="container-chips col-lg-6 col-md-5 col-sm-12 col-xs-3"> 
-                <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
-                  <div id="containerChipsRow" class="hidden-xs">   
-                    <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
-                      <div class="chip" *ngIf="queriesRecebidas[key] != null && queriesRecebidas[key] != '' && queriesRecebidas[key] != undefined" >
-                          {{ formataChip (key) }}
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-                      </div>
-                    </div>
-                    <span *ngIf="checaChipsValidos(keys(queriesRecebidas)).length <= 0">Nenhum filtro de pesquisa.</span>
-                  </div>
-                <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
-                <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
-              </div>
-              <div id="containerChipsPanel" class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
-              
-              <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
-              </div>
-              <div class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
-                <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
-                  <div class="chip" *ngIf="queriesRecebidas[key] != null && queriesRecebidas[key] != '' && queriesRecebidas[key] != undefined" >
-                       {{ formataChip (key) }}
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
-                  </div>
-                </div>
-                <span *ngIf="checaChipsValidos(keys(queriesRecebidas)).length <= 0">Nenhum filtro de pesquisa.</span>
-              </div>
-
-              <!-- ORDENAÇÃO ==============================================-->
-              <div class="container-ordenacao col-lg-4 col-md-5 col-sm-8 col-xs-5"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">  
-                <span class="divisor pull-left hidden-sm"></span>    
-                <p class="header-respostas-titulo hidden-xs">Ordenar por: </p>
-                <div class="btn-group" dropdown>
-                  <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
-                    <span class="hidden-xs">{{ ordenarPorQueries[ordenarPor] }}</span>
-                    <span class="visible-xs-inline-block">Ordenar</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
-                    <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
-                  </ul>
-                </div>
-                <div class="btn-group" role="group">
-                  <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Ordenação crescente">
-                    <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                  </button>
-                  <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" aria-label="Ordenação decrescente">
-                    <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- BAIXAR CONSULTA ==============================================-->
-
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 container-baixar">
-                <span class="divisor pull-left"></span>
-                <a (click)="baixarCSVDaConsulta()" class="btn btn-default" [ngClass]="{'enabled': !carregandoDados, 'disabled': carregandoDados }"><span class="visible-xs-inline hidden-lg hidden-md hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline visible-lg-inline visible-md-inline">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div id="headerRespostas" class="header-respostas col-lg-12">
-          <div class="row">
+    <div *ngIf="passouDoScrollTop() && !buscaSemResultados && !carregandoDados">
+      <div class="header-respostas fixo col-lg-12">
+        <div class="row">
           <!-- FILTRAGEM PELOS CHIPS ==============================================-->
 
-          <div id="containerChips" class="container-chips col-lg-6 col-md-5 col-sm-12 col-xs-3"> 
+          <div id="containerChips" class="container-chips col-lg-7 col-md-6 col-sm-12 col-xs-3"> 
             <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
             <div id="containerChipsRow" class="hidden-xs">   
               <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
@@ -495,13 +429,10 @@
             <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
             <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
           </div>
-          <div id="containerChipsPanel" class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
-            <!-- CONTEÚDO INSERIDO VIA JQUERY A MEDIDA QUE FALTAR ESPAÇO NA containerChipsRow ========================================== -->
-          </div>
-          <div class="container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
+          <div class="hidden-lg hidden-md container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
             <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
               <div class="chip" *ngIf="queriesRecebidas[key] != null && queriesRecebidas[key] != '' && queriesRecebidas[key] != undefined" >
-                   {{ formataChip (key) }}
+                    {{ formataChip (key) }}
                 <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
               </div>
             </div>
@@ -510,10 +441,9 @@
 
           <!-- ORDENAÇÃO ==============================================-->
 
-          <div class="container-ordenacao col-lg-4 col-md-5 col-sm-8 col-xs-5"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">  
-            <span class="divisor pull-left hidden-sm"></span>   
+          <div class="container-ordenacao col-lg-5 col-md-6 col-sm-12 col-xs-9"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">  
             <p class="header-respostas-titulo hidden-xs">Ordenar por: </p>
-            <div class="btn-group" dropdown>
+            <div dropdown>
               <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
                 <span class="hidden-xs">{{ ordenarPorQueries[ordenarPor] }}</span>
                 <span class="visible-xs-inline-block">Ordenar</span>
@@ -531,18 +461,77 @@
                 <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
               </button>
             </div>
-          </div>
 
-          <!-- BAIXAR CONSULTA ==============================================-->
+            <!-- BAIXAR CONSULTA ==============================================-->
+            <span class="container-baixar">
+              <button (click)="baixarCSVDaConsulta()" class="btn btn-default" [ngClass]="{'enabled': !carregandoDados, 'disabled': carregandoDados }"><span class="visible-xs-inline visible-lg-inline visible-md-inline hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline hidden-md">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></button>
+            </span>
+          </div>  
 
-          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 container-baixar">
-            <span class="divisor pull-left"></span>
-            <button (click)="baixarCSVDaConsulta()" class="btn btn-default" [ngClass]="{'enabled': !carregandoDados, 'disabled': carregandoDados }"><span class="visible-xs-inline hidden-lg hidden-md hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline visible-lg-inline visible-md-inline">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></button>
-          </div>
-       
         </div>
       </div>
     </div>
+      
+    <div id="headerRespostas" class="header-respostas col-lg-12">
+      <div class="row">
+        <!-- FILTRAGEM PELOS CHIPS ==============================================-->
+
+        <div id="containerChips" class="container-chips col-lg-7 col-md-6 col-sm-12 col-xs-3"> 
+          <p class="header-respostas-titulo hidden-xs">Filtragem: </p>
+          <div id="containerChipsRow" class="hidden-xs">   
+            <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
+              <div class="chip" *ngIf="queriesRecebidas[key] != null && queriesRecebidas[key] != '' && queriesRecebidas[key] != undefined" >
+                  {{ formataChip (key) }}
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+              </div>
+            </div>
+            <span *ngIf="checaChipsValidos(keys(queriesRecebidas)).length <= 0">Nenhum filtro de pesquisa.</span>
+          </div>
+          <button id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="btn btn-default hidden-xs" aria-label="Left Align">{{ filtrosEscondido ? 'mais' : 'menos' }}</button>
+          <a id="containerChipsButton" (click)="filtrosEscondido = !filtrosEscondido;" type="button" class="visible-xs-inline-block" aria-label="Left Align">{{ filtrosEscondido ? '&#x25B8; Filtros' : '&#x25BE; Filtros' }}</a>
+        </div>
+        <div class="hidden-lg hidden-md container-chips-panel col-sm-12" [ngStyle]="{ display: filtrosEscondido ? 'none' : 'inline-block' }">   
+          <div class="chip-wrapper" *ngFor="let key of checaChipsValidos(keys(queriesRecebidas))">
+            <div class="chip" *ngIf="queriesRecebidas[key] != null && queriesRecebidas[key] != '' && queriesRecebidas[key] != undefined" >
+                  {{ formataChip (key) }}
+              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)='removeQuery(key)'></span>
+            </div>
+          </div>
+          <span *ngIf="checaChipsValidos(keys(queriesRecebidas)).length <= 0">Nenhum filtro de pesquisa.</span>
+        </div>
+
+        <!-- ORDENAÇÃO ==============================================-->
+
+        <div class="container-ordenacao col-lg-5 col-md-6 col-sm-12 col-xs-9"  *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação">  
+          <p class="header-respostas-titulo hidden-xs">Ordenar por: </p>
+          <div dropdown>
+            <button class="btn btn-default" type="button" id="seletorOrdenarPor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+              <span class="hidden-xs">{{ ordenarPorQueries[ordenarPor] }}</span>
+              <span class="visible-xs-inline-block">Ordenar</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="seletorOrdenarPor">
+              <li *ngFor="let key of keys(ordenarPorQueries)" role="menuitem"><a (click)="ordenarPor = key; onRealizarBusca();" class="dropdown-item">{{ ordenarPorQueries[key] }}</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
+              <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+            </button>
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
+              <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- BAIXAR CONSULTA ==============================================-->
+          <span class="container-baixar">
+            <button (click)="baixarCSVDaConsulta()" class="btn btn-default" [ngClass]="{'enabled': !carregandoDados, 'disabled': carregandoDados }"><span class="visible-xs-inline visible-lg-inline visible-md-inline hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline hidden-md">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></button>
+          </span>
+        </div>  
+
+      </div>
+    </div>
+  </div>
 
   <!-- PAGINACAO, QUANDO DISPONÍVEL =================================================================================-->  
   <div class="col-lg-12 col-sm-12" [ngStyle]="{'display': !buscaSemResultados && !carregandoDados? 'block' : 'none' }">
@@ -555,7 +544,7 @@
   
       <div class="col-sm-4 col-xs-6 itens-por-pagina" >
         <p>Itens por página: </p>
-        <div class="btn-group" dropdown>
+        <div dropdown>
           <button class="btn btn-default" type="button" id="seletorNumeroDeItens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
             {{ configurationService.limitResultados }}
             <span class="caret"></span>
@@ -566,7 +555,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4 col-xs-12 paginacao-superior" *ngIf="(numeroDeItems < totalDeItems)">
+      <div class="col-sm-4 col-xs-12 paginacao-superior" *ngIf="numeroDeItems > 0">
 
         <pagination [totalItems]="totalDeItems" 
                     (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
@@ -589,7 +578,7 @@
 
       <!-- GRADE OU LISTA DE RESULTADOS =================================================================================-->
       <div *ngSwitchCase="'projetos'" class="row">
-        <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6 col-lg-4" >
+        <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6 col-lg-4" role="group">
           <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
           <div class="card-resposta texto-elipsado">
             <div class="row">
@@ -618,12 +607,12 @@
               </span>
               
               <div class="card-botao-ver">
-                <a [routerLink]="['/projetos', projeto.PRONAC]" ><img class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
+                <a [routerLink]="['/projetos', projeto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
               </div>
             </div>
           </div>
           <div class="card-resumo" [ngStyle]="{'top': projeto.isResumoEscondido ? '59px' : '101%', 'background-color': projeto.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
-            <p>{{projeto.resumo}}</p>
+            <p role="contentinfo">{{projeto.resumo}}</p>
           </div>
         </div>
       </div>
@@ -649,12 +638,12 @@
               </span>
               
               <div class="card-botao-ver">
-                <a [routerLink]="['/propostas', proposta.id]" ><img class="card-icon" src="../../../assets/ic_propostas.svg"/> &nbsp; VER PROPOSTA</a>
+                <a [routerLink]="['/propostas', proposta.id]" ><img class="card-icon" alt="Ícone de Propostas" src="../../../assets/ic_propostas.svg"/> &nbsp; VER PROPOSTA</a>
               </div>
             </div>
           </div>
           <div class="card-resumo" [ngStyle]="{'top': proposta.isResumoEscondido ? '59px' : '101%', 'background-color': proposta.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
-            <p>{{proposta.resumo}}</p>
+            <p role="contentinfo">{{proposta.resumo}}</p>
           </div>
         </div>
       </div>
@@ -676,7 +665,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" ><img class="card-icon" src="../../../assets/ic_proponentes.svg"/> VER PROPONENTE</a>
+                  <a [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(proponente._links.self)]" ><img class="card-icon" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/> VER PROPONENTE</a>
                 </div>
               </div>
             </div>
@@ -701,7 +690,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" ><img class="card-icon" style="height: 1.3em" src="../../../assets/ic_incentivadores.svg"/> VER INCENTIVADOR</a>
+                  <a [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(incentivador._links.self)]" ><img class="card-icon" alt="Ícone de Incentivadores" style="height: 1.3em" src="../../../assets/ic_incentivadores.svg"/> VER INCENTIVADOR</a>
                 </div>
               </div>
             </div>
@@ -720,7 +709,7 @@
             <div class="card-botoes-container">
               <div class="card-botoes">
                 <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" ><img class="card-icon" src="../../../assets/ic_fornecedores.svg"/> &nbsp; VER FORNECEDOR</a>
+                  <a [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(fornecedor._links.self)]" ><img class="card-icon" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/> &nbsp; VER FORNECEDOR</a>
                 </div>
               </div>
             </div>
@@ -731,19 +720,19 @@
     </div>
   </div>
 
-  <div *ngIf="carregandoDados" class="spinner">
+  <div *ngIf="carregandoDados" class="spinner" role="progressbar">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
     <p *ngIf="taxaDuracaoCarregamento === 0">Buscando {{ pesquisaPor }}...</p>
     <p *ngIf="taxaDuracaoCarregamento === 5">Ordenando resultados...</p>
     <p *ngIf="taxaDuracaoCarregamento === 10">Ainda trabalhando...</p>
   </div>
 
-  <alert *ngIf="buscaSemResultados" class="col-lg-8 col-md-12 col-lg-offset-2" type="danger">
+  <alert role="alert" *ngIf="buscaSemResultados" class="col-lg-8 col-md-12 col-lg-offset-2" type="danger">
     <p>Não encontramos {{ pesquisaPor }} com estes parâmetros de pesquisa :(</p>
     <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
   </alert>
       
-  <div class="text-center" *ngIf="(numeroDeItems < totalDeItems) && !carregandoDados">
+  <div class="text-center" *ngIf="(numeroDeItems > 0) && !carregandoDados">
     <pagination [totalItems]="totalDeItems" 
                 (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
                 [maxSize]=" maximoBotoes + 2" 
