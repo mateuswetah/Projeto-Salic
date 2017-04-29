@@ -124,6 +124,14 @@ export class DataFormatterService {
     }
   }
 
+  verificaSeHaTexto (texto: String) {
+    if (texto !== null && texto !== '' && texto !== ' ' && texto !== undefined) {
+      return texto;
+    } else {
+      return 'Informação não fornececida.';
+    }
+  }
+
   constructor() { }
 
 }

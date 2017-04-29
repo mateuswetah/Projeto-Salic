@@ -23,10 +23,13 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   PRONAC: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
-  carregandoDados: Boolean = true;
   projeto: Projeto;
+  carregandoDados: Boolean = true;
   JSON: any = JSON;
   url: string = location.href;
+
+  // Dados utilizados na view
+  textoSelecionado = 'resumo';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -65,13 +68,99 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
       () => this.carregandoDados = false);
   }
 
-  // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
   ngAfterViewInit() {
+    // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
     $('app-projetos').css({position: 'relative'}).appendTo('app-outlet-container');
+
+    // Aqui é configurado o botão de deslizamento das abas de pesquisa
+    const scrollBarWidths = 40;
+
+    function widthOfList() {
+
+      let itemsWidth = 0;
+
+      $('.aba li').each(function(){
+        const itemWidth = $(this).outerWidth();
+        itemsWidth += itemWidth;
+      });
+
+      return itemsWidth;
+    };
+
+    function widthOfHidden() {
+      return (($('.abas-texto').outerWidth()) - widthOfList() - getLeftPosi()) - scrollBarWidths;
+    };
+
+    function getLeftPosi() {
+      return $('.aba').position().left;
+    };
+
+    function getScrollPosi() {
+      return $('.abas-texto').scrollLeft();
+    };
+
+    function reAdjust() {
+      if (($('.abas-texto').outerWidth()) < widthOfList()) {
+        $('.scroller-right').show();
+      } else {
+        $('.scroller-right').hide();
+      }
+
+      if (getLeftPosi() < 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.item').animate({left: '-=' + getLeftPosi() + 'px'}, 'slow');
+        $('.scroller-left').hide();
+      }
+
+    }
+
+    if (!this.carregandoDados) { reAdjust(); }
+
+    $(window).on('resize', function(e){
+      if (!this.carregandoDados) { reAdjust(); }
+    });
+
+    $('.abas-texto').scroll(function() {
+
+      if (getScrollPosi() > 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.scroller-left').hide();
+      }
+
+      if (getScrollPosi() < $('.abas-texto').outerWidth()) {
+        $('.scroller-rigth').show();
+      } else {
+        $('.scroller-right').hide();
+      }
+    });
+
+    $('.scroller-right').click(function() {
+
+      $('.scroller-left').fadeIn('slow');
+      $('.scroller-right').fadeOut('slow');
+
+      $('.aba').animate({left: '+=' + widthOfHidden() + 'px'}, 'slow', function(){
+
+      });
+    });
+
+    $('.scroller-left').click(function() {
+
+      $('.scroller-right').fadeIn('slow');
+      $('.scroller-left').fadeOut('slow');
+
+      $('.aba').animate({ left: '-=' + getLeftPosi() + 'px'}, 'slow', function(){
+
+      });
+    });
+
   }
 
+
   atualizarMetaTags() {
-    
+
     // Meta tags genéricas
     this.metaService.setTitle('Projeto: ' +  this.projeto.nome);
     this.metaService.setTag('description', `Portal de Visualização do 

@@ -2,15 +2,194 @@
 
 // Container principal da página
 .container-projeto {
-  padding-top: 50px;
   width: auto;
   overflow-x: hidden;
   background-color: $background-salic;
   min-height: calc(100vh - 110px) !important;
 
+  .barra-compartilhar {
+    background-color: $cinza;
+    height: 42px;
+    border-top: 1px solid $cinza-escuro;
+    border-bottom: 1px solid $cinza-escuro;
+    text-align: end;
+    padding: 6px 6px;
+
+    share-buttons{
+      background-color: aqua !important;
+      .sb-buttons {
+        display: inline-block !important;
+
+        .sb-button {
+            border-radius: 15px  !important;
+            background-color: $verde-salic  !important; 
+            color: white  !important;
+            
+          button{
+            .sb-template{
+            }
+            .sb-count{
+            }
+          }
+        }
+      }
+    }
+  }
+
   .pagina-titulo {
     color: $verde-salic;
     font-size: 1.750em;
+    margin: 15px 0px;
+  }
+
+  .linha-pagina-titulo {
+    height: 3px;
+    background-color: $verde-salic;
+  }
+
+  .pagina-infos {
+    
+    margin-top: 20px;
+
+    .pagina-infos-label { 
+      font-size: 0.875em; 
+      line-height: 1.2em;
+      margin-bottom: 0px;  
+      color: $verde-salic; 
+    }
+
+    .pagina-infos-valor { 
+      font-size: 1.0em; 
+      margin-bottom: 14px;
+    }
+
+    .pagina-botoes {
+      margin-top: 7px;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        color: $verde-salic;
+        background-color: $verde-claro-salic;
+        border-color: darken($verde-claro-salic, 10%);
+      }
+    }
+  }
+
+  .pagina-bloco {
+    background-color: $verde-salic;
+    padding: 25px 25px 11px 25px;
+    margin-bottom: 7px;
+
+    .pagina-infos-label { color: $verde-claro-salic; }
+
+    .pagina-infos-valor { color: white; }
+
+  }
+
+
+    // Abas de Texto ----------------------------------------------------------
+  .container-abas {
+    margin-top: 20px;
+  }
+  .abas-texto {
+      
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0px 5px;
+      height: 56px;
+      line-height: 1;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      a { 
+          color: $verde-salic; 
+          font-size: 1.0em;
+          border-radius: 0px;
+          cursor: pointer;
+          background-color: $verde-claro-salic; 
+          transition: border-bottom-color  0.4s;
+          -webkit-transition: border-bottom-color  0.4s;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+
+          &:hover {
+              color: $verde-claro-salic;
+              background-color: $verde-salic;
+              text-decoration: none;
+          }  
+      }
+
+      .active {
+          a {
+              color:white;
+              background-color: $verde-salic; 
+          }
+      }   
+
+  }
+
+  .aba {
+      position: absolute;
+      overflow-y: hidden;
+      left:0px;
+      top:0px;
+      min-width: 545px;
+      margin-top: 0px;
+      margin-left: 14px;
+
+      @media (max-width: 992px) and (min-width: 768px) {
+          margin-left: 30px;
+      }
+
+      li {
+          display:table-cell;
+          position:relative;
+          text-align: center;
+          color:#efefef;
+          vertical-align:middle;
+      }
+
+      li>a { padding: 8px 10px 7px 10px; }
+
+  }
+
+  .scroller {
+    text-align:center;
+    cursor: pointer;
+    display: none;
+    padding: 6px 10px;
+    white-space:no-wrap;
+    vertical-align:middle;
+    background-color: $verde-salic;
+    z-index: 999;
+
+    i { color: white; }
+  }
+
+  .scroller-right{
+    float: right;
+
+  }
+
+  .scroller-left {
+    float: left;
+  }
+
+  .pagina-textos{
+    background-color: white;
+    border: 3px solid $verde-salic;
+    border-radius: 10px;
+    margin: -25px;
+    padding: 25px;
+    font-size: 1.0em; 
+
+    p { margin-bottom: 0px; }
+  }
+
+  .botao-icone {
+    max-height: 1.0em;
   }
 
 }
