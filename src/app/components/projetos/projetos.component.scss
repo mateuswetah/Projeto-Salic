@@ -85,8 +85,11 @@
     // Abas de Texto ----------------------------------------------------------
   .container-abas {
     margin-top: 20px;
+    margin-bottom: 13px;
     padding: 0px;
-
+    height: 43px;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   
   .abas-texto { 
