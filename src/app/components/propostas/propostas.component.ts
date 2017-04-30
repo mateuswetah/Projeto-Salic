@@ -6,6 +6,7 @@ import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
 
 import { Proposta } from './../../models/proposta.model';
 
@@ -24,14 +25,16 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
   inscricao: Subscription; // Usada para observar mudanças na URL
   JSON: any = JSON;
   url: string = location.href;
-
   carregandoDados: Boolean = false;
-
   proposta: Proposta;
+
+  // Dados utilizados na view
+  textoSelecionado = 'resumo';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
+              private dataFormatterService: DataFormatterService,
               private metaService: MetaService) { }
 
   ngOnInit() {
@@ -64,9 +67,100 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
       () => this.carregandoDados = false);
   }
 
-  // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
   ngAfterViewInit() {
-    $('app-propostas').css({position: 'relative'}).appendTo('app-outlet-container');
+    // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
+    setTimeout(function(){
+      $('app-propostas').css({position: 'relative'}).appendTo('app-outlet-container');
+    }, 2000);
+
+    // Aqui é configurado o botão de deslizamento das abas de pesquisa
+    const scrollBarWidths = 16;
+
+    function widthOfList() {
+
+      let itemsWidth = 0;
+
+      $('.aba li').each(function(){
+        const itemWidth = $(this).outerWidth();
+        itemsWidth += itemWidth;
+      });
+
+      return itemsWidth;
+    };
+
+    function widthOfHidden() {
+      return (($('.abas-texto').outerWidth()) - widthOfList() - getLeftPosi()) - scrollBarWidths;
+    };
+
+    function getLeftPosi() {
+      return $('.aba').position().left;
+    };
+
+    function getScrollPosi() {
+      return $('.abas-texto').scrollLeft();
+    };
+
+    function reAjustarProposta() {
+      if (($('.abas-texto').outerWidth()) < widthOfList()) {
+        $('.scroller-right').show();
+      } else {
+        $('.scroller-right').hide();
+      }
+
+      if (getLeftPosi() < 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.item').animate({left: '-=' + getLeftPosi() + 'px'}, 'slow');
+        $('.scroller-left').hide();
+      }
+
+    }
+
+    reAjustarProposta();
+
+    $(window).on('resize', function(e){
+      reAjustarProposta();
+    });
+
+    $('.abas-texto').scroll(function() {
+
+      if (getScrollPosi() > 0) {
+        $('.scroller-left').show();
+      } else {
+        $('.scroller-left').hide();
+      }
+
+      if (getScrollPosi() < widthOfList() - $('.abas-texto').outerWidth() ) {
+        $('.scroller-right').show();
+      } else {
+        $('.scroller-right').hide();
+      }
+    });
+
+    $('.scroller-right').click(function() {
+
+      $('.scroller-left').fadeIn('slow');
+      if (widthOfHidden() > 0) {
+        $('.scroller-right').fadeOut('slow');
+      }
+      if (-1*widthOfHidden() > $('.abas-texto').outerWidth()) {
+        $('.aba').animate({left: '-=' + ($('.abas-texto').outerWidth() - 30) + 'px'}, 'normal', function(){ });
+      } else {
+        $('.aba').animate({left: '+=' + widthOfHidden() + 'px'}, 'normal', function(){ });
+        $('.scroller-right').fadeOut('slow');
+      }
+    });
+
+    $('.scroller-left').click(function() {
+
+      $('.scroller-right').fadeIn('slow');
+      $('.scroller-left').fadeOut('slow');
+
+      $('.aba').animate({ left: '-=' + getLeftPosi() + 'px'}, 'slow', function(){
+
+      });
+    });
+
   }
 
   atualizarMetaTags() {

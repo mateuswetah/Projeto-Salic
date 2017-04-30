@@ -1,24 +1,60 @@
-<div class="container container-proposta">
-  <div *ngIf="!carregandoDados" class="container">
-    <h3>
-      Página da Proposta de ID: {{ idProposta }}
-    </h3>
-    <share-buttons class="withCount" 
+<div class="container-proposta">
+  <div class="barra-compartilhar">
+    <div *ngIf="!carregandoDados" class="container">
+      <p>Compartilhe:&nbsp;&nbsp;</p>
+      <share-buttons class="withCount" 
+                  [defaultStyle]="false"
                   [url]="url" 
                   [title]="'Proposta: ' + proposta.nome" 
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
-                  
-    <button (click)="onLoadProposta(idProposta)">Carregar Proposta</button>
-    <div>
-      <p>{{ JSON.stringify(proposta) }}</p>
+    </div>
+  </div>
+  <div *ngIf="!carregandoDados  && proposta != undefined" class="container">
+    <h1 class="pagina-titulo">
+      {{ proposta.nome }}
+    </h1>
+  </div> 
+  <div class="linha-pagina-titulo"></div>
+  <div class="container">
+    <div  *ngIf="!carregandoDados && proposta != undefined" class="row">
+      <div class="pagina-infos col-md-12">
+        <div class="row">
+          <div class="col-sm-1 col-xs-6"><p class="pagina-infos-label">ID: </p><p class="pagina-infos-valor">{{ proposta.id }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Mecanismo: </p><p class="pagina-infos-valor">{{ proposta.mecanismo }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data aceite: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_aceite) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_inicio) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_termino) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data arquivamento: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_arquivamento) }}</p></div>
+        </div>
+      </div>    
+    </div>           
+    <div [ngStyle]="{ opacity: carregandoDados ? '0' : '1' }" class="container-abas row">
+      <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+      <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+      <div class="text-center abas-texto">
+        <ul class="nav nav-pills aba">
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'resumo'}"><a (click)="textoSelecionado = 'resumo'">Resumo</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'etapa'}"><a (click)="textoSelecionado = 'etapa'">Etapa</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'providencia'}"><a (click)="textoSelecionado = 'providencia'">Providência</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'objetivos'}"><a (click)="textoSelecionado = 'objetivos'">Objetivos</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'sinopse'}"><a (click)="textoSelecionado = 'sinopse'">Sinopse</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'justificativa'}"><a (click)="textoSelecionado = 'justificativa'">Justificativa</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'ficha_tecnica'}"><a (click)="textoSelecionado = 'ficha_tecnica'">Ficha Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'especificacao_tecnica'}"><a (click)="textoSelecionado = 'especificacao_tecnica'">Especificação Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'impacto_ambiental'}"><a (click)="textoSelecionado = 'impacto_ambiental'">Impacto Ambiental</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'democratizacao'}"><a (click)="textoSelecionado = 'democratizacao'">Democratização</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'acessibilidade'}"><a (click)="textoSelecionado = 'acessibilidade'">Acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>  
+    <div *ngIf="!carregandoDados && proposta != undefined" class="pagina-textos">   
+      <p>{{ dataFormatterService.verificaSeHaTexto(proposta[textoSelecionado]) }}</p>
     </div>
   </div>
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
-    <p *ngIf="taxaDuracaoCarregamento === 0">Buscando {{ pesquisaPor }}...</p>
-    <p *ngIf="taxaDuracaoCarregamento === 5">Ordenando resultados...</p>
-    <p *ngIf="taxaDuracaoCarregamento === 10">Ainda trabalhando...</p>
+    <p>Carregando Proposta...</p>
   </div>
 </div>

@@ -1,6 +1,7 @@
 <div class="container-projeto">
   <div class="barra-compartilhar">
     <div *ngIf="!carregandoDados" class="container">
+      <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"
                   [url]="url" 
@@ -73,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div [ngStyle]="{ opacity: carregandoDados ? '0' : '1' }" class="container-abas">
+    <div [ngStyle]="{ opacity: carregandoDados ? '0' : '1' }" class="container-abas row">
       <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
       <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
       <div class="text-center abas-texto">

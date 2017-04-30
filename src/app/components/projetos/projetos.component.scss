@@ -10,13 +10,13 @@
   p { word-wrap: break-word; }
 
   .barra-compartilhar {
+    p { display: inline-block; }
     background-color: $cinza;
     height: 42px;
     border-top: 1px solid $cinza-escuro;
     border-bottom: 1px solid $cinza-escuro;
     text-align: end;
-    padding: 6px 6px;
-
+    padding: 5px 9px;
   }
 
   .pagina-titulo {
@@ -82,7 +82,7 @@
   }
 
 
-    // Abas de Texto ----------------------------------------------------------
+  // Abas de Texto ----------------------------------------------------------
   .container-abas {
     margin-top: 20px;
     margin-bottom: 13px;
@@ -90,6 +90,8 @@
     height: 43px;
     overflow-y: hidden;
     overflow-x: hidden;
+
+    @media (min-width: 768px) { margin-right: 0px; margin-left: 0px; }
   }
   
   .abas-texto { 
@@ -99,11 +101,8 @@
       padding: 0px 5px;
       height: 56px;
       line-height: 1;
-/*
-      &::-webkit-scrollbar {
-        display: none;
-      }
-*/
+      margin-left: 2px;
+
       a { 
           color: $verde-salic; 
           font-size: 1.0em;
@@ -166,14 +165,10 @@
 
   .scroller-right{
     float: right;
-    
-    @media (max-width: 768px) { margin-right: -15px; }
   }
 
   .scroller-left {
     float: left;
-
-    @media (max-width: 768px) { margin-left: -15px; }
   }
 
   .pagina-textos{

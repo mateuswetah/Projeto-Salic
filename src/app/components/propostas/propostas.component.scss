@@ -1,7 +1,166 @@
+@import '../../../styles.scss';
+
 // Container principal da página
 .container-proposta {
-  padding-top: 50px;
   width: auto;
   overflow-x: hidden;
-  background-color: white;
+  background-color: $background-salic;
+  min-height: calc(100vh - 110px) !important;
+
+  p { word-wrap: break-word; }
+  .barra-compartilhar {
+    p { display: inline-block; }
+    background-color: $cinza;
+    height: 42px;
+    border-top: 1px solid $cinza-escuro;
+    border-bottom: 1px solid $cinza-escuro;
+    text-align: end;
+    padding: 5px 9px;
+  }
+  .barra-compartilhar {
+    p { display: inline-block; }
+    background-color: $cinza;
+    height: 42px;
+    border-top: 1px solid $cinza-escuro;
+    border-bottom: 1px solid $cinza-escuro;
+    text-align: end;
+    padding: 5px 9px;
+  }
+
+  .pagina-titulo {
+    color: $verde-salic;
+    font-size: 1.750em;
+    margin: 15px 0px;
+  }
+
+  .linha-pagina-titulo {
+    height: 3px;
+    background-color: $verde-salic;
+  }
+
+  .pagina-infos {
+    
+    margin-top: 20px;
+
+    .pagina-infos-label { 
+      font-size: 0.875em; 
+      line-height: 1.2em;
+      margin-bottom: 0px;  
+      color: $verde-salic; 
+    }
+
+    .pagina-infos-valor { 
+      font-size: 1.0em; 
+      margin-bottom: 14px;
+    }
+
+    .pagina-infos-valor-destaque { font-size: 1.188em; }
+  }
+
+
+  // Abas de Texto ----------------------------------------------------------
+  .container-abas {
+    margin-top: 20px;
+    margin-bottom: 13px;
+    padding: 0px;
+    height: 43px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    @media (min-width: 768px) { margin-right: 0px; margin-left: 0px; }
+  }
+  
+  .abas-texto { 
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0px 5px;
+      height: 56px;
+      line-height: 1;
+      margin-left: 2px;
+
+      a { 
+          color: $verde-salic; 
+          font-size: 1.0em;
+          border-radius: 0px;
+          cursor: pointer;
+          background-color: $verde-claro-salic; 
+          transition: border-bottom-color  0.4s;
+          -webkit-transition: border-bottom-color  0.4s;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+
+          &:hover {
+              // color: $verde-claro-salic;
+              // background-color: $verde-salic;
+              text-decoration: none;
+          }  
+      }
+
+      .active {
+          a {
+              color:white;
+              background-color: $verde-salic; 
+          }
+      }   
+
+  }
+
+  .aba {
+      position: absolute;
+      overflow-y: hidden;
+      left:0px;
+      top:0px;
+      min-width: 1220px;
+      margin-top: 0px;
+
+      li {
+          display: table-cell;
+          position: relative;
+          text-align: center;
+          color:#efefef;
+          vertical-align: middle;
+      }
+
+      li>a { padding: 8px 10px 7px 10px; }
+
+  }
+
+  .scroller {
+    text-align:center;
+    cursor: pointer;
+    display: none;
+    padding: 5px 10px;
+    white-space:no-wrap;
+    vertical-align:middle;
+    background-color: $verde-salic;
+    z-index: 999;
+
+    i { color: white; }
+  }
+
+  .scroller-right{
+    float: right;
+  }
+
+  .scroller-left {
+    float: left;
+  }
+
+  .pagina-textos{
+    background-color: white;
+    border: 3px solid $verde-salic;
+    border-radius: 10px;
+    margin: -25px -25px 50px -25px;
+    padding: 25px;
+    font-size: 1.0em; 
+
+    p { margin-bottom: 0px; }
+  }
+}
+
+// Spinner
+.spinner {
+    text-align: center;
+    margin: 25vh auto 0 auto;
 }

@@ -141,7 +141,9 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     $('.scroller-right').click(function() {
 
       $('.scroller-left').fadeIn('slow');
-      $('.scroller-right').fadeOut('slow');
+      if (widthOfHidden() > 0) {
+        $('.scroller-right').fadeOut('slow');
+      }
 
       if (-1*widthOfHidden() > $('.abas-texto').outerWidth()) {
         $('.aba').animate({left: '-=' + ($('.abas-texto').outerWidth() - 30) + 'px'}, 'normal', function(){ });
