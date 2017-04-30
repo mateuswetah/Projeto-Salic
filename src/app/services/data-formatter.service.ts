@@ -82,6 +82,14 @@ export class DataFormatterService {
     }
   }
 
+  formataAno(anoEmDoisDigitos: string): string {
+    if (parseFloat(anoEmDoisDigitos) > 80) {
+      return '19' + anoEmDoisDigitos;
+    } else {
+      return '20' + anoEmDoisDigitos;
+    }
+  }
+
   formataValorEmReais(valor: String): String {
     if (valor === undefined || valor === null) {
       return 'Não Informado';

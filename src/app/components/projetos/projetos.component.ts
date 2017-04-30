@@ -70,10 +70,12 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
-    $('app-projetos').css({position: 'relative'}).appendTo('app-outlet-container');
+    setTimeout(function(){
+      $('app-projetos').css({ position: 'relative' }).appendTo('app-outlet-container');
+    }, 2000);
 
     // Aqui é configurado o botão de deslizamento das abas de pesquisa
-    const scrollBarWidths = 40;
+    const scrollBarWidths = 16;
 
     function widthOfList() {
 
@@ -99,7 +101,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
       return $('.abas-texto').scrollLeft();
     };
 
-    function reAdjust() {
+    function reAjustar() {
       if (($('.abas-texto').outerWidth()) < widthOfList()) {
         $('.scroller-right').show();
       } else {
@@ -115,10 +117,10 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
 
-    if (!this.carregandoDados) { reAdjust(); }
+    reAjustar();
 
     $(window).on('resize', function(e){
-      if (!this.carregandoDados) { reAdjust(); }
+      reAjustar();
     });
 
     $('.abas-texto').scroll(function() {

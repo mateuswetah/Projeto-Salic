@@ -7,6 +7,8 @@
   background-color: $background-salic;
   min-height: calc(100vh - 110px) !important;
 
+  p { word-wrap: break-word; }
+
   .barra-compartilhar {
     background-color: $cinza;
     height: 42px;
@@ -15,25 +17,6 @@
     text-align: end;
     padding: 6px 6px;
 
-    share-buttons{
-      background-color: aqua !important;
-      .sb-buttons {
-        display: inline-block !important;
-
-        .sb-button {
-            border-radius: 15px  !important;
-            background-color: $verde-salic  !important; 
-            color: white  !important;
-            
-          button{
-            .sb-template{
-            }
-            .sb-count{
-            }
-          }
-        }
-      }
-    }
   }
 
   .pagina-titulo {
@@ -63,15 +46,26 @@
       margin-bottom: 14px;
     }
 
+    .pagina-infos-valor-destaque { font-size: 1.188em; }
+
     .pagina-botoes {
       margin-top: 7px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
+
       justify-content: space-between;
 
       button {
         color: $verde-salic;
+        padding: 6px 8px;
         background-color: $verde-claro-salic;
         border-color: darken($verde-claro-salic, 10%);
+      }
+      .botao-icone {
+        max-height: 1.0em;
       }
     }
   }
@@ -91,17 +85,16 @@
     // Abas de Texto ----------------------------------------------------------
   .container-abas {
     margin-top: 20px;
+    padding: 0px;
   }
-  .abas-texto {
-      
+  
+  .abas-texto { 
       position: relative;
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: hidden;
       padding: 0px 5px;
       height: 56px;
       line-height: 1;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
 
       a { 
           color: $verde-salic; 
@@ -115,8 +108,8 @@
           border-top-right-radius: 5px;
 
           &:hover {
-              color: $verde-claro-salic;
-              background-color: $verde-salic;
+              // color: $verde-claro-salic;
+              // background-color: $verde-salic;
               text-decoration: none;
           }  
       }
@@ -135,20 +128,15 @@
       overflow-y: hidden;
       left:0px;
       top:0px;
-      min-width: 545px;
+      min-width: 1220px;
       margin-top: 0px;
-      margin-left: 14px;
-
-      @media (max-width: 992px) and (min-width: 768px) {
-          margin-left: 30px;
-      }
 
       li {
-          display:table-cell;
-          position:relative;
+          display: table-cell;
+          position: relative;
           text-align: center;
           color:#efefef;
-          vertical-align:middle;
+          vertical-align: middle;
       }
 
       li>a { padding: 8px 10px 7px 10px; }
@@ -170,28 +158,26 @@
 
   .scroller-right{
     float: right;
-
+    
+    @media (max-width: 768px) { margin-right: -15px; }
   }
 
   .scroller-left {
     float: left;
+
+    @media (max-width: 768px) { margin-left: -15px; }
   }
 
   .pagina-textos{
     background-color: white;
     border: 3px solid $verde-salic;
     border-radius: 10px;
-    margin: -25px;
+    margin: -25px -25px 50px -25px;
     padding: 25px;
     font-size: 1.0em; 
 
     p { margin-bottom: 0px; }
   }
-
-  .botao-icone {
-    max-height: 1.0em;
-  }
-
 }
 
 // Spinner

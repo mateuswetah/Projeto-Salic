@@ -16,94 +16,100 @@
     </h1>
   </div>  
   <div class="linha-pagina-titulo"></div>
-  <div *ngIf="!carregandoDados" class="container">
-    <div *ngIf="projeto != undefined">
-      <div class="row">
-        <div class="pagina-infos col-md-7">
+  <div class="container">
+    <div  *ngIf="!carregandoDados && projeto != undefined" class="row">
+      <div class="pagina-infos col-sm-7">
+        <div class="row">
+          <div class="col-sm-3"><p class="pagina-infos-label">PRONAC: </p><p class="pagina-infos-valor">{{ projeto.PRONAC }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Segmento: </p><p class="pagina-infos-valor">{{ projeto.segmento }}</p></div>
+          <div class="col-sm-5 col-xs-6"><p class="pagina-infos-label">Área: </p><p class="pagina-infos-valor">{{ projeto.area }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">Mecanismo: </p><p class="pagina-infos-valor">{{ projeto.mecanismo }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Enquadramento: </p><p class="pagina-infos-valor">{{ projeto.enquadramento }}</p></div>
+          <div class="col-sm-5 col-xs-6"><p class="pagina-infos-label">Município/UF: </p><p class="pagina-infos-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
+          <div class="col-xs-6 hidden-sm hidden-lg hidden-md"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataAno(projeto.ano_projeto) }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 hidden-xs"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataAno(projeto.ano_projeto) }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-7"><p class="pagina-infos-label">Proponente: </p><p class="pagina-infos-valor">{{ projeto.proponente }}</p></div>
+          <div class="col-sm-5"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor-destaque">{{ projeto.situacao }}</p></div>
+        </div>
+      </div>               
+      <div class="pagina-infos col-sm-5">
+        <div class="pagina-bloco">
           <div class="row">
-            <div class="col-sm-3"><p class="pagina-infos-label">PRONAC: </p><p class="pagina-infos-valor">{{ projeto.PRONAC }}</p></div>
-            <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Segmento: </p><p class="pagina-infos-valor">{{ projeto.segmento }}</p></div>
-            <div class="col-sm-5 col-xs-6"><p class="pagina-infos-label">Área: </p><p class="pagina-infos-valor">{{ projeto.area }}</p></div>
-          </div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor proposta: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+          </div> 
           <div class="row">
-            <div class="col-sm-3"><p class="pagina-infos-label">Mecanismo: </p><p class="pagina-infos-valor">{{ projeto.mecanismo }}</p></div>
-            <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Enquadramento: </p><p class="pagina-infos-valor">{{ projeto.enquadramento }}</p></div>
-            <div class="col-sm-5 col-xs-6"><p class="pagina-infos-label">Município/UF: </p><p class="pagina-infos-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
-          </div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</p></div>
+          </div> 
           <div class="row">
-            <div class="col-sm-4"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
-            <div class="col-sm-4"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
-            <div class="col-sm-4"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ projeto.ano_projeto }}</p></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-7"><p class="pagina-infos-label">Proponente: </p><p class="pagina-infos-valor">{{ projeto.proponente }}</p></div>
-            <div class="col-sm-5"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor">{{ projeto.situacao }}</p></div>
-          </div>
-        </div>               
-        <div class="pagina-infos col-md-5">
-          <div class="pagina-bloco">
-            <div class="row">
-              <div class="col-xs-6"><p class="pagina-infos-label">Valor proposta: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}</p></div>
-              <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-            </div> 
-            <div class="row">
-              <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
-              <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</p></div>
-            </div> 
-            <div class="row">
-              <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
-              <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
-            </div> 
-          </div>
-          <p class="pagina-infos-label">Páginas associadas: </p>
-          <div class="pagina-botoes">
-            <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/> &nbsp; Propontente</button>
-            <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary pull-center" disabled="{ projeto._embedded.captacoes?.length <= 0 }"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores.svg"/> &nbsp; Incentivadores</button>
-            <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" disabled="{ projeto._embedded.relacao_pagamentos?.length <= 0}"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/> &nbsp; Fornecedores</button>
-          </div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
+          </div> 
+        </div>
+        <p class="pagina-infos-label">Páginas associadas: </p>
+        <div class="pagina-botoes hidden-xs hidden-sm visible-inline-md visible-inline-lg">
+          <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/>&nbsp;Propontente</button>
+          <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary pull-center" disabled="{ projeto._embedded.captacoes?.length <= 0 }"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores.svg"/>&nbsp;Incentivadores</button>
+          <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" disabled="{ projeto._embedded.relacao_pagamentos?.length <= 0}"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/>&nbsp;Fornecedores</button>
+        </div>
+        <div class="pagina-botoes hidden-md hidden-lg visible-inline-sm visible-inline-xs">
+          <button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/>&nbsp;Propontente</button>
+        </div>
+        <div class="pagina-botoes hidden-md hidden-lg visible-inline-sm visible-inline-xs">
+          <button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary pull-center" disabled="{ projeto._embedded.captacoes?.length <= 0 }"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores.svg"/>&nbsp;Incentivadores</button>
+          <button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" disabled="{ projeto._embedded.relacao_pagamentos?.length <= 0}"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/>&nbsp;Fornecedores</button>
         </div>
       </div>
-      <div class="container-abas">
-          <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
-          <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
-          <div class="text-center abas-texto">
-            <ul class="nav nav-pills aba">
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'resumo'}"><a (click)="textoSelecionado = 'resumo'">Resumo</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'etapa'}"><a (click)="textoSelecionado = 'etapa'">Etapa</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'providencia'}"><a (click)="textoSelecionado = 'providencia'">Providência</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'objetivos'}"><a (click)="textoSelecionado = 'objetivos'">Objetivos</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'sinopse'}"><a (click)="textoSelecionado = 'sinopse'">Sinopse</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'justificativa'}"><a (click)="textoSelecionado = 'justificativa'">Justificativa</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'ficha_tecnica'}"><a (click)="textoSelecionado = 'ficha_tecnica'">Ficha Técnica</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'especificacao_tecnica'}"><a (click)="textoSelecionado = 'especificacao_tecnica'">Especificação Técnica</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'impacto_ambiental'}"><a (click)="textoSelecionado = 'impacto_ambiental'">Impacto Ambiental</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'democratizacao'}"><a (click)="textoSelecionado = 'democratizacao'">Democratização</a></li>
-              <li role="presentation" [ngClass]="{'active': textoSelecionado === 'acessibilidade'}"><a (click)="textoSelecionado = 'acessibilidade'">Acessibilidade</a></li>
-            </ul>
-          </div>
-      </div>  
-      <div class="pagina-textos">   
-        <p>{{ dataFormatterService.verificaSeHaTexto(projeto[textoSelecionado]) }}</p>
+    </div>
+    <div [ngStyle]="{ opacity: carregandoDados ? '0' : '1' }" class="container-abas">
+      <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+      <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+      <div class="text-center abas-texto">
+        <ul class="nav nav-pills aba">
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'resumo'}"><a (click)="textoSelecionado = 'resumo'">Resumo</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'etapa'}"><a (click)="textoSelecionado = 'etapa'">Etapa</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'providencia'}"><a (click)="textoSelecionado = 'providencia'">Providência</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'objetivos'}"><a (click)="textoSelecionado = 'objetivos'">Objetivos</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'sinopse'}"><a (click)="textoSelecionado = 'sinopse'">Sinopse</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'justificativa'}"><a (click)="textoSelecionado = 'justificativa'">Justificativa</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'ficha_tecnica'}"><a (click)="textoSelecionado = 'ficha_tecnica'">Ficha Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'especificacao_tecnica'}"><a (click)="textoSelecionado = 'especificacao_tecnica'">Especificação Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'impacto_ambiental'}"><a (click)="textoSelecionado = 'impacto_ambiental'">Impacto Ambiental</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'democratizacao'}"><a (click)="textoSelecionado = 'democratizacao'">Democratização</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'acessibilidade'}"><a (click)="textoSelecionado = 'acessibilidade'">Acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>  
+    <div *ngIf="!carregandoDados && projeto != undefined" class="pagina-textos">   
+      <p>{{ dataFormatterService.verificaSeHaTexto(projeto[textoSelecionado]) }}</p>
 
 <!--
-        <h4>Exemplo de formatação de dados: </h4> 
-        <p>Data Formatada: {{ projeto?.data_inicio }} -> {{ dataFormatterService.formataData(projeto?.data_inicio)}} -> {{ dataFormatterService.formataDataExtenso(projeto?.data_inicio)}}<br></p>
-        <p>Valor Formatado: {{ projeto?.valor_solicitado }} -> {{ dataFormatterService.formataValorEmReais(projeto?.valor_solicitado)}}<br></p>
-        <p>CGCCPF Formatado: {{ projeto?.cgccpf }} -> {{ dataFormatterService.formataCGCCPF(projeto?.cgccpf)}}<br></p>
+      <h4>Exemplo de formatação de dados: </h4> 
+      <p>Data Formatada: {{ projeto?.data_inicio }} -> {{ dataFormatterService.formataData(projeto?.data_inicio)}} -> {{ dataFormatterService.formataDataExtenso(projeto?.data_inicio)}}<br></p>
+      <p>Valor Formatado: {{ projeto?.valor_solicitado }} -> {{ dataFormatterService.formataValorEmReais(projeto?.valor_solicitado)}}<br></p>
+      <p>CGCCPF Formatado: {{ projeto?.cgccpf }} -> {{ dataFormatterService.formataCGCCPF(projeto?.cgccpf)}}<br></p>
 
-        <h4>Exemplo de Captações (uma das)</h4>
-        <p *ngIf="projeto._embedded.captacoes.length <= 0">Este projeto ainda <strong>não possui Incentivadores</strong> ou captações.</p>
-        <p *ngIf="projeto._embedded.captacoes.length > 0">{{ projeto._embedded.captacoes[0].valor }} doados pelo {{ projeto._embedded.captacoes[0].nome_doador }}. <button type="button" class="btn btn-warning" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(projeto._embedded.captacoes[0]._links.incentivador)]">IR PARA INCENTIVADOR</button></p>
+      <h4>Exemplo de Captações (uma das)</h4>
+      <p *ngIf="projeto._embedded.captacoes.length <= 0">Este projeto ainda <strong>não possui Incentivadores</strong> ou captações.</p>
+      <p *ngIf="projeto._embedded.captacoes.length > 0">{{ projeto._embedded.captacoes[0].valor }} doados pelo {{ projeto._embedded.captacoes[0].nome_doador }}. <button type="button" class="btn btn-warning" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(projeto._embedded.captacoes[0]._links.incentivador)]">IR PARA INCENTIVADOR</button></p>
 
-        <h4>Exemplo de Relações Pagamento (produtos) (uma das)</h4>
-        <p *ngIf="projeto._embedded.relacao_pagamentos.length <= 0">Este projeto ainda <strong>não possui Fornecedores</strong> ou Relações Pagamento.</p>
-        <p *ngIf="projeto._embedded.relacao_pagamentos.length > 0">{{ projeto._embedded.relacao_pagamentos[0].nome }} fornecido pelo {{ projeto._embedded.relacao_pagamentos[0].nome_fornecedor }}. <button type="button" class="btn btn-warning" [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(projeto._embedded.relacao_pagamentos[0]._links.fornecedor)]">IR PARA FORNECEDOR</button></p>
+      <h4>Exemplo de Relações Pagamento (produtos) (uma das)</h4>
+      <p *ngIf="projeto._embedded.relacao_pagamentos.length <= 0">Este projeto ainda <strong>não possui Fornecedores</strong> ou Relações Pagamento.</p>
+      <p *ngIf="projeto._embedded.relacao_pagamentos.length > 0">{{ projeto._embedded.relacao_pagamentos[0].nome }} fornecido pelo {{ projeto._embedded.relacao_pagamentos[0].nome_fornecedor }}. <button type="button" class="btn btn-warning" [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(projeto._embedded.relacao_pagamentos[0]._links.fornecedor)]">IR PARA FORNECEDOR</button></p>
 -->
-      </div>
-    </div> 
+    </div>
   </div>
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>

@@ -110,3 +110,35 @@ footer {
     } 
   }
 }
+
+share-buttons{
+
+      .sb-buttons {
+
+        display: inline-block;
+
+        .sb-button {  
+
+          button{
+
+            border-radius: 15px;
+            background-color: $verde-salic; 
+            color: white;
+            min-width: 30px;
+            height: 30px;
+            padding: 8px;
+            vertical-align: middle;
+
+            .sb-template{
+              i {font-size: 1.0em; display: block; }
+
+              .fa-google-plus {
+                font-size: 0.75em;
+              }
+            }
+            .sb-count{
+            }
+          }
+        }
+      }
+}
