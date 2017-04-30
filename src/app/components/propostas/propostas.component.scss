@@ -8,15 +8,7 @@
   min-height: calc(100vh - 110px) !important;
 
   p { word-wrap: break-word; }
-  .barra-compartilhar {
-    p { display: inline-block; }
-    background-color: $cinza;
-    height: 42px;
-    border-top: 1px solid $cinza-escuro;
-    border-bottom: 1px solid $cinza-escuro;
-    text-align: end;
-    padding: 5px 9px;
-  }
+
   .barra-compartilhar {
     p { display: inline-block; }
     background-color: $cinza;
@@ -77,7 +69,8 @@
       padding: 0px 5px;
       height: 56px;
       line-height: 1;
-      margin-left: 2px;
+
+      @media (max-width: 768px) { margin-left: 2px; }
 
       a { 
           color: $verde-salic; 

@@ -1,6 +1,57 @@
+@import '../../../styles.scss';
+
+// Container principal da página
 .container-proponente {
-  padding-top: 50px;
   width: auto;
   overflow-x: hidden;
-  background-color: white;
+  background-color: $background-salic;
+  min-height: calc(100vh - 110px) !important;
+
+  p { word-wrap: break-word; }
+
+  .barra-compartilhar {
+    p { display: inline-block; }
+    background-color: $cinza;
+    height: 42px;
+    border-top: 1px solid $cinza-escuro;
+    border-bottom: 1px solid $cinza-escuro;
+    text-align: end;
+    padding: 5px 9px;
+  }
+
+  .pagina-titulo {
+    color: $verde-salic;
+    font-size: 1.750em;
+    margin: 15px 0px;
+  }
+
+  .linha-pagina-titulo {
+    height: 3px;
+    background-color: $verde-salic;
+  }
+
+  .pagina-infos {
+    
+    margin-top: 20px;
+
+    .pagina-infos-label { 
+      font-size: 0.875em; 
+      line-height: 1.2em;
+      margin-bottom: 0px;  
+      color: $verde-salic; 
+    }
+
+    .pagina-infos-valor { 
+      font-size: 1.0em; 
+      margin-bottom: 14px;
+    }
+
+    .pagina-infos-valor-destaque { font-size: 1.188em; }
+  }
+}
+
+// Spinner
+.spinner {
+    text-align: center;
+    margin: 25vh auto 0 auto;
 }

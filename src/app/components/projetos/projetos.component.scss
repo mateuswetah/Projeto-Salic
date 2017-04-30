@@ -101,7 +101,8 @@
       padding: 0px 5px;
       height: 56px;
       line-height: 1;
-      margin-left: 2px;
+      
+      @media (max-width: 768px) { margin-left: 2px; }
 
       a { 
           color: $verde-salic; 

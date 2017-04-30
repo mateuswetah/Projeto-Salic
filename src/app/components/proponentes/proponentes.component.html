@@ -1,23 +1,46 @@
 <div class="container-proponente">
-  <div *ngIf="!carregandoDados" class="container">
-    <h3>
-      Página do Proponente de id: {{ idProponente }}
-    </h3>
-    <share-buttons class="withCount" 
+  <div class="barra-compartilhar">
+    <div *ngIf="!carregandoDados" class="container">
+      <p>Compartilhe:&nbsp;&nbsp;</p>
+      <share-buttons class="withCount" 
+                  [defaultStyle]="false"
                   [url]="url" 
                   [title]="'Proponente: ' + proponente.nome" 
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
-    
+    </div>
+  </div>
+  <div *ngIf="!carregandoDados  && proponente != undefined" class="container">
+    <h1 class="pagina-titulo">
+      {{ proponente.nome }}
+    </h1>
+  </div> 
+  <div class="linha-pagina-titulo"></div>
+  <div class="container">
+    <div  *ngIf="!carregandoDados && proponente != undefined" class="row">
+      <div class="pagina-infos col-md-12">
+        <div class="row">
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(proponente.tipo_pessoa) }}</p></div>
+          <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(proponente.cgccpf) }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Responsável: </p><p class="pagina-infos-valor">{{ proponente.responsavel }}</p></div>
+          <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">Município, UF: </p><p class="pagina-infos-valor">{{ proponente.municipio }}, {{ proponente.UF }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total captado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(proponente.total_captado) }}</p></div>
+        </div>
+      </div>    
+    </div>  
+
     <div class="row">
+      
       <div class="col-md-8 col-md-offset-2" *ngIf="!carregandoDados">
         <!--<p>{{ JSON.stringify(proponente) }}</p>-->
         <!--<button (click)="onLoadProjetos(idProponente)">Carregar Projetos deste Proponente</button>-->
-        <p *ngIf="carregandoDadosProjetos">Carregando doações deste incentivador...</p>
+        <p *ngIf="carregandoDadosProjetos">Carregando projetos do Proponente...</p>
         <div *ngIf="!carregandoDadosProjetos">
           
-          <h4 *ngIf="!buscaPorProjetosSemResultados">Projetos submetidos:</h4>
+          <h4 *ngIf="!buscaPorProjetosSemResultados">PLANEJAR A LISTAGEM DESTES DADOS: Projetos submetidos:</h4>
           <p *ngIf="totalDeItens > 1">Foram encontrados {{ totalDeItens }} projetos submetidos por este proponente: </p>
           <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
 
