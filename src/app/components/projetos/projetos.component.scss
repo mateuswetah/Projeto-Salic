@@ -86,16 +86,21 @@
   .container-abas {
     margin-top: 20px;
     padding: 0px;
+
   }
   
   .abas-texto { 
       position: relative;
-      overflow-x: hidden;
+      overflow-x: auto;
       overflow-y: hidden;
       padding: 0px 5px;
       height: 56px;
       line-height: 1;
-
+/*
+      &::-webkit-scrollbar {
+        display: none;
+      }
+*/
       a { 
           color: $verde-salic; 
           font-size: 1.0em;
@@ -147,7 +152,7 @@
     text-align:center;
     cursor: pointer;
     display: none;
-    padding: 6px 10px;
+    padding: 5px 10px;
     white-space:no-wrap;
     vertical-align:middle;
     background-color: $verde-salic;

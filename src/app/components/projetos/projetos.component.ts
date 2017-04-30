@@ -131,8 +131,8 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
         $('.scroller-left').hide();
       }
 
-      if (getScrollPosi() < $('.abas-texto').outerWidth()) {
-        $('.scroller-rigth').show();
+      if (getScrollPosi() < widthOfList() - $('.abas-texto').outerWidth() ) {
+        $('.scroller-right').show();
       } else {
         $('.scroller-right').hide();
       }
@@ -143,9 +143,12 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
       $('.scroller-left').fadeIn('slow');
       $('.scroller-right').fadeOut('slow');
 
-      $('.aba').animate({left: '+=' + widthOfHidden() + 'px'}, 'slow', function(){
-
-      });
+      if (-1*widthOfHidden() > $('.abas-texto').outerWidth()) {
+        $('.aba').animate({left: '-=' + ($('.abas-texto').outerWidth() - 30) + 'px'}, 'normal', function(){ });
+      } else {
+        $('.aba').animate({left: '+=' + widthOfHidden() + 'px'}, 'normal', function(){ });
+        $('.scroller-right').fadeOut('slow');
+      }
     });
 
     $('.scroller-left').click(function() {
