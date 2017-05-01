@@ -380,6 +380,7 @@
             text-align: left;
         }
 
+        .dropdown-menu { left: initial; }
 
         .btn-group { 
             padding-top: 2px;
@@ -463,6 +464,8 @@
         @media all and (max-width: 440px){
             width: 100%;
         }    
+
+        .dropdown-menu { left: initial; }
     }
 
 }
