@@ -1,6 +1,14 @@
 <div class="container-projeto">
   <div class="barra-compartilhar">
-    <div *ngIf="!carregandoDados" class="container">
+    <div class="container">
+      <span class="baixar"><p>
+                <img class="botao-icone" alt="Ícone de Projetos" src="../../../assets/ic_projetos.svg"/>
+                &nbsp;Pagina de Projeto:&nbsp;&nbsp;&nbsp;
+                <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}">json</a> | 
+                <a filename="projeto.csv" target="projeto.csv" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=csv' }}">csv</a> | 
+                <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}">xml</a></span></p>
+      </span>
+      <div *ngIf="!carregandoDados" class="compartilhar"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"
@@ -9,6 +17,7 @@
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
+    </div>
     </div>
   </div>
   <div *ngIf="!carregandoDados" class="container">

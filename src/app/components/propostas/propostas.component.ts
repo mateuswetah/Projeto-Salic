@@ -7,6 +7,7 @@ import { RouterTransition } from './../../services/router.animations';
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
+import { ConfigurationService } from './../../services/configuration.service';
 
 import { Proposta } from './../../models/proposta.model';
 
@@ -35,7 +36,8 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
               private router: Router,
               private apiService: ApiService,
               private dataFormatterService: DataFormatterService,
-              private metaService: MetaService) { }
+              private metaService: MetaService,
+              private configurationService: ConfigurationService) { }
 
   ngOnInit() {
    // Obtêm o parâmetro através da rota da URL

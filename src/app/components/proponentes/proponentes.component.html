@@ -1,6 +1,14 @@
 <div class="container-proponente">
   <div class="barra-compartilhar">
-    <div *ngIf="!carregandoDados" class="container">
+    <div class="container">
+      <span class="baixar"><p>
+                <img class="botao-icone" alt="Ícone de proponentes" src="../../../assets/ic_proponentes.svg"/>
+                &nbsp;Pagina de Proponente:&nbsp;&nbsp;&nbsp;
+                <span class="links"><a filename="proponente.json" target="proponente.json" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente }}">json</a> | 
+                <a filename="proponente.csv" target="proponente.csv" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=csv' }}">csv</a> | 
+                <a filename="proponente.xml" target="proponente.xml" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=xml' }}">xml</a></span></p>
+      </span>
+      <div *ngIf="!carregandoDados" class="compartilhar"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"
@@ -9,6 +17,7 @@
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
+    </div>
     </div>
   </div>
   <div *ngIf="!carregandoDados  && proponente != undefined" class="container">

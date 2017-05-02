@@ -11,12 +11,30 @@
 
   .barra-compartilhar {
     p { display: inline-block; }
+
     background-color: $cinza;
-    height: 42px;
+    min-height: 42px;
     border-top: 1px solid $cinza-escuro;
     border-bottom: 1px solid $cinza-escuro;
-    text-align: end;
     padding: 5px 9px;
+
+    .baixar {
+      margin-top: 4px;
+      display: inline-block;
+      text-align: center;
+      p { margin-bottom: 0px; }
+      .links {
+        display: inline-block;
+      }
+    }
+    .compartilhar { 
+      text-align: center; 
+      display: inline-block;
+      float: right;
+      margin-left: 6px;
+
+       @media (max-width: 480px) { margin-top: 12px; }
+    }
   }
 
   .pagina-titulo {
