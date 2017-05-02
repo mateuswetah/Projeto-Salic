@@ -29,7 +29,7 @@ export class FalhaComponent implements OnInit, OnDestroy {
             this.detalhesFalha = 'Parâmetro de pesquisa inválido.';
           break;
           case 503:
-            this.detalhesFalha = 'Erro interno.';
+            this.detalhesFalha = 'Erro interno da API.';
           break;
           default:
             this.detalhesFalha = 'Erro desconhecido.';

@@ -29,6 +29,13 @@
     height: 3px;
     background-color: $verde-salic;
   }
+
+  .pagina-subtitulo {
+    color: $verde-salic;
+    font-size: 1.188em;
+    margin: 15px 0px;
+  }
+
 .pagina-infos {
     
     margin-top: 20px;
@@ -47,6 +54,229 @@
 
     .pagina-infos-valor-destaque { font-size: 1.188em; }
   }
+
+  .card {
+        
+        overflow: hidden;
+        height: 475px;
+        padding: 6px;
+        margin-bottom: 19px; 
+
+        @media all and (min-width: 768px){
+            height: 338px;
+            padding: 19px;
+        }    
+
+        @media (max-width: 1360px) {
+
+            &.col-lg-4 {
+                width: 50%;
+            }
+        }  
+
+        @media (max-width: 860px) {
+            &.col-md-6 {
+                width: 100%;
+            }
+        }       
+
+        .texto-elipsado{
+            p, h5, .card-title{
+                width: 100%;
+                white-space: nowrap;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .card-header {
+            background-color: $verde-salic;
+            color: white;
+            margin: 10px 10px -10px 10px;
+            padding: 6px 20px;
+            border: 1px solid $verde-escuro;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            height: 40px;
+
+            p { margin-bottom: 0px; font-size: 1.25em;}
+        }
+
+        .card-resposta {
+            background-color: $cinza-claro;
+            border-left: 1px solid $cinza-escuro;
+            border-right: 1px solid $cinza-escuro;
+            padding: 20px;
+            margin: 10px;
+            height: 377px;
+
+            @media all and (min-width: 768px){
+                height: 227px;
+            } 
+            
+            div {
+                padding-left: 7px;
+                padding-right: 7px;
+
+                @media (max-width: 440px) {
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+            }
+
+            .resposta-label {
+                font-size: 1.0em;
+                line-height: 1.15em;
+                margin-bottom: 0px;  
+            }
+            .resposta-valor {
+                font-size: 1.0em;
+                font-weight: 600;
+            }
+
+            .resposta-valor-destaque {
+               font-size: 1.125em; 
+               font-weight: 600;
+            }
+        }
+
+        .card-resumo {
+            background-color: rgba(32, 46, 26, 0.90);
+            color: white;
+            height: 380px;
+            @media all and (min-width: 768px){
+                height: 230px;
+                margin: 10px 29px;
+            }
+            position: absolute;
+            overflow-y: auto;
+            padding: 20px; 
+            margin: -3px 16px;
+            right: 0;
+            transition-property: all;
+            transition-duration: .5s;
+            transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+            p { font-size: 1.15em }
+
+            min-width: calc(100% - 32px);
+
+            @media all and (min-width: 768px){
+                min-width: calc(100% - 58px);
+            }
+        }
+
+        .card-botoes-container {
+            height: 41px;
+            position: relative;
+            z-index: 99;
+            background-color: $background-salic;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .card-botoes {
+            background-color: $cinza;
+            color: $verde-salic;
+            padding: 0;
+            margin: -12px 10px 10px 10px;
+            height: 100%;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border: 1px solid $cinza-escuro;
+            overflow: hidden;
+
+            a {
+                font-size: 1.125;
+                cursor: pointer;
+
+                &:hover {
+                    color: $verde-salic;
+                    text-decoration: none;
+                }
+            }
+
+            .card-botao-resumo {
+                background-color: $cinza;
+                border-right: none;
+                display: inline-block;
+                padding: 8px 16px 9px 16px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border-bottom: 1px solid $cinza-escuro;
+                border-top: 1px solid $cinza-escuro;
+                border-left: 1px solid $cinza-escuro;   
+                margin: -1px;
+                @media all and (max-width: 330px){ padding: 8px 15px 9px 10px; }
+                &:hover { border-right: 1px solid $cinza-escuro; }
+            }
+
+            .card-botao-ver {
+                text-align: end;
+                float: right;
+                display: inline-block;
+                padding: 8px 15px 8px 15px;
+
+                @media all and (max-width: 330px){ padding: 8px 15px 8px 2px; }
+
+                &:hover { background-color: #d2d2d2; border-left: 1px solid $cinza-escuro; }
+            }
+
+            .card-icon {
+                height: 1.55em;
+                padding-bottom: 5px;
+            }
+        }
+
+    }
+
+    .card-proponente {
+        height: 435px;
+
+        @media all and (min-width: 768px){
+            height: 244px;
+        } 
+
+        .card-resposta {
+            height: 335px;
+
+            @media all and (min-width: 768px){
+                height: 135px;
+            } 
+        }
+
+        .card-botoes-container {
+            top: 8px;
+            
+            .card-botoes {
+                margin: 0 -28px;
+                padding: 0px;
+
+                @media (max-width: 440px) {
+                    margin: 0 -26px;
+                }
+
+            }
+        }
+    }
+
+    .card-fornecedor {
+         height: 227px;
+
+        @media all and (min-width: 768px){
+            height: 189px;
+        } 
+
+        .card-resposta {
+            height: 156px;
+
+            @media all and (min-width: 768px){
+                height: 79px;
+            } 
+        }
+
+    }
+
 }
 
 // Spinner

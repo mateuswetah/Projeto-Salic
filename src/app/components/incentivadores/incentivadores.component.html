@@ -33,32 +33,58 @@
       </div>    
     </div>  
     <div class="row">
-      <!--<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>-->
-      <p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
-      <div *ngIf="!carregandoDadosDoacoes">
+      <div class="col-lg-12 col-sm-12" *ngIf="!carregandoDadosDoacoes">
 
-        <h4 *ngIf="!buscaPorDoacoesSemResultados">Doações feitas:</h4>
-        <p *ngIf="totalDeItens > 1">Foram encontradas {{ totalDeItens }} doações feitas por este incentivador: </p>
+        <p class="pagina-subtitulo" *ngIf="!buscaPorDoacoesSemResultados">Doações feitas:</p>
+        <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} doações feitas por este incentivador: </p>
         <p *ngIf="totalDeItens == 1">Foi encontrada uma doação feita por este incentivador: </p>
 
-        <div *ngFor="let doacao of listaDoacoes">
-          <div class="panel panel-default container-fluid">
-            <div class="panel-heading row">{{ doacao.nome_projeto}} <button [routerLink]="['/projetos', doacao.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">VER PROJETO</button></div>
-            <div class="panel-body">{{ JSON.stringify(doacao) }}</div>
+        <div *ngFor="let doacao of listaDoacoes" class="card card-proponente card-fornecedor col-sm-12 col-md-6">
+          <div class="card-header texto-elipsado" title="{{ doacao.nome_projeto }}"><p>{{ doacao.nome_projeto }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-sm-6"><p class="resposta-label">PRONAC: </p><p class="resposta-valor" title="{{ doacao.PRONAC }}">{{ doacao.PRONAC }}</p></div> 
+              <div class="col-sm-6"><p class="resposta-label">Valor da doação: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(doacao.valor) }}</p></div>
+            </div>
+            <div class="card-botoes-container">
+              <div class="card-botoes">
+                <div class="card-botao-ver col-xs-12">
+                  <a [routerLink]="['/projetos', doacao.PRONAC]" ><img class="card-icon" alt="Ícone de Projeto" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidas {{ totalDeItensCarregado }} doações. <button (click)="carregarMaisDoacoes()">EXIBIR MAIS</button></p>
-
         <div *ngIf="buscaPorDoacoesSemResultados">
           <p>Não encontramos Doações feitas por este Incentivador.</p>
         </div>
 
       </div>
     </div>
+
+        <div class="text-center" [ngStyle]="{ display: !carregandoDadosDoacoes ? 'block' : 'none' }">
+            <pagination [totalItems]="totalDeItens" 
+                   [(ngModel)]="paginaAtual" 
+                   (pageChanged)="paginaAtual = $event.page; onLoadDoacoes(idIncentivador, paginaAtual)" 
+                    pageBtnClass="btn" 
+                    [maxSize]="4" 
+                    class="pagination-sm"
+                    [boundaryLinks]="true" 
+                    itemsPerPage="12"
+                    [rotate]="false"  
+                    nextText="&#x25B8;"
+                    lastText="&#x25B8;&#x25B8;"
+                    firstText="&#x25C2;&#x25C2;"
+                    previousText="&#x25C2;"></pagination>
+        </div>
+
   </div>
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
     <p>Carregando Incentivador...</p>
+  </div>
+  <div *ngIf="!carregandoDados && carregandoDadosDoacoes" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDadosDoacoes"></sk-cube-grid>
+    <p>Carregando doações do incentivador...</p>
   </div>
 </div>

@@ -39,6 +39,8 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
   numeroDeItens: number;
   totalDeItens: number;
   totalDeItensCarregado = 0;
+  paginaAtual = 1;
+  offsetAtual: String = '0';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -53,7 +55,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
       (params: any) => {
         this.idIncentivador = params['idIncentivador'];
         this.onLoadIncentivador(this.idIncentivador);
-        this.onLoadDoacoes(this.idIncentivador);
+        this.onLoadDoacoes(this.idIncentivador, this.paginaAtual);
       }
     );
 
@@ -81,22 +83,18 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
       () => this.carregandoDados = false);
   }
 
-  onLoadDoacoes(idIncentivador: String) {
+  onLoadDoacoes(idIncentivador: String, index: number) {
     this.carregandoDadosDoacoes = true;
     this.buscaPorDoacoesSemResultados = false;
 
     this.queriesDeDoacao['limit'] = '' + this.configurationService.limitResultados;
+    this.queriesDeDoacao['offset'] = (index - 1) * this.configurationService.limitResultados + '';
+    this.offsetAtual = this.queriesDeDoacao['offset'];
 
     this.apiService.getListaDoacoesDoIncentivador(idIncentivador, this.queriesDeDoacao).subscribe(
       resposta => {
-        console.log(resposta);
-        if (this.listaDoacoes === undefined) {
-          this.listaDoacoes = resposta.listaDoacoesDoIncentivador;
-        } else {
-          for (const doacao of resposta.listaDoacoesDoIncentivador) {
-            this.listaDoacoes.push(doacao);
-          }
-        }
+        this.listaDoacoes = resposta.listaDoacoesDoIncentivador;
+        
         this.numeroDeItens = resposta.count;
         this.totalDeItens = resposta.total;
         this.totalDeItensCarregado += this.numeroDeItens;
@@ -113,17 +111,16 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
       () => this.carregandoDadosDoacoes = false);
   }
 
-  carregarMaisDoacoes() {
-
-    this.queriesDeDoacao['offset'] = (this.totalDeItensCarregado + this.configurationService.limitResultados - 1) + '';
-    this.onLoadDoacoes(this.idIncentivador);
-
-  }
-
   // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
   ngAfterViewInit() {
     $('app-incentivadores').css({position: 'relative'}).appendTo('app-outlet-container');
   }
+
+
+  obterStringDeQuantidadeNaResposta() {
+    return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItens));
+  }
+
 
   atualizarMetaTags() {
     // Meta tags genéricas
