@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit,
-         trigger, state, style, transition, animate, keyframes, HostListener, ViewChild } from '@angular/core';
+         trigger, state, style, transition, animate, keyframes, HostListener, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { Location, DatePipe } from '@angular/common';
 import { RequestOptions, URLSearchParams } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -106,6 +106,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   maximoBotoes = 4;
   opcoesDePaginacao = [12, 24, 48, 100 ];
   paginaAtual = 1;
+  paginaAnterior = 0;
 
   // Opções de Ordenação
   ordenarPor: String = '';
@@ -167,7 +168,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
               private apiService: ApiService,
               private configurationService: ConfigurationService,
               private dataFormatterService: DataFormatterService,
-              private datePipe: DatePipe) { }
+              private datePipe: DatePipe,
+              private changeDetectionRef: ChangeDetectorRef) { }
 
   ngOnInit() {
       this.inscricaoPesquisaPor = this.route.params.subscribe (
@@ -360,6 +362,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.carregarPagina(1);
   }
 
+  onTrocaPagina(indice: number) { this.carregarPagina(indice); }
+
   carregarPagina(indice: number) {
 
     console.log('Indice da pg.: ' + indice);
@@ -496,7 +500,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
               this.totalDeItems = resposta.total;
               this.numeroDeItems = resposta.count;
               this.listaFornecedores = resposta.listaFornecedores;
-              console.log(resposta);
+              
               this.subirRespostasEstado = 'ativo';
             },
             err => {
@@ -654,6 +658,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   // Aqui é configurado o botão de deslizamento das abas de pesquisa
   ngAfterViewInit() {
 
+    //this.changeDetectionRef.detectChanges();
+
     const scrollBarWidths = 40;
 
     function widthOfList() {
@@ -769,9 +775,10 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   passouDoScrollTop(event) {
-
+    
     if ($('#headerRespostas').offset() !== undefined) {
       if (window.pageYOffset > $('#headerRespostas').offset().top) {
+        
         return true;
       }
     }

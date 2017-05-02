@@ -647,13 +647,15 @@
                 background-color: $cinza;
                 border-right: none;
                 display: inline-block;
-                padding: 8px 16px 9px 18px;
+                padding: 8px 16px 9px 16px;
                 border-bottom-left-radius: 5px;
                 border-bottom-right-radius: 5px;
                 border-bottom: 1px solid $cinza-escuro;
                 border-top: 1px solid $cinza-escuro;
                 border-left: 1px solid $cinza-escuro;   
                 margin: -1px;
+                @media all and (max-width: 330px){ padding: 8px 15px 9px 10px; }
+                &:hover { border-right: 1px solid $cinza-escuro; }
             }
 
             .card-botao-ver {
@@ -661,6 +663,10 @@
                 float: right;
                 display: inline-block;
                 padding: 8px 15px 8px 15px;
+
+                @media all and (max-width: 330px){ padding: 8px 15px 8px 2px; }
+
+                &:hover { background-color: #d2d2d2; border-left: 1px solid $cinza-escuro; }
             }
 
             .card-icon {
@@ -707,7 +713,7 @@
             
             .card-botoes {
                 margin: 0 -28px;
-                
+                padding: 0px;
 
                 @media (max-width: 440px) {
                     margin: 0 -26px;

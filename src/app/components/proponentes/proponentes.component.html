@@ -61,4 +61,8 @@
       </div>
     </div> <!-- final da row -->
   </div>
+  <div *ngIf="carregandoDados" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
+    <p>Carregando Proponente...</p>
+  </div>
 </div>

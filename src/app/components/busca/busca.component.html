@@ -463,7 +463,7 @@
             </div>
 
             <!-- BAIXAR CONSULTA ==============================================-->
-            <span class="container-baixar">
+           <span class="container-baixar">
               <button (click)="baixarCSVDaConsulta()" class="btn btn-default" [ngClass]="{'enabled': !carregandoDados, 'disabled': carregandoDados }"><span class="visible-xs-inline visible-lg-inline visible-md-inline hidden-sm">Baixar </span><span class="hidden-xs visible-sm-inline hidden-md">Baixar consulta </span><span class="glyphicon glyphicon-download" ></span></button>
             </span>
           </div>  
@@ -558,7 +558,7 @@
       <div class="col-sm-4 col-xs-12 paginacao-superior" *ngIf="numeroDeItems > 0">
 
         <pagination [totalItems]="totalDeItems" 
-                    (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
+                    (pageChanged)="paginaAtual = $event.page; onTrocaPagina(paginaAtual)" 
                     [maxSize]=" maximoBotoes - 2" 
                     class="pagination-sm"
                     [boundaryLinks]="true" 
@@ -732,9 +732,9 @@
     <p>Experimente mudar os termos de busca ou filtros aplicados.</p>
   </alert>
       
-  <div class="text-center" *ngIf="(numeroDeItems > 0) && !carregandoDados">
+  <div class="text-center" [ngStyle]="{ display: (numeroDeItems > 0) && !carregandoDados ? 'block' : 'none' }">
     <pagination [totalItems]="totalDeItems" 
-                (pageChanged)="paginaAtual = $event.page; carregarPagina(paginaAtual);" 
+                (pageChanged)="paginaAtual = $event.page; onTrocaPagina(paginaAtual);" 
                 [maxSize]=" maximoBotoes + 2" 
                 class="pagination-sm"
                 [boundaryLinks]="true" 

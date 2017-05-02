@@ -1,17 +1,34 @@
 <div class="container-fornecedor">
-  <div  *ngIf="!carregandoDados" class="container">
-    <h3>
-      Página do Fornecedor de id: {{ idFornecedor }} 
-    </h3>
-    <share-buttons class="withCount" 
+  <div class="barra-compartilhar">
+    <div *ngIf="!carregandoDados" class="container">
+      <p>Compartilhe:&nbsp;&nbsp;</p>
+      <share-buttons class="withCount" 
+                  [defaultStyle]="false"
                   [url]="url" 
                   [title]="'Fornecedor: ' + fornecedor.nome" 
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
+    </div>
+  </div>
+  <div *ngIf="!carregandoDados  && fornecedor != undefined" class="container">
+    <h1 class="pagina-titulo">
+      {{ fornecedor.nome }}
+    </h1>
+  </div> 
+  <div class="linha-pagina-titulo"></div>
 
-    <div>
-      <p>{{ JSON.stringify(fornecedor) }}</p>
+  <div class="container">
+    <div  *ngIf="!carregandoDados && fornecedor != undefined" class="row">
+      <div class="pagina-infos col-md-12">
+        <div class="row">
+          <div class="col-sm-3 col-xs-12"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(fornecedor.cgccpf) }}</p></div>
+          <div class="col-sm-3 col-xs-12"><p class="pagina-infos-label">Email: </p><a href="mailto:{{fornecedor.email}}" class="pagina-infos-valor">{{ fornecedor.email ? fornecedor.email : 'Não informado.'  }}</a></div>
+        </div>
+      </div>    
+    </div>  
+
+    <div class="row">
       <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
       <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
       <div *ngIf="!carregandoDadosProdutos">
@@ -31,6 +48,10 @@
 
       </div>
     </div>
+  </div>
+  <div *ngIf="carregandoDados" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
+    <p>Carregando Proponente...</p>
   </div>
   
 </div>

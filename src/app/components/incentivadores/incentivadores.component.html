@@ -1,17 +1,38 @@
-<div class="container container-incentivador">
-  <div *ngIf="!carregandoDados" class="container">
-    <h3>
-      Página do Incentivador de id: {{ idIncentivador }} 
-    </h3>
-    <share-buttons class="withCount" 
+<div class="container-incentivador">
+  <div class="barra-compartilhar">
+    <div *ngIf="!carregandoDados" class="container">
+      <p>Compartilhe:&nbsp;&nbsp;</p>
+      <share-buttons class="withCount" 
+                  [defaultStyle]="false"
                   [url]="url" 
                   [title]="'Incentivador: ' + incentivador.nome" 
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false"
+                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
-
-    <div>
-      <p>{{ JSON.stringify(incentivador) }}</p>
+    </div>
+  </div>
+  <div *ngIf="!carregandoDados  && incentivador != undefined" class="container">
+    <h1 class="pagina-titulo">
+      {{ incentivador.nome }}
+    </h1>
+  </div> 
+  <div class="linha-pagina-titulo"></div>
+  
+  <div class="container">
+    <div  *ngIf="!carregandoDados && incentivador != undefined" class="row">
+      <div class="pagina-infos col-md-12">
+        <div class="row">
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipo_pessoa) }}</p></div>
+          <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}</p></div>
+          <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Responsável: </p><p class="pagina-infos-valor">{{ incentivador.responsavel }}</p></div>
+          <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">Município, UF: </p><p class="pagina-infos-valor">{{ incentivador.municipio }}, {{ incentivador.UF }}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total captado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(incentivador.total_doado) }}</p></div>
+        </div>
+      </div>    
+    </div>  
+    <div class="row">
       <!--<button (click)="onLoadDoacoes(idIncentivador)">Carregar Doações deste Incentivador</button>-->
       <p *ngIf="carregandoDadosDoacoes">Carregando doações deste incentivador...</p>
       <div *ngIf="!carregandoDadosDoacoes">
@@ -35,5 +56,9 @@
 
       </div>
     </div>
+  </div>
+  <div *ngIf="carregandoDados" class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
+    <p>Carregando Incentivador...</p>
   </div>
 </div>

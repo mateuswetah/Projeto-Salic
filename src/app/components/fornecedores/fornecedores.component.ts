@@ -6,6 +6,8 @@ import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
+import { ConfigurationService } from './../../services/configuration.service';
 
 import { Fornecedor } from './../../models/fornecedor.model';
 import { Produto } from './../../models/produto.model';
@@ -36,7 +38,9 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
-              private metaService: MetaService) { }
+              private dataFormatterService: DataFormatterService,
+              private metaService: MetaService,
+              private configurationService: ConfigurationService) { }
 
   ngOnInit() {
    // Obtêm o parâmetro através da rota da URL

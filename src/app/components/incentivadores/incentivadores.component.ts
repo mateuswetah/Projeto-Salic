@@ -6,6 +6,7 @@ import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
+import { DataFormatterService } from './../../services/data-formatter.service';
 import { ConfigurationService } from './../../services/configuration.service';
 
 import { Incentivador } from './../../models/incentivador.model';
@@ -42,6 +43,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
   constructor(private route: ActivatedRoute,
               private router: Router,
               private apiService: ApiService,
+              private dataFormatterService: DataFormatterService,
               private metaService: MetaService,
               private configurationService: ConfigurationService) { }
 
