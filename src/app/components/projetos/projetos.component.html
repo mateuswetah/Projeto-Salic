@@ -196,7 +196,7 @@
     </div>
   </div>
 
-  <!-- MODAL DE DDOCUMENTOS ANEXAS ===================================================================-->
+  <!-- MODAL DE DOCUMENTOS ANEXAS ===================================================================-->
   <div  *ngIf="!carregandoDados && projeto != undefined">
     <div bsModal #modalDeDocumentosAnexos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Documentos Anexos" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -225,6 +225,35 @@
     </div>
   </div>
 
+  <!-- MODAL DE DESLOCAMENTOS ANEXAS ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeDeslocamentos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Deslocamentos" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Deslocamentos do Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeDeslocamentos()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let deslocamento of projeto._embedded.deslocamento; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ deslocamento.municipio_origem }} &#8594; {{ deslocamento.municipio_destino }}"><p>{{ deslocamento.municipio_origem }} &#8594; {{ deslocamento.municipio_destino }}</p></div>
+                <div class="row">
+                  <div class="col-md-5 col-sm-6 col-xs-12"><p class="modal-item-label">Origem: </p><p class="modal-item-valor">{{ deslocamento.municipio_origem }}, {{ deslocamento.uf_origem }}, {{ deslocamento.pais_origem }}</p></div>
+                  <div class="col-md-5 col-sm-6 col-xs-12"><p class="modal-item-label">Destino: </p><p class="modal-item-valor">{{ deslocamento.municipio_destino }}, {{ deslocamento.uf_destino }}, {{ deslocamento.pais_destino }}</p></div>
+                  <div class="col-md-2 col-sm-12 col-xs-12"><p class="modal-item-label">Quantidade: </p><p class="modal-item-valor">{{ deslocamento.quantidade > 1 ? deslocamento.quantidade + ' vezes.' : deslocamento.quantidade + ' vez.' }}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL DE MARCAS ANEXAS ===================================================================-->
   <div  *ngIf="!carregandoDados && projeto != undefined">
     <div bsModal #modalDeMarcasAnexas="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Marcas Anexas" aria-hidden="true">
@@ -242,13 +271,13 @@
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ marca.nome_arquivo }}"><p>{{ marca.nome_arquivo }}</p></div>
                 <div class="row row-dark">
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Id do arquivo: </p><p class="modal-item-valor">{{ marca.id_arquivo }}</p></div> 
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Id documento: </p><p class="modal-item-valor">{{ marca.id_documento }}</p></div>
-                  <div class="col-sm-6 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(marca.data_envio) }}</p></div>
+                  <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Id do arquivo: </p><p class="modal-item-valor">{{ marca.id_arquivo }}</p></div> 
+                  <div class="col-md-3 col-sm-5 col-xs-12"><p class="modal-item-label">Id documento: </p><p class="modal-item-valor">{{ marca.id_documento }}</p></div>
+                  <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ marca.link }}">Clique aqui.</a></div>
+                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(marca.data_envio) }}</p></div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-19 col-xs-12"><p class="modal-item-label">Descrição: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(marca.descricao) }}</p></div>
-                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ marca.link }}">Clique aqui.</a></div>
+                  <div class="col-xs-12"><p class="modal-item-label">Descrição: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(marca.descricao) }}</p></div>
                 </div>
               </div>
             </div>
@@ -258,7 +287,7 @@
     </div>
   </div>
 
-    <!-- MODAL DE PRORROGAÇÕES ===================================================================-->
+  <!-- MODAL DE PRORROGAÇÕES ===================================================================-->
   <div  *ngIf="!carregandoDados && projeto != undefined">
     <div bsModal #modalDeProrrogacao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Prorrogações" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -292,6 +321,71 @@
     </div>
   </div>
 
+  <!-- MODAL DE RELATÓRIOS FÍSICOS ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeRelatorioFisico="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Relatórios Físicos" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Relatórios Físicos do Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeRelatorioFisico()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let relatorio of projeto._embedded.relatorio_fisico; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ relatorio.item }}"><p>{{ relatorio.item }}</p></div>
+                <div class="row row-dark">
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Valor programado: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relatorio.valor_programado) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade programada: </p><p class="modal-item-valor">{{ relatorio.qtd_programada }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Valor executado: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relatorio.valor_executado) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Percentagem executada: </p><p class="modal-item-valor">{{ relatorio.perc_executado }}</p></div>
+                </div>
+                <div class="row row">
+                  <div class="col-lg-2 col-md-4 col-xs-12"><p class="modal-item-label">Percentagem à executar: </p><p class="modal-item-valor">{{ relatorio.perc_executar }}</p></div> 
+                  <div class="col-lg-2 col-md-8 col-xs-12"><p class="modal-item-label">Etapa: </p><p class="modal-item-valor">{{ relatorio.etapa }}</p></div>
+                  <div class="col-lg-2 col-md-8 col-xs-12"><p class="modal-item-label">Id da Planilha Etapa: </p><p class="modal-item-valor">{{ relatorio.id_planilha_etapa }}</p></div>
+                  <div class="col-lg-8 col-md-12 col-xs-12"><p class="modal-item-label">Unidade: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(relatorio.unidade) }}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CERTIDÃO NEGATIVA ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeCertidoesNegativas="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Certidão Negativa" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Certidões Negativas do Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeCertidoesNegativas()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let certidao of projeto._embedded.certidoes_negativas; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ certidao.descricao }}"><p>{{ certidao.descricao }}</p></div>
+                <div class="row">
+                  <div class="col-sm-6 col-xs-12"><p class="modal-item-label">Situação: </p><p class="modal-item-valor">{{ certidao.situacao }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Data de emissão: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(certidao.data_emissao) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Data de validade: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(certidao.data_validade) }}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <button class="btn btn-primary" (click)="mostrarModalDeDistribuicao();">Distribuição</button>
   <button class="btn btn-primary" (click)="mostrarModalDeDivulgacao();">Divulgação</button>
@@ -299,6 +393,8 @@
   <button class="btn btn-primary" (click)="mostrarModalDeMarcasAnexas();">Marcas Anexas</button>
   <button class="btn btn-primary" (click)="mostrarModalDeDeslocamentos();">Deslocamentos</button>
   <button class="btn btn-primary" (click)="mostrarModalDeProrrogacao();">Prorrogação</button>
+  <button class="btn btn-primary" (click)="mostrarModalDeRelatorioFisico();">Relatório Físico</button>
+  <button class="btn btn-primary" (click)="mostrarModalDeCertidoesNegativas();">Certidão Negativa</button>
 
   <!-- ÍCONE DE CARREGAMENTO =====================================================-->
   <div *ngIf="carregandoDados" class="spinner">
