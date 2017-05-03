@@ -186,7 +186,7 @@
             min-width: calc(100% - 32px);
 
             @media all and (min-width: 768px){
-                height: 230px;
+                height: 226px;
                 margin: 10px 0px;
                 min-width: calc(100% - 58px);
                 max-width: calc(100% - 58px);
@@ -241,17 +241,20 @@
             .card-botao-ver {
                 text-align: end;
                 float: right;
-                display: inline-block;
+                display: inline-table;
                 padding: 8px 15px 8px 15px;
 
                 @media all and (max-width: 330px){ padding: 8px 15px 8px 2px; }
 
                 &:hover { background-color: #d2d2d2; border-left: 1px solid $cinza-escuro; }
+
+                 a { display: flex; }
             }
 
             .card-icon {
                 height: 1.55em;
                 padding-bottom: 5px;
+                margin-top: 2px;
             }
         }
 
