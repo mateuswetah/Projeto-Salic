@@ -25,6 +25,7 @@
          "styles.scss"
       ],
       "scripts": [
+          "../node_modules/angular2-ie9-shims/shims_for_IE.dev.js",
           "../node_modules/jquery/dist/jquery.js",
           "../node_modules/hammerjs/hammer.js"
       ],
