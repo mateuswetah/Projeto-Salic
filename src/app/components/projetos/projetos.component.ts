@@ -28,6 +28,9 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modalDeDistribuicao') public modalDeDistribuicao: ModalDirective;
   @ViewChild('modalDeDivulgacao') public modalDeDivulgacao: ModalDirective;
   @ViewChild('modalDeDocumentosAnexos') public modalDeDocumentosAnexos: ModalDirective;
+  @ViewChild('modalDeMarcasAnexas') public modalDeMarcasAnexas: ModalDirective;
+  @ViewChild('modalDeDeslocamentos') public modalDeDeslocamentos: ModalDirective;
+  @ViewChild('modalDeProrrogacao') public modalDeProrrogacao: ModalDirective;
 
   // Variáveis locais
   PRONAC: Number;
@@ -100,6 +103,26 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeDocumentosAnexos.hide();
   }
 
+  public mostrarModalDeMarcasAnexas() {
+    this.modalDeMarcasAnexas.show();
+  }
+  public esconderModalDeMarcasAnexas(): void {
+    this.modalDeMarcasAnexas.hide();
+  }
+
+  public mostrarModalDeDeslocamentos() {
+    this.modalDeDeslocamentos.show();
+  }
+  public esconderModalDeDeslocamentos(): void {
+    this.modalDeDeslocamentos.hide();
+  }
+
+  public mostrarModalDeProrrogacao() {
+    this.modalDeProrrogacao.show();
+  }
+  public esconderModalDeProrrogacao(): void {
+    this.modalDeProrrogacao.hide();
+  }
 
   ngAfterViewInit() {
     // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
