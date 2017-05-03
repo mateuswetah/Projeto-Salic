@@ -207,9 +207,15 @@ export class ApiService {
    }
 
   // Produtos do Fornecedor
-  getListaProdutosDoFornecedor(fornecedor_id: String): Observable<[Produto]> {
-    return this.http.get(this.configuration.ApiUrl + 'fornecedores/' + fornecedor_id + '/produtos/')
-      .map((res: Response) => res.json()._embedded.produtos)
+  getListaProdutosDoFornecedor(fornecedor_id: String, queries: { [query: string]: String; } ):
+      Observable<{ listaProdutosDoFornecedor: [Produto], count: number, total: number }> {
+
+    const searchParams = this.serializeQueries(queries);
+
+    return this.http.get(this.configuration.ApiUrl + 'fornecedores/' + fornecedor_id + '/produtos/', { search: searchParams })
+      .map((res: Response) => ({ listaProdutosDoFornecedor: res.json()._embedded.produtos,
+                                 count: res.json().count,
+                                 total: res.json().total }))
       .catch((error: any) => this.handleError(error));
   }
 

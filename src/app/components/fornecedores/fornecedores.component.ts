@@ -31,9 +31,15 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
   carregandoDadosProdutos: Boolean = false;
   buscaPorProdutosSemResultados: Boolean = false;
 
+  queriesDeProdutos: { [query: string]: String; } = {};
   idFornecedor: String;
   fornecedor: Fornecedor;
   listaProdutos: [Produto];
+  numeroDeItens: number;
+  totalDeItens: number;
+  totalDeItensCarregado = 0;
+  paginaAtual = 1;
+  offsetAtual: String = '0';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -48,7 +54,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
       (params: any) => {
         this.idFornecedor = params['idFornecedor'];
         this.onLoadFornecedor(this.idFornecedor);
-        this.onLoadProdutos(this.idFornecedor);
+        this.onLoadProdutos(this.idFornecedor, this.paginaAtual);
       }
     );
   }
@@ -59,6 +65,8 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onLoadFornecedor(idFornecedor: String) {
     this.carregandoDados = true;
+     this.listaProdutos = undefined; // Garante que o objeto seja sobrescrito
+                                    // caso estejamos voltando de outra página.
 
     this.apiService.getFornecedor(idFornecedor).subscribe(
       fornecedor => {
@@ -73,14 +81,22 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
       () => this.carregandoDados = false);
   }
 
-  onLoadProdutos(idFornecedor: String) {
+  onLoadProdutos(idFornecedor: String, index: number) {
     this.carregandoDadosProdutos = true;
     this.buscaPorProdutosSemResultados = false;
 
-    this.apiService.getListaProdutosDoFornecedor(idFornecedor).subscribe(
-      produtos => {
-        console.log(produtos);
-        this.listaProdutos = produtos;
+    this.queriesDeProdutos['limit'] = '' + this.configurationService.limitResultados;
+    this.queriesDeProdutos['offset'] = (index - 1) * this.configurationService.limitResultados + '';
+    this.offsetAtual = this.queriesDeProdutos['offset'];
+
+    this.apiService.getListaProdutosDoFornecedor(idFornecedor, this.queriesDeProdutos).subscribe(
+      resposta => {
+        console.log(resposta);
+        this.listaProdutos = resposta.listaProdutosDoFornecedor;
+
+        this.numeroDeItens = resposta.count;
+        this.totalDeItens = resposta.total;
+        this.totalDeItensCarregado += this.numeroDeItens;
       },
       err => {
         this.carregandoDadosProdutos = false;
@@ -97,6 +113,10 @@ export class FornecedoresComponent implements OnInit, OnDestroy, AfterViewInit {
   // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
   ngAfterViewInit() {
     $('app-incentivadores').css({position: 'relative'}).appendTo('app-outlet-container');
+  }
+
+  obterStringDeQuantidadeNaResposta() {
+    return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItens));
   }
 
   atualizarMetaTags() {

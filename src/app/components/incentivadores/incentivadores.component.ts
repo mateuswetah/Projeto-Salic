@@ -116,11 +116,9 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
     $('app-incentivadores').css({position: 'relative'}).appendTo('app-outlet-container');
   }
 
-
   obterStringDeQuantidadeNaResposta() {
     return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItens));
   }
-
 
   atualizarMetaTags() {
     // Meta tags genéricas

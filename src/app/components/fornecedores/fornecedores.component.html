@@ -36,18 +36,43 @@
         </div>
       </div>    
     </div>  
-
     <div class="row">
-      <!--<button (click)="onLoadProdutos(idFornecedor)">Carregar Produtos deste Fornecedor</button>-->
-      <p *ngIf="carregandoDadosProdutos">Carregando produtos deste fornecedor...</p>
-      <div *ngIf="!carregandoDadosProdutos">
+      <div class="col-lg-12 col-sm-12" *ngIf="!carregandoDadosprodutos">
         
-        <h4 *ngIf="!buscaPorProdutosSemResultados">Produtos fornecidos:</h4>
+        <p class="pagina-subtitulo" *ngIf="!buscaPorProdutosSemResultados">Produtos relacionados:</p>
+        <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} produtos relacionados a este fornecedor: </p>
+        <p *ngIf="totalDeItens == 1">Foi encontrado um produto relacionado a esse fornecedor: </p>
 
-        <div *ngFor="let produto of listaProdutos">
-          <div class="panel panel-default container-fluid">
-            <div class="panel-heading row">{{ produto.nome}} <button [routerLink]="['/projetos', produto.PRONAC]" type="button" class="btn btn-sm btn-success pull-right">Ver Projeto</button></div>
-            <div class="panel-body">{{ JSON.stringify(produto) }}</div>
+        <div *ngFor="let produto of listaProdutos;" class="card col-sm-12 col-md-6" role="group">
+          <div class="card-header texto-elipsado" title="{{ produto.nome }}"><p>{{ produto.nome }}</p></div>
+          <div class="card-resposta texto-elipsado">
+            <div class="row">
+              <div class="col-xs-6"><p class="resposta-label">Data aprovação: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_aprovacao) }}</p></div>
+              <div class="col-xs-6"><p class="resposta-label">Data pagamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_pagamento) }}</p></div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5"><p class="resposta-label">Nome do Arquivo: </p><p class="resposta-valor" title="{{ produto.nm_arquivo }}">{{ produto.nm_arquivo }}</p></div>
+              <div class="col-xs-7"><p class="resposta-label">Tipo do documento: </p><p class="resposta-valor" title="{{ produto.tipo_documento}}">{{ produto.tipo_documento}}</p></div>
+            </div>  
+            <div class="row">
+              <div class="col-xs-5"><p class="resposta-label">Valor produto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}</p></div>
+              <div class="col-xs-7"><p class="resposta-label">Forma de Pagamento: </p><p class="resposta-valor" title="{{ produto.tipo_forma_pagamento }}">{{ produto.tipo_forma_pagamento }}</p></div>
+            </div>                
+          </div>
+          <div class="card-botoes-container">
+            <div class="card-botoes" [ngStyle]="{'border-top-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-left-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623'}">
+              <span class="card-botao-resumo" (click)="produto.isJustificativaEscondida = !produto.isJustificativaEscondida"
+                  [ngStyle]="{'background-color': !produto.isJustificativaEscondida ? '#e0e0e0' : '#293623', 'border-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !produto.isJustificativaEscondida ? '0px' : '5px'}">
+                <a [ngStyle]="{'color': produto.isJustificativaEscondida ? 'white' : '#226000'}">{{ !produto.isJustificativaEscondida ? '&#9656;' : '&#9652;' }}&nbsp; JUSTIFICATIVA</a>
+              </span>
+              
+              <div class="card-botao-ver">
+                <a [routerLink]="['/projetos', produto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-resumo" [ngStyle]="{'top': produto.isJustificativaEscondida ? '59px' : '101%', 'background-color': produto.isJustificativaEscondida ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
+            <p role="contentinfo">{{ produto.justificativa != '' && produto.justificativa !== null ? produto.justificativa : 'Não informada.' }}</p>
           </div>
         </div>
 
@@ -57,10 +82,31 @@
 
       </div>
     </div>
+
+    <div class="text-center" [ngStyle]="{ display: !carregandoDadosProdutos ? 'block' : 'none' }">
+        <pagination [totalItems]="totalDeItens" 
+                [(ngModel)]="paginaAtual" 
+                (pageChanged)="paginaAtual = $event.page; onLoadProdutos(idFornecedor, paginaAtual)" 
+                pageBtnClass="btn" 
+                [maxSize]="4" 
+                class="pagination-sm"
+                [boundaryLinks]="true" 
+                itemsPerPage="12"
+                [rotate]="false"  
+                nextText="&#x25B8;"
+                lastText="&#x25B8;&#x25B8;"
+                firstText="&#x25C2;&#x25C2;"
+                previousText="&#x25C2;"></pagination>
+    </div>
+
   </div>
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
-    <p>Carregando Proponente...</p>
+    <p>Carregando Fornecedor...</p>
+  </div>
+  <div *ngIf="!carregandoDados && carregandoDadosProdutos " class="spinner">
+    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDadosProdutos"></sk-cube-grid>
+    <p>Carregando produtos do Fornecedor...</p>
   </div>
   
 </div>

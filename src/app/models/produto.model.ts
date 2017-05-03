@@ -19,5 +19,8 @@ export class Produto {
                 public tipo_documento:        String,
                 public nr_documento_pagamento:    String,
                 public nm_arquivo:            String,
-                public PRONAC:                String ) {}
+                public PRONAC:                String,  
+                public isJustificativaEscondida: Boolean ) {
+                  this.isJustificativaEscondida = true;
+                }
 }
