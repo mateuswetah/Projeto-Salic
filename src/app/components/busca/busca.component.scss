@@ -591,10 +591,6 @@
             background-color: rgba(32, 46, 26, 0.90);
             color: white;
             height: 380px;
-            @media all and (min-width: 768px){
-                height: 230px;
-                margin: 10px 29px;
-            }
             position: absolute;
             overflow-y: auto;
             padding: 20px; 
@@ -609,7 +605,11 @@
             min-width: calc(100% - 32px);
 
             @media all and (min-width: 768px){
+                height: 230px;
+                margin: 10px 0px;
                 min-width: calc(100% - 58px);
+                max-width: calc(100% - 58px);
+                left: 29px;
             }
         }
 
@@ -687,6 +687,13 @@
         .card-resposta {
             height: 225px;
 
+            @media all and (min-width: 768px){
+                height: 122px;
+            } 
+        }
+        .card-resumo {
+            height: 224px;
+        
             @media all and (min-width: 768px){
                 height: 122px;
             } 
