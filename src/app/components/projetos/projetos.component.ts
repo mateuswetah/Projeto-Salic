@@ -33,6 +33,8 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modalDeProrrogacao') public modalDeProrrogacao: ModalDirective;
   @ViewChild('modalDeRelatorioFisico') public modalDeRelatorioFisico: ModalDirective;
   @ViewChild('modalDeCertidoesNegativas') public modalDeCertidoesNegativas: ModalDirective;
+  @ViewChild('modalDeCaptacoes') public modalDeCaptacoes: ModalDirective;
+  @ViewChild('modalDeRelacaoPagamentos') public modalDeRelacaoPagamentos: ModalDirective;
 
   // Variáveis locais
   PRONAC: Number;
@@ -132,12 +134,26 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   public esconderModalDeRelatorioFisico(): void {
     this.modalDeRelatorioFisico.hide();
   }
-  
+
   public mostrarModalDeCertidoesNegativas() {
     this.modalDeCertidoesNegativas.show();
   }
   public esconderModalDeCertidoesNegativas(): void {
     this.modalDeCertidoesNegativas.hide();
+  }
+
+  public mostrarModalDeCaptacoes() {
+    this.modalDeCaptacoes.show();
+  }
+  public esconderModalDeCaptacoes(): void {
+    this.modalDeCaptacoes.hide();
+  }
+
+  public mostrarModalDeRelacaoPagamentos() {
+    this.modalDeRelacaoPagamentos.show();
+  }
+  public esconderModalDeRelacaoPagamentos(): void {
+    this.modalDeRelacaoPagamentos.hide();
   }
 
   ngAfterViewInit() {
