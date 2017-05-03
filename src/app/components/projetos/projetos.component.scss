@@ -110,6 +110,62 @@
 
   }
 
+  // Estilos dos modais de vetores
+  .modal-header {
+    color: $verde-salic;
+    background-color: $verde-claro-salic;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid $verde-salic;
+    
+    h4 { font-size: 1.35em; }
+    button.close { color: $verde-salic !important; opacity: 0.9 !important; }
+    
+  }
+  .modal-item {
+
+    padding: 5px 20px;
+
+    .texto-elipsado{
+      p, h5, .card-title{
+          width: 100%;
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+      }
+    }
+
+    .row {
+      padding: 4px 20px;
+      margin-left: -35px;
+      margin-right: -35px;
+    }
+    .row-dark { background-color:#f8f8f8;}
+
+    .modal-divisor {
+      height: 1px;
+      background-color: $verde-claro-salic;
+      margin: 0px -35px 15px -35px;
+    }
+
+    .modal-item-titulo { 
+      font-size: 1.15em;
+      font-weight: bold;
+      color: $verde-salic;
+    }
+
+    .modal-item-label {
+      font-size: 0.85em;
+      color: $verde-salic;
+      margin-bottom: 2px;
+      line-height: 1.0em;
+    }
+
+    .modal-item-valor {
+      margin-bottom: 6px;
+    }
+
+  }
 
   // Abas de Texto ----------------------------------------------------------
   .container-abas {

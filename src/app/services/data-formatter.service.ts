@@ -136,7 +136,7 @@ export class DataFormatterService {
     if (texto !== null && texto !== '' && texto !== ' ' && texto !== undefined) {
       return texto;
     } else {
-      return 'Informação não fornececida.';
+      return 'Informação não existente.';
     }
   }
 

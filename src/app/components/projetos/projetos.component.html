@@ -121,6 +121,116 @@
 -->
     </div>
   </div>
+
+  <!-- MODAL DE DISTRIBUIÇÃO ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeDistribuicao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Distribuição" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Distribuição do Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeDistribuicao()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let distribuicao of projeto._embedded.distribuicao; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ distribuicao.produto }}"><p>{{ distribuicao.produto }}</p></div>
+                <div class="row row-dark">
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Segmento: </p><p class="modal-item-valor">{{ distribuicao.segmento }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Área: </p><p class="modal-item-valor">{{ distribuicao.area }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Localização: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(distribuicao.localizacao) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Posição da Logo: </p><p class="modal-item-valor">{{ distribuicao.posicao_logo }}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Preço unitário normal: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(distribuicao.preco_unitario_normal) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade venda normal: </p><p class="modal-item-valor">{{ distribuicao.qtd_venda_normal }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Preço unitário promocional: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(distribuicao.preco_unitario_promocional) }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Qtd. venda promocional: </p><p class="modal-item-valor">{{ distribuicao.qtd_venda_promocional }}</p></div>
+                </div>
+                <div class="row row-dark">
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade do proponente: </p><p class="modal-item-valor">{{ distribuicao.qtd_proponente }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade do patrocinador: </p><p class="modal-item-valor">{{ distribuicao.qtd_patrocinador }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade produzida: </p><p class="modal-item-valor">{{ distribuicao.qtd_produzida }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade de outros: </p><p class="modal-item-valor">{{ distribuicao.qtd_outros }}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Receita normal: </p><p class="modal-item-valor">{{ distribuicao.receita_normal }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Receita prevista: </p><p class="modal-item-valor">{{ distribuicao.receita_prevista }}</p></div>
+                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Receita projeto: </p><p class="modal-item-valor">{{ distribuicao.receita_pro }}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DIVULGAÇÃO ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeDivulgacao="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Divulgação" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Divulgação do Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeDivulgacao()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let divulgacao of projeto._embedded.divulgacao; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ divulgacao.peca }}"><p>Peça: {{ divulgacao.peca }}</p></div>
+                <div class="row">
+                  <div class="col-xs-12"><p class="modal-item-label">Veículo: </p><p class="modal-item-valor">{{ divulgacao.veiculo }}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DDOCUMENTOS ANEXOS ===================================================================-->
+  <div  *ngIf="!carregandoDados && projeto != undefined">
+    <div bsModal #modalDeDocumentosAnexos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Documentos Anexos" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Documentos Anexados ao Projeto</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeDocumentosAnexos()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let documento of projeto._embedded.documentos_anexados; let i = index;">
+            <div class="modal-item texto-elipsado">
+              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <div class="modal-item-titulo" title="{{ documento.produto }}"><p>{{ documento.nome }}</p></div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12"><p class="modal-item-label">Classificação: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(documento.classificacao) }}</p></div>
+                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(documento.data) }}</p></div>
+                  <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ documento.link }}">Clique aqui.</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <button (click)="mostrarModalDeDistribuicao();">Distribuição</button>
+  <button (click)="mostrarModalDeDivulgacao();">Divulgação</button>
+  <button (click)="mostrarModalDeDocumentosAnexos();">Documentos Anexos</button>
+
+  <!-- ÍCONE DE CARREGAMENTO =====================================================-->
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
     <p>Carregando Projeto...</p>

@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { RouterTransition } from './../../services/router.animations';
+
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
@@ -22,6 +24,12 @@ declare var $: any;
 })
 export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  // Modais de vetores
+  @ViewChild('modalDeDistribuicao') public modalDeDistribuicao: ModalDirective;
+  @ViewChild('modalDeDivulgacao') public modalDeDivulgacao: ModalDirective;
+  @ViewChild('modalDeDocumentosAnexos') public modalDeDocumentosAnexos: ModalDirective;
+
+  // Variáveis locais
   PRONAC: Number;
   inscricao: Subscription; // Usada para observar mudanças na URL
   projeto: Projeto;
@@ -69,6 +77,29 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       () => this.carregandoDados = false);
   }
+
+  // Rotinas dos modais de vetores
+  public mostrarModalDeDistribuicao() {
+    this.modalDeDistribuicao.show();
+  }
+  public esconderModalDeDistribuicao(): void {
+    this.modalDeDistribuicao.hide();
+  }
+
+  public mostrarModalDeDivulgacao() {
+    this.modalDeDivulgacao.show();
+  }
+  public esconderModalDeDivulgacao(): void {
+    this.modalDeDivulgacao.hide();
+  }
+
+  public mostrarModalDeDocumentosAnexos() {
+    this.modalDeDocumentosAnexos.show();
+  }
+  public esconderModalDeDocumentosAnexos(): void {
+    this.modalDeDocumentosAnexos.hide();
+  }
+
 
   ngAfterViewInit() {
     // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
