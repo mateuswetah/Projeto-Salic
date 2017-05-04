@@ -153,8 +153,8 @@
                 <div class="row row-dark">
                   <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Segmento: </p><p class="modal-item-valor">{{ distribuicao.segmento }}</p></div>
                   <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Área: </p><p class="modal-item-valor">{{ distribuicao.area }}</p></div>
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Localização: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(distribuicao.localizacao) }}</p></div>
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Posição da Logo: </p><p class="modal-item-valor">{{ distribuicao.posicao_logo }}</p></div>
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Localização: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(distribuicao.localizacao) }}</p></div>
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Posição da Logo: </p><p class="modal-item-valor">{{ distribuicao.posicao_logo }}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Preço unitário normal: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(distribuicao.preco_unitario_normal) }}</p></div>
@@ -226,7 +226,7 @@
               <div class="modal-item-titulo" title="{{ documento.produto }}"><p>{{ documento.nome }}</p></div>
                 <div class="row">
                   <div class="col-md-6 col-sm-12 col-xs-12"><p class="modal-item-label">Classificação: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(documento.classificacao) }}</p></div>
-                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(documento.data) }}</p></div>
+                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(documento.data) }}</p></div>
                   <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ documento.link }}">Clique aqui.</a></div>
                 </div>
               </div>
@@ -237,7 +237,7 @@
     </div>
   </div>
 
-  <!-- MODAL DE DESLOCAMENTOS ANEXAS ===================================================================-->
+  <!-- MODAL DE DESLOCAMENTOS ===================================================================-->
   <div  *ngIf="!carregandoDados && projeto != undefined">
     <div bsModal #modalDeDeslocamentos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Modal de Deslocamentos" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -286,7 +286,7 @@
                   <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Id do arquivo: </p><p class="modal-item-valor">{{ marca.id_arquivo }}</p></div> 
                   <div class="col-md-3 col-sm-5 col-xs-12"><p class="modal-item-label">Id documento: </p><p class="modal-item-valor">{{ marca.id_documento }}</p></div>
                   <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ marca.link }}">Clique aqui.</a></div>
-                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(marca.data_envio) }}</p></div>
+                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(marca.data_envio) }}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12"><p class="modal-item-label">Descrição: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(marca.descricao) }}</p></div>
@@ -316,9 +316,9 @@
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ prorrogacao.usuario }}"><p>{{ prorrogacao.usuario }}</p></div>
                 <div class="row row-dark">
-                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data do Pedido: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(prorrogacao.data_pedido) }}</p></div>
-                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data de Início: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(prorrogacao.data_inicio) }}</p></div>
-                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data Final: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(prorrogacao.data_final) }}</p></div>
+                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data do Pedido: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(prorrogacao.data_pedido) }}</p></div>
+                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data de Início: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(prorrogacao.data_inicio) }}</p></div>
+                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Data Final: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(prorrogacao.data_final) }}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-lg-2 col-md-4 col-xs-12"><p class="modal-item-label">Atendimento: </p><p class="modal-item-valor">{{ prorrogacao.atendimento }}</p></div> 
@@ -345,21 +345,21 @@
             </button>
           </div>
           <div class="modal-body">
-            <div *ngFor="let relatorio of projeto._embedded.relatorio_fisico; let i = index;">
+            <div *ngFor="let relatorio of projeto._embedded.relatorio_fisco; let i = index;">
             <div class="modal-item texto-elipsado">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ relatorio.item }}"><p>{{ relatorio.item }}</p></div>
                 <div class="row row-dark">
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Quantidade programada: </p><p class="modal-item-valor">{{ relatorio.qtd_programada }}</p></div>
                   <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Valor programado: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relatorio.valor_programado) }}</p></div>
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Quantidade programada: </p><p class="modal-item-valor">{{ relatorio.qtd_programada }}</p></div>
                   <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Valor executado: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relatorio.valor_executado) }}</p></div>
-                  <div class="col-sm-3 col-xs-6"><p class="modal-item-label">Percentagem executada: </p><p class="modal-item-valor">{{ relatorio.perc_executado }}</p></div>
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Percentagem executada: </p><p class="modal-item-valor">{{ dataFormatterService.formataPercentagem(relatorio.perc_executado) }}</p></div>
                 </div>
                 <div class="row row">
-                  <div class="col-lg-2 col-md-4 col-xs-12"><p class="modal-item-label">Percentagem à executar: </p><p class="modal-item-valor">{{ relatorio.perc_executar }}</p></div> 
-                  <div class="col-lg-2 col-md-8 col-xs-12"><p class="modal-item-label">Etapa: </p><p class="modal-item-valor">{{ relatorio.etapa }}</p></div>
-                  <div class="col-lg-2 col-md-8 col-xs-12"><p class="modal-item-label">Id da Planilha Etapa: </p><p class="modal-item-valor">{{ relatorio.id_planilha_etapa }}</p></div>
-                  <div class="col-lg-8 col-md-12 col-xs-12"><p class="modal-item-label">Unidade: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(relatorio.unidade) }}</p></div>
+                  <div class="col-sm-2 col-xs-12"><p class="modal-item-label">Id da Planilha Etapa: </p><p class="modal-item-valor">{{ relatorio.id_planilha_etapa }}</p></div>
+                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Etapa: </p><p class="modal-item-valor">{{ relatorio.etapa }}</p></div>
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Unidade: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(relatorio.unidade) }}</p></div>
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Percentagem à executar: </p><p class="modal-item-valor">{{ dataFormatterService.formataPercentagem(relatorio.perc_a_executar) }}</p></div> 
                 </div>
               </div>
             </div>
@@ -413,15 +413,17 @@
             <div *ngFor="let captacao of projeto._embedded.captacoes; let i = index;">
             <div class="modal-item texto-elipsado">
               <div *ngIf="i > 0" class="modal-divisor"></div>
-              <div class="modal-item-titulo" title="{{ dataFormatterService.formataValorEmReais(captacao.valor) }}"><p>{{ dataFormatterService.formataValorEmReais(captacao.valor) }}</p></div>
+              <div class="modal-item-titulo" title="{{ dataFormatterService.formataValorEmReais(captacao.valor) }}">
+                    <p>{{ dataFormatterService.formataValorEmReais(captacao.valor) }}
+                      <button (click)="esconderModalDeCaptacoes()" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(captacao._links.incentivador)]" 
+                      type="button" class="btn btn-primary pull-right hidden-lg hidden-md"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;Incentivador</button></p> 
+                  </div>
                 <div class="row">
                   <div class="col-md-3 col-sm-3 col-xs-12"><p class="modal-item-label">Data do recibo: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(captacao.data_recibo) }}</p></div>
-                  <div class="col-md-6 col-sm-5 col-xs-12"><p class="modal-item-label">Nome do incentivador: </p><p class="modal-item-valor">{{ captacao.nome_doador }}</p></div>
-                  <div class="col-md-3 col-sm-4 col-xs-12 text-center">
-                    <button (click)="esconderModalDeCaptacoes()" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(captacao._links.incentivador)]" 
-                            type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;Incentivador</button>
-                  
-                  </div>
+                  <div class="col-md-7 col-sm-9 col-xs-12"><p class="modal-item-label">Nome do incentivador: </p><p class="modal-item-valor">{{ captacao.nome_doador }}</p></div>
+                   <button (click)="esconderModalDeCaptacoes()" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(captacao._links.incentivador)]" 
+                      type="button" class="btn btn-primary pull-right hidden-xs hidden-sm"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;Incentivador</button> 
+
                 </div>
               </div>
             </div>
@@ -447,28 +449,7 @@
             <div class="modal-item texto-elipsado">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ relacao.nome }}"><p>{{ relacao.nome }}</p></div>
-                <div class="row row-dark">
-                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Valor do pagamento: </p><p class="modal-item-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data aprovação: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_aprovacao) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_pagamento) }}</p></div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12"><p class="modal-item-label">Nome do arquivo: </p><p class="modal-item-valor" title="{{ relacao.nm_arquivo }}">{{ relacao.nm_arquivo }}</p></div>
-                </div>  
-                <div class="row row-dark">
-                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Tipo do documento: </p><p class="modal-item-valor" title="{{ relacao.tipo_documento}}">{{ relacao.tipo_documento}}</p></div>
-                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Forma de pagamento: </p><p class="modal-item-valor" title="{{ relacao.tipo_forma_pagamento }}">{{ relacao.tipo_forma_pagamento }}</p></div>
-                </div> 
-                <div class="row">
-                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Comprovante">Número comprovante: </p><p class="modal-item-valor" title="{{ relacao.nr_comprovante }}">{{ relacao.nr_comprovante }}</p></div>
-                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="modal-item-valor" title="{{ relacao.nr_documento_pagamento }}">{{ relacao.nr_documento_pagamento }}</p></div>
-                </div> 
-                <div class="row row-dark">
-                  <div class="col-sm-2 col-xs-4"><p class="modal-item-label" title="Id do Arquivo">Id arquivo: </p><p class="modal-item-valor" title="{{ relacao.id_arquivo }}">{{ relacao.id_arquivo }}</p></div>  
-                  <div class="col-sm-5 col-xs-8"><p class="modal-item-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="modal-item-valor" title="{{ relacao.id_comprovante_pagamento }}">{{ relacao.id_comprovante_pagamento }}</p></div>
-                  <div class="col-sm-5 col-xs-12"><p class="modal-item-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="modal-item-valor" title="{{ relacao.id_planilha_aprovacao }}">{{ relacao.id_planilha_aprovacao }}</p></div>
-                </div>  
-                <div class="row">
+                <div class="row  row-dark">
                   <div class="col-md-6 col-sm-5 col-xs-12"><p class="modal-item-label">Nome do fornecedor: </p><p class="modal-item-valor">{{ relacao.nome_fornecedor }}</p></div>
                   <div class="col-md-4 col-sm-4 col-xs-12"><p class="modal-item-label">CPF/CNPJ: </p><p class="modal-item-valor">{{ dataFormatterService.formataCGCCPF(relacao.cgccpf) }}</p></div>
                   <div class="col-md-2 col-sm-3 col-xs-12 text-center">
@@ -476,6 +457,27 @@
                             type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores_branco.svg"/>&nbsp;Fornecedor</button>
                   
                   </div>
+                </div>  
+                <div class="row">
+                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Valor do pagamento: </p><p class="modal-item-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data aprovação: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_aprovacao) }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_pagamento) }}</p></div>
+                </div>
+                <div class="row  row-dark">
+                  <div class="col-xs-12"><p class="modal-item-label">Nome do arquivo: </p><p class="modal-item-valor" title="{{ relacao.nm_arquivo }}">{{ relacao.nm_arquivo }}</p></div>
+                </div>  
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Tipo do documento: </p><p class="modal-item-valor" title="{{ relacao.tipo_documento}}">{{ relacao.tipo_documento}}</p></div>
+                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Forma de pagamento: </p><p class="modal-item-valor" title="{{ relacao.tipo_forma_pagamento }}">{{ relacao.tipo_forma_pagamento }}</p></div>
+                </div> 
+                <div class="row  row-dark">
+                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Comprovante">Número comprovante: </p><p class="modal-item-valor" title="{{ relacao.nr_comprovante }}">{{ relacao.nr_comprovante }}</p></div>
+                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="modal-item-valor" title="{{ relacao.nr_documento_pagamento }}">{{ relacao.nr_documento_pagamento }}</p></div>
+                </div> 
+                <div class="row">
+                  <div class="col-sm-2 col-xs-4"><p class="modal-item-label" title="Id do Arquivo">Id arquivo: </p><p class="modal-item-valor" title="{{ relacao.id_arquivo }}">{{ relacao.id_arquivo }}</p></div>  
+                  <div class="col-sm-5 col-xs-8"><p class="modal-item-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="modal-item-valor" title="{{ relacao.id_comprovante_pagamento }}">{{ relacao.id_comprovante_pagamento }}</p></div>
+                  <div class="col-sm-5 col-xs-12"><p class="modal-item-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="modal-item-valor" title="{{ relacao.id_planilha_aprovacao }}">{{ relacao.id_planilha_aprovacao }}</p></div>
                 </div>              
               </div>
             </div>

@@ -7,6 +7,14 @@ export class DataFormatterService {
     return url.substr(url.lastIndexOf('/') + 1);
   }
 
+  formataPercentagem(valor: string): String {
+    if (valor === undefined || valor === null) {
+      return 'Não Informada';
+    } else {
+      return parseFloat(valor).toFixed(2) + '%';
+    }
+  }
+
   formataData(data: String): String {
     if (data === undefined || data === null) {
       return 'Não Informada';
@@ -16,6 +24,25 @@ export class DataFormatterService {
       if (dataSplit.length !== 3) {
         return data;
       } else {
+        return dataSplit[2] + '/' +
+              dataSplit[1] + '/' +
+              dataSplit[0];
+      }
+    }
+  }
+
+  formataDataSemHora(data: String): String {
+    if (data === undefined || data === null) {
+      return 'Não Informada';
+    } else {
+      const strSplit = data.split(" ");
+      const dataSplit = strSplit[0].split('-');
+      const horaSplit = strSplit[1].split(':');
+
+      if (dataSplit.length !== 3) {
+        return data;
+      } else {
+        
         return dataSplit[2] + '/' +
               dataSplit[1] + '/' +
               dataSplit[0];

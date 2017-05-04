@@ -87,7 +87,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
 
         // return null if the path does not have a routerConfig OR if there is no stored route for that routerConfig
         if (!route.routeConfig || !this.storedRoutes[route.routeConfig.path]) return null;
-        console.log("retrieving", "return: ", this.storedRoutes[route.routeConfig.path]);
+        //console.log("retrieving", "return: ", this.storedRoutes[route.routeConfig.path]);
 
         /** returns handle when the route.routeConfig.path is already stored */
         return this.storedRoutes[route.routeConfig.path].handle;
@@ -100,7 +100,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
      * @returns boolean basically indicating true if the user intends to leave the current route
      */
     shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-        console.log("deciding to reuse", "future", future.routeConfig, "current", curr.routeConfig, "return: ", future.routeConfig === curr.routeConfig);
+        //console.log("deciding to reuse", "future", future.routeConfig, "current", curr.routeConfig, "return: ", future.routeConfig === curr.routeConfig);
         return future.routeConfig === curr.routeConfig;
     }
 

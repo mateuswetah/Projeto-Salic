@@ -13,6 +13,8 @@ import { FornecedoresComponent } from '../components/fornecedores/fornecedores.c
 import { FalhaComponent } from '../components/falha/falha.component';
 import { SobreComponent } from './../components/sobre/sobre.component';
 
+import { CanDeactivateGuard } from './../services/can-deactivate-guard.service';
+
 const appRoutes: Routes = [
   {
     path: 'projetos/:PRONAC',
@@ -22,7 +24,8 @@ const appRoutes: Routes = [
         title: 'Página de Projeto',
         description: 'Página de Projeto - VERSALIC'
       }
-    }
+    },
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'propostas/:idProposta',
@@ -100,6 +103,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CanDeactivateGuard]
 })
 export class AppRoutingModule {}

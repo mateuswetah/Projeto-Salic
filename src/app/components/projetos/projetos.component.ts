@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, CanDeactivate } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { RouterTransition } from './../../services/router.animations';
@@ -66,6 +66,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
+    console.log("TCHAAAUUU");
     this.inscricao.unsubscribe();
   }
 
@@ -153,6 +154,20 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeRelacaoPagamentos.show();
   }
   public esconderModalDeRelacaoPagamentos(): void {
+    this.modalDeRelacaoPagamentos.hide();
+  }
+
+  // Utilizado pelo Guard de Rotas (can-deactivate-guard.service) quando é feita uma troca de página.
+  public esconderTodosOsModais(): void {
+    this.modalDeDistribuicao.hide();
+    this.modalDeDivulgacao.hide();
+    this.modalDeDocumentosAnexos.hide();
+    this.modalDeMarcasAnexas.hide();
+    this.modalDeDeslocamentos.hide();
+    this.modalDeProrrogacao.hide();
+    this.modalDeRelatorioFisico.hide();
+    this.modalDeCertidoesNegativas.hide();
+    this.modalDeCaptacoes.hide();
     this.modalDeRelacaoPagamentos.hide();
   }
 

@@ -142,12 +142,12 @@
     }
 
     .row {
-      padding: 4px 20px;
+      padding: 8px 20px 0px 20px;
       margin-left: -35px;
       margin-right: -35px;
 
       @media (max-width: 480px) { 
-        padding: 4px 8px;
+        padding: 8px 8px 0px 8px;
         margin-left: -20px;
         margin-right: -20px;
       }
@@ -159,7 +159,7 @@
       background-color: $verde-claro-salic;
       margin: 0px -35px 15px -35px;
 
-      @media (max-width: 480px) { margin: 0px -15px 15px -15px; }
+      @media (max-width: 480px) { margin: 0px -20px 15px -20px; }
     }
 
     .modal-item-titulo { 
