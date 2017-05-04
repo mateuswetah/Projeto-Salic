@@ -46,52 +46,53 @@
         <p class="pagina-subtitulo" *ngIf="!buscaPorProjetosSemResultados">Projetos submetidos:</p>
         <p *ngIf="totalDeItens > 1">Foram encontrados {{ totalDeItens }} projetos submetidos por este proponente: </p>
         <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
-
-        <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6" role="group">
-          <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
-          <div class="card-resposta texto-elipsado">
-            <div class="row">
-              <div class="col-sm-3"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>
-              <div class="col-sm-4 col-xs-6"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
-              <div class="col-sm-5 col-xs-6"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
-              <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
-            </div>
-            <div class="row">
-              <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
-              <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
-            </div>
-            <div class="row">
-              <div class="col-xs-7"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-              <div class="col-xs-5"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
-            </div>                
-          </div>
-          <div class="card-botoes-container">
-            <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
-              <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
-                  [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
-                <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
-              </span>
-              
-              <div class="card-botao-ver">
-                <a [routerLink]="['/projetos', projeto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
-              </div>
-            </div>
-          </div>
-          <div class="card-resumo" [ngStyle]="{'top': projeto.isResumoEscondido ? '59px' : '101%', 'background-color': projeto.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
-            <p role="contentinfo">{{projeto.resumo}}</p>
-          </div>
-        </div>
-
-        <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos. <button (click)="carregarMaisProjetos()">EXIBIR MAIS</button></p>
-
-        <div *ngIf="buscaPorProjetosSemResultados">
-          <p>Não encontramos Projetos submetidos por este Proponente.</p>
-        </div>
-
       </div>
+    </div>
+    <div class="row row-cards" *ngIf="!carregandoDadosProjetos">
+      <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6" role="group">
+        <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
+        <div class="card-resposta texto-elipsado">
+          <div class="row">
+            <div class="col-sm-3"><p class="resposta-label">PRONAC: </p><p class="resposta-valor">{{ projeto.PRONAC }}</p></div>
+            <div class="col-sm-4 col-xs-6"><p class="resposta-label">Segmento: </p><p class="resposta-valor">{{ projeto.segmento }}</p></div>
+            <div class="col-sm-5 col-xs-6"><p class="resposta-label">Área: </p><p class="resposta-valor">{{ projeto.area }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7"><p class="resposta-label">Proponente: </p><p class="resposta-valor">{{ projeto.proponente }}</p></div>
+            <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
+            <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-7"><p class="resposta-label">Valor Projeto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+            <div class="col-xs-5"><p class="resposta-label">Valor Captado: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+          </div>                
+        </div>
+        <div class="card-botoes-container">
+          <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
+            <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
+                [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
+              <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
+            </span>
+            
+            <div class="card-botao-ver">
+              <a [routerLink]="['/projetos', projeto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-resumo" [ngStyle]="{'top': projeto.isResumoEscondido ? '59px' : '101%', 'background-color': projeto.isResumoEscondido ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
+          <p role="contentinfo">{{projeto.resumo}}</p>
+        </div>
+      </div>
+
+      <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos. <button (click)="carregarMaisProjetos()">EXIBIR MAIS</button></p>
+
+      <div *ngIf="buscaPorProjetosSemResultados">
+        <p>Não encontramos Projetos submetidos por este Proponente.</p>
+      </div>
+
     </div>
   </div>
   <div *ngIf="carregandoDados" class="spinner">

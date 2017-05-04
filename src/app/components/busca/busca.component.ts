@@ -731,9 +731,11 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
     reAdjust();
 
     $(window).on('resize', function(e){
-      console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
-      console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
-      reAdjust();
+      if ($('#containerChipsRow').length > 0) {
+        console.log('Inneter Width 1:' + $('#containerChips').innerWidth());
+        console.log('Inner Width 2:' + $('#containerChipsRow').innerWidth());
+        reAdjust();
+      }
     });
 
     $('.abas-pesquisa').scroll(function() {
@@ -775,10 +777,8 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   passouDoScrollTop(event) {
-    
     if ($('#headerRespostas').offset() !== undefined) {
       if (window.pageYOffset > $('#headerRespostas').offset().top) {
-        
         return true;
       }
     }

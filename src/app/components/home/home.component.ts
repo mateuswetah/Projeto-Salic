@@ -342,13 +342,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (this.queries['segmento'] !== null && this.queries['segmento'] !== undefined && this.queries['area'] !== null && this.queries['area'] != this.segmentosDeProjetos.obterAreaCodPorCod(this.queries['segmento'])) {
       this.queries['segmento'] = null;
      }
-    console.log(this.queries['area']);
-    console.log(this.queries['segmento']);
-    console.log(this.segmentosDeProjetos.obterNomePorCod(this.queries['segmento']));
-}
+  }
 
   mudarTipoPessoaPorSelect($event) {
-    console.log($event.target.value);
     if ($event.target.value !== null && $event.target.value !== '' && $event.target.value !== 'Qualquer tipo') {
       $event.target.value === 'fisica' ? this.queries['tipo_pessoa'] = 'fisica' : this.queries['tipo_pessoa'] = 'juridica';
     } else {
@@ -482,7 +478,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     reAdjust();
 
     $(window).on('resize', function(e){
-      reAdjust();
+      if ($('#container-dados').length > 0) {
+        reAdjust();
+      }
     });
 
     $('.scroller-right').click(function() {

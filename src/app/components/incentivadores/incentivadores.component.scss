@@ -13,6 +13,16 @@
 
   p { word-wrap: break-word; }
 
+   .row-cards {
+        margin-right: -27px;
+        margin-left: -27px;
+
+        @media (max-width: 768px) { 
+            margin-right: -16px;
+            margin-left: -16px;
+        }
+   }
+   
   .barra-compartilhar {
     p { display: inline-block; margin-bottom: 0px; }
 

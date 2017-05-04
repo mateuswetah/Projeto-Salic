@@ -121,7 +121,9 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
     reAjustarProposta();
 
     $(window).on('resize', function(e){
-      reAjustarProposta();
+      if ($('#titulo-proposta').length > 0) {
+        reAjustarProposta();
+      }
     });
 
     $('.abas-texto').scroll(function() {

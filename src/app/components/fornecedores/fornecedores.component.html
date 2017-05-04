@@ -42,47 +42,48 @@
         <p class="pagina-subtitulo" *ngIf="!buscaPorProdutosSemResultados">Produtos relacionados:</p>
         <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} produtos relacionados a este fornecedor: </p>
         <p *ngIf="totalDeItens == 1">Foi encontrado um produto relacionado a esse fornecedor: </p>
-
-        <div *ngFor="let produto of listaProdutos;" class="card col-sm-12 col-md-6" role="group">
-          <div class="card-header texto-elipsado" title="{{ produto.nome }}"><p>{{ produto.nome }}</p></div>
-          <div class="card-resposta texto-elipsado">
-            <div class="row">
-              <div class="col-xs-6"><p class="resposta-label">Data aprovação: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_aprovacao) }}</p></div>
-              <div class="col-xs-6"><p class="resposta-label">Data pagamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_pagamento) }}</p></div>
+      </div>
+    </div>
+    <div class="row row-cards" *ngIf="!carregandoDadosProdutos">
+      <div *ngFor="let produto of listaProdutos;" class="card col-sm-12 col-md-6" role="group">
+        <div class="card-header texto-elipsado" title="{{ produto.nome }}"><p>{{ produto.nome }}</p></div>
+        <div class="card-resposta texto-elipsado">
+          <div class="row">
+            <div class="col-xs-6"><p class="resposta-label">Data aprovação: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_aprovacao) }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label">Data pagamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_pagamento) }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Nome do arquivo: </p><p class="resposta-valor" title="{{ produto.nm_arquivo }}">{{ produto.nm_arquivo }}</p></div>
+            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Tipo do documento: </p><p class="resposta-valor" title="{{ produto.tipo_documento}}">{{ produto.tipo_documento}}</p></div>
+          </div>  
+          <div class="row">
+            <div class="col-xs-5"><p class="resposta-label">Valor produto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}</p></div>
+            <div class="col-xs-7"><p class="resposta-label">Forma de pagamento: </p><p class="resposta-valor" title="{{ produto.tipo_forma_pagamento }}">{{ produto.tipo_forma_pagamento }}</p></div>
+          </div> 
+          <div class="row">
+            <div class="col-xs-6"><p class="resposta-label" title="Número do Comprovante">Número comprovante: </p><p class="resposta-valor" title="{{ produto.nr_comprovante }}">{{ produto.nr_comprovante }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="resposta-valor" title="{{ produto.nr_documento_pagamento }}">{{ produto.nr_documento_pagamento }}</p></div>
+          </div> 
+          <div class="row">
+            <div class="col-sm-2 col-xs-4"><p class="resposta-label" title="Id do Arquivo">Id arquivo: </p><p class="resposta-valor" title="{{ produto.id_arquivo }}">{{ produto.id_arquivo }}</p></div>  
+            <div class="col-sm-5 col-xs-8"><p class="resposta-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="resposta-valor" title="{{ produto.id_comprovante_pagamento }}">{{ produto.id_comprovante_pagamento }}</p></div>
+            <div class="col-sm-5 col-xs-12"><p class="resposta-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="resposta-valor" title="{{ produto.id_planilha_aprovacao }}">{{ produto.id_planilha_aprovacao }}</p></div>
+          </div>                
+        </div>
+        <div class="card-botoes-container">
+          <div class="card-botoes" [ngStyle]="{'border-top-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-left-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623'}">
+            <span class="card-botao-resumo" (click)="produto.isJustificativaEscondida = !produto.isJustificativaEscondida"
+                [ngStyle]="{'background-color': !produto.isJustificativaEscondida ? '#e0e0e0' : '#293623', 'border-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !produto.isJustificativaEscondida ? '0px' : '5px'}">
+              <a [ngStyle]="{'color': produto.isJustificativaEscondida ? 'white' : '#226000'}">{{ !produto.isJustificativaEscondida ? '&#9656;' : '&#9652;' }}&nbsp; JUSTIFICATIVA</a>
+            </span>
+            
+            <div class="card-botao-ver">
+              <a [routerLink]="['/projetos', produto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
             </div>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6"><p class="resposta-label">Nome do arquivo: </p><p class="resposta-valor" title="{{ produto.nm_arquivo }}">{{ produto.nm_arquivo }}</p></div>
-              <div class="col-xs-12 col-sm-6"><p class="resposta-label">Tipo do documento: </p><p class="resposta-valor" title="{{ produto.tipo_documento}}">{{ produto.tipo_documento}}</p></div>
-            </div>  
-            <div class="row">
-              <div class="col-xs-5"><p class="resposta-label">Valor produto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}</p></div>
-              <div class="col-xs-7"><p class="resposta-label">Forma de pagamento: </p><p class="resposta-valor" title="{{ produto.tipo_forma_pagamento }}">{{ produto.tipo_forma_pagamento }}</p></div>
-            </div> 
-            <div class="row">
-              <div class="col-xs-6"><p class="resposta-label" title="Número do Comprovante">Número comprovante: </p><p class="resposta-valor" title="{{ produto.nr_comprovante }}">{{ produto.nr_comprovante }}</p></div>
-              <div class="col-xs-6"><p class="resposta-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="resposta-valor" title="{{ produto.nr_documento_pagamento }}">{{ produto.nr_documento_pagamento }}</p></div>
-            </div> 
-            <div class="row">
-              <div class="col-sm-2 col-xs-4"><p class="resposta-label" title="Id do Arquivo">Id arquivo: </p><p class="resposta-valor" title="{{ produto.id_arquivo }}">{{ produto.id_arquivo }}</p></div>  
-              <div class="col-sm-5 col-xs-8"><p class="resposta-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="resposta-valor" title="{{ produto.id_comprovante_pagamento }}">{{ produto.id_comprovante_pagamento }}</p></div>
-              <div class="col-sm-5 col-xs-12"><p class="resposta-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="resposta-valor" title="{{ produto.id_planilha_aprovacao }}">{{ produto.id_planilha_aprovacao }}</p></div>
-            </div>                
           </div>
-          <div class="card-botoes-container">
-            <div class="card-botoes" [ngStyle]="{'border-top-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-left-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623'}">
-              <span class="card-botao-resumo" (click)="produto.isJustificativaEscondida = !produto.isJustificativaEscondida"
-                  [ngStyle]="{'background-color': !produto.isJustificativaEscondida ? '#e0e0e0' : '#293623', 'border-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !produto.isJustificativaEscondida ? '0px' : '5px'}">
-                <a [ngStyle]="{'color': produto.isJustificativaEscondida ? 'white' : '#226000'}">{{ !produto.isJustificativaEscondida ? '&#9656;' : '&#9652;' }}&nbsp; JUSTIFICATIVA</a>
-              </span>
-              
-              <div class="card-botao-ver">
-                <a [routerLink]="['/projetos', produto.PRONAC]" ><img alt="Ícone de Projetos" class="card-icon" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
-              </div>
-            </div>
-          </div>
-          <div class="card-resumo" [ngStyle]="{'top': produto.isJustificativaEscondida ? '59px' : '101%', 'background-color': produto.isJustificativaEscondida ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
-            <p role="contentinfo">{{ produto.justificativa != '' && produto.justificativa !== null ? produto.justificativa : 'Não informada.' }}</p>
-          </div>
+        </div>
+        <div class="card-resumo" [ngStyle]="{'top': produto.isJustificativaEscondida ? '59px' : '101%', 'background-color': produto.isJustificativaEscondida ? 'rgba(32, 46, 26, 0.95)' : 'rgba(32, 46, 26, 0.0);'  }">
+          <p role="contentinfo">{{ produto.justificativa != '' && produto.justificativa !== null ? produto.justificativa : 'Não informada.' }}</p>
         </div>
 
         <div *ngIf="buscaPorProdutosSemResultados">

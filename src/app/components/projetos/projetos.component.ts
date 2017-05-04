@@ -236,7 +236,9 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     reAjustar();
 
     $(window).on('resize', function(e){
-      reAjustar();
+      if ($('#titulo-proposta').length > 0) {
+        reAjustar();
+      }
     });
 
     $('.abas-texto').scroll(function() {

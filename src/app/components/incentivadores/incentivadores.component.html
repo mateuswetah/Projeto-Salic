@@ -47,28 +47,28 @@
         <p class="pagina-subtitulo" *ngIf="!buscaPorDoacoesSemResultados">Doações feitas:</p>
         <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} doações feitas por este incentivador: </p>
         <p *ngIf="totalDeItens == 1">Foi encontrada uma doação feita por este incentivador: </p>
-
-        <div *ngFor="let doacao of listaDoacoes" class="card card-proponente card-fornecedor col-sm-12 col-md-6">
-          <div class="card-header texto-elipsado" title="{{ doacao.nome_projeto }}"><p>{{ doacao.nome_projeto }}</p></div>
-          <div class="card-resposta texto-elipsado">
-            <div class="row">
-              <div class="col-sm-6"><p class="resposta-label">PRONAC: </p><p class="resposta-valor" title="{{ doacao.PRONAC }}">{{ doacao.PRONAC }}</p></div> 
-              <div class="col-sm-6"><p class="resposta-label">Valor da doação: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(doacao.valor) }}</p></div>
-            </div>
-            <div class="card-botoes-container">
-              <div class="card-botoes">
-                <div class="card-botao-ver col-xs-12">
-                  <a [routerLink]="['/projetos', doacao.PRONAC]" ><img class="card-icon" alt="Ícone de Projeto" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
-                </div>
+      </div>
+    </div>
+    <div class="row row-cards" *ngIf="!carregandoDadosDoacoes">
+      <div *ngFor="let doacao of listaDoacoes" class="card card-proponente card-fornecedor col-sm-12 col-md-6">
+        <div class="card-header texto-elipsado" title="{{ doacao.nome_projeto }}"><p>{{ doacao.nome_projeto }}</p></div>
+        <div class="card-resposta texto-elipsado">
+          <div class="row">
+            <div class="col-sm-6"><p class="resposta-label">PRONAC: </p><p class="resposta-valor" title="{{ doacao.PRONAC }}">{{ doacao.PRONAC }}</p></div> 
+            <div class="col-sm-6"><p class="resposta-label">Valor da doação: </p><p class="resposta-valor">{{ dataFormatterService.formataValorEmReais(doacao.valor) }}</p></div>
+          </div>
+          <div class="card-botoes-container">
+            <div class="card-botoes">
+              <div class="card-botao-ver col-xs-12">
+                <a [routerLink]="['/projetos', doacao.PRONAC]" ><img class="card-icon" alt="Ícone de Projeto" src="../../../assets/ic_projetos.svg"/> &nbsp; VER PROJETO</a>
               </div>
             </div>
           </div>
         </div>
-        
-        <div *ngIf="buscaPorDoacoesSemResultados">
-          <p>Não encontramos Doações feitas por este Incentivador.</p>
-        </div>
-
+      </div>
+      
+      <div *ngIf="buscaPorDoacoesSemResultados">
+        <p>Não encontramos Doações feitas por este Incentivador.</p>
       </div>
     </div>
 

@@ -11,6 +11,16 @@
     @media (min-width: 992px) { padding: 0px 56px; }
   }
 
+   .row-cards {
+        margin-right: -27px;
+        margin-left: -27px;
+
+        @media (max-width: 768px) { 
+            margin-right: -16px;
+            margin-left: -16px;
+        }
+   }
+
   p { word-wrap: break-word; }
   
   .barra-compartilhar {
