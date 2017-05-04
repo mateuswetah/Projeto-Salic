@@ -147,7 +147,7 @@ export class Projeto {
                                               }
                                              ],
                 public _embedded:           {
-                                 'captacoes':               {
+                                 'captacoes':              [{
                                                     'PRONAC': String,
                                                      'valor': String,
                                                'data_recibo': String,
@@ -160,7 +160,7 @@ export class Projeto {
                                                                 'incentivador': String
                                                                               }
                                                                             ]
-                                                            }
+                                                            }]
                                             },
                 public isResumoEscondido: Boolean ) {
                   this.isResumoEscondido = true;

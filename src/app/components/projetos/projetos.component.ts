@@ -35,6 +35,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modalDeCertidoesNegativas') public modalDeCertidoesNegativas: ModalDirective;
   @ViewChild('modalDeCaptacoes') public modalDeCaptacoes: ModalDirective;
   @ViewChild('modalDeRelacaoPagamentos') public modalDeRelacaoPagamentos: ModalDirective;
+  @ViewChild('modalDeReadequacoes') public modalDeReadequacoes: ModalDirective;
 
   // Variáveis locais
   PRONAC: Number;
@@ -66,7 +67,6 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    console.log("TCHAAAUUU");
     this.inscricao.unsubscribe();
   }
 
@@ -157,6 +157,13 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeRelacaoPagamentos.hide();
   }
 
+  public mostrarModalDeReadequacoes() {
+    this.modalDeReadequacoes.show();
+  }
+  public esconderModalDeReadequacoes(): void {
+    this.modalDeReadequacoes.hide();
+  }
+
   // Utilizado pelo Guard de Rotas (can-deactivate-guard.service) quando é feita uma troca de página.
   public esconderTodosOsModais(): void {
     this.modalDeDistribuicao.hide();
@@ -169,6 +176,12 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeCertidoesNegativas.hide();
     this.modalDeCaptacoes.hide();
     this.modalDeRelacaoPagamentos.hide();
+    this.modalDeReadequacoes.hide();
+  }
+
+  // Obtem o tamanho de vetores internos do Projeto.
+  obterLength(nome: string) {
+    return (<any>this.projeto._embedded[nome]).length;
   }
 
   ngAfterViewInit() {
