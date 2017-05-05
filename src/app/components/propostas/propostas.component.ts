@@ -43,6 +43,12 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
         this.onLoadProposta(this.idProposta);
       }
     );
+
+    this.router.events.subscribe((path) => {
+      if (path.url != this.url) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   ngOnDestroy() {

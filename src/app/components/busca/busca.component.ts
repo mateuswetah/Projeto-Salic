@@ -213,6 +213,12 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.atualizaQueries(queryParams);
       }
     );
+
+    this.router.events.subscribe((path) => {
+      if (path.url != this.location.path()) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
    consoleLog(event) { console.log(event); }
@@ -415,7 +421,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
               this.totalDeItems = resposta.total;
               this.numeroDeItems = resposta.count;
               this.listaProjetos = resposta.listaProjetos;
-
+              
               this.subirRespostasEstado = 'ativo';
             },
             err => {
@@ -427,7 +433,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; window.scrollTo(0, 0);});
 
         break;
 
@@ -449,7 +455,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; window.scrollTo(0, 0);});
         break;
 
         case 'proponentes':
@@ -470,7 +476,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; window.scrollTo(0, 0);});
         break;
 
         case 'incentivadores':
@@ -491,7 +497,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; window.scrollTo(0, 0);});
         break;
 
         case 'fornecedores':
@@ -512,7 +518,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.router.navigate(['falha', err]);
               }
             },
-            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; });
+            () => { this.carregandoDados = false; this.taxaDuracaoCarregamento = 0; window.scrollTo(0, 0);});
         break;
         default:
           this.router.navigate(['falha', 405]);

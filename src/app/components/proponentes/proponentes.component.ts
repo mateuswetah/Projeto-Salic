@@ -52,6 +52,12 @@ export class ProponentesComponent implements OnInit, OnDestroy {
         this.onLoadProjetos(this.idProponente);
       }
     );
+
+    this.router.events.subscribe((path) => {
+      if (path.url != this.url) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -106,7 +112,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
           this.router.navigate(['falha', err]);
         }
       },
-      () => this.carregandoDadosProjetos = false);
+      () => { this.carregandoDadosProjetos = false; window.scrollTo(0, 0); });
   }
 
   carregarMaisProjetos() {

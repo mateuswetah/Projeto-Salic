@@ -32,6 +32,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modalDeCaptacoes') public modalDeCaptacoes: ModalDirective;
   @ViewChild('modalDeRelacaoPagamentos') public modalDeRelacaoPagamentos: ModalDirective;
   @ViewChild('modalDeReadequacoes') public modalDeReadequacoes: ModalDirective;
+  @ViewChild('modalDeRelacaoBensCapital') public modalDeRelacaoBensCapital;
 
   // Variáveis locais
   PRONAC: Number;
@@ -61,6 +62,12 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
         this.onLoadProjeto(this.PRONAC);
       }
     );
+
+    this.router.events.subscribe((path) => {
+      if (path.url != this.url) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -161,6 +168,13 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeReadequacoes.hide();
   }
 
+  public mostrarModalDeRelacaoBensCapital() {
+    this.modalDeRelacaoBensCapital.show();
+  }
+  public esconderModalDeRelacaoBensCapitals(): void {
+    this.modalDeRelacaoBensCapital.hide();
+  }
+
   // Utilizado pelo Guard de Rotas (can-deactivate-guard.service) quando é feita uma troca de página.
   public esconderTodosOsModais(): void {
     this.modalDeDistribuicao.hide();
@@ -174,6 +188,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeCaptacoes.hide();
     this.modalDeRelacaoPagamentos.hide();
     this.modalDeReadequacoes.hide();
+    this.modalDeRelacaoBensCapital.hide();
   }
 
   // Obtem o tamanho de vetores internos do Projeto.

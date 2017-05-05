@@ -55,6 +55,12 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
       }
     );
 
+    this.router.events.subscribe((path) => {
+      if (path.url != this.url) {
+        window.scrollTo(0, 0);
+      }
+    });
+
   }
 
   ngOnDestroy() {
@@ -104,7 +110,7 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
           this.router.navigate(['falha', err]);
         }
       },
-      () => this.carregandoDadosDoacoes = false);
+      () => { this.carregandoDadosDoacoes = false; window.scrollTo(0, 0); });
   }
 
   obterStringDeQuantidadeNaResposta() {

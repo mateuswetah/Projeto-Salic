@@ -53,6 +53,12 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
         this.onLoadProdutos(this.idFornecedor, this.paginaAtual);
       }
     );
+
+    this.router.events.subscribe((path) => {
+      if (path.url != this.url) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -93,6 +99,7 @@ export class FornecedoresComponent implements OnInit, OnDestroy {
         this.numeroDeItens = resposta.count;
         this.totalDeItens = resposta.total;
         this.totalDeItensCarregado += this.numeroDeItens;
+        window.scrollTo(0, 0);
       },
       err => {
         this.carregandoDadosProdutos = false;

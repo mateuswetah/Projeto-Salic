@@ -55,7 +55,7 @@
               </div>
               <!-- AREA =========================================-->
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['area'] !== undefined && queries['area'] !== null && queries['area'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ areasDeProjetos[queries['area']] }}
                   <span class="caret"></span> 
                 </button>
@@ -79,7 +79,7 @@
               </div>
               <!-- SEGMENTO ======================================-->
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['segmento'] !== undefined && queries['segmento'] !== null && queries['segmento'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ segmentosDeProjetos.obterNomePorCod(queries['segmento']) }}
                   <span class="caret"></span>
                 </button>
@@ -101,7 +101,7 @@
               </div>
               <!-- UF ==============================================-->        
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ queries['UF'] }}
                   <span class="caret"></span> 
                 </button>
@@ -276,7 +276,7 @@
               </div>
               <!-- TIPO DE PESSOA =========================================-->
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                   <span class="caret"></span> 
                 </button>
@@ -298,7 +298,7 @@
               </div>
               <!-- UF ==============================================-->        
               <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ queries['UF'] }}
                   <span class="caret"></span> 
                 </button>
@@ -339,7 +339,7 @@
               </div>
               <!-- TIPO DE PESSOA =========================================-->
               <div class="input col-sm-3 col-md-2 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                   <span class="caret"></span> 
                 </button>
@@ -361,7 +361,7 @@
               </div>
               <!-- UF ==============================================-->        
               <div class="input col-sm-3 col-md-1 col-xs-6 btn-group hidden-xs" dropdown>
-                <button class="btn btn-default form-control text-left" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['UF'] !== undefined && queries['UF'] !== null && queries['UF'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
                   {{ queries['UF'] }}
                   <span class="caret"></span> 
                 </button>
@@ -386,7 +386,7 @@
                 <div class="form-control-placeholder">Município</div>
               </div>
             </div>
-            <!-- INCENTIVADORES BUSCA AVANÇADA ====================================================================================== -->
+            <!-- FORNECEDORES BUSCA AVANÇADA ====================================================================================== -->
             <div *ngSwitchCase="'fornecedores'" class="row">
               <div class="input col-sm-5">
                 <input type="text" [(ngModel)]="queries['nome']" (keypress)="onRealizarBuscaComEnter($event)" class="form-control" [ngClass]="{'cheio': queries['nome'] !== undefined && queries['nome'] !== null && queries['nome'] !== ''}">
