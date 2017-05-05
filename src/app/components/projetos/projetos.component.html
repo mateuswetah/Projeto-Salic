@@ -151,7 +151,6 @@
         <ul class="nav nav-pills aba">
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'resumo'}"><a (click)="textoSelecionado = 'resumo'">Resumo</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'etapa'}"><a (click)="textoSelecionado = 'etapa'">Etapa</a></li>
-          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'providencia'}"><a (click)="textoSelecionado = 'providencia'">Providência</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'objetivos'}"><a (click)="textoSelecionado = 'objetivos'">Objetivos</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'sinopse'}"><a (click)="textoSelecionado = 'sinopse'">Sinopse</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'justificativa'}"><a (click)="textoSelecionado = 'justificativa'">Justificativa</a></li>
@@ -181,7 +180,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let distribuicao of projeto._embedded.distribuicao; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ distribuicao.produto }}"><p>{{ distribuicao.produto }}</p></div>
                 <div class="row row-dark">
@@ -228,7 +227,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let divulgacao of projeto._embedded.divulgacao; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ divulgacao.peca }}"><p>Peça: {{ divulgacao.peca }}</p></div>
                 <div class="row">
@@ -255,7 +254,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let documento of projeto._embedded.documentos_anexados; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ documento.produto }}"><p>{{ documento.nome }}</p></div>
                 <div class="row">
@@ -284,7 +283,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let deslocamento of projeto._embedded.deslocamento; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ deslocamento.municipio_origem }} &#8594; {{ deslocamento.municipio_destino }}"><p>{{ deslocamento.municipio_origem }} &#8594; {{ deslocamento.municipio_destino }}</p></div>
                 <div class="row">
@@ -313,7 +312,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let marca of projeto._embedded.marcas_anexadas; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ marca.nome_arquivo }}"><p>{{ marca.nome_arquivo }}</p></div>
                 <div class="row row-dark">
@@ -346,7 +345,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let prorrogacao of projeto._embedded.prorrogacao; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ prorrogacao.usuario }}"><p>{{ prorrogacao.usuario }}</p></div>
                 <div class="row row-dark">
@@ -380,7 +379,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let relatorio of projeto._embedded.relatorio_fisco; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ relatorio.item }}"><p>{{ relatorio.item }}</p></div>
                 <div class="row row-dark">
@@ -416,7 +415,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let certidao of projeto._embedded.certidoes_negativas; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ certidao.descricao }}"><p>{{ certidao.descricao }}</p></div>
                 <div class="row">
@@ -445,7 +444,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let captacao of projeto._embedded.captacoes; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ dataFormatterService.formataValorEmReais(captacao.valor) }}">
                     <p>{{ dataFormatterService.formataValorEmReais(captacao.valor) }}
@@ -480,7 +479,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let relacao of projeto._embedded.relacao_pagamentos; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ relacao.nome }}"><p>{{ relacao.nome }}</p></div>
                 <div class="row  row-dark">
@@ -534,7 +533,7 @@
           </div>
           <div class="modal-body">
             <div *ngFor="let readequacao of projeto._embedded.readequacoes; let i = index;">
-            <div class="modal-item texto-elipsado">
+            <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ readequacao.nome_arquivo }}"><p>{{ readequacao.nome_arquivo }}</p></div>
                 <div class="row  row-dark">
