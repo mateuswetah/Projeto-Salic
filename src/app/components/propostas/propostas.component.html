@@ -1,9 +1,9 @@
 <div class="container-proposta">
   <div class="barra-compartilhar">
     <div class="container">
-      <span class="baixar"><p>
+      <span *ngIf="!carregandoDados" class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de propostas" src="../../../assets/ic_propostas.svg"/>
-                &nbsp;Pagina de Proposta:&nbsp;&nbsp;&nbsp;
+                &nbsp;Pagina de Proposta - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="proposta.json" target="proposta.json" href="{{ configurationService.ApiUrl + 'propostas/' + idProposta }}">json</a> | 
                 <a filename="proposta.csv" target="proposta.csv" href="{{ configurationService.ApiUrl + 'propostas/' + idProposta + '?format=csv' }}">csv</a> | 
                 <a filename="proposta.xml" target="proposta.xml" href="{{ configurationService.ApiUrl + 'propostas/' + idProposta + '?format=xml' }}">xml</a></span></p>

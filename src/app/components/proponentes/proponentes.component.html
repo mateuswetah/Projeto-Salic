@@ -1,9 +1,9 @@
 <div class="container-proponente">
   <div class="barra-compartilhar">
     <div class="container">
-      <span class="baixar"><p>
+      <span *ngIf="!carregandoDados"  class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de proponentes" src="../../../assets/ic_proponentes.svg"/>
-                &nbsp;Pagina de Proponente:&nbsp;&nbsp;&nbsp;
+                &nbsp;Pagina de Proponente - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="proponente.json" target="proponente.json" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente }}">json</a> | 
                 <a filename="proponente.csv" target="proponente.csv" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=csv' }}">csv</a> | 
                 <a filename="proponente.xml" target="proponente.xml" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=xml' }}">xml</a></span></p>

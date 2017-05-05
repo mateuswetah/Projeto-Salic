@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular
 import { Router, ActivatedRoute, CanDeactivate } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { RouterTransition } from './../../services/router.animations';
-
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import { MetaService } from '@nglibs/meta';
@@ -18,9 +16,7 @@ declare var $: any;
 @Component({
   selector: 'app-projetos',
   templateUrl: './projetos.component.html',
-  styleUrls: ['./projetos.component.scss'],
-  animations: [RouterTransition()],
-  host: {'[@routerTransition]': ''}
+  styleUrls: ['./projetos.component.scss']
 })
 export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -186,10 +182,6 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
-    setTimeout(function(){
-      $('app-projetos').css({ position: 'relative' }).appendTo('app-outlet-container');
-    }, 2000);
 
     // Aqui é configurado o botão de deslizamento das abas de pesquisa
     const scrollBarWidths = 16;

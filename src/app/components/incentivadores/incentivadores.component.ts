@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-
-import { RouterTransition } from './../../services/router.animations';
 
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
@@ -17,11 +15,9 @@ declare var $: any;
 @Component({
   selector: 'app-incentivadores',
   templateUrl: './incentivadores.component.html',
-  styleUrls: ['./incentivadores.component.scss'],
-  animations: [RouterTransition()],
-  host: {'[@routerTransition]': ''}
+  styleUrls: ['./incentivadores.component.scss']
 })
-export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit {
+export class IncentivadoresComponent implements OnInit, OnDestroy {
 
   inscricao: Subscription; // Usada para observar mudanças na URL
   JSON: any = JSON;
@@ -109,11 +105,6 @@ export class IncentivadoresComponent implements OnInit, OnDestroy, AfterViewInit
         }
       },
       () => this.carregandoDadosDoacoes = false);
-  }
-
-  // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
-  ngAfterViewInit() {
-    $('app-incentivadores').css({position: 'relative'}).appendTo('app-outlet-container');
   }
 
   obterStringDeQuantidadeNaResposta() {

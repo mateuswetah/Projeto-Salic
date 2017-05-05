@@ -1,7 +1,7 @@
 <div class="container-projeto">
   <div class="barra-compartilhar">
     <div class="container">
-      <span class="baixar"><p>
+      <span *ngIf="!carregandoDados" class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Projetos" src="../../../assets/ic_projetos.svg"/>
                 &nbsp;Pagina de Projeto - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}">json</a> | 

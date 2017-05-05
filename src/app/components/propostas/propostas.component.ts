@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
-import { RouterTransition } from './../../services/router.animations';
-
 import { MetaService } from '@nglibs/meta';
 import { ApiService } from './../../services/api.service';
 import { DataFormatterService } from './../../services/data-formatter.service';
@@ -11,14 +9,12 @@ import { ConfigurationService } from './../../services/configuration.service';
 
 import { Proposta } from './../../models/proposta.model';
 
-declare var $: any
+declare var $: any;
 
 @Component({
   selector: 'app-propostas',
   templateUrl: './propostas.component.html',
-  styleUrls: ['./propostas.component.scss'],
-  animations: [RouterTransition()],
-  host: {'[@routerTransition]': ''}
+  styleUrls: ['./propostas.component.scss']
 })
 export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -70,10 +66,6 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Altera o position da página, que estava em 'absolute' para o efeito de animação ao entrar.
-    setTimeout(function(){
-      $('app-propostas').css({position: 'relative'}).appendTo('app-outlet-container');
-    }, 2000);
 
     // Aqui é configurado o botão de deslizamento das abas de pesquisa
     const scrollBarWidths = 16;

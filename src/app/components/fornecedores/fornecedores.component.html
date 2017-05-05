@@ -1,9 +1,9 @@
 <div class="container-fornecedor">
   <div class="barra-compartilhar">
     <div class="container">
-      <span class="baixar"><p>
+      <span *ngIf="!carregandoDados"  class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/>
-                &nbsp;Pagina de Fornecedor:&nbsp;&nbsp;&nbsp;
+                &nbsp;Pagina de Fornecedor - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="fornecedor.json" target="fornecedor.json" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor }}">json</a> | 
                 <a filename="fornecedor.csv" target="fornecedor.csv" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=csv' }}">csv</a> | 
                 <a filename="fornecedor.xml" target="fornecedor.xml" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=xml' }}">xml</a></span></p>

@@ -1,9 +1,9 @@
 <div class="container-incentivador">
   <div class="barra-compartilhar">
     <div class="container">
-      <span class="baixar"><p>
+      <span *ngIf="!carregandoDados" class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de incentivadores" src="../../../assets/ic_incentivadores.svg"/>
-                &nbsp;Pagina de Incentivador:&nbsp;&nbsp;&nbsp;
+                &nbsp;Pagina de Incentivador - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="incentivador.json" target="incentivador.json" href="{{ configurationService.ApiUrl + 'incentivadores/' + idIncentivador }}">json</a> | 
                 <a filename="incentivador.csv" target="incentivador.csv" href="{{ configurationService.ApiUrl + 'incentivadores/' + idIncentivador + '?format=csv' }}">csv</a> | 
                 <a filename="incentivador.xml" target="incentivador.xml" href="{{ configurationService.ApiUrl + 'incentivadores/' + idIncentivador + '?format=xml' }}">xml</a></span></p>

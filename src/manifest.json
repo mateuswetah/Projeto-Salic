@@ -1,5 +1,5 @@
 {
-  "name": "VERSALIC",
+  "name": "Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura",
   "short_name": "VERSALIC",
   "icons": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "theme_color": "#b92b27",
-  "background_color": "#acda5d",
+  "background_color": "#226000",
   "display": "standalone",
   "start_url": "./?utm_source=web_app_manifest"
 }

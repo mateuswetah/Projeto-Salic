@@ -36,7 +36,6 @@
     "core-js": "^2.4.1",
     "express": "^4.14.1",
     "font-awesome": "^4.7.0",
-    "hammerjs": "^2.0.8",
     "jquery": "^2.2.4",
     "moment": "^2.17.1",
     "mydatepicker": "^1.8.5",

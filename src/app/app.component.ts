@@ -8,7 +8,7 @@ import { MetaService } from '@nglibs/meta';
 })
 export class AppComponent {
 
-  title = 'Consulta Salic';
+  title = 'VERSALIC';
 
   public menuEscondido: Boolean = true;
 
