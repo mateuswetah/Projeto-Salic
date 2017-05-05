@@ -13,6 +13,15 @@
 
   p { word-wrap: break-word; }
 
+    .texto-elipsado{
+      p, h5, .card-title{
+          width: 100%;
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+      }
+    }
+
   .botao-icone {
     max-height: 1.0em;
   }
@@ -81,6 +90,17 @@
 
     .pagina-infos-valor-destaque { font-size: 1.188em; }
 
+    .toggle { 
+      padding: 15px 15px 0px 0px;
+      text-align: right; 
+
+      @media (max-width: 768px){ 
+        padding: 0px 15px 15px 15px;
+        text-align: left; 
+      }
+
+    }
+
   }
 
   .pagina-bloco {
@@ -92,6 +112,10 @@
 
     .pagina-infos-valor { color: white; }
 
+  }
+
+  .container-bloco-e-entidades {
+    @media (min-width: 768px){ padding-left: 0px; }
   }
 
   .pagina-listas {
@@ -120,8 +144,12 @@
 
   .pagina-entidades {
       margin-top: 15px;
+      padding-top: 15px;
 
-      @media (min-width: 768px){ border-left: 2px solid $verde-claro-salic; }
+      @media (min-width: 768px){ 
+        border-left: 2px solid $verde-claro-salic; 
+        padding-left: 15px;  
+      }
 
       .pagina-subtitulo { 
         margin: 0px 0px 15px 0px;
@@ -131,10 +159,20 @@
         }
       }
 
-      .botao-verde-claro>button {
-        color: $verde-salic;
-        background-color: $verde-claro-salic;
-        border-color: darken($verde-claro-salic, 10%);
+      .col-xs-7 {
+        @media (max-width: 480px){ padding-right: 0px; }
+      }
+
+      .botao-verde-claro{
+        button {
+          color: $verde-salic;
+          background-color: $verde-claro-salic;
+          border-color: darken($verde-claro-salic, 10%);
+        }
+        @media (max-width: 480px){
+           padding-left: 0px;          
+           button { padding: 6px 4px; }  
+        }
       }
 
       &>.row { padding-bottom: 5px; }
@@ -142,14 +180,13 @@
 
   // Estilos dos modais de vetores
   .modal-header {
-    color: $verde-salic;
-    background-color: $verde-claro-salic;
+    color: white;
+    background-color: $verde-salic;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border-bottom: 2px solid $verde-salic;
     
     h4 { font-size: 1.35em; }
-    button.close { color: $verde-salic !important; opacity: 0.9 !important; }
+    button.close { color: white !important; opacity: 0.9 !important; }
     
   }
   .modal-item {
@@ -157,15 +194,6 @@
     padding: 5px 20px;
 
     @media (max-width: 480px) { padding: 5px; }
-
-    .texto-elipsado{
-      p, h5, .card-title{
-          width: 100%;
-          white-space: nowrap;
-          overflow-x: hidden;
-          text-overflow: ellipsis;
-      }
-    }
 
     .row {
       padding: 8px 20px 0px 20px;

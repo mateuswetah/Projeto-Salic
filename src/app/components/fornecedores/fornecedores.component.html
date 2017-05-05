@@ -38,7 +38,7 @@
     </div>  
     <div class="row">
       <div class="col-lg-12 col-sm-12" *ngIf="!carregandoDadosprodutos">
-        
+        <div class="sessao-linha"></div>
         <p class="pagina-subtitulo" *ngIf="!buscaPorProdutosSemResultados">Produtos relacionados:</p>
         <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} produtos relacionados a este fornecedor: </p>
         <p *ngIf="totalDeItens == 1">Foi encontrado um produto relacionado a esse fornecedor: </p>

@@ -422,8 +422,20 @@
   <div class="container-info">
     <div class="container">
       <div class="row" [ngSwitch]="pesquisaPor">
-        <div class="col-xs-12 col-sm-4 col-md-2">
-          <div class="container-icone" [ngStyle]="{'background-image': 'url(../../../assets/ic_' + pesquisaPor + '_branco.svg)'}"></div>
+        <div *ngSwitchCase="'projetos'"  class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone container-icone-projetos"></div>
+        </div>
+        <div *ngSwitchCase="'propostas'" class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone container-icone-propostas"></div>
+        </div>
+        <div *ngSwitchCase="'proponentes'" class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone container-icone-proponentes"></div>
+        </div>
+        <div *ngSwitchCase="'incentivadores'" class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone container-icone-incentivadores"></div>
+        </div>
+        <div *ngSwitchCase="'fornecedores'" class="col-xs-12 col-sm-4 col-md-2">
+          <div class="container-icone container-icone-fornecedores"></div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-10 descricao-entidade" >
 

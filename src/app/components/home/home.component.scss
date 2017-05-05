@@ -316,11 +316,36 @@
         width: 160px;
         text-align: center;
         background-color: $verde-salic;
-        background-position:50% 50%;
+        background-position: 50% 50%;
         background-repeat: no-repeat; 
         background-size: 80px;
-
     }
+
+    .container-icone-projetos {
+        background-image: url(../../../assets/ic_projetos_branco.svg);
+        background-position: 51% 45%;
+    }
+    .container-icone-propostas {
+        background-image: url(../../../assets/ic_propostas_branco.svg);
+        background-position: 52% 47%;
+        background-size: 70px;
+    }
+    .container-icone-proponentes {
+        background-image: url(../../../assets/ic_proponentes_branco.svg);
+        background-position: 50% 44%;
+        background-size: 86px;
+    }
+    .container-icone-incentivadores {
+        background-image: url(../../../assets/ic_incentivadores_branco.svg);
+        background-position: 50% 53%;
+        background-size: 93px;
+    }
+    .container-icone-fornecedores {
+        background-image: url(../../../assets/ic_fornecedores_branco.svg);
+        background-position: 51% 53%;
+        background-size: 78px;
+    }
+
     .descricao-entidade {
         text-align: left;
         padding-left: 40px;

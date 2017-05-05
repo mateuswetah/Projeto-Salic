@@ -3,7 +3,7 @@
     <div class="container">
       <span class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Projetos" src="../../../assets/ic_projetos.svg"/>
-                &nbsp;Pagina de Projeto:&nbsp;&nbsp;&nbsp;
+                &nbsp;Pagina de Projeto - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}">json</a> | 
                 <a filename="projeto.csv" target="projeto.csv" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=csv' }}">csv</a> | 
                 <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}">xml</a></span></p>
@@ -47,29 +47,15 @@
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-12"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor-destaque">{{ projeto.situacao }}</p></div>
-        </div>
-      </div>               
-      <div class="pagina-infos col-sm-5">
-        <div class="pagina-bloco">
-          <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor proposta: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}</p></div>
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-          </div> 
-          <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</p></div>
-          </div> 
-          <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
-            <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
-          </div> 
-        </div>
-      </div>
-    </div>
-    <div class="container-listas">
-      <div *ngIf="!carregandoDados" class="row">
-        <div class="col-sm-7 pagina-infos pagina-listas">
+          <div class="col-sm-9" [ngClass]="{'texto-elipsado' : isProvidenciasEscondido }"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor">{{ projeto.situacao }}</p></div>
+          <div class="col-sm-3 toggle">
+            <a (click)="isProvidenciasEscondido = !isProvidenciasEscondido" class="paginas-infos-valor hidden-sm visible-inline-xs visible-inline-lg">{{ isProvidenciasEscondido ? '&#x25B8; Providências' : '&#9652; Providências' }}</a>
+            <a (click)="isProvidenciasEscondido = !isProvidenciasEscondido" class="paginas-infos-valor visible-inline-sm hidden-xs hidden-lg hidden-md">{{ isProvidenciasEscondido ? '&#x25B8;Providências' : '&#9652;Providências' }}</a>
+          </div>
+          <div *ngIf="!isProvidenciasEscondido" class="col-sm-12"><p class="pagina-infos-label">Providências: </p><p class="paginas-info-valor">{{ projeto.providencia }}</p></div>
+        </div> 
+
+        <div class="pagina-listas">
           <div class="row">
             <p class="pagina-subtitulo col-sm-12">Listas associadas</p>
             <div class="col-sm-6 col-xs-12 col-borda-dir">
@@ -113,8 +99,29 @@
               </div>
             </div>
           </div>
+        </div>  
+      </div>
+                  
+      <div class="pagina-infos container-bloco-e-entidades col-sm-5">
+
+        <!-- BLOCO DE VALORES =============================================-->
+        <div class="pagina-bloco">
+          <div class="row">
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor proposta: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
+          </div> 
+          <div class="row">
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</p></div>
+          </div> 
+          <div class="row">
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
+          </div> 
         </div>
-        <div class="col-sm-5 pagina-infos pagina-entidades">
+
+        <!-- PAGINAS DAS ENTIDADES E INFO RELACIONADAS =============================================-->
+        <div class="pagina-infos pagina-entidades">
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Proponente&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/></p></div>
             <div class="col-xs-5 text-right botao-verde-claro"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary">Propontente</button></div>
@@ -443,13 +450,13 @@
               <div class="modal-item-titulo" title="{{ dataFormatterService.formataValorEmReais(captacao.valor) }}">
                     <p>{{ dataFormatterService.formataValorEmReais(captacao.valor) }}
                       <button (click)="esconderModalDeCaptacoes()" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(captacao._links.incentivador)]" 
-                      type="button" class="btn btn-primary pull-right hidden-lg hidden-md"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;Incentivador</button></p> 
+                      type="button" class="btn btn-primary pull-right hidden-lg hidden-md"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;&nbsp;Incentivador</button></p> 
                   </div>
                 <div class="row">
                   <div class="col-md-3 col-sm-3 col-xs-12"><p class="modal-item-label">Data do recibo: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(captacao.data_recibo) }}</p></div>
                   <div class="col-md-7 col-sm-9 col-xs-12"><p class="modal-item-label">Nome do incentivador: </p><p class="modal-item-valor">{{ captacao.nome_doador }}</p></div>
                    <button (click)="esconderModalDeCaptacoes()" [routerLink]="['/incentivadores', dataFormatterService.extraiIdDaUrl(captacao._links.incentivador)]" 
-                      type="button" class="btn btn-primary pull-right hidden-xs hidden-sm"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;Incentivador</button> 
+                      type="button" class="btn btn-primary pull-right hidden-xs hidden-sm"><img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores_branco.svg"/>&nbsp;&nbsp;Incentivador</button> 
 
                 </div>
               </div>
@@ -481,7 +488,7 @@
                   <div class="col-md-4 col-sm-4 col-xs-12"><p class="modal-item-label">CPF/CNPJ: </p><p class="modal-item-valor">{{ dataFormatterService.formataCGCCPF(relacao.cgccpf) }}</p></div>
                   <div class="col-md-2 col-sm-3 col-xs-12 text-center">
                     <button (click)="esconderModalDeRelacaoPagamentos()" [routerLink]="['/fornecedores', dataFormatterService.extraiIdDaUrl(relacao._links.fornecedor)]" 
-                            type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores_branco.svg"/>&nbsp;Fornecedor</button>
+                            type="button" class="btn btn-primary"><img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores_branco.svg"/>&nbsp;&nbsp;Fornecedor</button>
                   
                   </div>
                 </div>  

@@ -47,6 +47,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Dados utilizados na view
   textoSelecionado = 'resumo';
+  isProvidenciasEscondido = true;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
