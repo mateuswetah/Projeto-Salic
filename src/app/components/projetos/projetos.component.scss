@@ -60,7 +60,7 @@
   .pagina-subtitulo {
     color: $verde-salic;
     font-size: 1.188em;
-    margin: 15px 0px;
+    margin: 15px 0px 6px 0px;
   }
 
   .pagina-infos {
@@ -81,26 +81,6 @@
 
     .pagina-infos-valor-destaque { font-size: 1.188em; }
 
-    .pagina-botoes {
-      margin-top: 7px;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-
-      justify-content: space-between;
-
-      button {
-        color: $verde-salic;
-        padding: 6px 8px;
-        background-color: $verde-claro-salic;
-        border-color: darken($verde-claro-salic, 10%);
-      }
-      .botao-icone {
-        max-height: 1.0em;
-      }
-    }
   }
 
   .pagina-bloco {
@@ -112,6 +92,52 @@
 
     .pagina-infos-valor { color: white; }
 
+  }
+
+  .pagina-listas {
+    margin-top: 0px;
+
+    .pagina-subtitulo { 
+        margin-bottom: 5px;
+      }
+
+    &>.row>.col-sm-6 { padding-top: 15px; }
+    &>.row>.col-xs-12 { 
+      padding-top: 0px;
+    }
+
+    .col-xs-5 {
+          @media (min-width: 768px) and (max-width: 992px){ padding-left: 0px; }
+    }
+
+    .col-borda-dir {
+      
+      @media (min-width: 768px){ border-right: 1px solid $verde-escuro; }
+      padding-bottom: 5px;
+
+    }
+  }
+
+  .pagina-entidades {
+      margin-top: 15px;
+
+      @media (min-width: 768px){ border-left: 2px solid $verde-claro-salic; }
+
+      .pagina-subtitulo { 
+        margin: 0px 0px 15px 0px;
+        img { 
+          vertical-align: baseline; 
+          height: 0.95em;
+        }
+      }
+
+      .botao-verde-claro>button {
+        color: $verde-salic;
+        background-color: $verde-claro-salic;
+        border-color: darken($verde-claro-salic, 10%);
+      }
+
+      &>.row { padding-bottom: 5px; }
   }
 
   // Estilos dos modais de vetores
