@@ -42,7 +42,7 @@
           <div class="col-xs-6 hidden-sm hidden-lg hidden-md"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataAno(projeto.ano_projeto) }}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-4 hidden-xs"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataAno(projeto.ano_projeto) }}</p></div>
+          <div class="col-md-3 col-sm-4 hidden-xs"><p class="pagina-infos-label">Ano do projeto: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataAno(projeto.ano_projeto) }}</p></div>
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
         </div>
@@ -129,7 +129,7 @@
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Proponente&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/></p></div>
             <div class="col-xs-5 text-right botao-verde-claro"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary">Propontente</button></div>
-            <div class="col-xs-7"><p class="pagina-infos-label">Proponente: </p><p class="pagina-infos-valor">{{ projeto.proponente }}</p></div>
+            <div class="col-xs-7"><p class="pagina-infos-label">Proponente: </p><p class="pagina-infos-valor" id="nomeProponente">{{ projeto.proponente }}</p></div>
             <div class="col-xs-5"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
           </div>
           <div class="row">

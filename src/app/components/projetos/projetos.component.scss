@@ -57,7 +57,7 @@
   .pagina-titulo {
     color: $verde-salic;
     font-size: 1.750em;
-    margin: 15px 0px;
+    margin: 14px 0px;
   }
 
   .linha-pagina-titulo {
@@ -95,7 +95,7 @@
       text-align: right; 
 
       @media (max-width: 768px){ 
-        padding: 0px 15px 15px 15px;
+        padding: 0px 15px 0px 15px;
         text-align: left; 
       }
 
@@ -105,13 +105,13 @@
 
   .pagina-bloco {
     background-color: $verde-salic;
-    padding: 25px 25px 11px 25px;
+    padding: 20px 20px 5px 20px;
     margin-bottom: 7px;
     border-radius: 2px;
 
-    .pagina-infos-label { color: $background-salic; }
+    .pagina-infos-label { color: white; }
 
-    .pagina-infos-valor { color: white; }
+    .pagina-infos-valor { color: $background-salic; font-size: 1.188em; }
 
   }
 
@@ -123,12 +123,17 @@
     margin-top: 0px;
 
     .pagina-subtitulo { 
-        margin-bottom: 5px;
-      }
+        margin-bottom: 6px;
+        @media (max-width: 768px){ margin-bottom: 15px; }
+    }
 
-    &>.row>.col-sm-6 { padding-top: 15px; }
-    &>.row>.col-xs-12 { 
-      padding-top: 0px;
+    &>.row>.col-sm-6 { 
+      padding-top: 10px; 
+
+      @media (max-width: 768px){ 
+        padding-bottom: 0px;
+        padding-top: 0px ; margin-bottom: 15px; 
+      }
     }
 
     .col-xs-5 {
@@ -137,14 +142,18 @@
 
     .col-borda-dir {
       
-      @media (min-width: 768px){ border-right: 1px solid $verde-escuro; }
-      padding-bottom: 5px;
+      @media (min-width: 768px){ border-right: 1px solid $verde-salic; }
 
+      padding-bottom: 10px;
+
+      @media (min-width: 768px) and (max-width: 992px){
+        padding-bottom: 0px; 
+      }
     }
   }
 
   .pagina-entidades {
-      margin-top: 15px;
+      margin-top: 13px;
       padding-top: 15px;
 
       @media (min-width: 768px){ 
@@ -160,8 +169,10 @@
         }
       }
 
+      #nomeProponente { line-height: 1.1em; }
+
       .col-xs-7 {
-        @media (max-width: 480px){ padding-right: 0px; }
+        padding-right: 0px;
       }
 
       .botao-verde-claro{
@@ -174,9 +185,14 @@
            padding-left: 0px;          
            button { padding: 6px 4px; }  
         }
+
+        @media (min-width: 768px) and (max-width: 992px){
+           padding-left: 0px;          
+           button { padding: 6px 8px; }  
+        }
       }
 
-      &>.row { padding-bottom: 5px; }
+      &>.row { padding-bottom: 10px; }
   }
 
   // Estilos dos modais de vetores
@@ -328,7 +344,7 @@
 
   .pagina-textos{
     background-color: white;
-    border: 3px solid $verde-salic;
+    border: 2px solid $verde-salic;
     border-radius: 7px;
     margin: -25px -25px 50px -25px;
     padding: 25px;
