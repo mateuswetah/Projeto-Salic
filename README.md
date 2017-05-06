@@ -1,4 +1,4 @@
-# Projeto Salic - Uma nova forma de consulta e navegação ao SALIC
+# Projeto VERSALIC - Uma nova forma de consulta e navegação ao SALIC
 
 Este projeto demonstra o uso da [API SALIC](http://hmg.api.salic.cultura.gov.br/doc/#) para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura ([SALIC](http://novosalic.cultura.gov.br/cidadao/consultar)).
 
@@ -56,4 +56,4 @@ $ ng serve
 Navegue para `http://localhost:4200/`. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.
 
 ## Link para a última versão hospedada
-Ainda em desenvolvimento!!! [Acesse aqui](http://hmg.app.api.salic.cultura.gov.br/). 
+Em homologação!!! [Acesse aqui](http://hmg.app.api.salic.cultura.gov.br/). 
