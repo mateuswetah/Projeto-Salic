@@ -124,8 +124,9 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                               'valor_projeto':    'Valor do Projeto' };
   queriesDeOrdemDePropostas: { [query: string]: String } = {};
   queriesDeOrdemDeProponentes: { [query: string]: String }
-                             = { 'total_captado': 'Total Captado',
-                                 'cgccpf':        'CGCCPF (FALTA NA API)' };
+                             = { 'total_captado': 'Total Captado'
+                                // ,'cgccpf':        'CGCCPF (FALTA NA API)'
+                                };
   queriesDeOrdemDeIncentivadores: { [query: string]: String }
                                 = { 'total_doado': 'Total Doado'
                                  // ,'cgccpf':        'CGCCPF (FALTA NA API)'
