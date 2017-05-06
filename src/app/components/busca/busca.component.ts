@@ -127,8 +127,9 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
                              = { 'total_captado': 'Total Captado',
                                  'cgccpf':        'CGCCPF (FALTA NA API)' };
   queriesDeOrdemDeIncentivadores: { [query: string]: String }
-                                = { 'total_doado': 'Total Doado',
-                                    'cgccpf':        'CGCCPF (FALTA NA API)' };
+                                = { 'total_doado': 'Total Doado'
+                                 // ,'cgccpf':        'CGCCPF (FALTA NA API)'
+                                 };
   queriesDeOrdemDeFornecedores: { [query: string]: String } = {};
 
   // Queries para a busca

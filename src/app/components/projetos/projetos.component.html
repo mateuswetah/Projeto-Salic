@@ -31,6 +31,12 @@
   <div class="linha-pagina-titulo"></div>
   <div class="container">
 
+    <!-- ÍCONE DE CARREGAMENTO =====================================================-->
+    <div *ngIf="carregandoDados" class="spinner">
+      <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
+      <p>Carregando Projeto...</p>
+    </div>
+
     <div  *ngIf="!carregandoDados && projeto != undefined" class="row">
       <div class="pagina-infos col-sm-7">
         <div class="row">
@@ -624,10 +630,4 @@
         </div>
       </div>
     </div>
-
-  <!-- ÍCONE DE CARREGAMENTO =====================================================-->
-  <div *ngIf="carregandoDados" class="spinner">
-    <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>
-    <p>Carregando Projeto...</p>
-  </div>
 </div>
