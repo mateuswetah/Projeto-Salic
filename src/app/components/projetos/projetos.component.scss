@@ -38,12 +38,14 @@
     .baixar {
       margin-top: 4px;
       display: inline-block;
-      text-align: center;
+      white-space: nowrap;
       
       .links {
         display: inline-block;
       }
       @media (max-width: 768px) { 
+          white-space: initial;
+          text-align: center;
           width: 100%;
           margin-top: 0px;
           margin-right: auto;
@@ -159,7 +161,7 @@
       
       @media (min-width: 768px){ border-right: 1px solid $verde-salic; }
 
-      padding-bottom: 4px;
+      padding-bottom: 0px;
 
       @media (min-width: 768px) and (max-width: 992px){
         padding-bottom: 0px; 

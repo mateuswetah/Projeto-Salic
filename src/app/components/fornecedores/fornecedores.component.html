@@ -3,8 +3,7 @@
     <div class="container">
       <span *ngIf="!carregandoDados"  class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/>
-                &nbsp;Pagina de Fornecedor - baixar:&nbsp;&nbsp;&nbsp;
-                <span class="links"><a filename="fornecedor.json" target="fornecedor.json" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor }}">json</a> | 
+                &nbsp;Pagina de Fornecedor - baixar:&nbsp;&nbsp;&nbsp;<span class="links"><a filename="fornecedor.json" target="fornecedor.json" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor }}">json</a> | 
                 <a filename="fornecedor.csv" target="fornecedor.csv" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=csv' }}">csv</a> | 
                 <a filename="fornecedor.xml" target="fornecedor.xml" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=xml' }}">xml</a></span></p>
       </span>
@@ -20,7 +19,7 @@
       <span class="sb-buttons"><span class="sb-button">
         <button (click)="compartilharTelegram()"><span class="sb-template"><i class="fa fa-paper-plane"></i></span></button>
       </span></span>
-    </div>
+      </div>
     </div>
   </div>
   <div *ngIf="!carregandoDados  && fornecedor != undefined" class="container">
