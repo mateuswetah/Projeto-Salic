@@ -261,13 +261,12 @@
 
             .card-botao-ver {
                 text-align: end;
+                white-space: nowrap;
                 float: right;
-                display: inline-table;
+                display: inline-block;
                 padding: 8px 15px 8px 15px;
 
                 @media all and (max-width: 330px){ padding: 8px 15px 8px 2px; }
-
-                 a { display: flex; }
 
                 &:hover { background-color: #d2d2d2; border-left: 1px solid $cinza-escuro; }
             }
