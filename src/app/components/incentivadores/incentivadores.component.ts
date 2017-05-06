@@ -117,6 +117,10 @@ export class IncentivadoresComponent implements OnInit, OnDestroy {
     return (Number(this.offsetAtual) + 1) + ' a ' + (Number(this.offsetAtual) + Number(this.numeroDeItens));
   }
 
+  compartilharTelegram() {
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank');
+  }
+
   atualizarMetaTags() {
     // Meta tags genéricas
     this.metaService.setTitle('Incentivador: ' +  this.incentivador.nome);

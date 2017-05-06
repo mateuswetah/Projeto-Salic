@@ -71,6 +71,10 @@ export class PropostasComponent implements OnInit, OnDestroy, AfterViewInit {
       () => this.carregandoDados = false);
   }
 
+  compartilharTelegram() {
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank');
+  }
+
   ngAfterViewInit() {
 
     // Aqui é configurado o botão de deslizamento das abas de pesquisa

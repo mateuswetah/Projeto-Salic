@@ -291,6 +291,9 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  compartilharTelegram() {
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank');
+  }
 
   atualizarMetaTags() {
 

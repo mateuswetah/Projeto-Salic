@@ -122,6 +122,10 @@ export class ProponentesComponent implements OnInit, OnDestroy {
 
   }
 
+  compartilharTelegram() {
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href), '_blank');
+  }
+
   atualizarMetaTags() {
     // Meta tags genéricas
     this.metaService.setTitle('Proponente: ' +  this.proponente.nome);

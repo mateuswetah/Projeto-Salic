@@ -45,6 +45,7 @@
       }
       @media (max-width: 768px) { 
           width: 100%;
+          margin-top: 0px;
           margin-right: auto;
           margin-left: auto;
        }
@@ -123,6 +124,10 @@
 
     .pagina-infos-valor { color: $background-salic; font-size: 1.188em; }
 
+    .col-xs-6 {
+          @media (min-width: 768px) and (max-width: 992px){ padding-right: 0px; }
+    }
+
   }
 
   .container-bloco-e-entidades {
@@ -154,7 +159,7 @@
       
       @media (min-width: 768px){ border-right: 1px solid $verde-salic; }
 
-      padding-bottom: 10px;
+      padding-bottom: 4px;
 
       @media (min-width: 768px) and (max-width: 992px){
         padding-bottom: 0px; 
@@ -213,7 +218,7 @@
     border-top-right-radius: 5px;
     
     h4 { font-size: 1.35em; }
-    button.close { color: white !important; opacity: 0.9 !important; }
+    button.close { color: white !important; }
     
   }
   .modal-item {

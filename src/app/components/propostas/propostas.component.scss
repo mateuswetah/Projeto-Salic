@@ -30,7 +30,8 @@
       .links {
         display: inline-block;
       }
-      @media (max-width: 768px) { 
+      @media (max-width: 768px) {
+          margin-top: 0px; 
           width: 100%;
           margin-right: auto;
           margin-left: auto;
@@ -43,7 +44,7 @@
       margin-left: 6px;
 
        @media (max-width: 768px) { 
-         margin-top: 12px;
+          margin-top: 12px;
           width: 100%;
           margin-right: auto;
           margin-left: auto;

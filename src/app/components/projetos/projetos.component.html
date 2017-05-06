@@ -17,6 +17,9 @@
                   [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
                   [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
                   [showCount]="true" ></share-buttons>
+      <span class="sb-buttons"><span class="sb-button">
+        <button (click)="compartilharTelegram()"><span class="sb-template"><i class="fa fa-paper-plane"></i></span></button>
+      </span></span>
     </div>
     </div>
   </div>
@@ -47,8 +50,8 @@
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-9" [ngClass]="{'texto-elipsado' : isProvidenciasEscondido }"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor">{{ projeto.situacao }}</p></div>
-          <div class="col-sm-3 toggle">
+          <div class="col-sm-8 col-md-9" [ngClass]="{'texto-elipsado' : isProvidenciasEscondido }"><p class="pagina-infos-label">Situação: </p><p class="pagina-infos-valor">{{ projeto.situacao }}</p></div>
+          <div class="col-sm-4 col-md-3 toggle">
             <a (click)="isProvidenciasEscondido = !isProvidenciasEscondido" class="paginas-infos-valor hidden-sm visible-inline-xs visible-inline-lg">{{ isProvidenciasEscondido ? '&#x25B8; Providências' : '&#9652; Providências' }}</a>
             <a (click)="isProvidenciasEscondido = !isProvidenciasEscondido" class="paginas-infos-valor visible-inline-sm hidden-xs hidden-lg hidden-md">{{ isProvidenciasEscondido ? '&#x25B8;Providências' : '&#9652;Providências' }}</a>
           </div>
@@ -116,10 +119,10 @@
           </div> 
           <div class="row">
             <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><a [ngStyle]="{ 'pointer-events': obterLength('relacao_pagamentos') <= 0 ? 'none' : 'initial'}" (click)="obterLength('relacao_pagamentos') > 0 ? mostrarModalDeRelacaoPagamentos() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</a></div>
           </div> 
           <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</p></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><a [ngStyle]="{ 'pointer-events': obterLength('captacoes') <= 0 ? 'none' : 'initial'}" (click)="obterLength('captacoes') > 0 ? mostrarModalDeCaptacoes() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</a></div>
             <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
           </div> 
         </div>
@@ -441,7 +444,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title pull-left">Captações do Projeto</h4>
+            <h4 class="modal-title pull-left">Captações - Total de {{dataFormatterService.formataValorEmReais(projeto.valor_captado)}}</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="esconderModalDeCaptacoes()">
               <span aria-hidden="true">&times;</span>
             </button>
