@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   // Opções de Ordenação
   ordenarPor = 'PRONAC';
-  ordenarDesc = false;
+  ordenarDesc = true;
   ordenarPorQueries:  { [query: string]: String; } = {}
   queriesDeOrdemDeProjetos: { [query: string]: String }
                           = { 'PRONAC':           'PRONAC',
@@ -192,7 +192,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         if (query === 'sort') {
           this.ordenarPor = this.queries['sort'].split(':')[0];
-          this.ordenarDesc = this.queries['sort'].split(':')[1] === 'desc' ? false : true;
+          this.ordenarDesc = true;
         }
       }
     }

@@ -269,11 +269,11 @@
             <div *ngFor="let documento of projeto._embedded.documentos_anexados; let i = index;">
             <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
-              <div class="modal-item-titulo" title="{{ documento.produto }}"><p>{{ documento.nome }}</p></div>
+              <div class="modal-item-titulo" title="{{ documento.produto }}"><a href="{{ documento.link }}" title="Baixar arquivo.">{{ documento.nome }}</a></div>
                 <div class="row">
-                  <div class="col-md-6 col-sm-12 col-xs-12"><p class="modal-item-label">Classificação: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(documento.classificacao) }}</p></div>
-                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(documento.data) }}</p></div>
-                  <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ documento.link }}">Clique aqui.</a></div>
+                  <div class="col-md-8 col-sm-12 col-xs-12"><p class="modal-item-label">Classificação: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(documento.classificacao) }}</p></div>
+                  <div class="col-md-2 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(documento.data) }}</p></div>
+                  <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link do Arquivo: </p><a class="modal-item-valor" href="{{ documento.link }}" title="Baixar arquivo.">Clique aqui.</a></div>
                 </div>
               </div>
             </div>
@@ -327,12 +327,12 @@
             <div *ngFor="let marca of projeto._embedded.marcas_anexadas; let i = index;">
             <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
-              <div class="modal-item-titulo" title="{{ marca.nome_arquivo }}"><p>{{ marca.nome_arquivo }}</p></div>
+              <div class="modal-item-titulo" title="{{ marca.nome_arquivo }}"><a href="{{ marca.link }}" title="Baixar arquivo.">{{ marca.nome_arquivo }}</a></div>
                 <div class="row row-dark">
                   <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Id do arquivo: </p><p class="modal-item-valor">{{ marca.id_arquivo }}</p></div> 
-                  <div class="col-md-3 col-sm-5 col-xs-12"><p class="modal-item-label">Id documento: </p><p class="modal-item-valor">{{ marca.id_documento }}</p></div>
-                  <div class="col-md-2 col-sm-4 col-xs-12"><p class="modal-item-label">Link: </p><a class="modal-item-valor" href="{{ marca.link }}">Clique aqui.</a></div>
-                  <div class="col-md-4 col-sm-8 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(marca.data_envio) }}</p></div>
+                  <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Id documento: </p><p class="modal-item-valor">{{ marca.id_documento }}</p></div>
+                  <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Data: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(marca.data_envio) }}</p></div>
+                  <div class="col-md-3 col-sm-6 col-xs-12"><p class="modal-item-label">Link do Arquivo: </p><a class="modal-item-valor" href="{{ marca.link }}" title="Baixar arquivo.">Clique aqui.</a></div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12"><p class="modal-item-label">Descrição: </p><p class="modal-item-valor">{{ dataFormatterService.verificaSeHaTexto(marca.descricao) }}</p></div>
@@ -506,8 +506,8 @@
                 </div>  
                 <div class="row">
                   <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Valor do pagamento: </p><p class="modal-item-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(relacao.valor_pagamento) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data aprovação: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_aprovacao) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(relacao.data_pagamento) }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(relacao.data_pagamento) }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data aprovação: </p><p class="modal-item-valor">{{ dataFormatterService.formataDataSemHora(relacao.data_aprovacao) }}</p></div>               
                 </div>
                 <div class="row  row-dark">
                   <div class="col-xs-12"><p class="modal-item-label">Nome do arquivo: </p><p class="modal-item-valor" title="{{ relacao.nm_arquivo }}">{{ relacao.nm_arquivo }}</p></div>

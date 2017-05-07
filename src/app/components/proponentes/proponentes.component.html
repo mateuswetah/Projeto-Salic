@@ -51,7 +51,8 @@
         <p *ngIf="totalDeItens == 1">Foi encontrado um projeto submetido por este proponente: </p>
       </div>
     </div>
-    <div class="row row-cards" *ngIf="!carregandoDadosProjetos">
+    <div class="row row-cards" *ngIf="listaProjetos !== null && listaProjetos !== undefined">
+
       <div *ngFor="let projeto of listaProjetos;" class="card col-sm-12 col-md-6" role="group">
         <div class="card-header texto-elipsado" title="{{ projeto.nome }}"><p>{{ projeto.nome }}</p></div>
         <div class="card-resposta texto-elipsado">
@@ -89,14 +90,14 @@
           <p role="contentinfo">{{projeto.resumo}}</p>
         </div>
       </div>
-
-      <p *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos. <button (click)="carregarMaisProjetos()">EXIBIR MAIS</button></p>
-
-      <div *ngIf="buscaPorProjetosSemResultados">
-        <p>Não encontramos Projetos submetidos por este Proponente.</p>
-      </div>
-
     </div>
+
+    <p class="paginador" *ngIf="totalDeItens > totalDeItensCarregado">Exibidos {{ totalDeItensCarregado }} projetos de {{ totalDeItens }}.&nbsp;&nbsp;<button class="btn btn-primary" (click)="carregarMaisProjetos()">Exibir mais</button></p>
+
+    <div *ngIf="buscaPorProjetosSemResultados">
+      <p>Não encontramos Projetos submetidos por este Proponente.</p>
+    </div>
+
   </div>
   <div *ngIf="carregandoDados" class="spinner">
     <sk-cube-grid [color]="'#226000'" [isRunning]="carregandoDados"></sk-cube-grid>

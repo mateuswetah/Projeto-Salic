@@ -110,7 +110,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Opções de Ordenação
   ordenarPor: String = '';
-  ordenarDesc = false;
+  ordenarDesc = true;
   ordenarPorQueries:  { [query: string]: String } = {};
   queriesDeOrdemDeProjetos: { [query: string]: String }
                           = { 'PRONAC':           'PRONAC',

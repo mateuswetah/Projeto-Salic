@@ -93,6 +93,7 @@ export class ProponentesComponent implements OnInit, OnDestroy {
         console.log(resposta);
         if (this.listaProjetos === undefined) {
           this.listaProjetos = resposta.listaProjetosDoProponente;
+          window.scrollTo(0, 0);
         } else {
           for (const projeto of resposta.listaProjetosDoProponente) {
             this.listaProjetos.push(projeto);
@@ -112,14 +113,12 @@ export class ProponentesComponent implements OnInit, OnDestroy {
           this.router.navigate(['falha', err]);
         }
       },
-      () => { this.carregandoDadosProjetos = false; window.scrollTo(0, 0); });
+      () => { this.carregandoDadosProjetos = false; });
   }
 
   carregarMaisProjetos() {
-
-    this.queriesDeProjeto['offset'] = (this.totalDeItensCarregado + this.configurationService.limitResultados - 1) + '';
+    this.queriesDeProjeto['offset'] = this.totalDeItensCarregado + '';
     this.onLoadProjetos(this.idProponente);
-
   }
 
   compartilharTelegram() {
