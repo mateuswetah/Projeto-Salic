@@ -4,11 +4,11 @@
       <span *ngIf="!carregandoDados" class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Projetos" src="../../../assets/ic_projetos.svg"/>
                 &nbsp;Pagina de Projeto - baixar:&nbsp;&nbsp;&nbsp;
-                <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}">json</a> | 
-                <a filename="projeto.csv" target="projeto.csv" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=csv' }}">csv</a> | 
-                <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}">xml</a></span></p>
+                <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}" title="Baixar dados em formato JSON.">json</a> | 
+                <a filename="projeto.csv" target="projeto.csv" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=csv' }}" title="Baixar dados em formato CSV.">csv</a> | 
+                <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}" title="Baixar dados em formato XML.">xml</a></span></p>
       </span>
-      <div *ngIf="!carregandoDados" class="compartilhar"> 
+      <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"

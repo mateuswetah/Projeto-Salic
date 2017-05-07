@@ -431,7 +431,7 @@
     padding-top: 20px;
 
     .paginacao-superior {
-        margin-top: -18px;
+        margin-top: -20px;
         margin-bottom: -15px;
         text-align: end;
         padding-right: 30px;
@@ -446,7 +446,7 @@
     p { display: inline-block; }
 
     .quantidade-respostas { 
-        padding-top: 8px; 
+        padding-top: 2px; 
         padding-left: 30px;
 
         @media all and (max-width: 440px){

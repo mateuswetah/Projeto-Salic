@@ -3,11 +3,11 @@
     <div class="container">
       <span *ngIf="!carregandoDados"  class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/>
-                &nbsp;Pagina de Fornecedor - baixar:&nbsp;&nbsp;&nbsp;<span class="links"><a filename="fornecedor.json" target="fornecedor.json" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor }}">json</a> | 
-                <a filename="fornecedor.csv" target="fornecedor.csv" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=csv' }}">csv</a> | 
-                <a filename="fornecedor.xml" target="fornecedor.xml" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=xml' }}">xml</a></span></p>
+                &nbsp;Pagina de Fornecedor - baixar:&nbsp;&nbsp;&nbsp;<span class="links"><a filename="fornecedor.json" target="fornecedor.json" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor }}" title="Baixar dados em formato JSON.">json</a> | 
+                <a filename="fornecedor.csv" target="fornecedor.csv" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=csv' }}" title="Baixar dados em formato CSV.">csv</a> | 
+                <a filename="fornecedor.xml" target="fornecedor.xml" href="{{ configurationService.ApiUrl + 'fornecedores/' + idFornecedor + '?format=xml' }}" title="Baixar dados em formato XML.">xml</a></span></p>
       </span>
-      <div *ngIf="!carregandoDados" class="compartilhar"> 
+      <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"

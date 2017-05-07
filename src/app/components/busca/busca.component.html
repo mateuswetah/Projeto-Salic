@@ -454,10 +454,10 @@
               </ul>
             </div>
             <div *ngIf="keys(ordenarPorQueries).length > 0" aria-label="Ordenação" class="btn-group" role="group">
-              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
+              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" title="Ordenação crescente"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
                 <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
               </button>
-              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
+              <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" title="Ordenação decrescente" [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
                 <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
               </button>
             </div>
@@ -515,10 +515,10 @@
             </ul>
           </div>
           <div *ngIf="keys(ordenarPorQueries).length > 0" class="btn-group" role="group" aria-label="Ordenação">
-            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" title="Ordenação crescente"  [ngClass]="{'disabled': !ordenarDesc, 'enabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação crescente" aria-label="Ordenação crescente">
               <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
             </button>
-            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();"  [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
+            <button (click)="ordenarDesc = !ordenarDesc; onRealizarBusca();" title="Ordenação decrescente" [ngClass]="{'enabled': !ordenarDesc, 'disabled': ordenarDesc }" type="button" class="btn btn-default" alt="Ordenação decrescente" aria-label="Ordenação decrescente">
               <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
             </button>
           </div>
@@ -545,7 +545,7 @@
       <div class="col-sm-4 col-xs-6 itens-por-pagina" >
         <p>Itens por página: </p>
         <div dropdown>
-          <button class="btn btn-default dropdown-toggle" type="button" id="seletorNumeroDeItens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
+          <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="seletorNumeroDeItens" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"  dropdownToggle>
             {{ configurationService.limitResultados }}
             <span class="caret"></span>
           </button>

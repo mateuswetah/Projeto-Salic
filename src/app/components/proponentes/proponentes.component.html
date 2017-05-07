@@ -4,11 +4,11 @@
       <span *ngIf="!carregandoDados"  class="baixar"><p>
                 <img class="botao-icone" alt="Ícone de proponentes" src="../../../assets/ic_proponentes.svg"/>
                 &nbsp;Pagina de Proponente - baixar:&nbsp;&nbsp;&nbsp;
-                <span class="links"><a filename="proponente.json" target="proponente.json" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente }}">json</a> | 
-                <a filename="proponente.csv" target="proponente.csv" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=csv' }}">csv</a> | 
-                <a filename="proponente.xml" target="proponente.xml" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=xml' }}">xml</a></span></p>
+                <span class="links"><a filename="proponente.json" target="proponente.json" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente }}" title="Baixar dados em formato JSON.">json</a> | 
+                <a filename="proponente.csv" target="proponente.csv" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=csv' }}" title="Baixar dados em formato CSV.">csv</a> | 
+                <a filename="proponente.xml" target="proponente.xml" href="{{ configurationService.ApiUrl + 'proponentes/' + idProponente + '?format=xml' }}" title="Baixar dados em formato XML.">xml</a></span></p>
       </span>
-      <div *ngIf="!carregandoDados" class="compartilhar"> 
+      <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
       <share-buttons class="withCount" 
                   [defaultStyle]="false"
