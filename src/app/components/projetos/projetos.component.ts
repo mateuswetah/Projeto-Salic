@@ -177,7 +177,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   public mostrarModalDeRelacaoBensCapital() {
     this.modalDeRelacaoBensCapital.show();
   }
-  public esconderModalDeRelacaoBensCapitals(): void {
+  public esconderModalDeRelacaoBensCapital(): void {
     this.modalDeRelacaoBensCapital.hide();
   }
 

@@ -10,7 +10,7 @@
       </span>
       <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
-      <share-buttons class="withCount" 
+      <share-buttons class="withCount"  
                   [defaultStyle]="false"
                   [url]="url" 
                   [title]="'Projeto: ' + projeto.nome" 
@@ -37,6 +37,7 @@
       <p>Carregando Projeto...</p>
     </div>
 
+    <!-- BLOCO DE DADOS GERAIS =============================================-->
     <div  *ngIf="!carregandoDados && projeto != undefined" class="row">
       <div class="pagina-infos col-sm-7">
         <div class="row">
@@ -64,6 +65,7 @@
           <div *ngIf="!isProvidenciasEscondido" class="col-sm-12"><p class="pagina-infos-label">Providências: </p><p class="paginas-info-valor">{{ projeto.providencia }}</p></div>
         </div> 
 
+        <!-- BLOCO DE LISTAS ASSOCIADAS AO PROJETO =============================================-->
         <div class="pagina-listas">
           <div class="row">
             <p class="pagina-subtitulo col-sm-12">Listas associadas</p>
@@ -551,9 +553,9 @@
           <div class="modal-body">
             <div *ngFor="let readequacao of projeto._embedded.readequacoes; let i = index;">
             <div class="modal-item ">
-              <div *ngIf="i > 0" class="modal-divisor"></div>
+              <!--<div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ readequacao.nome_arquivo }}"><p>{{ readequacao.nome_arquivo }}</p></div>
-               <!-- <div class="row  row-dark">
+               <div class="row  row-dark">
                   <div class="col-md-6 col-sm-5 col-xs-12"><p class="modal-item-label">Nome do fornecedor: </p><p class="modal-item-valor">{{ readequacao.nome_fornecedor }}</p></div>
                   <div class="col-md-4 col-sm-4 col-xs-12"><p class="modal-item-label">CPF/CNPJ: </p><p class="modal-item-valor">{{ dataFormatterService.formataCGCCPF(readequacao.cgccpf) }}</p></div>
                 </div>
@@ -578,9 +580,9 @@
                   <div class="col-sm-2 col-xs-4"><p class="modal-item-label" title="Id do Arquivo">Id arquivo: </p><p class="modal-item-valor" title="{{ readequacao.id_arquivo }}">{{ readequacao.id_arquivo }}</p></div>  
                   <div class="col-sm-5 col-xs-8"><p class="modal-item-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="modal-item-valor" title="{{ readequacao.id_comprovante_pagamento }}">{{ readequacao.id_comprovante_pagamento }}</p></div>
                   <div class="col-sm-5 col-xs-12"><p class="modal-item-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="modal-item-valor" title="{{ readequacao.id_planilha_aprovacao }}">{{ readequacao.id_planilha_aprovacao }}</p></div>
-                </div>  -->            
+                </div>            
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
@@ -601,33 +603,24 @@
             <div *ngFor="let relacao of projeto._embedded.relacao_bens_captal; let i = index;">
             <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
-              <!--<div class="modal-item-titulo" title="{{ relacao.nome_produto }}"><p>{{ relacao.nome_produto }}</p></div>
-                <div class="row  row-dark">
-                  <div class="col-md-6 col-sm-5 col-xs-12"><p class="modal-item-label">Nome do fornecedor: </p><p class="modal-item-valor">{{ readequacao.nome_fornecedor }}</p></div>
-                  <div class="col-md-4 col-sm-4 col-xs-12"><p class="modal-item-label">CPF/CNPJ: </p><p class="modal-item-valor">{{ dataFormatterService.formataCGCCPF(readequacao.cgccpf) }}</p></div>
+              <div class="modal-item-titulo" title="{{ relacao.Titulo }}"><p>{{ relacao.titulo }}</p></div>
+                <div class="row row-dark">
+                  <div class="col-sm-4 col-xs-12"><p class="modal-item-label">Item: </p><p class="modal-item-valor-destaque" title="{{ relacao.Item }}">{{ relacao.Item }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Valor unitário: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relacao.vlUnitario) }}</p></div>
+                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Valor total: </p><p class="modal-item-valor">{{ dataFormatterService.formataValorEmReais(relacao.vlTotal) }}</p></div>
                 </div>
-                </div>  
                 <div class="row">
-                  <div class="col-sm-3 col-xs-12"><p class="modal-item-label">Valor do pagamento: </p><p class="modal-item-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(readequacao.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(readequacao.valor_pagamento) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data aprovação: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(readequacao.data_aprovacao) }}</p></div>
-                  <div class="col-sm-4 col-xs-6"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor">{{ dataFormatterService.formataData(readequacao.data_pagamento) }}</p></div>
-                </div>
-                <div class="row  row-dark">
-                  <div class="col-xs-12"><p class="modal-item-label">Nome do arquivo: </p><p class="modal-item-valor" title="{{ readequacao.nm_arquivo }}">{{ readequacao.nm_arquivo }}</p></div>
-                </div>  
-                <div class="row">
-                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Tipo do documento: </p><p class="modal-item-valor" title="{{ readequacao.tipo_documento}}">{{ readequacao.tipo_documento}}</p></div>
-                  <div class="col-xs-12 col-sm-6"><p class="modal-item-label">Forma de pagamento: </p><p class="modal-item-valor" title="{{ readequacao.tipo_forma_pagamento }}">{{ readequacao.tipo_forma_pagamento }}</p></div>
+                  <div class="col-xs-6 col-sm-4"><p class="modal-item-label">Quantidade: </p><p class="modal-item-valor" title="{{ relacao.Qtde }}">{{ relacao.Qtde }}</p></div>
+                  <div class="col-xs-6 col-sm-4"><p class="modal-item-label">Data pagamento: </p><p class="modal-item-valor" title="{{ dataFormatterService.formataDataSemHora(relacao.dtPagamento) }}">{{ dataFormatterService.formataDataSemHora(relacao.dtPagamento) }}</p></div>
+                  <div class="col-xs-6 col-sm-4"><p class="modal-item-label">Número do comprovante </p><p class="modal-item-valor" title="{{ relacao.nrComprovante }}">{{ relacao.nrComprovante }}</p></div>
                 </div> 
                 <div class="row  row-dark">
-                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Comprovante">Número comprovante: </p><p class="modal-item-valor" title="{{ readequacao.nr_comprovante }}">{{ readequacao.nr_comprovante }}</p></div>
-                  <div class="col-xs-6"><p class="modal-item-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="modal-item-valor" title="{{ readequacao.nr_documento_pagamento }}">{{ readequacao.nr_documento_pagamento }}</p></div>
+                  <div class="col-xs-6"><p class="modal-item-label" title="Fabricante">Fabricante: </p><p class="modal-item-valor" title="{{ dataFormatterService.verificaSeHaTexto(relacao.Fabricante) }}">{{ dataFormatterService.verificaSeHaTexto(relacao.Fabricante) }}</p></div>
+                  <div class="col-xs-6"><p class="modal-item-label" title="Marca">Marca: </p><p class="modal-item-valor" title="{{ dataFormatterService.verificaSeHaTexto(relacao.Marca) }}">{{ dataFormatterService.verificaSeHaTexto(relacao.Marca) }}</p></div>
                 </div> 
                 <div class="row">
-                  <div class="col-sm-2 col-xs-4"><p class="modal-item-label" title="Id do Arquivo">Id arquivo: </p><p class="modal-item-valor" title="{{ readequacao.id_arquivo }}">{{ readequacao.id_arquivo }}</p></div>  
-                  <div class="col-sm-5 col-xs-8"><p class="modal-item-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="modal-item-valor" title="{{ readequacao.id_comprovante_pagamento }}">{{ readequacao.id_comprovante_pagamento }}</p></div>
-                  <div class="col-sm-5 col-xs-12"><p class="modal-item-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="modal-item-valor" title="{{ readequacao.id_planilha_aprovacao }}">{{ readequacao.id_planilha_aprovacao }}</p></div>
-                </div>  -->            
+                  <div class="col-xs-12"><p class="modal-item-label" title="Especificação">Especificação: </p><p class="modal-item-valor" title="{{ relacao.Especificacao }}">{{ relacao.Especificacao}}</p></div>  
+                </div>           
               </div>
             </div>
           </div>
