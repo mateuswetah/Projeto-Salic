@@ -45,6 +45,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   // Dados utilizados na view
   textoSelecionado = 'resumo';
   isProvidenciasEscondido = true;
+  relacaoPagamentosCarregadas = 0;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -72,6 +73,10 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  consoleLog(str: string) {
+    console.log(str);
   }
 
   onLoadProjeto(PRONAC: Number) {
@@ -158,6 +163,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeRelacaoPagamentos.show();
   }
   public esconderModalDeRelacaoPagamentos(): void {
+    this.relacaoPagamentosCarregadas = 0;
     this.modalDeRelacaoPagamentos.hide();
   }
 
@@ -187,6 +193,7 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.modalDeCertidoesNegativas.hide();
     this.modalDeCaptacoes.hide();
     this.modalDeRelacaoPagamentos.hide();
+    this.relacaoPagamentosCarregadas = 0;
     this.modalDeReadequacoes.hide();
     this.modalDeRelacaoBensCapital.hide();
   }
@@ -194,6 +201,11 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
   // Obtem o tamanho de vetores internos do Projeto.
   obterLength(nome: string) {
     return (<any>this.projeto._embedded[nome]).length;
+  }
+
+  public incrementarRelacaoPagamentos() {
+    this.relacaoPagamentosCarregadas = this.relacaoPagamentosCarregadas + 20;
+    window.scrollTo(0, 0);
   }
 
   ngAfterViewInit() {

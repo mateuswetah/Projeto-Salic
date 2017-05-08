@@ -491,7 +491,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div *ngFor="let relacao of projeto._embedded.relacao_pagamentos; let i = index;">
+            <div *ngFor="let relacao of projeto._embedded.relacao_pagamentos.slice(0, relacaoPagamentosCarregadas + 20); let i = index;">
             <div class="modal-item ">
               <div *ngIf="i > 0" class="modal-divisor"></div>
               <div class="modal-item-titulo" title="{{ relacao.nome }}"><p>{{ relacao.nome }}</p></div>
@@ -526,6 +526,10 @@
                   <div class="col-sm-5 col-xs-12"><p class="modal-item-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="modal-item-valor" title="{{ relacao.id_planilha_aprovacao }}">{{ relacao.id_planilha_aprovacao }}</p></div>
                 </div>              
               </div>
+            </div>
+            <div class="modal-paginacao">
+              <p *ngIf="relacaoPagamentosCarregadas + 20 <= obterLength('relacao_pagamentos')">Exibidos {{ relacaoPagamentosCarregadas + 20 }} de {{ obterLength('relacao_pagamentos') }} itens.&nbsp;&nbsp;<button (click)="incrementarRelacaoPagamentos();" class="btn btn-default">Mostrar mais.</button></p>
+              <p *ngIf="relacaoPagamentosCarregadas + 20 > obterLength('relacao_pagamentos')">Exibidos {{ obterLength('relacao_pagamentos') }} itens.</p>
             </div>
           </div>
         </div>
