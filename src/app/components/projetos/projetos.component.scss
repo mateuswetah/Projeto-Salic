@@ -7,6 +7,8 @@
   background-color: $background-salic;
   min-height: calc(100vh - 110px) !important;
 
+  #print-section { display: none; }
+
   .container {
     @media (min-width: 992px) { padding: 0px 56px; }
   }
@@ -42,6 +44,8 @@
       
       .links {
         display: inline-block;
+
+        i{ top: 3px; }
       }
       @media (max-width: 768px) { 
           white-space: initial;

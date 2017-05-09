@@ -5,14 +5,14 @@ Este projeto demonstra o uso da [API SALIC](http://hmg.api.salic.cultura.gov.br/
 ## Configuração do ambiente
 ##### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para a execução do projeto.
 #
-A última versão do **Node** pode ser encontrada [aqui].(https://nodejs.org/en/). A versão usada para o desenvolvimento é **7.4.0**. 
+A última versão do **Node** pode ser encontrada [aqui](https://nodejs.org/en/). A versão usada para o desenvolvimento é a **7.4.0**. 
 Usuários _Ubuntu/Debian_ podem instalar via apt:
 
 ```
 $ sudo apt-get update
 $ sudo apt-get install nodejs
 ```
-Geralmente o pacote Node já traz o **npm** junto, mas caso precise instalar, a versão usada para desenvolvimento é **4.0.5**
+Geralmente o pacote Node já traz o **npm** junto, mas caso precise instalar, a versão usada para desenvolvimento é a **4.0.5**
 Usuários Ubuntu/Debian podem instalar via apt:
 
 ```

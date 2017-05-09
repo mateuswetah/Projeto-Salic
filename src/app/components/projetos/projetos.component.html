@@ -6,7 +6,9 @@
                 &nbsp;Pagina de Projeto - baixar:&nbsp;&nbsp;&nbsp;
                 <span class="links"><a filename="projeto.json" target="projeto.json" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC }}" title="Baixar dados em formato JSON.">json</a> | 
                 <a filename="projeto.csv" target="projeto.csv" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=csv' }}" title="Baixar dados em formato CSV.">csv</a> | 
-                <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}" title="Baixar dados em formato XML.">xml</a></span></p>
+                <a filename="projeto.xml" target="projeto.xml" href="{{ configurationService.ApiUrl + 'projetos/' + PRONAC + '?format=xml' }}" title="Baixar dados em formato XML.">xml</a>
+                <!--| <a title="Imprimir página." (click)="print()"><i class="glyphicon glyphicon-print"></i></a>-->
+                </span></p>
       </span>
       <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
@@ -72,45 +74,45 @@
             <div class="col-sm-6 col-xs-12 col-borda-dir">
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Distribuição: </p><p class="pagina-infos-valor">{{ obterLength('distribuicao') === 1 ? obterLength('distribuicao') + ' item.' : obterLength('distribuicao') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class=" btn btn-primary" (click)="mostrarModalDeDistribuicao();" [disabled]="obterLength('distribuicao') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class=" btn btn-primary" title="Ver lista de Distribuições" (click)="mostrarModalDeDistribuicao();" [disabled]="obterLength('distribuicao') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Divulgação: </p><p class="pagina-infos-valor">{{ obterLength('divulgacao') === 1 ? obterLength('divulgacao') + ' item.' : obterLength('divulgacao') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeDivulgacao();" [disabled]="obterLength('divulgacao') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Divulgações" (click)="mostrarModalDeDivulgacao();" [disabled]="obterLength('divulgacao') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Documentos anexos: </p><p class="pagina-infos-valor">{{ obterLength('documentos_anexados') === 1 ? obterLength('documentos_anexados') + ' item.' : obterLength('documentos_anexados') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeDocumentosAnexos();" [disabled]="obterLength('documentos_anexados') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Documentos Anexados" (click)="mostrarModalDeDocumentosAnexos();" [disabled]="obterLength('documentos_anexados') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Marcas anexas: </p><p class="pagina-infos-valor">{{ obterLength('marcas_anexadas') === 1 ? obterLength('marcas_anexadas') + ' item.' : obterLength('marcas_anexadas') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeMarcasAnexas();" [disabled]="obterLength('marcas_anexadas') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Marcas Anexadas" (click)="mostrarModalDeMarcasAnexas();" [disabled]="obterLength('marcas_anexadas') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Deslocamentos: </p><p class="pagina-infos-valor">{{ obterLength('deslocamento') === 1 ? obterLength('deslocamento') + ' item.' : obterLength('deslocamento') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class=" btn btn-primary" (click)="mostrarModalDeDeslocamentos();" [disabled]="obterLength('deslocamento') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class=" btn btn-primary" title="Ver lista de Deslocamentos" (click)="mostrarModalDeDeslocamentos();" [disabled]="obterLength('deslocamento') <= 0">Ver lista</button></div>
               </div>
             </div>
             <div class="col-sm-6 col-xs-12">
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Prorrogação: </p><p class="pagina-infos-valor">{{ obterLength('prorrogacao') === 1 ? obterLength('prorrogacao') + ' item.' : obterLength('prorrogacao') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeProrrogacao();" [disabled]="obterLength('prorrogacao') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Prorrogações" (click)="mostrarModalDeProrrogacao();" [disabled]="obterLength('prorrogacao') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Relatório fisco: </p><p class="pagina-infos-valor">{{ obterLength('relatorio_fisco') === 1 ? obterLength('relatorio_fisco') + ' item.' : obterLength('relatorio_fisco') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class=" btn btn-primary" (click)="mostrarModalDeRelatorioFisico();" [disabled]="obterLength('relatorio_fisco') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class=" btn btn-primary" title="Ver lista de Relatórios Fiscos" (click)="mostrarModalDeRelatorioFisico();" [disabled]="obterLength('relatorio_fisco') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Certidões negativas: </p><p class="pagina-infos-valor">{{ obterLength('certidoes_negativas') === 1 ? obterLength('certidoes_negativas') + ' item.' : obterLength('certidoes_negativas') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeCertidoesNegativas();" [disabled]="obterLength('certidoes_negativas') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Certidões Negativas" (click)="mostrarModalDeCertidoesNegativas();" [disabled]="obterLength('certidoes_negativas') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Readequações: </p><p class="pagina-infos-valor">{{ obterLength('readequacoes') === 1 ? obterLength('readequacoes') + ' item.' : obterLength('readequacoes') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeReadequacoes();" [disabled]="obterLength('readequacoes') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Readequações" (click)="mostrarModalDeReadequacoes();" [disabled]="obterLength('readequacoes') <= 0">Ver lista</button></div>
               </div>
               <div class="row">
                 <div class="col-xs-7"><p class="pagina-infos-label">Relação bens capital: </p><p class="pagina-infos-valor">{{ obterLength('relacao_bens_captal') === 1 ? obterLength('relacao_bens_captal') + ' item.' : obterLength('relacao_bens_captal') + ' itens.' }}</p></div>
-                <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeRelacaoBensCapital();" [disabled]="obterLength('relacao_bens_captal') <= 0">Ver lista</button></div>
+                <div class="col-xs-5 text-right"><button class="btn btn-primary" title="Ver lista de Relação Bens Capital" (click)="mostrarModalDeRelacaoBensCapital();" [disabled]="obterLength('relacao_bens_captal') <= 0">Ver lista</button></div>
               </div>
             </div>
           </div>
@@ -130,7 +132,7 @@
             <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><a [ngStyle]="{ 'pointer-events': obterLength('relacao_pagamentos') <= 0 ? 'none' : 'initial'}" (click)="obterLength('relacao_pagamentos') > 0 ? mostrarModalDeRelacaoPagamentos() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</a></div>
           </div> 
           <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><a [ngStyle]="{ 'pointer-events': obterLength('captacoes') <= 0 ? 'none' : 'initial'}" (click)="obterLength('captacoes') > 0 ? mostrarModalDeCaptacoes() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</a></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><a [ngStyle]="{ 'pointer-events': obterLength('captacoes') <= 0 ? 'none' : 'initial'}" (click)="obterLength('captacoes') > 0 ? mostrarModalDeCaptacoes() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}  - Ver lista de Captações">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</a></div>
             <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
           </div> 
         </div>
@@ -139,19 +141,19 @@
         <div class="pagina-infos pagina-entidades">
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Proponente&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/></p></div>
-            <div class="col-xs-5 text-right botao-verde-claro"><button [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary">Propontente</button></div>
+            <div class="col-xs-5 text-right botao-verde-claro"><button title="Ir para página do Proponente deste Projeto" [routerLink]="['/proponentes', dataFormatterService.extraiIdDaUrl(projeto._links.proponente)]" type="button" class="btn btn-primary">Propontente</button></div>
             <div class="col-xs-7"><p class="pagina-infos-label">Proponente: </p><p class="pagina-infos-valor" id="nomeProponente">{{ projeto.proponente }}</p></div>
             <div class="col-xs-5"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor" id="cgccpfProponente">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
           </div>
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Incentivadores&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Incentivadores" src="../../../assets/ic_incentivadores.svg"/></p></div>
-            <div class="col-xs-5 text-right botao-verde-claro"><button [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" [disabled]="obterLength('captacoes') <= 0">Incentivadores</button></div>
+            <div class="col-xs-5 text-right botao-verde-claro"><button title="Consulta por Incentivadores deste Projeto" [routerLink]="['/incentivadores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" [disabled]="obterLength('captacoes') <= 0">Incentivadores</button></div>
             <div class="col-xs-7"><p class="pagina-infos-label">Captações: </p><p class="pagina-infos-valor">{{ obterLength('captacoes') === 1 ? obterLength('captacoes') + ' item.' : obterLength('captacoes') + ' itens.' }}</p></div>
             <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeCaptacoes();" [disabled]="obterLength('captacoes') <= 0">Captações</button></div>
           </div>
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Fornecedores&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Fornecedores" src="../../../assets/ic_fornecedores.svg"/></p></div>
-            <div class="col-xs-5 text-right botao-verde-claro"><button [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" [disabled]="obterLength('relacao_pagamentos') <= 0">Fornecedores</button></div>
+            <div class="col-xs-5 text-right botao-verde-claro"><button title="Consulta por Fornecedores deste Projeto" [routerLink]="['/fornecedores']" [queryParams]="{'PRONAC': projeto.PRONAC}" type="button" class="btn btn-primary" [disabled]="obterLength('relacao_pagamentos') <= 0">Fornecedores</button></div>
             <div class="col-xs-7"><p class="pagina-infos-label">Relação pagamentos: </p><p class="pagina-infos-valor">{{ obterLength('relacao_pagamentos') === 1 ? obterLength('relacao_pagamentos') + ' item.' : obterLength('relacao_pagamentos') + ' itens.' }}</p></div>
             <div class="col-xs-5 text-right"><button class="btn btn-primary" (click)="mostrarModalDeRelacaoPagamentos();" [disabled]="obterLength('relacao_pagamentos') <= 0">Produtos</button></div>
           </div>
