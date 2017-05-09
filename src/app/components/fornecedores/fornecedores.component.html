@@ -75,8 +75,8 @@
         <div class="card-botoes-container">
           <div class="card-botoes" [ngStyle]="{'border-top-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-left-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623'}">
             <span class="card-botao-resumo" (click)="produto.isJustificativaEscondida = !produto.isJustificativaEscondida"
-                [ngStyle]="{'background-color': !produto.isJustificativaEscondida ? '#e0e0e0' : '#293623', 'border-color': !produto.isJustificativaEscondida ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !produto.isJustificativaEscondida ? '0px' : '5px'}">
-              <a [ngStyle]="{'color': produto.isJustificativaEscondida ? 'white' : '#226000'}">{{ !produto.isJustificativaEscondida ? '&#9656;' : '&#9652;' }}&nbsp; JUSTIFICATIVA</a>
+                   [ngClass]="{'card-botao-resumo-ativo': produto.isJustificativaEscondida }">
+                <a [ngStyle]="{'color': produto.isJustificativaEscondida ? 'white' : '#226000'}">{{ !produto.isJustificativaEscondida ? '&#9656;' : '&#9652;' }}&nbsp; JUSTIFICATIVA</a>
             </span>
             
             <div class="card-botao-ver">

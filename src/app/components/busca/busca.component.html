@@ -602,7 +602,7 @@
           <div class="card-botoes-container">
             <div class="card-botoes" [ngStyle]="{'border-top-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623'}">
               <span class="card-botao-resumo" (click)="projeto.isResumoEscondido = !projeto.isResumoEscondido"
-                   [ngStyle]="{'background-color': !projeto.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !projeto.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !projeto.isResumoEscondido ? '0px' : '5px'}">
+                   [ngClass]="{'card-botao-resumo-ativo': projeto.isResumoEscondido }" >
                 <a [ngStyle]="{'color': projeto.isResumoEscondido ? 'white' : '#226000'}">{{ !projeto.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
               </span>
               
@@ -633,7 +633,7 @@
           <div class="card-botoes-container">
             <div class="card-botoes" [ngStyle]="{'border-top-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-left-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623'}">
               <span class="card-botao-resumo" (click)="proposta.isResumoEscondido = !proposta.isResumoEscondido"
-                   [ngStyle]="{'background-color': !proposta.isResumoEscondido ? '#e0e0e0' : '#293623', 'border-color': !proposta.isResumoEscondido ? '#b3b3b3' : '#293623', 'border-bottom-right-radius': !proposta.isResumoEscondido ? '0px' : '5px'}">
+                   [ngClass]="{'card-botao-resumo-ativo': proposta.isResumoEscondido }">
                 <a [ngStyle]="{'color': proposta.isResumoEscondido ? 'white' : '#226000'}">{{ !proposta.isResumoEscondido ? '&#9656;' : '&#9652;' }}&nbsp; RESUMO</a>
               </span>
               
