@@ -183,19 +183,18 @@ export class ProjetosComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Utilizado pelo Guard de Rotas (can-deactivate-guard.service) quando é feita uma troca de página.
   public esconderTodosOsModais(): void {
-    this.modalDeDistribuicao.hide();
-    this.modalDeDivulgacao.hide();
-    this.modalDeDocumentosAnexos.hide();
-    this.modalDeMarcasAnexas.hide();
-    this.modalDeDeslocamentos.hide();
-    this.modalDeProrrogacao.hide();
-    this.modalDeRelatorioFisico.hide();
-    this.modalDeCertidoesNegativas.hide();
-    this.modalDeCaptacoes.hide();
-    this.modalDeRelacaoPagamentos.hide();
-    this.relacaoPagamentosCarregadas = 0;
-    this.modalDeReadequacoes.hide();
-    this.modalDeRelacaoBensCapital.hide();
+    if (this.modalDeDistribuicao !== undefined) { this.modalDeDistribuicao.hide(); }
+    if (this.modalDeDivulgacao !== undefined) { this.modalDeDivulgacao.hide(); }
+    if (this.modalDeDocumentosAnexos !== undefined) { this.modalDeDocumentosAnexos.hide(); }
+    if (this.modalDeMarcasAnexas !== undefined) { this.modalDeMarcasAnexas.hide(); }
+    if (this.modalDeDeslocamentos !== undefined) { this.modalDeDeslocamentos.hide(); }
+    if (this.modalDeProrrogacao !== undefined) { this.modalDeProrrogacao.hide(); }
+    if (this.modalDeRelatorioFisico !== undefined) { this.modalDeRelatorioFisico.hide(); }
+    if (this.modalDeCertidoesNegativas !== undefined) { this.modalDeCertidoesNegativas.hide(); }
+    if (this.modalDeCaptacoes !== undefined) { this.modalDeCaptacoes.hide(); }
+    if (this.modalDeRelacaoPagamentos !== undefined) { this.modalDeRelacaoPagamentos.hide(); this.relacaoPagamentosCarregadas = 0; }
+    if (this.modalDeReadequacoes !== undefined) { this.modalDeReadequacoes.hide(); }
+    if (this.modalDeRelacaoBensCapital !== undefined) { this.modalDeRelacaoBensCapital.hide(); }
   }
 
   // Obtem o tamanho de vetores internos do Projeto.
