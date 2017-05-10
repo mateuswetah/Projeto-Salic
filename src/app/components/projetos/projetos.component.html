@@ -125,15 +125,15 @@
         <div class="pagina-bloco">
           <div class="row">
             <div class="col-xs-6"><p class="pagina-infos-label">Valor proposta: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_proposta) }}</p></div>
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
-          </div> 
-          <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
             <div class="col-xs-6"><p class="pagina-infos-label">Valor aprovado: </p><a [ngStyle]="{ 'pointer-events': obterLength('relacao_pagamentos') <= 0 ? 'none' : 'initial'}" (click)="obterLength('relacao_pagamentos') > 0 ? mostrarModalDeRelacaoPagamentos() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_aprovado) }}</a></div>
           </div> 
           <div class="row">
-            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><a [ngStyle]="{ 'pointer-events': obterLength('captacoes') <= 0 ? 'none' : 'initial'}" (click)="obterLength('captacoes') > 0 ? mostrarModalDeCaptacoes() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}  - Ver lista de Captações">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</a></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor solicitado: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_solicitado) }}</p></div>
             <div class="col-xs-6"><p class="pagina-infos-label">Outras fontes: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}">{{ dataFormatterService.formataValorEmReais(projeto.outras_fontes) }}</p></div>
+          </div> 
+          <div class="row">
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor captado: </p><a [ngStyle]="{ 'pointer-events': obterLength('captacoes') <= 0 ? 'none' : 'initial'}" (click)="obterLength('captacoes') > 0 ? mostrarModalDeCaptacoes() : null" class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}  - Ver lista de Captações">{{ dataFormatterService.formataValorEmReais(projeto.valor_captado) }}</a></div>
+            <div class="col-xs-6"><p class="pagina-infos-label">Valor projeto: </p><p class="pagina-infos-valor" title="{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}">{{ dataFormatterService.formataValorEmReais(projeto.valor_projeto) }}</p></div>
           </div> 
         </div>
 
