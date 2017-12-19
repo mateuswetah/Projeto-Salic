@@ -10,16 +10,9 @@
       </span>
       <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
-      <share-buttons class="withCount" 
-                  [defaultStyle]="false"
+      <share-buttons class="withCount"
                   [url]="url" 
-                  [title]="'Proposta: ' + proposta.nome" 
-                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
-                  [showCount]="true" ></share-buttons>
-      <span class="sb-buttons"><span class="sb-button">
-        <button (click)="compartilharTelegram()"><span class="sb-template"><i class="fa fa-paper-plane"></i></span></button>
-      </span></span>
+                  [title]="'Proposta: ' + proposta.nome"></share-buttons>
     </div>
     </div>
   </div>

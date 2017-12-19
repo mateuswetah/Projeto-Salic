@@ -12,16 +12,9 @@
       </span>
       <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
-      <share-buttons class="withCount"  
-                  [defaultStyle]="false"
-                  [url]="url" 
-                  [title]="'Projeto: ' + projeto.nome" 
-                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
-                  [showCount]="true" ></share-buttons>
-      <span class="sb-buttons"><span class="sb-button">
-        <button (click)="compartilharTelegram()"><span class="sb-template"><i class="fa fa-paper-plane"></i></span></button>
-      </span></span>
+      <share-buttons class="withCount"
+                    [url]="url" 
+                    [title]="'Projeto: ' + projeto.nome" ></share-buttons>
     </div>
     </div>
   </div>
@@ -137,7 +130,7 @@
           </div> 
         </div>
 
-        <!-- PAGINAS DAS ENTIDADES E INFO RELACIONADAS =============================================-->
+        <!-- PAGINAS DAS ENTIDADES RELACIONADAS =============================================-->
         <div class="pagina-infos pagina-entidades">
           <div class="row">
             <div class="col-xs-7"><p class="pagina-subtitulo">Proponente&nbsp;&nbsp;<img class="botao-icone" alt="Ícone de Proponentes" src="../../../assets/ic_proponentes.svg"/></p></div>
@@ -161,6 +154,7 @@
       </div>
     </div>
 
+    <!-- ABAS E DEMAIS INFOS -->
     <div [ngStyle]="{ opacity: carregandoDados ? '0' : '1' }" class="container-abas row">
       <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
       <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
@@ -180,7 +174,7 @@
       </div>
     </div>  
     <div *ngIf="!carregandoDados && projeto != undefined" class="pagina-textos">   
-      <p>{{ dataFormatterService.verificaSeHaTexto(projeto[textoSelecionado]) }}</p>
+      <p [innerHTML]="dataFormatterService.verificaSeHaTexto(projeto[textoSelecionado])"></p>
     </div>
   </div>
 
