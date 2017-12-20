@@ -786,7 +786,7 @@ export class BuscaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  passouDoScrollTop(event) {
+  passouDoScrollTop() {
     if ($('#headerRespostas').offset() !== undefined) {
       if (window.pageYOffset > $('#headerRespostas').offset().top) {
         return true;
