@@ -9,16 +9,9 @@
       </span>
       <div *ngIf="!carregandoDados" class="compartilhar" title="Compartilhar nas Redes Sociais"> 
       <p>Compartilhe:&nbsp;&nbsp;</p>
-      <share-buttons class="withCount" 
-                  [defaultStyle]="false"
-                  [url]="url" 
-                  [title]="'Fornecedor: ' + fornecedor.nome" 
-                  [description]="'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.'"
-                  [stumbleUpOn]="false" [pinterest]="false" [tumblr]="false" [linkedIn]="false"
-                  [showCount]="true" ></share-buttons>
-      <span class="sb-buttons"><span class="sb-button">
-        <button (click)="compartilharTelegram()"><span class="sb-template"><i class="fa fa-paper-plane"></i></span></button>
-      </span></span>
+      <share-buttons class="withCount"
+                    [url]="url" 
+                    [title]="'Fornecedor: ' + fornecedor.nome"></share-buttons>
       </div>
     </div>
   </div>
@@ -39,7 +32,7 @@
       </div>    
     </div>  
     <div class="row">
-      <div class="col-lg-12 col-sm-12" *ngIf="!carregandoDadosprodutos">
+      <div class="col-lg-12 col-sm-12" *ngIf="!carregandoDadosProdutos">
         <div class="sessao-linha"></div>
         <p class="pagina-subtitulo" *ngIf="!buscaPorProdutosSemResultados">Produtos relacionados:</p>
         <p *ngIf="totalDeItens > 1">Exibindo {{ obterStringDeQuantidadeNaResposta() }} de {{ totalDeItens }} produtos relacionados a este fornecedor: </p>

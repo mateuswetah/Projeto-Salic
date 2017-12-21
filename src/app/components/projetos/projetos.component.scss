@@ -314,8 +314,8 @@
           background-color: $verde-claro-salic; 
           transition: border-bottom-color  0.4s;
           -webkit-transition: border-bottom-color  0.4s;
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
 
           &:hover {
               // color: $verde-claro-salic;
@@ -377,7 +377,7 @@
   .pagina-textos{
     background-color: white;
     border: 2px solid $verde-salic;
-    border-radius: 7px;
+    border-radius: 4px;
     margin: -25px -25px 50px -25px;
     padding: 25px;
     font-size: 1.0em; 

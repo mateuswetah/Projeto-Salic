@@ -654,6 +654,7 @@
                 border-top: 1px solid $cinza-escuro;
                 border-left: 1px solid $cinza-escuro;   
                 margin: -1px;
+                cursor: pointer;
                 @media all and (max-width: 330px){ padding: 8px 15px 9px 10px; }
 
                 &:hover { 
