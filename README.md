@@ -3,13 +3,13 @@
 Este projeto demonstra o uso da [API SALIC](http://api.salic.cultura.gov.br/doc/#) para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura ([SALIC](http://novosalic.cultura.gov.br/cidadao/consultar)).
 
 ## Configuração do ambiente via docker
-##### Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:
+#### Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:
 
 [https://github.com/mateuswetah/docker-angular](https://github.com/mateuswetah/docker-angular)
 
 ## Configuração do ambiente na sua máquina
-##### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para a execução do projeto.
-#
+#### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para a execução do projeto.
+
 A última versão do **Node** pode ser encontrada [aqui](https://nodejs.org/en/). A versão usada para o desenvolvimento é a **9.3.0**. 
 Usuários _Ubuntu/Debian_ podem instalar via apt:
 
