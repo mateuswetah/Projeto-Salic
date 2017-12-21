@@ -62,7 +62,7 @@ export function metaFactory(): MetaLoader {
 }
 
 const shareOptions: ShareButtonsOptions = {
-  include: ['facebook', 'twitter', 'linkedin', 'google', 'reddit', 'whatsapp', 'telegram'],
+  include: ['facebook', 'twitter', 'linkedin', 'google', 'reddit', 'whatsapp', 'telegram', 'email', 'copy'],
   exclude: ['tumblr', 'stumble', 'vk', 'tumblr', 'pinterest'],
   description: 'VERSALIC - Portal de Visualização do Sistema de Apoio às Leis de Incentivo à Cultura.',
   theme: 'versalic'
