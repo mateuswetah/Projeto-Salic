@@ -7,175 +7,148 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
   </head>
-  <body>
-	<section class="hero is-primary">
+  <body >
+	<section class="hero is-info">
 		<div class="hero-body">
-		<div class="container">
-			<h1 class="title">
-			  Blog do <bold>VER</bold>SALIC
-			</h1>
-			<h2 class="subtitle">
-			  PORTAL DE VISUALIZAÇÃO DO SISTEMA DE APOIO ÀS LEIS DE INCENTIVO À CULTURA
-			</h2>
-		</div>
+			<div class="container">
+				<h1 class="title">
+					Blog do <bold>VER</bold>SALIC
+				</h1>
+				<h2 class="subtitle">
+					PORTAL DE VISUALIZAÇÃO DO SISTEMA DE APOIO ÀS LEIS DE INCENTIVO À CULTURA
+				</h2>
+			</div>
 		</div>
 	</section>
 
-  <section class="section">
+  <section class="section" id="app" style="padding-top: 0px;">
+	
+		<div class="tabs is-medium is-centered">
+	      <ul>
+	          <li @click="changeTab(0)" :class="selectedTab == 0 ? 'is-active' : ''"><a href="#">Notícias</a></li>
+	          <li @click="changeTab(1)" :class="selectedTab == 1 ? 'is-active' : ''"><a href="#">Instalação</a></li>
+	          <li @click="changeTab(2)" :class="selectedTab == 2 ? 'is-active' : ''"><a href="#">Sobre</a></li>
+	      </ul>
+	  </div>
+
     <div class="container">
-				<div class="content">
-				<h1 id="versalicumanovaformadeconsultarenavegaratravsdosprojetosculturaisdaleirouanet">VerSalic - Uma nova forma de consultar e navegar através dos projetos culturais da Lei Rouanet</h1>
+			<div class="content">
 
-				<p>Este aplicativo faz uso da <a href="http://api.salic.cultura.gov.br/">API SALIC</a> para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura (<a href="http://salic.cultura.gov.br">SALIC</a>). Para saber mais sobre a Lei Rouanet, acesse <a href="http://rouanet.cultura.gov.br">rouanet.cultura.gov.br</a>.</p>
+					<!-- NOTÍCIAS -->
+				<div v-if="selectedTab == 0">
+					<h1>Blog do VerSalic</h1>
 
-				<p>O VerSalic pode ser utilizado em <a href="http://versalic.cultura.gov.br">Versalic.cultura.gov.br</a>. Descubra e compartilhe dados da Lei Rouanet!</p>
+					<h2>Acompanhe aqui novidades sobre o desenvolvimento do VerSalic!</h2>
+<!--
+					<div class="box">
+						<article class="media">
+							<div class="media-left">
+								<figure class="image is-64x64">
+									<img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+								</figure>
+							</div>
+							<div class="media-content">
+								<div class="content">
+									<p>
+										<strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+										<br>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+									</p>
+								</div>
+							
+							</div>
+						</article>
+					</div>
+-->
+				</div>
 
-				<h2 id="configuraodoambienteviadocker">Configuração do ambiente via docker</h2>
+				<!-- SOBRE -->
+				<div v-if="selectedTab == 2">
+					<h1>VerSalic - Uma nova forma de consultar e navegar através dos projetos culturais da Lei Rouanet</h1>
 
-				<h4 id="recomendamosfortementeousododockerparatrabalharcomesteprojetosigaasinstruesdesterepositrioconsiderandoaverso161daclidoangular">Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:</h4>
+					<p>Este aplicativo faz uso da <a href="http://api.salic.cultura.gov.br/">API SALIC</a> para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura (<a href="http://salic.cultura.gov.br">SALIC</a>). Para saber mais sobre a Lei Rouanet, acesse <a href="http://rouanet.cultura.gov.br">rouanet.cultura.gov.br</a>.</p>
 
-				<p><a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a></p>
+					<p>O VerSalic pode ser utilizado em <a href="http://versalic.cultura.gov.br">Versalic.cultura.gov.br</a>. Descubra e compartilhe dados da Lei Rouanet!</p>
 
-				<h2 id="configuraodoambientenasuamquina">Configuração do ambiente na sua máquina</h2>
+				</div>
 
-				<h4 id="precisoter_node__npm__typescript_e_angularcli_instaladosparaaexecuodoprojeto">É preciso ter <em>node</em>, <em>npm</em>, <em>typescript</em> e <em>angular cli</em> instalados para a execução do projeto.</h4>
+				<!-- INSTALAÇÃO -->
+				<div v-if="selectedTab == 1">				
 
-				<p>A última versão do <strong>Node</strong> pode ser encontrada <a href="https://nodejs.org/en/">aqui</a>. A versão usada para o desenvolvimento é a <strong>9.3.0</strong>. 
-				Usuários <em>Ubuntu/Debian</em> podem instalar via apt:</p>
+					<h2>Configuração do ambiente via docker</h2>
 
-				<pre><code>$ sudo apt-get update
-				$ sudo apt-get install nodejs</code></pre>
+					<h4>Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:</h4>
 
-				<p>Geralmente o pacote Node já traz o <strong>npm</strong> junto, mas caso precise instalar, a versão usada para desenvolvimento é a <strong>5.5.1</strong>
-				Usuários Ubuntu/Debian podem instalar via apt:</p>
+					<p><a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a></p>
 
-				<pre><code>$ sudo apt-get install npm</code></pre>
+					<h2>Configuração do ambiente na sua máquina</h2>
 
-				<p>O <strong>TypeScript</strong> pode ser instalado via npm:</p>
+					<h4>É preciso ter <em>node</em>, <em>npm</em>, <em>typescript</em> e <em>angular cli</em> instalados para a execução do projeto.</h4>
 
-				<pre><code>$ npm install -g typescript</code></pre>
+					<p>A última versão do <strong>Node</strong> pode ser encontrada <a href="https://nodejs.org/en/">aqui</a>. A versão usada para o desenvolvimento é a <strong>9.3.0</strong>. 
+					Usuários <em>Ubuntu/Debian</em> podem instalar via apt:</p>
 
-				<p>Dependendo das configurações npm do seu sistema (em geral Mac e Linux) será necessário o '<em>sudo</em>' para o npm ter as permissões de instalação.</p>
+					<pre><code>$ sudo apt-get update
+					$ sudo apt-get install nodejs</code></pre>
 
-				<p>Por fim, a instalação do <strong>Angular CLI</strong> também é feita via npm:</p>
+					<p>Geralmente o pacote Node já traz o <strong>npm</strong> junto, mas caso precise instalar, a versão usada para desenvolvimento é a <strong>5.5.1</strong>
+					Usuários Ubuntu/Debian podem instalar via apt:</p>
 
-				<pre><code>$ npm install -g @angular/cli@1.6.1</code></pre>
+					<pre><code>$ sudo apt-get install npm</code></pre>
 
-				<p>Mais informações sobre a instalação do ambiente Angular podem ser obtidas na <a href="https://github.com/angular/angular-cli">página da CLI</a>. A versão utilizada neste projeto é a <strong>1.6.1</strong>. Para verificar a versão atual, basta rodar:</p>
+					<p>O <strong>TypeScript</strong> pode ser instalado via npm:</p>
 
-				<pre><code>$ ng --version</code></pre>
+					<pre><code>$ npm install -g typescript</code></pre>
 
-				<h2 id="instalao">Instalação</h2>
+					<p>Dependendo das configurações npm do seu sistema (em geral Mac e Linux) será necessário o '<em>sudo</em>' para o npm ter as permissões de instalação.</p>
 
-				<p>Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:</p>
+					<p>Por fim, a instalação do <strong>Angular CLI</strong> também é feita via npm:</p>
 
-				<pre><code>$ git clone https://github.com/mateuswetah/Projeto-Salic.git
-				$ cd Projeto-Salic/
-				$ npm install</code></pre>
+					<pre><code>$ npm install -g @angular/cli@1.6.1</code></pre>
 
-				<p>Os módulos necessários são informados no <code>package.json</code>. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via <code>npm install</code>.</p>
+					<p>Mais informações sobre a instalação do ambiente Angular podem ser obtidas na <a href="https://github.com/angular/angular-cli">página da CLI</a>. A versão utilizada neste projeto é a <strong>1.6.1</strong>. Para verificar a versão atual, basta rodar:</p>
 
-				<h2 id="executandoemlocalserver">Executando em local server</h2>
+					<pre><code>$ ng --version</code></pre>
 
-				<p>Para obter um server de desenvolvimeto, execute:</p>
+					<h2 id="instalao">Instalação</h2>
 
-				<pre><code>$ ng serve</code></pre>
+					<p>Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:</p>
 
-				<p>ou, caso esteja no Docker:</p>
+					<pre><code>$ git clone https://github.com/mateuswetah/Projeto-Salic.git
+					$ cd Projeto-Salic/
+					$ npm install
+					</code></pre>
 
-				<pre><code>$ ng serve --host 0.0.0.0</code></pre>
+					<p>Os módulos necessários são informados no <code>package.json</code>. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via <code>npm install</code>.</p>
 
-				<p>
-				Navegue para <code>http://localhost:4200/</code>. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.</p>
+					<h2 id="executandoemlocalserver">Executando em local server</h2>
 
-				<h2 id="gerandobuilddeproduo">Gerando build de produção:</h2>
+					<p>Para obter um server de desenvolvimeto, execute:</p>
 
-				<p>Recomendamos testar uma build em produção antes de qualquer <em>pull-request</em>, já que a compilação Ahead of Time (AOT) é sensível a erros que não são percebidos pelo compilador em modo de desenvolvimento. Para compilar em produção, com otimização de assets e minimização dos arquivos js, execute:</p>
+					<pre><code>$ ng serve</code></pre>
 
-				<pre><code>$ ng build --prod --aot
-				</code></pre>
+					<p>ou, caso esteja no Docker:</p>
 
-				<p>Isso irá gerar os arquivos de distribuição na pasta indicada pelo caminho <code>outDir</code> especificado no arquivo <em>.angular-cli.json</em>. Mude para o caminho do seu web server se desejar. </p>
+					<pre><code>$ ng serve --host 0.0.0.0</code></pre>
 
-				<h2 id="linkparaaltimaversohospedada">Link para a última versão hospedada</h2>
+					<p>
+					Navegue para <code>http://localhost:4200/</code>. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.</p>
 
-				<p><a href="http://hmg.app.api.salic.cultura.gov.br/">Acesse aqui</a>. </p><h1 id="versalicumanovaformadeconsultarenavegaratravsdosprojetosculturaisdaleirouanet">VerSalic - Uma nova forma de consultar e navegar através dos projetos culturais da Lei Rouanet</h1>
+					<h2>Gerando build de produção:</h2>
 
-				<p>Este aplicativo faz uso da <a href="http://api.salic.cultura.gov.br/">API SALIC</a> para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura (<a href="http://salic.cultura.gov.br">SALIC</a>). Para saber mais sobre a Lei Rouanet, acesse <a href="http://rouanet.cultura.gov.br">rouanet.cultura.gov.br</a>.</p>
+					<p>Recomendamos testar uma build em produção antes de qualquer <em>pull-request</em>, já que a compilação Ahead of Time (AOT) é sensível a erros que não são percebidos pelo compilador em modo de desenvolvimento. Para compilar em produção, com otimização de assets e minimização dos arquivos js, execute:</p>
 
-				<p>O VerSalic pode ser utilizado em <a href="http://versalic.cultura.gov.br">Versalic.cultura.gov.br</a>. Descubra e compartilhe dados da Lei Rouanet!</p>
+					<pre><code>$ ng build --prod --aot</code></pre>
 
-				<h2 id="configuraodoambienteviadocker">Configuração do ambiente via docker</h2>
+					<p>Isso irá gerar os arquivos de distribuição na pasta indicada pelo caminho <code>outDir</code> especificado no arquivo <em>.angular-cli.json</em>. Mude para o caminho do seu web server se desejar. </p>
 
-				<h4 id="recomendamosfortementeousododockerparatrabalharcomesteprojetosigaasinstruesdesterepositrioconsiderandoaverso161daclidoangular">Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:</h4>
+					<h2>Link para a última versão hospedada</h2>
 
-				<p><a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a></p>
+					<p><a href="http://hmg.app.api.salic.cultura.gov.br/">Acesse aqui</a>. </p>
 
-				<h2 id="configuraodoambientenasuamquina">Configuração do ambiente na sua máquina</h2>
+				</div>
 
-				<h4 id="precisoter_node__npm__typescript_e_angularcli_instaladosparaaexecuodoprojeto">É preciso ter <em>node</em>, <em>npm</em>, <em>typescript</em> e <em>angular cli</em> instalados para a execução do projeto.</h4>
-
-				<p>A última versão do <strong>Node</strong> pode ser encontrada <a href="https://nodejs.org/en/">aqui</a>. A versão usada para o desenvolvimento é a <strong>9.3.0</strong>. 
-				Usuários <em>Ubuntu/Debian</em> podem instalar via apt:</p>
-
-				<pre><code>$ sudo apt-get update
-				$ sudo apt-get install nodejs</code></pre>
-
-				<p>Geralmente o pacote Node já traz o <strong>npm</strong> junto, mas caso precise instalar, a versão usada para desenvolvimento é a <strong>5.5.1</strong>
-				Usuários Ubuntu/Debian podem instalar via apt:</p>
-
-				<pre><code>$ sudo apt-get install npm</code></pre>
-
-				<p>O <strong>TypeScript</strong> pode ser instalado via npm:</p>
-
-				<pre><code>$ npm install -g typescript</code></pre>
-
-				<p>Dependendo das configurações npm do seu sistema (em geral Mac e Linux) será necessário o '<em>sudo</em>' para o npm ter as permissões de instalação.</p>
-
-				<p>Por fim, a instalação do <strong>Angular CLI</strong> também é feita via npm:</p>
-
-				<pre><code>$ npm install -g @angular/cli@1.6.1</code></pre>
-
-				<p>Mais informações sobre a instalação do ambiente Angular podem ser obtidas na <a href="https://github.com/angular/angular-cli">página da CLI</a>. A versão utilizada neste projeto é a <strong>1.6.1</strong>. Para verificar a versão atual, basta rodar:</p>
-
-				<pre><code>$ ng --version</code></pre>
-
-				<h2 id="instalao">Instalação</h2>
-
-				<p>Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:</p>
-
-				<pre><code>$ git clone https://github.com/mateuswetah/Projeto-Salic.git
-				$ cd Projeto-Salic/
-				$ npm install
-				</code></pre>
-
-				<p>Os módulos necessários são informados no <code>package.json</code>. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via <code>npm install</code>.</p>
-
-				<h2 id="executandoemlocalserver">Executando em local server</h2>
-
-				<p>Para obter um server de desenvolvimeto, execute:</p>
-
-				<pre><code>$ ng serve</code></pre>
-
-				<p>ou, caso esteja no Docker:</p>
-
-				<pre><code>$ ng serve --host 0.0.0.0</code></pre>
-
-				<p>
-				Navegue para <code>http://localhost:4200/</code>. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.</p>
-
-				<h2 id="gerandobuilddeproduo">Gerando build de produção:</h2>
-
-				<p>Recomendamos testar uma build em produção antes de qualquer <em>pull-request</em>, já que a compilação Ahead of Time (AOT) é sensível a erros que não são percebidos pelo compilador em modo de desenvolvimento. Para compilar em produção, com otimização de assets e minimização dos arquivos js, execute:</p>
-
-				<pre><code>$ ng build --prod --aot</code></pre>
-
-				<p>Isso irá gerar os arquivos de distribuição na pasta indicada pelo caminho <code>outDir</code> especificado no arquivo <em>.angular-cli.json</em>. Mude para o caminho do seu web server se desejar. </p>
-
-				<h2 id="linkparaaltimaversohospedada">Link para a última versão hospedada</h2>
-
-				<p><a href="http://hmg.app.api.salic.cultura.gov.br/">Acesse aqui</a>. </p>
-		  </div>
+			</div>
 		</div>
   </section>
 
@@ -183,12 +156,29 @@
 		<div class="container">
 		  <div class="content has-text-centered">
 		    <p>
-		      <strong>Blog do VerSalic</strong> por <a href="http://jgthms.com">Mateus Wetah</a>. The source code is licensed
-		      <a href="https://opensource.org/licenses/GPL-3.0">GLP-v3.0</a>. The website content
+		      <strong>Blog do VerSalic</strong> por <a href="http://jgthms.com">Mateus Wetah</a>. 
+					The source code is licensed
+		      <a href="https://opensource.org/licenses/GPL-3.0">GLP-v3.0</a>. 
+					The website content
 		      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
 		    </p>
 		  </div>
 		</div>
 	</footer>
- </body>
+ </body>	
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			selectedTab: number = 0
+		},
+		methods: {
+			changeTab(tab) {
+				this.selectedTab = tab;	
+			}			
+		}
+	})	
+</script>
