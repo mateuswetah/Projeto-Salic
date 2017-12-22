@@ -8,164 +8,323 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
   </head>
   <body >
-	<section class="hero is-info">
-		<div class="hero-body">
-			<div class="container">
-				<h1 class="title">
-					Blog do <bold>VER</bold>SALIC
-				</h1>
-				<h2 class="subtitle">
-					PORTAL DE VISUALIZAÇÃO DO SISTEMA DE APOIO ÀS LEIS DE INCENTIVO À CULTURA
-				</h2>
-			</div>
-		</div>
-	</section>
+  <div id="app">
+  	<section class="hero is-info">
+  		<div class="hero-body">
+  			<div class="container has-text-centered">
+  				<h1 class="title">
+  					Blog do <bold>VER</bold>SALIC
+  				</h1>
+  				<h2 class="subtitle">
+  					PORTAL DE VISUALIZAÇÃO DO SISTEMA DE APOIO ÀS LEIS DE INCENTIVO À CULTURA
+  				</h2>
+  			</div>
+  		</div>
+      <!-- Hero footer: will stick at the bottom -->
+      <div class="hero-foot">
+        <div class="tabs is-boxed is-centered">
+    	      <ul>
+    	          <li @click="changeTab(0)" :class="selectedTab == 0 ? 'is-active' : ''"><a href="#">Notícias</a></li>
+    	          <li @click="changeTab(1)" :class="selectedTab == 1 ? 'is-active' : ''"><a href="#">Instalação</a></li>
+    	          <li @click="changeTab(2)" :class="selectedTab == 2 ? 'is-active' : ''"><a href="#">Sobre</a></li>
+    	      </ul>
+    	  </div>
+      </div>
+  	</section>
 
-  <section class="section" id="app" style="padding-top: 0px;">
-	
-		<div class="tabs is-medium is-centered">
-	      <ul>
-	          <li @click="changeTab(0)" :class="selectedTab == 0 ? 'is-active' : ''"><a href="#">Notícias</a></li>
-	          <li @click="changeTab(1)" :class="selectedTab == 1 ? 'is-active' : ''"><a href="#">Instalação</a></li>
-	          <li @click="changeTab(2)" :class="selectedTab == 2 ? 'is-active' : ''"><a href="#">Sobre</a></li>
-	      </ul>
-	  </div>
+    <section class="section">
 
-    <div class="container">
-			<div class="content">
+      <div class="container">
+  			<div class="columns is-desktop">
 
-					<!-- NOTÍCIAS -->
-				<div v-if="selectedTab == 0">
-					<h1>Blog do VerSalic</h1>
+  					<!-- NOTÍCIAS -->
+  				<div v-if="selectedTab == 0" class="column is-8 is-offset-2">
+  					<div class="content">
+  					  <h2>Acompanhe aqui novidades sobre o desenvolvimento do VerSalic!</h2>
+            </div>
 
-					<h2>Acompanhe aqui novidades sobre o desenvolvimento do VerSalic!</h2>
-<!--
-					<div class="box">
-						<article class="media">
-							<div class="media-left">
-								<figure class="image is-64x64">
-									<img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-								</figure>
-							</div>
-							<div class="media-content">
-								<div class="content">
-									<p>
-										<strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-										<br>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-									</p>
-								</div>
-							
-							</div>
-						</article>
-					</div>
--->
-				</div>
+            <!-- POST 2 -->
+  					<div class="box" id="post2">
+  						<article class="media">
+  							<div class="media-left">
+  								<figure class="image is-64x64">
+  									<img src="avatar_mateus.jpg" alt="Avatar Mateus" style="border-radius: 50%">
+  								</figure>
+  							</div>
+  							<div class="media-content">
+									<p><strong>Mateus Wetah</strong> <small>@mateuswetah <a href="#post2">Post #2</a></small></p>
+                  <h1 class="title is-3 has-text-primary">Refatoração para a Versão 2.0 do VerSalic</h1>
+                  <h2 class="subtitle is-5">Também conhecida como, tome cuidado com suas versões no Angular!</h2>
+                  <article class="content">
+                    <p>Mês passado alguns colegas do <a href="https://fga.unb.br/lappis">Lappis</a>
+                      tentaram compilar o código do VerSalic para configurar uma Docker e não tiveram sucesso. Intrigado,
+                      fui investigar a situação e vi que nem eu conseguia. A criatura derrotou seu criador! <strong>Nesta onda de
+                      tentar desenvolver Software Livre a gente muitas vezes se esquece de que o mesmo, antes de tudo, tem
+                      que ser livre de nós mesmos</strong>.
+                    </p>
+                    <p>
+                      Então fui analisar a situação. O problema é basicamente na questão das diversas dependências do projeto.
+                      Na minha cabeça, termos um <code>package.json</code> com todos as versões de pacotes do projeto listadas
+                      seria suficiente pra qualquer <code>npm install</code> deixar tudo em ordem pra qualquer um que
+                      baixasse o código do GitHub. Bom, não foi bem assim.
+                    </p>
+                    <br>
+                    <h4 class="has-text-info">Error! Version vX.X.X not found...</h4>
+                    <p>
+                      Pra início de conversa, deixei claro no README as versões necessárias para o Node(7.0.4) e NPM(4.0.5).
+                      O que eu não contava, era que o link para instalação dessa versão sumiria dos repositórios oficiais do NodeJS!
+                      (<a href="https://nodejs.org/dist/">Sério, saca isso.</a>).
+                    </p>
+                    <p>A ingenuidade continuou com o uso da Angular CLI em sua vesão Beta (1.0.0-beta-31) - não confundir com a
+                      versão do Angular em si, que já era o 2.4. Embora ainda seja possível usar esta versão em configurações de um
+                      projeto, o Angular fez questão de trazer uma mudancinha ou outra de projeto. O arquivo de configuração <code>
+                      angular-cli.json</code>, por exemplo, passou a ser um arquivo oculto nas versões mais recentes.
+                    </p>
+                    <p>De início pensei que a solução seria montar um Docker com as configurações "legadas" que usei em meu projeto.
+                      Não tinha como fazer um docker com Node 7.0.4? Tudo bem, eu usaria a versão mais próxima! E assim o fiz. Logo
+                      ao tentar compilar, porém, uma das bibliotecas de terceiros que usei já não estava mais disponível no NPM registry.
+                    </p>
+                    <p>
+                      <i>Aí o tamanho do trampo começou a ficar claro.</i>
+                    </p>
+                    <p>
+                      No projeto VerSalic utilizei diversas bibliotecas de terceiros, e na época estive bem satisfeito com elas porque,
+                      afinal, uma das mágicas do Angular é te permitir criar e reutilizar componentes e diretivas, o que de fato fez
+                      com que muita gente criasse ferramentas incríveis. Dentre essas posso citar um componente de <i>calendar-picker</i>, um
+                      componente de botões de compartilhamento, um module para tratar de meta-tags do site, etc.
+                    </p>
+                    <p>
+                      A questão é que muitas dessas bibliotecas, junto com o Angular, estavam sofrendo constantes mudanças. Algumas
+                      tinham acabado de sair da traumática migração do Angular 1 para o Angular 2 e outras estavam encarando novas mudanças
+                      quebrantes (como a chegada do <i>Webpack</i> e da compilação <i>Ahead of Time</i>). Nisso, algumas acabaram por retirar do NPM
+                      registry versões antigas, que estavam causando dor de cabeça por quebrar o código dos usuários. Algumas até
+                      mudaram o nome do projeto (como aconteceu com a de Meta-tags), de modo que ao executar <code>npm install</code>,
+                      choviam erros no meu console avisando que não foi possível encontrar tal pacote. A coisa vai ficando pior quando
+                      você começa a tentar ajustar as versões, para usar a compatível com seu ambiente. A <i>calendar-picker</i>, por exemplo,
+                      depende de uma do <i>Bootstrap</i>... esta tem suas próprias dependências no Angular...
+                    </p>
+                    <br>
+                    <h4 class="has-text-info">Retrabalho, mas dessa vez no lugar certo.</h4>
+                    <p>
+                      Ficou claro pra mim que seria mais seguro migrar para uma versão do Angular mais recente e trabalhar com as versões
+                      destas bibliotecas que estavam mais consolidadas. Após alguns testes com o Angular 5, descobri que nem todas as que eu
+                      estava usando suportavam ele ainda, por isso fiquei no Angular 4 (4.3.0, para ser mais preciso). E mais, eu deveria
+                      fazer este desenvolvimento 100% dentro do Docker, para garantir que o ambiente onde tudo foi criado fosse reproduzível
+                      e aproveitável. E sim, eu optei por recriar o projeto do zero com a CLI, pra garantir que nenhuma outra mudança de
+                      projeto me aparecesse de surpresa.
+                    </p>
+                    <figure class="image">
+                      <img src="docker.png" alt="Docker e Angular" style="border-radius: 5px">
+                    </figure>
+                    <p>
+                      O Dockerfile e as instruções de desenvolvimento podem ser encontrados aqui:
+                      <a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a>.
+                      As novas configurações de ambiente, são as seguintes:
+                      <ul>
+                        <li>Node v9.3.0</li>
+                        <li>NPM 5.5.1</li>
+                        <li>Angular CLI 1.6.1</li>
+                      </ul>
+                      A ideia é que este Docker possa ser aproveitado para outros projetos Angular também. Basta dar uma olhadinha no
+                      <code>package.json</code> do projeto que você quer contribuir, conferir qual a versão da angular-cli que é exigida,
+                      e colocar a mesma na variável de ambiente do <code>Dockerfile</code>. A imagem é baseada na imagem oficial do NodeJS.
+                    </p>
+                    <p>
+                      O retrabalho não foi tão exaustivo como parece, muitos arquivos nem precisaram ser tocados, mas enfrentei algumas dores
+                      de cabeça com uma certa chamada de função incorreta acusada pelo compilador ao usar <i>Ahead of Time</i> (basicamente
+                      essencial para qualquer projeto Angular em modo produção). O problema é que,
+                      <a href="https://github.com/angular/angular-cli/issues/6374">um dos issues conhecidos</a> da Angular CLI é o
+                      de não informar corretamente a linha de erro quando o mesmo foi identificado durante a compilação com AOT. Porque não
+                      procurar um bug na base do tira e põe, não é mesmo? Bom, algumas horas de detetive depois, idendifiquei o problema,
+                      que graciosamente não causava nenhum warning nas versões anteriores do Angular ¯\_(ツ)_/¯.
+                    </p>
+                    <br>
+                    <h4 class="has-text-info">Aproveitando para arrumar a casa.</h4>
+                    <p>
+                      No processo de atualização, fiz alguns pequenos ajustes de CSS, nada de mais. Porém algumas mudanças boas vieram
+                      a versão mais recente da <i>ngx-sharebuttons</i>. Antes, não havia botão de comparilhamento para o Telegram
+                      (eu implementei um na unha e alinhei com o componente da sharebuttons). Agora não só temos esse, como temos um útil
+                      botão de compartilhar via email e copiar link direto da url :)
+                      <figure class="image">
+                        <img src="screenshot_1.png" alt="Novas opções de compartilhamento" style="border-radius: 5px">
+                      </figure>
+                      </p>
+                      <p>
+                        O módulo <code>bootstrap_salic</code> que carrega a versão customizada do bootstrap com as cores do VerSalic agora não
+                        fica mais na pasta <i>node_modules</i> e sim na <i>src</i>, pois novas instalações do ambiente iriam sobrescrever esta pasta.
+                        Mesmo referenciando o módulo como uma dependência de desenvolvimento, a referência ao arquivo gerava um link que (por razões
+                        que ainda não compreendo), não era carregado ao se compilar o código.
+                      </p>
+                      <p>Uma requisição antiga já era a mudança da ordenação padrão de Projetos para PRONAC:desc, ao invés de PRONAC:asc. Isso
+                      está feito agora, evitando que a página inicial de projetos esteja sempre mostrando os mesmos projetos mais antigos da API.</p>
+                      <p>Por fim, durante meus teste descobri um bug seríssimo na paginação, que já está ocorrendo oficial. O issue já foi reportado
+                      aqui: <a href="https://github.com/mateuswetah/Projeto-Salic/issues/23">https://github.com/mateuswetah/Projeto-Salic/issues/23</a>.
+                      Enquanto este problema não é solucionado, mantive as navegações para os limites (primeira página e última página) desabilitadas.
+                    </p>
+                    <br>
+                    <h4 class="has-text-info">Conclusão.</h4>
+                    <p>
+                      O VerSalic foi meu primeiro grande projeto com Angular e certamente tem suas falhas. Depois de oito meses sem olhar pra cara
+                      do código, voltar a analisar a coisa me mostrou que tenho muito o que aprender ainda. Certamente aprendi muito daqui pra lá
+                      e ainda preciso entender como funcionam algumas coisas (pra evitar inclusive esse tipo de retrabalho que tive). Talvez houvessem
+                      caminhos mais simples pra resolver o problema das versões em questão, mas como não sou expert, acabei optando pelo caminho
+                      das pedras. Hoje, estudando outras frameworks, linguagens, bibliotecas, posso confirmar que o Angular tem sim um calcanhar de
+                      aquiles, que é esta questão de "mudanças quebrantes".
+                    </p>
+                    <p>
+                      Mesmo assim, acredito que agora temos uma boa "base" para futuras contribuições. Muito ainda poderia ser melhorado em termos
+                      de documentação para que outras pessoas possam adicionar <i>features</i> sem depender tanto do contato comigo. A própria criação
+                      deste blog é uma tentativa de abertura para isso. Embora sejamos extremamente dependes de melhorias também
+                      no projeto da API, acho que este site ainda tem sim muito a crescer, se claro, voltarmos a ter esta oportunidade, então...
+                    </p>
+                    <p><strong><it>..até a próxima!</it></strong></p>
+                  </article>
+                  <br/>
+                  <nav class="level is-mobile">
+                    <div class="level-right has-text-grey">
+                      <p class="level-item">
+                        <small>22 de Dezembro de 2017</small>
+                      </p>
+                    </div>
+                  </nav>
+  							</div>
+  						</article>
+  					</div>
 
-				<!-- SOBRE -->
-				<div v-if="selectedTab == 2">
-					<h1>VerSalic - Uma nova forma de consultar e navegar através dos projetos culturais da Lei Rouanet</h1>
+            <!-- POST 1 -->
+  					<div class="box" id="post1">
+  						<article class="media">
+  							<div class="media-left">
+  								<figure class="image is-64x64">
+  									<img src="avatar_mateus.jpg" alt="Avatar Mateus"  style="border-radius: 50%">
+  								</figure>
+  							</div>
+  							<div class="media-content" >
+                  <p><strong>Mateus Wetah</strong> <small>@mateuswetah <a href="#post1">Post #1</a></small></p>
+                  <h1 class="title is-3 has-text-primary">Olá Blog!</h1>
+                  <h2 class="subtitle is-5">Primeiro post do Blog do VerSalic.</h2>
+        					<p>Este é um espaço modesto para a divulgação das atividades
+                    de desenvolvimento do VerSalic, site que demonstra o uso
+                    da API de acesso ao SALIC e serve como portal de visualização
+                    dos dados da Lei Rouanet mais acessível ao cidadão.
+                  </p>
+                  <br/>
+                  <nav class="level is-mobile">
+                    <div class="level-right has-text-grey">
+                      <p class="level-item">
+                        <small>22 de Dezembro de 2017</small>
+                      </p>
+                    </div>
+                  </nav>
+  							</div>
+  						</article>
+  					</div>
+  				</div>
 
-					<p>Este aplicativo faz uso da <a href="http://api.salic.cultura.gov.br/">API SALIC</a> para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura (<a href="http://salic.cultura.gov.br">SALIC</a>). Para saber mais sobre a Lei Rouanet, acesse <a href="http://rouanet.cultura.gov.br">rouanet.cultura.gov.br</a>.</p>
+  				<!-- SOBRE -->
+  				<div v-if="selectedTab == 2" class="content column is-8 is-offset-2">
+  					<h1>VerSalic - Uma nova forma de consultar e navegar através dos projetos culturais da Lei Rouanet</h1>
 
-					<p>O VerSalic pode ser utilizado em <a href="http://versalic.cultura.gov.br">Versalic.cultura.gov.br</a>. Descubra e compartilhe dados da Lei Rouanet!</p>
+  					<p>Este aplicativo faz uso da <a href="http://api.salic.cultura.gov.br/">API SALIC</a> para consultas aos dados do Sistema de Apoio às Leis de Incentivo à Cultura (<a href="http://salic.cultura.gov.br">SALIC</a>). Para saber mais sobre a Lei Rouanet, acesse <a href="http://rouanet.cultura.gov.br">rouanet.cultura.gov.br</a>.</p>
 
-				</div>
+  					<p>O VerSalic pode ser utilizado em <a href="http://versalic.cultura.gov.br">Versalic.cultura.gov.br</a>. Descubra e compartilhe dados da Lei Rouanet!</p>
 
-				<!-- INSTALAÇÃO -->
-				<div v-if="selectedTab == 1">				
+  				</div>
 
-					<h2>Configuração do ambiente via docker</h2>
+  				<!-- INSTALAÇÃO -->
+  				<div v-if="selectedTab == 1" class="content column is-8 is-offset-2">
 
-					<h4>Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:</h4>
+  					<h2>Configuração do ambiente via docker</h2>
 
-					<p><a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a></p>
+  					<h4>Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:</h4>
 
-					<h2>Configuração do ambiente na sua máquina</h2>
+  					<p><a href="https://github.com/mateuswetah/docker-angular">https://github.com/mateuswetah/docker-angular</a></p>
 
-					<h4>É preciso ter <em>node</em>, <em>npm</em>, <em>typescript</em> e <em>angular cli</em> instalados para a execução do projeto.</h4>
+  					<h2>Configuração do ambiente na sua máquina</h2>
 
-					<p>A última versão do <strong>Node</strong> pode ser encontrada <a href="https://nodejs.org/en/">aqui</a>. A versão usada para o desenvolvimento é a <strong>9.3.0</strong>. 
-					Usuários <em>Ubuntu/Debian</em> podem instalar via apt:</p>
+  					<h4>É preciso ter <em>node</em>, <em>npm</em>, <em>typescript</em> e <em>angular cli</em> instalados para a execução do projeto.</h4>
 
-					<pre><code>$ sudo apt-get update
-					$ sudo apt-get install nodejs</code></pre>
+  					<p>A última versão do <strong>Node</strong> pode ser encontrada <a href="https://nodejs.org/en/">aqui</a>. A versão usada para o desenvolvimento é a <strong>9.3.0</strong>.
+  					Usuários <em>Ubuntu/Debian</em> podem instalar via apt:</p>
 
-					<p>Geralmente o pacote Node já traz o <strong>npm</strong> junto, mas caso precise instalar, a versão usada para desenvolvimento é a <strong>5.5.1</strong>
-					Usuários Ubuntu/Debian podem instalar via apt:</p>
+  					<pre><code>$ sudo apt-get update
+$ sudo apt-get install nodejs</code></pre>
 
-					<pre><code>$ sudo apt-get install npm</code></pre>
+  					<p>Geralmente o pacote Node já traz o <strong>npm</strong> junto, mas caso precise instalar, a versão usada para desenvolvimento é a <strong>5.5.1</strong>
+  					Usuários Ubuntu/Debian podem instalar via apt:</p>
 
-					<p>O <strong>TypeScript</strong> pode ser instalado via npm:</p>
+  					<pre><code>$ sudo apt-get install npm</code></pre>
 
-					<pre><code>$ npm install -g typescript</code></pre>
+  					<p>O <strong>TypeScript</strong> pode ser instalado via npm:</p>
 
-					<p>Dependendo das configurações npm do seu sistema (em geral Mac e Linux) será necessário o '<em>sudo</em>' para o npm ter as permissões de instalação.</p>
+  					<pre><code>$ npm install -g typescript</code></pre>
 
-					<p>Por fim, a instalação do <strong>Angular CLI</strong> também é feita via npm:</p>
+  					<p>Dependendo das configurações npm do seu sistema (em geral Mac e Linux) será necessário o '<em>sudo</em>' para o npm ter as permissões de instalação.</p>
 
-					<pre><code>$ npm install -g @angular/cli@1.6.1</code></pre>
+  					<p>Por fim, a instalação do <strong>Angular CLI</strong> também é feita via npm:</p>
 
-					<p>Mais informações sobre a instalação do ambiente Angular podem ser obtidas na <a href="https://github.com/angular/angular-cli">página da CLI</a>. A versão utilizada neste projeto é a <strong>1.6.1</strong>. Para verificar a versão atual, basta rodar:</p>
+  					<pre><code>$ npm install -g @angular/cli@1.6.1</code></pre>
 
-					<pre><code>$ ng --version</code></pre>
+  					<p>Mais informações sobre a instalação do ambiente Angular podem ser obtidas na <a href="https://github.com/angular/angular-cli">página da CLI</a>. A versão utilizada neste projeto é a <strong>1.6.1</strong>. Para verificar a versão atual, basta rodar:</p>
 
-					<h2 id="instalao">Instalação</h2>
+  					<pre><code>$ ng --version</code></pre>
 
-					<p>Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:</p>
+  					<h2 id="instalacao">Instalação</h2>
 
-					<pre><code>$ git clone https://github.com/mateuswetah/Projeto-Salic.git
-					$ cd Projeto-Salic/
-					$ npm install
-					</code></pre>
+  					<p>Para que o npm possa baixar os módulos extras necessários para o projeto, navegue para a pasta do projeto e execute a instalação:</p>
 
-					<p>Os módulos necessários são informados no <code>package.json</code>. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via <code>npm install</code>.</p>
+  					<pre><code>$ git clone https://github.com/mateuswetah/Projeto-Salic.git
+$ cd Projeto-Salic/
+$ npm install</code></pre>
 
-					<h2 id="executandoemlocalserver">Executando em local server</h2>
+  					<p>Os módulos necessários são informados no <code>package.json</code>. Possíveis erros na instalação costumam acontecer por incompatilidades nas versões dos módulos. Caso isso ocorra, verifique no console qual a versão do módulo necessária e instale via <code>npm install</code>.</p>
 
-					<p>Para obter um server de desenvolvimeto, execute:</p>
+  					<h2 id="executandoemlocalserver">Executando em local server</h2>
 
-					<pre><code>$ ng serve</code></pre>
+  					<p>Para obter um server de desenvolvimeto, execute:</p>
 
-					<p>ou, caso esteja no Docker:</p>
+  					<pre><code>$ ng serve</code></pre>
 
-					<pre><code>$ ng serve --host 0.0.0.0</code></pre>
+  					<p>ou, caso esteja no Docker:</p>
 
-					<p>
-					Navegue para <code>http://localhost:4200/</code>. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.</p>
+  					<pre><code>$ ng serve --host 0.0.0.0</code></pre>
 
-					<h2>Gerando build de produção:</h2>
+  					<p>
+  					Navegue para <code>http://localhost:4200/</code>. O App vai automaticamente se atualizar após qualquer mudança feita nos arquivos fonte.</p>
 
-					<p>Recomendamos testar uma build em produção antes de qualquer <em>pull-request</em>, já que a compilação Ahead of Time (AOT) é sensível a erros que não são percebidos pelo compilador em modo de desenvolvimento. Para compilar em produção, com otimização de assets e minimização dos arquivos js, execute:</p>
+  					<h2>Gerando build de produção:</h2>
 
-					<pre><code>$ ng build --prod --aot</code></pre>
+  					<p>Recomendamos testar uma build em produção antes de qualquer <em>pull-request</em>, já que a compilação Ahead of Time (AOT) é sensível a erros que não são percebidos pelo compilador em modo de desenvolvimento. Para compilar em produção, com otimização de assets e minimização dos arquivos js, execute:</p>
 
-					<p>Isso irá gerar os arquivos de distribuição na pasta indicada pelo caminho <code>outDir</code> especificado no arquivo <em>.angular-cli.json</em>. Mude para o caminho do seu web server se desejar. </p>
+  					<pre><code>$ ng build --prod --aot</code></pre>
 
-					<h2>Link para a última versão hospedada</h2>
+  					<p>Isso irá gerar os arquivos de distribuição na pasta indicada pelo caminho <code>outDir</code> especificado no arquivo <em>.angular-cli.json</em>. Mude para o caminho do seu web server se desejar. </p>
 
-					<p><a href="http://hmg.app.api.salic.cultura.gov.br/">Acesse aqui</a>. </p>
+  					<h2>Link para a última versão hospedada</h2>
 
-				</div>
+  					<p><a href="http://hmg.app.api.salic.cultura.gov.br/">Acesse aqui</a>. </p>
 
-			</div>
-		</div>
-  </section>
+  				</div>
 
-	<footer class="footer">
-		<div class="container">
-		  <div class="content has-text-centered">
-		    <p>
-		      <strong>Blog do VerSalic</strong> por <a href="http://jgthms.com">Mateus Wetah</a>. 
-					The source code is licensed
-		      <a href="https://opensource.org/licenses/GPL-3.0">GLP-v3.0</a>. 
-					The website content
-		      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-		    </p>
-		  </div>
-		</div>
-	</footer>
- </body>	
+  			</div>
+  		</div>
+    </section>
+
+  	<footer class="footer">
+  		<div class="container">
+  		  <div class="content has-text-centered">
+  		    <p>
+  		      <strong>Blog do VerSalic</strong> por <a href="http://jgthms.com">Mateus Wetah</a>.
+  					The source code is licensed
+  		      <a href="https://opensource.org/licenses/GPL-3.0">GLP-v3.0</a>.
+  					The website content
+  		      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+  		    </p>
+  		  </div>
+  		</div>
+  	</footer>
+  </div>
+ </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -177,8 +336,8 @@
 		},
 		methods: {
 			changeTab(tab) {
-				this.selectedTab = tab;	
-			}			
+				this.selectedTab = tab;
+			}
 		}
-	})	
+	})
 </script>
