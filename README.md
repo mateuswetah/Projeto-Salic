@@ -5,9 +5,13 @@ Este aplicativo faz uso da [API SALIC](http://api.salic.cultura.gov.br/) para co
 O VerSalic pode ser utilizado em [Versalic.cultura.gov.br](http://versalic.cultura.gov.br). Descubra e compartilhe dados da Lei Rouanet!
 
 ## Configuração do ambiente via docker
-#### Recomendamos fortemente o uso do Docker para trabalhar com este projeto. Siga as instruções deste repositório, considerando a versão 1.6.1 da CLI do Angular:
+#### Recomendamos fortemente o uso do Docker para trabalhar com este projeto. 
+Execute os comandos a seguir para construir a e rodar a imagem, substuindo pelo seu diretorio do Projeto-Salic no local indicado. Com esse volume mapeado, basta rodar o segundo comando novamente para atualizar a aplicacao de acordo o codigo fonte, caso este seja alterado.
 
-[https://github.com/mateuswetah/docker-angular](https://github.com/mateuswetah/docker-angular)
+```
+$ docker build -t angular-image .
+$ docker run --name angular -h angular -p 4200:4200 -v <your-versalic-folder>:/home/node/Projeto-Salic angular-image
+```
 
 ## Configuração do ambiente na sua máquina
 #### É preciso ter _node_, _npm_, _typescript_ e _angular cli_ instalados para a execução do projeto.
