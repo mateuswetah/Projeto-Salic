@@ -6,11 +6,11 @@ O VerSalic pode ser utilizado em [Versalic.cultura.gov.br](http://versalic.cultu
 
 ## Configuração do ambiente via docker
 #### Recomendamos fortemente o uso do Docker para trabalhar com este projeto. 
-Execute os comandos a seguir para construir a e rodar a imagem, substuindo pelo seu diretorio do Projeto-Salic no local indicado. Com esse volume mapeado, basta rodar o segundo comando novamente para atualizar a aplicacao de acordo o codigo fonte, caso este seja alterado.
+Execute os comandos a seguir para construir e rodar a imagem a partir do seu diretorio do projeto.
 
 ```
 $ docker build -t angular-image .
-$ docker run --name angular -h angular -p 4200:4200 -v <your-versalic-folder>:/home/node/Projeto-Salic angular-image
+$ docker run -it --name angular -h angular -p 4200:4200 -v $PWD:/home/node/Projeto-Salic angular-image
 ```
 
 ## Configuração do ambiente na sua máquina
