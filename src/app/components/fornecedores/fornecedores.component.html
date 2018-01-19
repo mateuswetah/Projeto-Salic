@@ -44,25 +44,25 @@
         <div class="card-header texto-elipsado" title="{{ produto.nome }}"><p>{{ produto.nome }}</p></div>
         <div class="card-resposta texto-elipsado">
           <div class="row">
-            <div class="col-xs-6"><p class="resposta-label">Data aprovação: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_aprovacao) }}</p></div>
-            <div class="col-xs-6"><p class="resposta-label">Data pagamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.data_pagamento) }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label">Data aprovação: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.dataAprovacao) }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label">Data pagamento: </p><p class="resposta-valor">{{ dataFormatterService.formataData(produto.dataPagamento) }}</p></div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Nome do arquivo: </p><p class="resposta-valor" title="{{ produto.nm_arquivo }}">{{ produto.nm_arquivo }}</p></div>
-            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Tipo do documento: </p><p class="resposta-valor" title="{{ produto.tipo_documento}}">{{ produto.tipo_documento}}</p></div>
+            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Nome do arquivo: </p><p class="resposta-valor" title="{{ produto.nmArquivo }}">{{ produto.nmArquivo }}</p></div>
+            <div class="col-xs-12 col-sm-6"><p class="resposta-label">Tipo do documento: </p><p class="resposta-valor" title="{{ produto.tipoDocumento}}">{{ produto.tipoDocumento}}</p></div>
           </div>  
           <div class="row">
-            <div class="col-xs-5"><p class="resposta-label">Valor produto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}">{{ dataFormatterService.formataValorEmReais(produto.valor_pagamento) }}</p></div>
-            <div class="col-xs-7"><p class="resposta-label">Forma de pagamento: </p><p class="resposta-valor" title="{{ produto.tipo_forma_pagamento }}">{{ produto.tipo_forma_pagamento }}</p></div>
+            <div class="col-xs-5"><p class="resposta-label">Valor produto: </p><p class="resposta-valor-destaque" title="{{ dataFormatterService.formataValorEmReais(produto.valorPagamento) }}">{{ dataFormatterService.formataValorEmReais(produto.valorPagamento) }}</p></div>
+            <div class="col-xs-7"><p class="resposta-label">Forma de pagamento: </p><p class="resposta-valor" title="{{ produto.tipoFormaPagamento }}">{{ produto.tipoFormaPagamento }}</p></div>
           </div> 
           <div class="row">
-            <div class="col-xs-6"><p class="resposta-label" title="Número do Comprovante">Número comprovante: </p><p class="resposta-valor" title="{{ produto.nr_comprovante }}">{{ produto.nr_comprovante }}</p></div>
-            <div class="col-xs-6"><p class="resposta-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="resposta-valor" title="{{ produto.nr_documento_pagamento }}">{{ produto.nr_documento_pagamento }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label" title="Número do Comprovante">Número comprovante: </p><p class="resposta-valor" title="{{ produto.nrComprovante }}">{{ produto.nrComprovante }}</p></div>
+            <div class="col-xs-6"><p class="resposta-label" title="Número do Documennto de Pagamento">N. documento pagamento: </p><p class="resposta-valor" title="{{ produto.nrDocumentoPagamento }}">{{ produto.nrDocumentoPagamento }}</p></div>
           </div> 
           <div class="row">
-            <div class="col-sm-2 col-xs-4"><p class="resposta-label" title="Id do Arquivo">Id arquivo: </p><p class="resposta-valor" title="{{ produto.id_arquivo }}">{{ produto.id_arquivo }}</p></div>  
-            <div class="col-sm-5 col-xs-8"><p class="resposta-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="resposta-valor" title="{{ produto.id_comprovante_pagamento }}">{{ produto.id_comprovante_pagamento }}</p></div>
-            <div class="col-sm-5 col-xs-12"><p class="resposta-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="resposta-valor" title="{{ produto.id_planilha_aprovacao }}">{{ produto.id_planilha_aprovacao }}</p></div>
+            <div class="col-sm-2 col-xs-4"><p class="resposta-label" title="Id do Arquivo">Id arquivo: </p><p class="resposta-valor" title="{{ produto.idArquivo }}">{{ produto.idArquivo }}</p></div>  
+            <div class="col-sm-5 col-xs-8"><p class="resposta-label" title="Id do Comprovante de Pagamento" >Id comprovante pagamento: </p><p class="resposta-valor" title="{{ produto.idComprovantePagamento }}">{{ produto.idComprovantePagamento }}</p></div>
+            <div class="col-sm-5 col-xs-12"><p class="resposta-label" title="Id da Planilha Eletrônica de Aprovação" >Id planilha eletrônica: </p><p class="resposta-valor" title="{{ produto.idPlanilhaAprovacao }}">{{ produto.idPlanilhaAprovacao }}</p></div>
           </div>                
         </div>
         <div class="card-botoes-container">

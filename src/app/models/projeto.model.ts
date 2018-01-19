@@ -24,7 +24,7 @@ export class Projeto {
                 public objetivos:             String,
                 public justificativa:         String,
                 public etapa:                 String,
-                public ficha_tecnica:         String,
+                public fichaTecnica:         String,
                 public impactoAmbiental:     String,
                 public especificacaoTecnica: String,
                 public estrategiaExecucao:   String,
@@ -37,7 +37,7 @@ export class Projeto {
                               'id_documento': String,
                                 'data_envio': String,
                                       'link': String,
-                                'id_arquivo': String,
+                                'idArquivo': String,
                                  'descricao': String,
                               'nome_arquivo': String
                                               }
@@ -64,19 +64,19 @@ export class Projeto {
                                              ],
                 public relacaoPagamentos:    [
                                               {
-                      'id_planilha_aprovacao': String,
+                      'idPlanilhaAprovacao': String,
                               'justificativa': String,
-                             'data_pagamento': String,
+                             'dataPagamento': String,
                                        'nome': String,
                                      'cgccpf': String,
-                             'data_aprovacao': String,
-                            'valor_pagamento': String,
-                                 'nm_arquivo': String,
-                                 'id_arquivo': String,
-                            'nome_fornecedor': String,
-                   'id_comprovante_pagamento': String,
-                     'nr_documento_pagamento': String,
-                             'tipo_documento': String
+                             'dataAprovacao': String,
+                            'valorPagamento': String,
+                                 'nmArquivo': String,
+                                 'idArquivo': String,
+                            'nomeFornecedor': String,
+                   'idComprovantePagamento': String,
+                     'nrDocumentoPagamento': String,
+                             'tipoDocumento': String
                                               }
                                              ],
                 public certidoesNegativas:   [
@@ -142,7 +142,7 @@ export class Projeto {
                                 'data_final': String,
                                'data_pedido': String,
                                 'observacao': String,
-                               'data_inicio': String,
+                               'dataInicio': String,
                                     'estado': String
                                               }
                                              ],
@@ -150,8 +150,8 @@ export class Projeto {
                                  'captacoes':              [{
                                                     'PRONAC': String,
                                                      'valor': String,
-                                               'data_recibo': String,
-                                              'nome_projeto': String,
+                                               'dataRecibo': String,
+                                              'nomeProjeto': String,
                                                     'cgccpf': String,
                                                'nome_doador': String,
                                                     '_links':               [

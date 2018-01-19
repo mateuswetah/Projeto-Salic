@@ -26,13 +26,13 @@
     <div  *ngIf="!carregandoDados && proponente != undefined" class="row">
       <div class="pagina-infos col-md-12">
         <div class="row">
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(proponente.tipo_pessoa) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(proponente.tipoPessoa) }}</p></div>
           <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(proponente.cgccpf) }}</p></div>
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Responsável: </p><p class="pagina-infos-valor">{{ proponente.responsavel }}</p></div>
           <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">Município, UF: </p><p class="pagina-infos-valor">{{ proponente.municipio }}, {{ proponente.UF }}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total captado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(proponente.total_captado) }}</p></div>
+          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total captado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(proponente.totalCaptado) }}</p></div>
         </div>
       </div>    
     </div>  
@@ -59,7 +59,7 @@
             <div class="col-sm-5"><p class="resposta-label">CPF/CNPJ: </p><p class="resposta-valor">{{ dataFormatterService.formataCGCCPF(projeto.cgccpf) }}</p></div>
           </div>
           <div class="row">
-            <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.data_inicio) }} - {{ dataFormatterService.formataData(projeto.data_inicio) }}</p></div>
+            <div class="col-sm-7"><p class="resposta-label">Data: </p><p class="resposta-valor">{{ dataFormatterService.formataData(projeto.dataInicio) }} - {{ dataFormatterService.formataData(projeto.dataInicio) }}</p></div>
             <div class="col-sm-5"><p class="resposta-label">Município: </p><p class="resposta-valor">{{ projeto.municipio }}, {{ projeto.UF }}</p></div>
           </div>
           <div class="row">

@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   queriesDeOrdemDeProjetos: { [query: string]: String }
                           = { 'PRONAC':           'PRONAC',
                               'ano_projeto':      'Ano do Projeto',
-                              'data_inicio':      'Data de Início',
-                              'data_termino':     'Data de Término',
+                              'dataInicio':      'Data de Início',
+                              'dataTermino':     'Data de Término',
                               'valor_solicitado': 'Valor Solicidado',
                               'outras_fontes':    'Outras Fontes',
                               'valor_captado':    'Valor Captado',
@@ -96,10 +96,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
                               'valor_projeto':    'Valor do Projeto' };
   queriesDeOrdemDePropostas: { [query: string]: String } = {};
   queriesDeOrdemDeProponentes: { [query: string]: String }
-                             = { 'total_captado': 'Total Captado',
+                             = { 'totalCaptado': 'Total Captado',
                                  'cgccpf':        'CGCCPF (FALTA NA API)' };
   queriesDeOrdemDeIncentivadores: { [query: string]: String }
-                                = { 'total_doado': 'Total Doado',
+                                = { 'totalDoado': 'Total Doado',
                                     'cgccpf':        'CGCCPF (FALTA NA API)' };
   queriesDeOrdemDeFornecedores: { [query: string]: String } = {};
 
@@ -109,16 +109,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
   queriesDeProjetos: { [query: string]: String }
                     = { 'limit': '', 'offset': '', 'PRONAC': '', 'proponente': '', 'cgccpf': '',
                         'nome': '', 'area': '', 'segmento': '', 'UF': '', 'ano_projeto': '', 'sort': 'PRONAC',
-                        'data_inicio': '', 'data_inicio_min': '', 'data_inicio_max': '',
-                        'data_termino': '', 'data_termino_min': '', 'data_termino_max': '' };
+                        'dataInicio': '', 'dataInicio_min': '', 'dataInicio_max': '',
+                        'dataTermino': '', 'dataTermino_min': '', 'dataTermino_max': '' };
   queriesDePropostas: { [query: string]: String }
-                    = { 'limit': '', 'offset': '', 'nome': '', 'data_inicio': '', 'data_termino': '' };
+                    = { 'limit': '', 'offset': '', 'nome': '', 'dataInicio': '', 'dataTermino': '' };
   queriesDeProponentes: { [query: string]: String }
                       = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'url_id': '',
-                           'municipio': '', 'UF': '', 'tipo_pessoa': '', 'sort': 'total_captado' };
+                           'municipio': '', 'UF': '', 'tipoPessoa': '', 'sort': 'totalCaptado' };
   queriesDeIncentivadores: { [query: string]: String }
                          = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'municipio': '',
-                              'UF': '', 'tipo_pessoa': '', 'PRONAC': '', 'sort': 'total_doado' };
+                              'UF': '', 'tipoPessoa': '', 'PRONAC': '', 'sort': 'totalDoado' };
   queriesDeFornecedores: { [query: string]: String }
                        = { 'limit': '', 'offset': '', 'nome': '', 'cgccpf': '', 'PRONAC': '' };
 
@@ -181,14 +181,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.ordenarPorQueries = this.queriesDeOrdemDeProponentes;
 
             if (this.ordenarPor === '') {
-              this.ordenarPor = 'total_captado';
+              this.ordenarPor = 'totalCaptado';
             }
           break;
           case 'incentivadores':
             this.queriesDeIncentivadores = this.queries;
             this.ordenarPorQueries = this.queriesDeOrdemDeIncentivadores;
             if (this.ordenarPor === '') {
-              this.ordenarPor = 'total_doado';
+              this.ordenarPor = 'totalDoado';
             }
           break;
           case 'fornecedores':
@@ -353,48 +353,48 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   mudarTipoPessoaPorSelect($event) {
     if ($event.target.value !== null && $event.target.value !== '' && $event.target.value !== 'Qualquer tipo') {
-      $event.target.value === 'fisica' ? this.queries['tipo_pessoa'] = 'fisica' : this.queries['tipo_pessoa'] = 'juridica';
+      $event.target.value === 'fisica' ? this.queries['tipoPessoa'] = 'fisica' : this.queries['tipoPessoa'] = 'juridica';
     } else {
-      this.queries['tipo_pessoa'] = null;
+      this.queries['tipoPessoa'] = null;
     }
   }
 
   public onObterDataInicioProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_inicio_min'] = null;
+       this.queries['dataInicio_min'] = null;
     } else {
-      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['dataInicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   public onObterDataInicioProposta(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_inicio_min'] = null;
+       this.queries['dataInicio_min'] = null;
     } else {
-      this.queries['data_inicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['dataInicio_min'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   public onObterDataTerminoProjeto(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_termino_max'] = null;
+       this.queries['dataTermino_max'] = null;
     } else {
-      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['dataTermino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   public onObterDataTerminoProposta(event: IMyDateModel): void {
     if (event.jsdate === null) {
-       this.queries['data_termino_max'] = null;
+       this.queries['dataTermino_max'] = null;
     } else {
-      this.queries['data_termino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
+      this.queries['dataTermino_max'] = event.date.year + '-' + event.date.month + '-' + event.date.day;
     }
   }
 
   atualizaInputsDeData() {
-    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'projetos') {
+    if (this.queries['dataInicio_min'] && this.pesquisaPor === 'projetos') {
 
-      const dataSplit = this.queries['data_inicio_min'].split('-');
+      const dataSplit = this.queries['dataInicio_min'].split('-');
 
       if (dataSplit.length === 3) {
         this.dataInicioProjeto = {
@@ -405,9 +405,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
     }
-    if (this.queries['data_termino_max'] && this.pesquisaPor === 'projetos') {
+    if (this.queries['dataTermino_max'] && this.pesquisaPor === 'projetos') {
 
-      const dataSplit = this.queries['data_termino_max'].split('-');
+      const dataSplit = this.queries['dataTermino_max'].split('-');
       console.log(dataSplit);
       this.dataTerminoProjeto = {
           date: { year: Number(dataSplit[0]),
@@ -416,9 +416,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 };
 
     }
-    if (this.queries['data_inicio_min'] && this.pesquisaPor === 'propostas') {
+    if (this.queries['dataInicio_min'] && this.pesquisaPor === 'propostas') {
 
-      const dataSplit = this.queries['data_inicio_min'].split('-');
+      const dataSplit = this.queries['dataInicio_min'].split('-');
 
       if (dataSplit.length === 3) {
         this.dataInicioProposta = {
@@ -429,9 +429,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
     }
-    if (this.queries['data_termino_max'] && this.pesquisaPor === 'propostas') {
+    if (this.queries['dataTermino_max'] && this.pesquisaPor === 'propostas') {
 
-      const dataSplit = this.queries['data_termino_max'].split('-');
+      const dataSplit = this.queries['dataTermino_max'].split('-');
       console.log(dataSplit);
       this.dataTerminoProposta = {
           date: { year: Number(dataSplit[0]),

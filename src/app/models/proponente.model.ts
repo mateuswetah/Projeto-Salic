@@ -6,10 +6,10 @@ export class Proponente {
                               'self': String,
                           'projetos': String
                                       },
-                public tipo_pessoa:   String,
+                public tipoPessoa:   String,
                 public responsavel:   String,
                 public UF:            String,
-                public total_captado: String,
+                public totalCaptado: String,
                 public municipio:     String) {}
 
 }

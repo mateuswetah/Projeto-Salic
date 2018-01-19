@@ -142,7 +142,7 @@
                       #dp="ngx-mydatepicker" 
                       (dateChanged)="onObterDataInicioProjeto($event)"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataInicioProjetoValida = true : dataInicioProjetoValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioProjetoValida }"/>
+                      [ngClass]="{'cheio': queries['dataInicio_min'] !== undefined && queries['dataInicio_min'] !== null && queries['dataInicio_min'] !== '', 'invalido': !dataInicioProjetoValida }"/>
                 <div class="form-control-placeholder">Início a partir de</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -163,7 +163,7 @@
                       #dp2="ngx-mydatepicker" 
                       (dateChanged)="onObterDataTerminoProjeto($event);"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
+                      [ngClass]="{'cheio': queries['dataTermino_max'] !== undefined && queries['dataTermino_max'] !== null && queries['dataTermino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                 <div class="form-control-placeholder">Término até</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -183,7 +183,7 @@
                       #dp3="ngx-mydatepicker" 
                       (dateChanged)="onObterDataTerminoProjeto($event);"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoProjetoValida = true : dataTerminoProjetoValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
+                      [ngClass]="{'cheio': queries['dataTermino_max'] !== undefined && queries['dataTermino_max'] !== null && queries['dataTermino_max'] !== '', 'invalido': !dataTerminoProjetoValida }"/>
                 <div class="form-control-placeholder">Término até</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -211,7 +211,7 @@
                       #dp="ngx-mydatepicker" 
                       (dateChanged)="onObterDataInicioProposta($event)"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataInicioPropostaValida = true : dataInicioPropostaValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_inicio_min'] !== undefined && queries['data_inicio_min'] !== null && queries['data_inicio_min'] !== '', 'invalido': !dataInicioPropostaValida }"/>
+                      [ngClass]="{'cheio': queries['dataInicio_min'] !== undefined && queries['dataInicio_min'] !== null && queries['dataInicio_min'] !== '', 'invalido': !dataInicioPropostaValida }"/>
                 <div class="form-control-placeholder">Início a partir de</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp.clearDate()">
@@ -232,7 +232,7 @@
                       #dp4="ngx-mydatepicker" 
                       (dateChanged)="onObterDataTerminoProposta($event);"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
+                      [ngClass]="{'cheio': queries['dataTermino_max'] !== undefined && queries['dataTermino_max'] !== null && queries['dataTermino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                 <div class="form-control-placeholder">Término até</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -252,7 +252,7 @@
                       #dp5="ngx-mydatepicker" 
                       (dateChanged)="onObterDataTerminoProposta($event);"
                       (inputFieldChanged)="$event.value.length === 0 ?  dataTerminoPropostaValida = true : dataTerminoPropostaValida = $event.valid;"
-                      [ngClass]="{'cheio': queries['data_termino_max'] !== undefined && queries['data_termino_max'] !== null && queries['data_termino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
+                      [ngClass]="{'cheio': queries['dataTermino_max'] !== undefined && queries['dataTermino_max'] !== null && queries['dataTermino_max'] !== '', 'invalido': !dataTerminoPropostaValida }"/>
                 <div class="form-control-placeholder">Término até</div>
                 <span class="input-group-btn">
                     <!--<button type="button" class="btn btn-default" (click)="dp2.clearDate()">
@@ -276,22 +276,22 @@
             </div>
             <!-- TIPO DE PESSOA =========================================-->
             <div class="input col-sm-2 col-xs-6 btn-group hidden-xs" dropdown>
-              <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
+              <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipoPessoa'] !== undefined && queries['tipoPessoa'] !== null && queries['tipoPessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                {{ queries['tipoPessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipoPessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                 <span class="caret"></span> 
               </button>
               <div class="form-control-placeholder hidden-sm">Pessoa</div>
               <div class="form-control-placeholder visible-inline-sm hidden-md hidden-lg">Pessoa</div>
               <ul class="dropdown-menu" role="menu" aria-labelledby="seletorTipoDePessoa">
                 <li *ngFor="let tipo of tiposPessoa; let i = index" role="menuitem">
-                  <a (click)="i > 0 ? (tipo === 'Física' ? queries['tipo_pessoa'] = 'fisica' : queries['tipo_pessoa'] = 'juridica') : queries['tipo_pessoa'] = null" class="dropdown-item">{{ tipo }}</a>
+                  <a (click)="i > 0 ? (tipo === 'Física' ? queries['tipoPessoa'] = 'fisica' : queries['tipoPessoa'] = 'juridica') : queries['tipoPessoa'] = null" class="dropdown-item">{{ tipo }}</a>
                 </li>
               </ul>
             </div>
             <div class="input col-sm-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select class="form-control" aria-labelledby="seletorTipoPessoa" [ngModel]="queries['tipo_pessoa']"
+              <select class="form-control" aria-labelledby="seletorTipoPessoa" [ngModel]="queries['tipoPessoa']"
                 (change)="mudarTipoPessoaPorSelect($event)"
-                [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== ''}">
+                [ngClass]="{'cheio': queries['tipoPessoa'] !== undefined && queries['tipoPessoa'] !== ''}">
                 <option [value]="i > 0 ? (tipo === 'Física' ? 'fisica' : 'juridica') : 'Qualquer tipo'" *ngFor="let tipo of tiposPessoa; let i = index">{{ tipo }} </option>
               </select>
               <div class="form-control-placeholder">Pessoa</div>
@@ -339,22 +339,22 @@
             </div>
             <!-- TIPO DE PESSOA =========================================-->
             <div class="input col-sm-3 col-md-2 col-xs-6 btn-group hidden-xs" dropdown>
-              <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== null && queries['tipo_pessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
-                {{ queries['tipo_pessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipo_pessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
+              <button class="btn btn-default form-control text-left dropdown-toggle" [ngClass]="{'cheio': queries['tipoPessoa'] !== undefined && queries['tipoPessoa'] !== null && queries['tipoPessoa'] !== ''}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" dropdownToggle>
+                {{ queries['tipoPessoa'] === 'fisica' ? tiposPessoa[1] : (queries['tipoPessoa'] === 'juridica' ? tiposPessoa[2]: '') }}
                 <span class="caret"></span> 
               </button>
               <div class="form-control-placeholder hidden-sm">Pessoa</div>
               <div class="form-control-placeholder visible-inline-sm hidden-md hidden-lg">Pessoa</div>
               <ul class="dropdown-menu" role="menu" aria-labelledby="seletorTipoDePessoa">
                 <li *ngFor="let tipo of tiposPessoa; let i = index" role="menuitem">
-                  <a (click)="i > 0 ? (tipo === 'Física' ? queries['tipo_pessoa'] = 'fisica' : queries['tipo_pessoa'] = 'juridica') : queries['tipo_pessoa'] = null" class="dropdown-item">{{ tipo }}</a>
+                  <a (click)="i > 0 ? (tipo === 'Física' ? queries['tipoPessoa'] = 'fisica' : queries['tipoPessoa'] = 'juridica') : queries['tipoPessoa'] = null" class="dropdown-item">{{ tipo }}</a>
                 </li>
               </ul>
             </div>
             <div class="input col-sm-3 col-md-2 col-xs-6 btn-group visible-xs-inline-block">
-              <select class="form-control" aria-labelledby="seletorTipoPessoa" [ngModel]="queries['tipo_pessoa']"
+              <select class="form-control" aria-labelledby="seletorTipoPessoa" [ngModel]="queries['tipoPessoa']"
                 (change)="mudarTipoPessoaPorSelect($event)"
-                [ngClass]="{'cheio': queries['tipo_pessoa'] !== undefined && queries['tipo_pessoa'] !== ''}">
+                [ngClass]="{'cheio': queries['tipoPessoa'] !== undefined && queries['tipoPessoa'] !== ''}">
                 <option [value]="i > 0 ? (tipo === 'Física' ? 'fisica' : 'juridica') : 'Qualquer tipo'" *ngFor="let tipo of tiposPessoa; let i = index">{{ tipo }} </option>
               </select>
               <div class="form-control-placeholder">Pessoa</div>

@@ -26,13 +26,13 @@
     <div  *ngIf="!carregandoDados && incentivador != undefined" class="row">
       <div class="pagina-infos col-md-12">
         <div class="row">
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipo_pessoa) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Tipo de Pessoa: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataTipoPessoa(incentivador.tipoPessoa) }}</p></div>
           <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">CPF/CNPJ: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataCGCCPF(incentivador.cgccpf) }}</p></div>
           <div class="col-sm-4 col-xs-6"><p class="pagina-infos-label">Responsável: </p><p class="pagina-infos-valor">{{ incentivador.responsavel }}</p></div>
           <div class="col-sm-3 col-xs-6"><p class="pagina-infos-label">Município, UF: </p><p class="pagina-infos-valor">{{ incentivador.municipio }}, {{ incentivador.UF }}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total doado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(incentivador.total_doado) }}</p></div>
+          <div class="col-sm-6 col-xs-6"><p class="pagina-infos-label">Total doado: </p><p class="pagina-infos-valor-destaque">{{ dataFormatterService.formataValorEmReais(incentivador.totalDoado) }}</p></div>
         </div>
       </div>    
     </div>  
@@ -46,7 +46,7 @@
     </div>
     <div class="row row-cards" *ngIf="!carregandoDadosDoacoes">
       <div *ngFor="let doacao of listaDoacoes" class="card card-proponente card-fornecedor col-sm-12 col-md-6">
-        <div class="card-header texto-elipsado" title="{{ doacao.nome_projeto }}"><p>{{ doacao.nome_projeto }}</p></div>
+        <div class="card-header texto-elipsado" title="{{ doacao.nomeProjeto }}"><p>{{ doacao.nomeProjeto }}</p></div>
         <div class="card-resposta texto-elipsado">
           <div class="row">
             <div class="col-sm-6"><p class="resposta-label">PRONAC: </p><p class="resposta-valor" title="{{ doacao.PRONAC }}">{{ doacao.PRONAC }}</p></div> 

@@ -28,10 +28,10 @@
         <div class="row">
           <div class="col-sm-1 col-xs-6"><p class="pagina-infos-label">ID: </p><p class="pagina-infos-valor">{{ proposta.id }}</p></div>
           <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Mecanismo: </p><p class="pagina-infos-valor">{{ proposta.mecanismo }}</p></div>
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data aceite: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_aceite) }}</p></div>
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_inicio) }}</p></div>
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_termino) }}</p></div>
-          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data arquivamento: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.data_arquivamento) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data aceite: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.dataAceite) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data início: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.dataInicio) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data término: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.dataTermino) }}</p></div>
+          <div class="col-sm-2 col-xs-6"><p class="pagina-infos-label">Data arquivamento: </p><p class="pagina-infos-valor">{{ dataFormatterService.formataData(proposta.dataArquivamento) }}</p></div>
         </div>
       </div>    
     </div>           
@@ -45,9 +45,9 @@
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'objetivos'}"><a (click)="textoSelecionado = 'objetivos'">Objetivos</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'sinopse'}"><a (click)="textoSelecionado = 'sinopse'">Sinopse</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'justificativa'}"><a (click)="textoSelecionado = 'justificativa'">Justificativa</a></li>
-          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'ficha_tecnica'}"><a (click)="textoSelecionado = 'ficha_tecnica'">Ficha Técnica</a></li>
-          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'especificacao_tecnica'}"><a (click)="textoSelecionado = 'especificacao_tecnica'">Especificação Técnica</a></li>
-          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'impacto_ambiental'}"><a (click)="textoSelecionado = 'impacto_ambiental'">Impacto Ambiental</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'fichaTecnica'}"><a (click)="textoSelecionado = 'fichaTecnica'">Ficha Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'especificacaoTecnica'}"><a (click)="textoSelecionado = 'especificacaoTecnica'">Especificação Técnica</a></li>
+          <li role="presentation" [ngClass]="{'active': textoSelecionado === 'impactoAmbiental'}"><a (click)="textoSelecionado = 'impactoAmbiental'">Impacto Ambiental</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'democratizacao'}"><a (click)="textoSelecionado = 'democratizacao'">Democratização</a></li>
           <li role="presentation" [ngClass]="{'active': textoSelecionado === 'acessibilidade'}"><a (click)="textoSelecionado = 'acessibilidade'">Acessibilidade</a></li>
         </ul>
